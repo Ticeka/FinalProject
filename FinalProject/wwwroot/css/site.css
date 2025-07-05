@@ -1,0 +1,130 @@
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Segoe UI', 'Prompt', sans-serif;
+    background-color: #fff8f0;
+    color: #333;
+}
+
+/* ปุ่มต่าง ๆ */
+.btn, .btn-primary {
+    background-color: #c97b36;
+    border-color: #c97b36;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+    .btn:hover, .btn-primary:hover {
+        background-color: #a0522d;
+        border-color: #a0522d;
+        color: white;
+    }
+
+    .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #c97b36;
+    }
+
+/* Navbar */
+.navbar {
+    background-color: #fff4e1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    color: #a0522d;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+    .navbar-brand:hover {
+        color: #7b3e1d;
+    }
+
+.nav-link {
+    color: #333;
+}
+
+    .nav-link:hover {
+        color: #a0522d;
+    }
+
+/* Footer */
+footer {
+    background-color: #fff4e1;
+    color: #333;
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+/* ปรับฟอร์ม */
+.form-control {
+    border-radius: 0.375rem;
+}
+
+    .form-control:focus {
+        border-color: #c97b36;
+    }
+
+/* Heading ต่าง ๆ */
+h1, h2, h3 {
+    color: #7b3e1d;
+    margin-top: 20px;
+}
+
+/* Card หรือกล่องเนื้อหา */
+.card {
+    border: 1px solid #eee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-radius: 0.5rem;
+}
+
+/* ส่วนของ Filter และ Map Layout */
+.map-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.filter-panel {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex: 1 1 250px;
+    max-width: 300px;
+}
+
+#map {
+    flex: 3 1 600px;
+    min-height: 600px;
+    width: 100%;
+    border: 2px solid #c97b36;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+
+/* Responsive ปรับ Layout บนจอเล็ก */
+@media (max-width: 768px) {
+    .map-container {
+        flex-direction: column;
+    }
+
+    #map {
+        min-height: 400px;
+    }
+}

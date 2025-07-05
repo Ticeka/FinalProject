@@ -1,0 +1,126 @@
+﻿@page
+@model FinalProject.Pages.IndexModel
+@{
+    ViewData["Title"] = "แผนที่เบียร์ท้องถิ่นไทย";
+}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+<style>
+    #map {
+        height: 600px;
+        width: 100%;
+        border: 2px solid #c97b36;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .filter-panel {
+        background-color: #fff8f0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+
+<h2>แผนที่เบียร์ท้องถิ่นไทย</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="filter-panel">
+            <h5>ตัวกรองค้นหา 🍺</h5>
+
+            <div class="mb-2">
+                <label>ค้นหาชื่อร้าน/เบียร์</label>
+                <input type="text" id="searchText" class="form-control" placeholder="เช่น สิงห์, Phuket...">
+            </div>
+
+            <div class="mb-2">
+                <label>จังหวัด</label>
+                <select id="provinceSelect" class="form-select">
+                    <option value="">-- ทั้งหมด --</option>
+                    @foreach (var province in Model.LocalBeers.Select(b => b.Province).Distinct())
+                    {
+                        <option>@province</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>ประเภท</label>
+                <select id="typeSelect" class="form-select">
+                    <option value="">-- ทั้งหมด --</option>
+                    @foreach (var type in Model.LocalBeers.Select(b => b.Type).Distinct())
+                    {
+                        <option>@type</option>
+                    }
+                </select>
+            </div>
+
+            <button class="btn btn-primary w-100" onclick="filterMarkers()">ค้นหา</button>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div id="map"></div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    // สร้างแผนที่ที่จุดศูนย์กลางกรุงเทพฯ และซูมระดับ 6
+    const map = L.map('map').setView([13.736717, 100.523186], 6);
+
+    // โหลดแผนที่จาก OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // ดึงข้อมูลหมุดจาก Model.LocalBeers มาแปลงเป็น JSON
+    const locations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.LocalBeers));
+
+    let markers = [];
+
+    function addMarkers(filtered) {
+        // ลบหมุดเก่าออกจากแผนที่ก่อน
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+
+        filtered.forEach(loc => {
+            const popupContent = `
+                <b>${loc.Name}</b><br>
+                ${loc.Description}<br>
+                <a href="/Detail?id=${loc.Id}" class="btn btn-sm btn-primary mt-2">ดูรายละเอียด</a>
+            `;
+
+            const marker = L.marker([loc.Latitude, loc.Longitude])
+                .addTo(map)
+                .bindPopup(popupContent);
+
+            markers.push(marker);
+        });
+    }
+
+    // แสดงหมุดทั้งหมดตอนโหลดหน้า
+    addMarkers(locations);
+
+    // ฟังก์ชันกรองหมุดตามข้อมูลในตัวกรอง
+    function filterMarkers() {
+        const keyword = document.getElementById('searchText').value.toLowerCase();
+        const province = document.getElementById('provinceSelect').value;
+        const type = document.getElementById('typeSelect').value;
+
+        const filtered = locations.filter(loc => {
+            const matchText = loc.Name.toLowerCase().includes(keyword) || loc.Description.toLowerCase().includes(keyword);
+            const matchProvince = !province || loc.Province === province;
+            const matchType = !type || loc.Type === type;
+
+            return matchText && matchProvince && matchType;
+        });
+
+        addMarkers(filtered);
+    }
+</script>

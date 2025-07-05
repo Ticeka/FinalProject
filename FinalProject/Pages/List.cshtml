@@ -1,0 +1,38 @@
+﻿@page
+@model FinalProject.Pages.ListModel
+@{
+    ViewData["Title"] = "รายชื่อร้าน/เบียร์ทั้งหมด";
+}
+
+<h2>รายชื่อร้าน/เบียร์ทั้งหมด</h2>
+
+@if (Model.LocalBeers == null || !Model.LocalBeers.Any())
+{
+    <p>ไม่มีข้อมูลเบียร์ท้องถิ่นในระบบ</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ชื่อร้าน/เบียร์</th>
+                <th>จังหวัด</th>
+                <th>ประเภท</th>
+                <th>รายละเอียด</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var beer in Model.LocalBeers)
+            {
+                <tr>
+                    <td>@beer.Name</td>
+                    <td>@beer.Province</td>
+                    <td>@beer.Type</td>
+                    <td>
+                        <a asp-page="/Detail" asp-route-id="@beer.Id" class="btn btn-sm btn-primary">ดูรายละเอียด</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

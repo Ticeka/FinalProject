@@ -1,0 +1,25 @@
+﻿@page
+@model FinalProject.Pages.DetailModel
+@{
+    ViewData["Title"] = "รายละเอียดเบียร์ท้องถิ่น";
+}
+
+<h2>@Model.LocalBeer?.Name</h2>
+
+@if (Model.LocalBeer == null)
+{
+    <div class="alert alert-warning">
+        ไม่พบข้อมูลเบียร์ท้องถิ่นนี้
+    </div>
+}
+else
+{
+    <div>
+        <p><strong>คำอธิบาย:</strong> @Model.LocalBeer.Description</p>
+        <p><strong>จังหวัด:</strong> @Model.LocalBeer.Province</p>
+        <p><strong>ประเภท:</strong> @Model.LocalBeer.Type</p>
+        <p><strong>พิกัด:</strong> @Model.LocalBeer.Latitude, @Model.LocalBeer.Longitude</p>
+
+        <a asp-page="/Index" class="btn btn-secondary mt-3">ย้อนกลับไปแผนที่</a>
+    </div>
+}
