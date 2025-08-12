@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\images\\beers\\maekhong.jpg"
     },
     {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\jibthai-logo-duoglass.svg",
+      "PackagePath": "staticwebassets\\images\\jibthai-logo-duoglass.svg"
+    },
+    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "PackagePath": "staticwebassets\\js\\detail.js"
     },

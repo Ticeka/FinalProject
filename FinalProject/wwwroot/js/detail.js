@@ -90,7 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch('/api/ratings/quick', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    credentials: 'same-origin',
                     body: JSON.stringify({ beerId: data.id, score, fingerprint: getFingerprint() })
                 });
 
@@ -134,3 +135,140 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     })();
 });
+
+(function () {
+    const beerEl = document.getElementById("beerData");
+    if (!beerEl) return;
+
+    const beerId = Number(beerEl.dataset.id);
+    if (!Number.isInteger(beerId) || beerId <= 0) {
+        console.error("Invalid beerId:", beerEl.dataset.id);
+        return;
+    }
+
+    const $ = s => document.querySelector(s);
+    const list = $("#cmtList");
+    const empty = $("#cmtEmpty");
+    const txt = $("#cmtText");
+    const name = $("#cmtName");
+    const btnSend = $("#cmtSendBtn");
+    const btnReload = $("#cmtReloadBtn");
+
+    function escapeHtml(s) { const d = document.createElement('div'); d.innerText = s ?? ""; return d.innerHTML; }
+
+    async function fetchWithTimeout(url, opts = {}, ms = 10000) {
+        const ctrl = new AbortController();
+        const id = setTimeout(() => ctrl.abort(new DOMException("timeout", "AbortError")), ms);
+        const headers = Object.assign({ 'Accept': 'application/json' }, opts.headers || {});
+        try {
+            return await fetch(url, { credentials: 'same-origin', ...opts, headers, signal: ctrl.signal });
+        } finally {
+            clearTimeout(id);
+        }
+    }
+
+    async function removeComment(commentId) {
+        if (!confirm("ลบความคิดเห็นนี้ใช่ไหม?")) return;
+        try {
+            const res = await fetchWithTimeout(`/api/beers/${beerId}/comments/${commentId}`, {
+                method: "DELETE"
+            }, 10000);
+
+            if (res.status === 204) {
+                await load();
+                return;
+            }
+            const t = await res.text().catch(() => "");
+            alert("ลบคอมเมนต์ไม่สำเร็จ: " + (t || res.status));
+        } catch (err) {
+            console.error(err);
+            const isAbort = err?.name === "AbortError" || err === "timeout";
+            alert(isAbort ? "เครือข่ายช้า/ขาดการเชื่อมต่อ" : "ลบคอมเมนต์ไม่สำเร็จ");
+        }
+    }
+
+    async function load() {
+        try {
+            const res = await fetchWithTimeout(`/api/beers/${beerId}/comments?skip=0&take=20`);
+            if (!res.ok) throw new Error(`GET ${res.status}`);
+            const items = await res.json();
+
+            list.innerHTML = "";
+            if (!items.length) { empty.style.display = ""; return; }
+            empty.style.display = "none";
+
+            items.forEach(it => {
+                const el = document.createElement("div");
+                el.className = "p-3 border rounded-3";
+                const when = new Date(it.createdAt).toLocaleString();
+
+                const delBtnHtml = it.canDelete
+                    ? `<button type="button" class="btn btn-sm btn-outline-danger cmt-del" data-id="${it.id}" aria-label="ลบความคิดเห็น">ลบ</button>`
+                    : "";
+
+                el.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <strong>${escapeHtml(it.author)}</strong>
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-muted small">${escapeHtml(when)}</span>
+              ${delBtnHtml}
+            </div>
+          </div>
+          <div style="white-space:pre-wrap">${escapeHtml(it.body)}</div>
+        `;
+                list.appendChild(el);
+
+                // bind delete if available
+                if (it.canDelete) {
+                    el.querySelector(".cmt-del")?.addEventListener("click", (e) => {
+                        const id = Number(e.currentTarget.getAttribute("data-id"));
+                        if (Number.isInteger(id) && id > 0) removeComment(id);
+                    });
+                }
+            });
+        } catch (err) {
+            console.error(err);
+            alert("โหลดคอมเมนต์ไม่สำเร็จ");
+        }
+    }
+
+    async function send(e) {
+        e?.preventDefault?.();
+        const body = (txt?.value || "").trim();
+        if (body.length === 0) { txt?.focus(); return; }
+        if (body.length > 1000) { alert("ข้อความยาวเกิน 1000 ตัวอักษร"); return; }
+
+        btnSend.disabled = true;
+        btnSend.textContent = "กำลังส่ง...";
+
+        try {
+            const payload = { body, displayName: name ? name.value : null };
+            const res = await fetchWithTimeout(`/api/beers/${beerId}/comments`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }, 10000);
+
+            if (!res.ok) {
+                const msg = await res.text().catch(() => "");
+                throw new Error(msg || `POST ${res.status}`);
+            }
+
+            txt.value = ""; if (name) name.value = "";
+            await load();
+        } catch (err) {
+            console.error(err);
+            const isAbort = err?.name === "AbortError" || err === "timeout";
+            alert(isAbort ? "เครือข่ายช้า/ขาดการเชื่อมต่อ" : "ส่งคอมเมนต์ไม่สำเร็จ");
+        } finally {
+            btnSend.disabled = false;
+            btnSend.textContent = "ส่งความคิดเห็น";
+        }
+    }
+
+    btnSend?.addEventListener("click", send);
+    btnReload?.addEventListener("click", load);
+
+    // auto-load
+    load();
+})();

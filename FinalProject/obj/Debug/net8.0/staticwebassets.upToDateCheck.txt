@@ -4,6 +4,7 @@ wwwroot\css\list.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\beers\maekhong.jpg
+wwwroot\images\jibthai-logo-duoglass.svg
 wwwroot\js\detail.js
 wwwroot\js\index.js
 wwwroot\js\list.js

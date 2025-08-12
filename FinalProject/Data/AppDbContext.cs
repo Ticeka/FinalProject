@@ -1,14 +1,16 @@
 ﻿using FinalProject.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<LocalBeer> LocalBeers { get; set; } = default!;
         public DbSet<QuickRating> QuickRatings { get; set; } = default!;
+        public DbSet<BeerComment> BeerComments { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,19 +20,31 @@ namespace FinalProject.Data
             {
                 e.ToTable("QuickRatings");
                 e.HasKey(x => x.Id);
-
                 e.Property(x => x.Score).IsRequired();
-                e.Property(x => x.IpHash).HasMaxLength(64);
-                e.Property(x => x.Fingerprint).HasMaxLength(128);
-
-                e.HasOne(x => x.LocalBeer)
-                 .WithMany()                 // ถ้าอยากให้ LocalBeer มี ICollection<QuickRating> ค่อยเปลี่ยนเป็น .WithMany(b => b.QuickRatings)
-                 .HasForeignKey(x => x.LocalBeerId)
-                 .OnDelete(DeleteBehavior.Cascade);
-
-                // ถ้าต้องการกันโหวตซ้ำระดับ IP ต่อหนึ่งเบียร์ ให้ทำ index นี้ (ไม่ต้อง unique ก็ได้)
-                e.HasIndex(x => new { x.LocalBeerId, x.IpHash });
+                e.Property(x => x.Fingerprint).HasMaxLength(128).IsRequired();
+                e.Property(x => x.IpHash).HasMaxLength(128);
+                e.Property(x => x.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                e.HasIndex(x => new { x.LocalBeerId, x.Fingerprint }).IsUnique();
             });
+
+            modelBuilder.Entity<LocalBeer>(e =>
+            {
+                e.Property(x => x.Rating).HasColumnType("float");
+                e.Property(x => x.RatingCount).HasDefaultValue(0);
+            });
+
+            modelBuilder.Entity<BeerComment>(e =>
+            {
+                e.ToTable("BeerComments");
+                e.HasKey(x => x.Id);
+                e.Property(x => x.Body).IsRequired().HasMaxLength(1000);
+                e.Property(x => x.DisplayName).HasMaxLength(100);
+                e.Property(x => x.UserName).HasMaxLength(100);
+                e.Property(x => x.IpHash).HasMaxLength(128);
+                e.Property(x => x.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                e.HasIndex(x => new { x.LocalBeerId, x.CreatedAt });
+            });
+
         }
     }
 }

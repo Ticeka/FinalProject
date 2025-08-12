@@ -316,6 +316,38 @@ else
             </section>
         }
     </div>
+    <!-- Comments -->
+    <section class="section p-4 p-md-5 mb-5">
+        <h2 class="h5 mb-3">ความคิดเห็น</h2>
+
+        <div class="mb-3">
+            <div class="form-floating mb-2">
+                <textarea id="cmtText" class="form-control" style="height: 110px"
+                          placeholder="พิมพ์ความคิดเห็นของคุณ..."></textarea>
+                <label for="cmtText">พิมพ์ความคิดเห็นของคุณ...</label>
+               
+            </div>
+
+            @if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                <div class="input-group mb-2">
+                    <span class="input-group-text">ชื่อที่แสดง</span>
+                    <input id="cmtName" class="form-control" maxlength="100" placeholder="Guest">
+                </div>
+                <div class="text-muted small mb-2">* ถ้าล็อกอินแล้วจะใช้ชื่อผู้ใช้ของคุณโดยอัตโนมัติ</div>
+            }
+
+            <div class="d-flex gap-2">
+                <button id="cmtSendBtn" type="button" class="btn btn-primary">ส่งความคิดเห็น</button>
+                <button id="cmtReloadBtn" type="button" class="btn btn-outline-secondary">โหลดใหม่</button>
+                
+            </div>
+        </div>
+
+        <div id="cmtList" class="d-flex flex-column gap-3"></div>
+        <div id="cmtEmpty" class="text-muted">ยังไม่มีความคิดเห็น — มาเป็นคนแรกกันเลย!</div>
+    </section>
+
 }
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

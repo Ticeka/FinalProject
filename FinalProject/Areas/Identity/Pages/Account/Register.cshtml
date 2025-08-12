@@ -1,0 +1,157 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "สมัครสมาชิก";
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --ink: #1f2937;
+        --muted: #6b7280;
+        --brand: #2563eb;
+        --brand-600: #1f51bf;
+        --ring: rgba(37,99,235,.2);
+    }
+
+    body {
+        font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        color: var(--ink);
+    }
+
+    .page-hero {
+        background: radial-gradient(1100px 380px at 20% -10%,#dbeafe,transparent), linear-gradient(180deg,#eff6ff,#ffffff);
+        border: 1px solid #e6ebf2;
+    }
+
+    .text-hero-sub {
+        color: var(--muted);
+    }
+
+    .auth-card {
+        background: var(--card);
+        border: 1px solid #e6ebf2;
+        border-radius: 16px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 10px;
+        border: 1px solid #d7deea;
+        box-shadow: none;
+    }
+
+        .form-control:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px var(--ring);
+        }
+
+    .btn-primary {
+        background: var(--brand);
+        border-color: var(--brand);
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background: var(--brand-600);
+            border-color: var(--brand-600);
+        }
+
+    .muted {
+        color: var(--muted);
+    }
+</style>
+
+<header class="page-hero rounded-4 mb-4 p-4 p-md-5">
+    <div class="container">
+        <h1 class="h3 h-md-2 fw-bold mb-1">🎉 สมัครสมาชิก Sip &amp; Trip</h1>
+        <p class="mb-0 text-hero-sub">สร้างบัญชีเพื่อบันทึกรายการโปรด และรีวิวเครื่องดื่มได้สะดวกยิ่งขึ้น</p>
+    </div>
+</header>
+
+<div class="container" style="max-width:980px;">
+    <div class="row g-4">
+        <!-- ฟอร์มสมัคร -->
+        <div class="col-lg-6">
+            <div class="auth-card p-4 p-md-5">
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" novalidate>
+                    <h2 class="h5 fw-semibold mb-3">สร้างบัญชีใหม่</h2>
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label">อีเมล</label>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Password" class="form-label">รหัสผ่าน</label>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="อย่างน้อย 6 ตัวอักษร" />
+                        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Input.ConfirmPassword" class="form-label">ยืนยันรหัสผ่าน</label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="พิมพ์รหัสผ่านอีกครั้ง" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                    </div>
+
+                    <button id="registerSubmit" type="submit" class="btn btn-primary w-100">สมัครสมาชิก</button>
+                    <div class="text-center mt-3">
+                        <span class="muted">มีบัญชีแล้ว?</span>
+                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">เข้าสู่ระบบ</a>
+                    </div>
+
+                    <hr class="my-4" />
+                    <p class="small muted mb-0">
+                        เมื่อสมัครสมาชิก แสดงว่าคุณยอมรับ <a href="#" class="text-decoration-underline">ข้อตกลงการใช้งาน</a> และ
+                        <a href="#" class="text-decoration-underline">นโยบายความเป็นส่วนตัว</a> ของเรา
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- สมัครด้วยผู้ให้บริการภายนอก -->
+        <div class="col-lg-6">
+            <div class="auth-card p-4 p-md-5 h-100">
+                <section>
+                    <h2 class="h5 fw-semibold mb-3">สมัครด้วยบัญชีอื่น</h2>
+                    @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div class="muted small">
+                            ยังไม่ได้ตั้งค่าผู้ให้บริการภายนอก (เช่น Google, Facebook)
+                            สามารถดูวิธีตั้งค่าได้จาก
+                            <a href="https://learn.microsoft.com/aspnet/core/security/authentication/social" target="_blank">เอกสารนี้</a>.
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div class="d-grid gap-2">
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-light border"
+                                            name="provider" value="@provider.Name"
+                                            title="สมัคร/เข้าสู่ระบบด้วย @provider.DisplayName">
+                                        เชื่อมต่อกับ @provider.DisplayName
+                                    </button>
+                                }
+                            </div>
+                        </form>
+                    }
+                    <div class="mt-4 small muted">
+                        เคล็ดลับ: ถ้าคุณสมัครด้วยอีเมลอยู่แล้ว แนะนำให้ล็อกอินด้วยอีเมลเดิม เพื่อไม่ให้เกิดบัญชีซ้ำ
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

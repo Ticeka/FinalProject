@@ -1,29 +1,15 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FinalProject.Models
+﻿namespace FinalProject.Models
 {
     public class QuickRating
     {
         public int Id { get; set; }
+        public int LocalBeerId { get; set; }   // ✅ FK
+        public LocalBeer? LocalBeer { get; set; } // ✅ Navigation
 
-        [Required]
-        public int LocalBeerId { get; set; }
-
-        [Range(1, 5)]
-        public int Score { get; set; }
-
-        [MaxLength(64)]
+        public int Score { get; set; }         // 1..5
         public string? IpHash { get; set; }
-
-        [MaxLength(128)]
         public string? Fingerprint { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        // ✅ เพิ่ม navigation property
-        [ForeignKey(nameof(LocalBeerId))]
-        public LocalBeer? LocalBeer { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string? UserId { get; set; }    // (ออปชัน) ผูกกับผู้ใช้ถ้ามีล็อกอิน
     }
 }
