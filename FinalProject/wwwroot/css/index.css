@@ -1,77 +1,190 @@
-﻿body {
-    background-color: #f7f9fc;
-    font-family: 'Segoe UI', sans-serif;
-    color: #2c3e50;
+﻿:root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --ink: #243447;
+    --muted: #6b7b8c;
+    --brand: #2563eb;
+    --brand-600: #1f51bf;
+    --ring: rgba(37,99,235,.2);
 }
 
-h2 {
-    font-weight: 700;
-    color: #34495e;
-    margin-bottom: 20px;
+body {
+    background: var(--bg);
+    font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color: var(--ink);
+}
+
+.page-hero {
+    background: radial-gradient(1200px 400px at 20% -10%, #dbeafe, transparent), linear-gradient(180deg, #eff6ff, #ffffff);
+    border: 1px solid #e6ebf2;
+}
+
+.text-hero-sub {
+    color: var(--muted);
+}
+
+.filter-panel .form-control, .filter-panel .form-select {
+    border-radius: 10px;
+    border: 1px solid #d7deea;
+    box-shadow: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+    .filter-panel .form-control:focus, .filter-panel .form-select:focus {
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px var(--ring);
+    }
+
+.filter-panel .btn-primary {
+    background: var(--brand);
+    border-color: var(--brand);
+    font-weight: 600;
+}
+
+    .filter-panel .btn-primary:hover {
+        background: var(--brand-600);
+        border-color: var(--brand-600);
+    }
+
+.chip-btn {
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+    .chip-btn.active {
+        background: #2563eb;
+        color: #fff;
+        border-color: #2563eb;
+    }
+
+/* Map */
+.map-wrap {
+    background: var(--card);
+    border: 1px solid #e6ebf2;
 }
 
 #map {
-    height: 600px;
+    height: 650px;
     width: 100%;
+}
+
+.map-legend {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: #fff;
     border-radius: 12px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* กล่องตัวกรอง */
-.filter-panel {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border: 1px solid #e5e9f2;
-}
-
-    .filter-panel h5 {
-        color: #2980b9;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-
-.form-label {
-    font-weight: 500;
-    color: #2c3e50;
-}
-
-/* ปุ่มค้นหา */
-.btn-primary {
-    background-color: #2980b9;
-    border: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-    .btn-primary:hover {
-        background-color: #1f6692;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-/* Popup ของ Leaflet */
+/* Popup */
 .leaflet-popup-content {
+    margin: 8px 12px;
+}
+
+.popup-header {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.chip {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* Toast */
+.toast-lite {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    background: #111827;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
     font-size: 14px;
-    line-height: 1.5;
-    color: #2c3e50;
+    z-index: 9999;
 }
 
-    .leaflet-popup-content strong {
-        color: #2980b9;
+    .toast-lite.show {
+        opacity: .98;
     }
 
-/* Input และ Select */
-.form-control, .form-select {
-    border-radius: 8px;
-    border: 1px solid #d1d9e6;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Emoji Pins */
+.poi-pin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    font-size: 18px;
+    background: #fff;
+    transition: transform .15s ease;
 }
 
-    .form-control:focus, .form-select:focus {
-        border-color: #2980b9;
-        box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2);
+.poi-mini {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+}
+
+.poi-beer {
+    background: #fff7e6;
+}
+
+.poi-wine {
+    background: #fde2e4;
+}
+
+.poi-liquor {
+    background: #e6f4ff;
+}
+
+.poi-default {
+    background: #eef2f7;
+}
+
+.leaflet-div-icon {
+    background: transparent;
+    border: none;
+}
+
+.pulse {
+    animation: pulse .6s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
     }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive เล็กน้อย */
+@media (max-width: 576px) {
+    .poi-pin {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+}

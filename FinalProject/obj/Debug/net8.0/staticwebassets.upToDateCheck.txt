@@ -1,7 +1,12 @@
+wwwroot\css\detail.css
 wwwroot\css\index.css
+wwwroot\css\list.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\beers\maekhong.jpg
+wwwroot\js\detail.js
+wwwroot\js\index.js
+wwwroot\js\list.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

@@ -1,0 +1,139 @@
+﻿:root {
+    --bg: #f6f8fb;
+    --card: #fff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --brand: #2563eb;
+    --ring: rgba(37,99,235,.2)
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color: var(--ink)
+}
+
+.page-hero {
+    background: linear-gradient(180deg,#f8fafc,#fff);
+    border: 1px solid #e6ebf2
+}
+
+.chip {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .85rem;
+    color: #0f172a
+}
+
+.meta-grid {
+    --gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: var(--gap)
+}
+/* (เลี่ยง @media ตามที่คุณบอก ถ้าต้องการจริง ๆ ค่อยเพิ่มภายหลัง) */
+
+.spec-table th {
+    width: 220px;
+    color: #475569
+}
+
+.spec-table td {
+    color: #0f172a
+}
+
+.thumb-lg {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 16px;
+    background: #eef2f7
+}
+
+.section {
+    background: var(--card);
+    border: 1px solid #e6ebf2;
+    border-radius: 16px
+}
+
+.rating-stars {
+    font-size: 1.05rem;
+    letter-spacing: 2px
+}
+
+.backlink {
+    color: #475569
+}
+
+/* Map */
+#map {
+    height: 300px;
+    border-radius: 12px
+}
+
+.leaflet-div-icon {
+    background: transparent;
+    border: none
+}
+
+.poi-pin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    font-size: 18px;
+    background: #fff
+}
+
+.poi-beer {
+    background: #fff7e6
+}
+
+.poi-wine {
+    background: #fde2e4
+}
+
+.poi-liquor {
+    background: #e6f4ff
+}
+
+.poi-default {
+    background: #eef2f7
+}
+
+/* ===== Quick rating (stars) ===== */
+.ratebox .stars {
+    display: inline-flex;
+    gap: 4px;
+    margin-bottom: 6px
+}
+
+    .ratebox .stars button {
+        border: none;
+        background: transparent;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        color: #cbd5e1;
+        transition: transform .1s ease,color .1s ease
+    }
+
+        .ratebox .stars button:hover {
+            transform: scale(1.15);
+            color: #f59e0b
+        }
+
+        .ratebox .stars button.active {
+            color: #f59e0b
+        }
+
+.ratebox .small {
+    color: #6b7280
+}

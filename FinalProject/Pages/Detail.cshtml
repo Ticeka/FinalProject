@@ -1,10 +1,10 @@
 ﻿@page
 @model FinalProject.Pages.DetailModel
 @{
-    ViewData["Title"] = "รายละเอียดเบียร์ท้องถิ่น";
+    ViewData["Title"] = "รายละเอียดเครื่องดื่ม";
     var b = Model.LocalBeer;
 
-    // ✅ รูป: รองรับ http/เริ่มด้วย "/" หรือชื่อไฟล์ล้วน
+    // รูปภาพ: รองรับทั้ง http(s), path เริ่มด้วย '/', หรือชื่อไฟล์
     string imageSrc;
     if (!string.IsNullOrWhiteSpace(b?.ImageUrl))
     {
@@ -14,16 +14,15 @@
     }
     else
     {
-        imageSrc = "https://via.placeholder.com/640x853?text=Beer";
+        imageSrc = "https://via.placeholder.com/640x853?text=Image";
     }
 
-    // ✅ ตัวแปรปลอดภัย (กัน null / ชนชนิด)
-    var priceSafe = b?.Price ?? 0m; // decimal => ใช้ 0m
-    var abvSafe = b?.AlcoholLevel ?? 0d; // double  => ใช้ 0d
-    var ratingSafe = b?.Rating ?? 0d; // double
-    var countSafe = b?.RatingCount ?? 0;  // int
+    // Safe values
+    var priceSafe = b?.Price ?? 0m;     // decimal
+    var abvSafe = b?.AlcoholLevel ?? 0d;     // double
+    var ratingSafe = b?.Rating ?? 0d;     // double
+    var countSafe = b?.RatingCount ?? 0;      // int
 
-    string PrintOrDash(string? s) => string.IsNullOrWhiteSpace(s) ? "-" : s!;
     string ChipIconByType(string? type)
         => (type ?? "").ToLower().Contains("ไวน์") || (type ?? "").ToLower().Contains("wine") ? "🍷"
          : (type ?? "").ToLower().Contains("เบียร์") || (type ?? "").ToLower().Contains("beer") || (type ?? "").ToLower().Contains("ลาเกอร์") || (type ?? "").ToLower().Contains("ipa") ? "🍺"
@@ -31,140 +30,37 @@
          : "🍶";
 }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="~/css/detail.css" />
 
-<style>
-    :root {
-        --bg: #f6f8fb;
-        --card: #ffffff;
-        --ink: #1f2937;
-        --muted: #6b7280;
-        --brand: #2563eb;
-        --ring: rgba(37,99,235,.2)
-    }
-
-    body {
-        background: var(--bg);
-        font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-        color: var(--ink)
-    }
-
-    .page-hero {
-        background: linear-gradient(180deg,#f8fafc,#fff);
-        border: 1px solid #e6ebf2
-    }
-
-    .chip {
-        background: #f1f5f9;
-        border: 1px solid #e2e8f0;
-        border-radius: 999px;
-        padding: 6px 10px;
-        font-size: .85rem;
-        color: #0f172a
-    }
-
-    .meta-grid {
-        --gap: 1rem;
-        display: grid;
-        grid-template-columns: repeat(2,minmax(0,1fr));
-        gap: var(--gap)
-    }
-    .media (min-width: 992px) {
-        .meta-grid
-
-    {
-        grid-template-columns: repeat(4,minmax(0,1fr));
-    }
-
-    } 
-
-    .spec-table th {
-        width: 220px;
-        color: #475569
-    }
-
-    .spec-table td {
-        color: #0f172a
-    }
-
-    .thumb-lg {
-        width: 100%;
-        max-width: 380px;
-        aspect-ratio: 3/4;
-        object-fit: cover;
-        border-radius: 16px;
-        background: #eef2f7
-    }
-
-    .section {
-        background: var(--card);
-        border: 1px solid #e6ebf2;
-        border-radius: 16px
-    }
-
-    .rating-stars {
-        font-size: 1.05rem;
-        letter-spacing: 2px
-    }
-
-    .backlink {
-        color: #475569
-    }
-
-    #map {
-        height: 300px;
-        border-radius: 12px
-    }
-
-    /* Emoji pins (เหมือนหน้า Index) */
-    .poi-pin {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 1px solid rgba(0,0,0,.15);
-        box-shadow: 0 2px 6px rgba(0,0,0,.15);
-        font-size: 18px;
-        background: #fff;
-    }
-
-    .poi-beer {
-        background: #fff7e6;
-    }
-
-    .poi-wine {
-        background: #fde2e4;
-    }
-
-    .poi-liquor {
-        background: #e6f4ff;
-    }
-
-    .poi-default {
-        background: #eef2f7;
-    }
-
-    .leaflet-div-icon {
-        background: transparent;
-        border: none;
-    }
-</style>
-
-@if (b == null)
+@if (b is null)
 {
     <div class="container py-5">
-        <div class="alert alert-warning">ไม่พบข้อมูลเบียร์ท้องถิ่นนี้</div>
+        <div class="alert alert-warning">ไม่พบข้อมูลรายการนี้</div>
         <a asp-page="/List" class="btn btn-outline-secondary mt-2">⬅️ กลับไปรายการทั้งหมด</a>
     </div>
 }
 else
 {
+    <!-- ข้อมูลสำหรับ JS -->
+    <div id="beerData"
+         data-id="@b.Id"
+         data-name="@b.Name"
+         data-type="@b.Type"
+         data-province="@b.Province"
+         data-description="@b.Description"
+         data-lat="@b.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+         data-lng="@b.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+         data-price="@priceSafe.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+         data-abv="@abvSafe.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+         data-rating="@ratingSafe.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+         data-count="@countSafe"
+         data-website="@b.Website"
+         data-facebook="@b.FacebookPage"
+         data-phone="@b.PhoneNumber">
+    </div>
+
     <div class="container py-4" itemscope itemtype="https://schema.org/Product">
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="mb-3">
@@ -179,7 +75,7 @@ else
         <header class="page-hero rounded-4 p-4 p-md-5 mb-4">
             <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-4">
                 <img itemprop="image" src="@imageSrc" alt="@b.Name" class="thumb-lg"
-                     onerror="this.src='https://via.placeholder.com/640x853?text=Beer'" />
+                     onerror="this.src='https://via.placeholder.com/640x853?text=Image'" />
 
                 <div class="flex-grow-1">
                     <h1 class="h3 h-md-2 mb-2" itemprop="name">@b.Name</h1>
@@ -208,11 +104,11 @@ else
                          data-avg="@ratingSafe.ToString("0.0")"
                          data-count="@countSafe">
                         <div class="stars" role="radiogroup" aria-label="ให้คะแนน">
-                            <button type="button" data-score="1">★</button>
-                            <button type="button" data-score="2">★</button>
-                            <button type="button" data-score="3">★</button>
-                            <button type="button" data-score="4">★</button>
-                            <button type="button" data-score="5">★</button>
+                            <button type="button" data-score="1" aria-label="1 ดาว">★</button>
+                            <button type="button" data-score="2" aria-label="2 ดาว">★</button>
+                            <button type="button" data-score="3" aria-label="3 ดาว">★</button>
+                            <button type="button" data-score="4" aria-label="4 ดาว">★</button>
+                            <button type="button" data-score="5" aria-label="5 ดาว">★</button>
                         </div>
                         <div class="small text-muted">
                             เฉลี่ย <span class="avg">@ratingSafe.ToString("0.0")</span> จาก <span class="cnt">@countSafe</span> รีวิว
@@ -224,25 +120,24 @@ else
                         <p class="text-secondary" itemprop="description">@b.Description</p>
                     }
 
-                    <div class="d-flex flex-wrap gap-3 align-items-center">
-                        @if (ratingSafe > 0d)
-                        {
-                            var stars = Math.Round(ratingSafe);
-                            <div class="rating-stars" aria-label="คะแนนเฉลี่ย @ratingSafe จาก @countSafe รีวิว">
-                                @Html.Raw(new string('★', (int)stars))@Html.Raw(new string('☆', 5 - (int)stars))
-                                <span class="text-muted">(@ratingSafe.ToString("0.0"))</span>
-                            </div>
-                        }
-                        @if (countSafe > 0)
-                        {
-                            <span class="text-muted">รีวิวทั้งหมด: <strong>@countSafe</strong></span>
-                        }
-                    </div>
+                    <!-- Static summary stars (อ่านอย่างเดียว) -->
+                    @if (ratingSafe > 0d)
+                    {
+                        var stars = Math.Round(ratingSafe);
+                        <div class="rating-stars mb-2" aria-label="คะแนนเฉลี่ย @ratingSafe จาก @countSafe รีวิว">
+                            @Html.Raw(new string('★', (int)stars))@Html.Raw(new string('☆', 5 - (int)stars))
+                            <span class="text-muted">(@ratingSafe.ToString("0.0"))</span>
+                        </div>
+                    }
+                    @if (countSafe > 0)
+                    {
+                        <div class="text-muted mb-2">รีวิวทั้งหมด: <strong>@countSafe</strong></div>
+                    }
 
                     <!-- Quick actions -->
-                    <div class="d-flex flex-wrap gap-2 mt-3">
+                    <div class="d-flex flex-wrap gap-2 mt-2">
                         <a asp-page="/List" class="btn btn-outline-secondary">⬅️ กลับไปรายการ</a>
-                        <a asp-page="/Index" class="btn btn-primary">ดูบนแผนที่</a>
+                        <a asp-page="/Index" class="btn btn-primary">ดูบนแผนที่รวม</a>
                         @if (!string.IsNullOrWhiteSpace(b.Website))
                         {
                             <a href="@b.Website" target="_blank" class="btn btn-light border">เว็บไซต์</a>
@@ -260,7 +155,6 @@ else
                 </div>
             </div>
         </header>
-
 
         <!-- Key Facts -->
         <section class="section p-4 p-md-5 mb-4">
@@ -405,7 +299,7 @@ else
             </div>
         </section>
 
-        <!-- Map (if coordinates) -->
+        <!-- Map -->
         @if (b.Latitude != 0 && b.Longitude != 0)
         {
             <section class="section p-3 p-md-4 mb-4">
@@ -413,7 +307,7 @@ else
                     <h2 class="h6 mb-0">ตำแหน่งบนแผนที่</h2>
                     <div class="d-flex gap-2">
                         <a asp-page="/Index" class="btn btn-sm btn-outline-primary">ดูบนแผนที่รวม</a>
-                        <a id="gmapsBtn" class="btn btn-sm btn-primary" target="_blank">เปิดใน Google Maps</a>
+                        <a id="gmapsBtn" class="btn btn-sm btn-primary" target="_blank" rel="noopener">เปิดใน Google Maps</a>
                     </div>
                 </div>
                 <div class="p-2 p-md-3">
@@ -422,51 +316,7 @@ else
             </section>
         }
     </div>
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        // ✅ ฟอร์แมตราคา THB
-        function fmtTHB(n){ try { return new Intl.NumberFormat('th-TH').format(parseFloat(n)); } catch { return n; } }
-        const p1 = document.getElementById('priceVal');  if (p1) p1.textContent = fmtTHB(p1.textContent);
-        const p2 = document.getElementById('priceVal2'); if (p2) p2.textContent = fmtTHB(p2.textContent);
-
-        // ✅ คัดลอกลิงก์หน้านี้
-        document.getElementById('copyLinkBtn')?.addEventListener('click', async ()=>{
-            try { await navigator.clipboard.writeText(location.href); alert('คัดลอกลิงก์แล้ว!'); }
-            catch { alert('คัดลอกไม่สำเร็จ'); }
-        });
-
-        // ====== Emoji icon functions (ให้ตรงกับหน้า Index) ======
-        function getEmojiByType(type){
-          const t = (type||'').toLowerCase();
-          if (t.includes('ไวน์') || t.includes('wine')) return { emoji:'🍷', cls:'poi-wine' };
-          if (t.includes('เบียร์') || t.includes('beer') || t.includes('ลาเกอร์') || t.includes('ipa')) return { emoji:'🍺', cls:'poi-beer' };
-          if (t.includes('วิสกี้') || t.includes('เหล้า') || t.includes('rum') || t.includes('whisky') || t.includes('liquor')) return { emoji:'🥃', cls:'poi-liquor' };
-          return { emoji:'🍶', cls:'poi-default' };
-        }
-        function createEmojiIcon(type){
-          const {emoji, cls} = getEmojiByType(type);
-          return L.divIcon({
-            html: `<div class="poi-pin ${cls}">${emoji}</div>`,
-            className: '', iconSize: [32,32], iconAnchor: [16,16], popupAnchor: [0,-14]
-          });
-        }
-
-        // ====== Map ======
-        const hasCoord = @((b.Latitude != 0 && b.Longitude != 0).ToString().ToLower());
-        if (hasCoord) {
-          const lat = @b.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
-          const lng = @b.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
-
-          // set Google Maps button
-          const gbtn = document.getElementById('gmapsBtn');
-          if (gbtn) gbtn.href = `https://www.google.com/maps?q=${lat},${lng}`;
-
-          const map = L.map('map').setView([lat, lng], 13);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' }).addTo(map);
-
-          const icon = createEmojiIcon('@(b.Type ?? "")'); // ใช้ไอคอนตามประเภท
-          L.marker([lat, lng], { icon }).addTo(map).bindPopup(`@b.Name`);
-        }
-    </script>
 }
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="~/js/detail.js"></script>

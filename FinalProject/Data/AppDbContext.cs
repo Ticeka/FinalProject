@@ -14,20 +14,22 @@ namespace FinalProject.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // QuickRating config
             modelBuilder.Entity<QuickRating>(e =>
             {
-                // 1 device ต่อ 1 เครื่องดื่ม ให้ได้ 1 แถว (กดซ้ำคืออัปเดต)
-                e.HasIndex(x => new { x.LocalBeerId, x.DeviceId }).IsUnique();
+                e.ToTable("QuickRatings");
+                e.HasKey(x => x.Id);
 
-                e.Property(x => x.DeviceId).HasMaxLength(64).IsRequired();
-                e.Property(x => x.IpHash).HasMaxLength(128).IsRequired();
+                e.Property(x => x.Score).IsRequired();
+                e.Property(x => x.IpHash).HasMaxLength(64);
+                e.Property(x => x.Fingerprint).HasMaxLength(128);
 
-                // คะแนนต้องอยู่ระหว่าง 1–5
-                e.ToTable(tb => tb.HasCheckConstraint("CK_QuickRatings_Score", "[Score] BETWEEN 1 AND 5"));
+                e.HasOne(x => x.LocalBeer)
+                 .WithMany()                 // ถ้าอยากให้ LocalBeer มี ICollection<QuickRating> ค่อยเปลี่ยนเป็น .WithMany(b => b.QuickRatings)
+                 .HasForeignKey(x => x.LocalBeerId)
+                 .OnDelete(DeleteBehavior.Cascade);
 
-                // (ทางเลือก) ให้ DB ใส่เวลาสร้างเป็น UTC อัตโนมัติ
-                // e.Property(x => x.CreatedAt).HasDefaultValueSql("SYSUTCDATETIME()");
+                // ถ้าต้องการกันโหวตซ้ำระดับ IP ต่อหนึ่งเบียร์ ให้ทำ index นี้ (ไม่ต้อง unique ก็ได้)
+                e.HasIndex(x => new { x.LocalBeerId, x.IpHash });
             });
         }
     }
