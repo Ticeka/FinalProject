@@ -1,38 +1,461 @@
 ﻿@page
 @model FinalProject.Pages.ListModel
 @{
-    ViewData["Title"] = "รายชื่อร้าน/เบียร์ทั้งหมด";
+    ViewData["Title"] = "Sip & Trip — รายการเครื่องดื่มทั้งหมด";
 }
 
-<h2>รายชื่อร้าน/เบียร์ทั้งหมด</h2>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
-@if (Model.LocalBeers == null || !Model.LocalBeers.Any())
-{
-    <p>ไม่มีข้อมูลเบียร์ท้องถิ่นในระบบ</p>
-}
-else
-{
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ชื่อร้าน/เบียร์</th>
-                <th>จังหวัด</th>
-                <th>ประเภท</th>
-                <th>รายละเอียด</th>
-            </tr>
-        </thead>
-        <tbody>
+<style>
+    :root {
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --ink: #1f2937;
+        --muted: #6b7280;
+        --brand: #2563eb;
+        --ring: rgba(37,99,235,.2)
+    }
+
+    body {
+        background: var(--bg);
+        font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        color: var(--ink)
+    }
+
+    .toolbar {
+        background: linear-gradient(180deg,#f8fafc,#fff);
+        border: 1px solid #e6ebf2
+    }
+
+    .count-chip {
+        background: #111827;
+        color: #fff;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: .85rem
+    }
+
+    /* แถวเดียวแบบลิสต์ */
+    .beer-row {
+        border: 1px solid #e6ebf2;
+        background: #fff;
+        border-radius: 12px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition: box-shadow .15s ease, transform .15s ease;
+        cursor: pointer;
+    }
+
+        .beer-row:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,.06);
+            transform: translateY(-1px);
+        }
+
+    .thumb {
+        width: 72px;
+        height: 72px;
+        object-fit: cover;
+        border-radius: 10px;
+        background: #eef2f7
+    }
+
+    .beer-title {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .muted {
+        color: #6b7280;
+        font-size: .9rem;
+    }
+
+    .pill {
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: .8rem;
+    }
+
+    .price {
+        font-weight: 700
+    }
+
+    .list-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .empty {
+        border: 1px dashed #d1d5db;
+        border-radius: 12px;
+        background: #fff
+    }
+
+    .row-main {
+        flex: 1;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+
+    .row-right {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    .truncate {
+        max-width: 480px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @@media (max-width: 576px) {
+        .truncate {
+            max-width: 220px;
+        }
+    }
+
+    /* Pagination */
+    .pagination .page-link {
+        color: #1f2937;
+        border-color: #e5e7eb;
+    }
+
+    .pagination .page-item.active .page-link {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #9ca3af;
+    }
+</style>
+
+<div class="container py-4">
+    <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
+        <h2 class="mb-0">🍹 รายการเครื่องดื่มทั้งหมด</h2>
+        <span id="resultCount" class="count-chip">0 รายการ</span>
+    </div>
+
+    <!-- Toolbar / Filters -->
+    <div class="toolbar rounded-4 p-3 p-md-4 mb-4">
+        <div class="row g-3 align-items-end">
+            <div class="col-12 col-sm-6 col-lg-3 position-relative">
+                <label class="form-label">🔍 ค้นหาชื่อเครื่องดื่ม/ร้าน</label>
+                <input type="text" id="searchInput" class="form-control" placeholder="เช่น สิงห์, Phuket, IPA, ไวน์แดง">
+                <span class="position-absolute text-muted" id="clearSearch" title="ล้างคำค้น" style="right:.5rem; top:50%; transform:translateY(-50%); cursor:pointer">✕</span>
+            </div>
+            <div class="col-6 col-lg-2">
+                <label class="form-label">🌍 จังหวัด</label>
+                <select id="provinceSelect" class="form-select">
+                    <option value="">ทุกจังหวัด</option>
+                    @foreach (var province in Model.LocalBeers.Select(b => b.Province).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct())
+                    {
+                        <option value="@province">@province</option>
+                    }
+                </select>
+            </div>
+            <div class="col-6 col-lg-2">
+                <label class="form-label">🍹 ประเภท</label>
+                <select id="typeSelect" class="form-select">
+                    <option value="">ทุกประเภท</option>
+                    @foreach (var type in Model.LocalBeers.Select(b => b.Type).Where(t => !string.IsNullOrWhiteSpace(t)).Distinct())
+                    {
+                        <option value="@type">@type</option>
+                    }
+                </select>
+            </div>
+            <div class="col-6 col-lg-2">
+                <label class="form-label">🔥 ดีกรี</label>
+                <select id="alcoholSelect" class="form-select">
+                    <option value="">ทุกดีกรี</option>
+                    @foreach (var alc in Model.LocalBeers.Select(b => b.AlcoholLevel).Where(a => a != null).Distinct())
+                    {
+                        <option value="@alc">@alc%</option>
+                    }
+                </select>
+            </div>
+            <div class="col-6 col-lg-2">
+                <label class="form-label">🔽 เรียงโดย</label>
+                <select id="sortSelect" class="form-select">
+                    <option value="">ค่าเริ่มต้น</option>
+                    <option value="price-asc">ราคาต่ำ → สูง</option>
+                    <option value="price-desc">ราคาสูง → ต่ำ</option>
+                    <option value="alc-asc">ดีกรีต่ำ → สูง</option>
+                    <option value="alc-desc">ดีกรีสูง → ต่ำ</option>
+                    <option value="name-asc">ชื่อ A → Z</option>
+                    <option value="name-desc">ชื่อ Z → A</option>
+                </select>
+            </div>
+            <div class="col-6 col-lg-2 ms-auto d-grid">
+                <button id="resetBtn" class="btn btn-outline-secondary">รีเซ็ตตัวกรอง</button>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.LocalBeers == null || !Model.LocalBeers.Any())
+    {
+        <div class="empty p-4 text-center text-muted">ไม่มีข้อมูลในระบบ</div>
+    }
+    else
+    {
+        <!-- มุมมองแบบแถวเดียว -->
+        <div id="beerList" class="list-wrap">
             @foreach (var beer in Model.LocalBeers)
             {
-                <tr>
-                    <td>@beer.Name</td>
-                    <td>@beer.Province</td>
-                    <td>@beer.Type</td>
-                    <td>
-                        <a asp-page="/Detail" asp-route-id="@beer.Id" class="btn btn-sm btn-primary">ดูรายละเอียด</a>
-                    </td>
-                </tr>
+                var price = beer.Price;
+                var alc = beer.AlcoholLevel;
+                var name = beer.Name ?? "";
+                var desc = beer.Description ?? "";
+                // รองรับ ImageUrl เป็นไฟล์สั้นๆ
+                var imgSrc = !string.IsNullOrWhiteSpace(beer.ImageUrl)
+                ? (beer.ImageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase) || beer.ImageUrl.StartsWith("/")
+                ? beer.ImageUrl
+                : $"/images/beers/{beer.ImageUrl}")
+                : "https://via.placeholder.com/72x72?text=Drink";
+
+                <div class="beer-row beer-item"
+                     data-name="@name"
+                     data-desc="@desc"
+                     data-province="@beer.Province"
+                     data-type="@beer.Type"
+                     data-alc="@alc"
+                     data-price="@price"
+                     onclick="location.href='@Url.Page("/Detail", new { id = beer.Id })'">
+
+                    <img src="@imgSrc" alt="@beer.Name" class="thumb" onerror="this.src='https://via.placeholder.com/72x72?text=Drink'" />
+
+                    <div class="row-main">
+                        <h5 class="beer-title truncate">@beer.Name</h5>
+                        @if (!string.IsNullOrWhiteSpace(beer.Province))
+                        {
+                            <span class="pill">@beer.Province</span>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(beer.Type))
+                        {
+                            <span class="pill">@beer.Type</span>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(beer.Description))
+                        {
+                            <span class="muted truncate">@beer.Description</span>
+                        }
+                    </div>
+
+                    <div class="row-right">
+                        <span class="muted">ABV: <strong>@(beer.AlcoholLevel > 0 ? $"{beer.AlcoholLevel}%" : "–")</strong></span>
+                        <span class="muted">ราคา: <span class="price">@((beer.Price > 0 ? beer.Price.ToString("N0") : "–"))</span> บาท</span>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-}
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="รายการเครื่องดื่ม pagination" class="mt-3">
+            <ul class="pagination pagination-sm justify-content-center" id="pager"></ul>
+        </nav>
+    }
+</div>
+
+<script>
+    // ===== Helpers =====
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const debounce = (fn, t=250) => { let id; return (...a)=>{ clearTimeout(id); id=setTimeout(()=>fn(...a), t); } };
+
+    // ===== Elements =====
+    const searchInput = $('#searchInput');
+    const provinceSelect = $('#provinceSelect');
+    const typeSelect = $('#typeSelect');
+    const alcoholSelect = $('#alcoholSelect');
+    const sortSelect = $('#sortSelect');
+    const resetBtn = $('#resetBtn');
+    const clearSearch = $('#clearSearch');
+    const resultCount = $('#resultCount');
+    const listEl = $('#beerList');
+    const pagerEl = $('#pager');
+
+    const pageSize = 10;   // ✅ 10 รายการต่อหน้า
+    let currentPage = 1;
+    let filtered = [];
+
+    function collect(){ return $$('#beerList .beer-item'); }
+
+    // ===== Read/Sync page from querystring =====
+    function getPageFromQS(){
+        const qs = new URLSearchParams(location.search);
+        const p = parseInt(qs.get('page') || '1', 10);
+        return isNaN(p) || p < 1 ? 1 : p;
+    }
+    function setPageToQS(p){
+        const qs = new URLSearchParams(location.search);
+        if (p <= 1) { qs.delete('page'); }
+        else { qs.set('page', String(p)); }
+        const url = `${location.pathname}${qs.toString() ? '?' + qs.toString() : ''}`;
+        history.replaceState(null, '', url);
+    }
+
+    // ===== Filters =====
+    function getFilters(){
+      const kw = (searchInput?.value||'').trim().toLowerCase();
+      const prov = provinceSelect?.value || '';
+      const type = typeSelect?.value || '';
+      const alc  = alcoholSelect?.value || '';
+      return {kw, prov, type, alc};
+    }
+
+    function applyFilters(){
+      const {kw, prov, type, alc} = getFilters();
+      const items = collect();
+
+      filtered = items.filter(el=>{
+        const name = (el.dataset.name||'').toLowerCase();
+        const desc = (el.dataset.desc||'').toLowerCase();
+        const okKw = !kw || name.includes(kw) || desc.includes(kw);
+        const okProv = !prov || el.dataset.province === prov;
+        const okType = !type || el.dataset.type === type;
+        const okAlc = !alc || el.dataset.alc === alc; // exact
+        return okKw && okProv && okType && okAlc;
+      });
+
+      // sort
+      const val = sortSelect?.value || '';
+      if (val){
+        const [key, dir] = val.split('-');
+        filtered.sort((a,b)=>{
+          const pa = parseFloat(a.dataset.price||'0');
+          const pb = parseFloat(b.dataset.price||'0');
+          const aa = parseFloat(a.dataset.alc||'0');
+          const ab = parseFloat(b.dataset.alc||'0');
+          const na = (a.dataset.name||'').toLowerCase();
+          const nb = (b.dataset.name||'').toLowerCase();
+          let d=0;
+          if (key==='price') d = pa - pb;
+          if (key==='alc')   d = aa - ab;
+          if (key==='name')  d = na.localeCompare(nb);
+          return dir==='desc' ? -d : d;
+        });
+        // re-append order in DOM
+        const parent = listEl;
+        filtered.forEach(el=>parent.appendChild(el));
+      }
+
+      // format price text (keep data-* สำหรับ logic)
+      $$('#beerList .beer-item .price').forEach(span=>{
+        const parent = span.closest('.beer-item');
+        const v = parseFloat(parent?.dataset.price||'0');
+        span.textContent = v > 0 ? new Intl.NumberFormat('th-TH').format(v) : '–';
+      });
+
+      // ไปหน้าจาก query (ถ้ามี) เมื่อเปลี่ยนฟิลเตอร์ให้กลับหน้า 1
+      currentPage = 1;
+      renderPage(currentPage);
+      resultCount.textContent = `${filtered.length} รายการ`;
+    }
+
+    // ===== Pagination =====
+    function renderPage(page){
+      const total = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+      // clamp page
+      currentPage = Math.min(Math.max(1, page), totalPages);
+
+      // hide all
+      collect().forEach(el => el.style.display = 'none');
+
+      // show current slice
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      filtered.slice(start, end).forEach(el => el.style.display = '');
+
+      renderPager(totalPages);
+      setPageToQS(currentPage);
+    }
+
+    function renderPager(totalPages){
+      if (!pagerEl) return;
+      if (totalPages <= 1) { pagerEl.innerHTML = ''; return; }
+
+      // windowed numbers (ถ้าหน้าเยอะ)
+      const maxNums = 7;
+      const nums = [];
+      let from = Math.max(1, currentPage - Math.floor(maxNums/2));
+      let to   = Math.min(totalPages, from + maxNums - 1);
+      from     = Math.max(1, Math.min(from, to - maxNums + 1));
+      for (let i=from; i<=to; i++) nums.push(i);
+
+      let html = '';
+      const prevDisabled = currentPage === 1 ? ' disabled' : '';
+      const nextDisabled = currentPage === totalPages ? ' disabled' : '';
+
+      html += `<li class="page-item${prevDisabled}"><a class="page-link" href="#" data-pg="${currentPage-1}" aria-label="ก่อนหน้า">Prev</a></li>`;
+
+      if (from > 1) {
+        html += `<li class="page-item"><a class="page-link" href="#" data-pg="1">1</a></li>`;
+        if (from > 2) html += `<li class="page-item disabled"><span class="page-link">…</span></li>`;
+      }
+
+      nums.forEach(i=>{
+        const active = i === currentPage ? ' active' : '';
+        const aria = i === currentPage ? ' aria-current="page"' : '';
+        html += `<li class="page-item${active}"><a class="page-link" href="#" data-pg="${i}"${aria}>${i}</a></li>`;
+      });
+
+      if (to < totalPages) {
+        if (to < totalPages-1) html += `<li class="page-item disabled"><span class="page-link">…</span></li>`;
+        html += `<li class="page-item"><a class="page-link" href="#" data-pg="${totalPages}">${totalPages}</a></li>`;
+      }
+
+      html += `<li class="page-item${nextDisabled}"><a class="page-link" href="#" data-pg="${currentPage+1}" aria-label="ถัดไป">Next</a></li>`;
+      pagerEl.innerHTML = html;
+    }
+
+    // pager clicks (delegation)
+    pagerEl?.addEventListener('click', e=>{
+      const a = e.target.closest('[data-pg]');
+      if (!a) return;
+      e.preventDefault();
+      const pg = parseInt(a.dataset.pg, 10);
+      if (!isNaN(pg)) {
+        renderPage(pg);
+        // scroll to list
+        const y = listEl.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+
+    // ===== Events =====
+    const deb = fn => debounce(fn, 180);
+    searchInput?.addEventListener('input', deb(applyFilters));
+    provinceSelect?.addEventListener('change', applyFilters);
+    typeSelect?.addEventListener('change', applyFilters);
+    alcoholSelect?.addEventListener('change', applyFilters);
+    sortSelect?.addEventListener('change', applyFilters);
+
+    clearSearch?.addEventListener('click', ()=>{ searchInput.value=''; applyFilters(); });
+    resetBtn?.addEventListener('click', ()=>{
+      searchInput.value=''; provinceSelect.value=''; typeSelect.value=''; alcoholSelect.value=''; sortSelect.value='';
+      applyFilters();
+    });
+
+    // ===== Init =====
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // เริ่มด้วยการกรอง + เปิดหน้าจาก query ถ้ามี
+      applyFilters();
+      const pageQS = getPageFromQS();
+      if (pageQS > 1) renderPage(pageQS);
+    });
+</script>

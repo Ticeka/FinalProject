@@ -3,86 +3,124 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - เบียร์ท้องถิ่นไทย</title>
+    <title>@ViewData["Title"] - Sip &amp; Trip</title>
+
+    <meta name="description" content="Sip &amp; Trip – แผนที่เครื่องดื่มท้องถิ่นไทย สำรวจคราฟต์เบียร์ ไวน์ และสุราทั่วประเทศ พร้อมรายละเอียดสถานที่และรสชาติ" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
 
     <style>
-        body {
-            background-color: #fff8f0;
-            color: #333;
-            font-family: 'Segoe UI', 'Prompt', sans-serif;
+        :root {
+            --bg: #f6f8fb;
+            --card: #ffffff;
+            --ink: #1f2937;
+            --muted: #6b7280;
+            --brand: #2563eb;
+            --ring: rgba(37,99,235,.2)
         }
 
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        }
+
+        /* Navbar */
         .navbar {
-            background-color: #fff4e1;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(180deg,#f8fafc,#ffffff);
+            border-bottom: 1px solid #e6ebf2;
         }
 
         .navbar-brand {
-            font-weight: bold;
-            color: #a0522d;
-            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--ink);
         }
 
             .navbar-brand:hover {
-                color: #7b3e1d;
+                color: #0f172a;
             }
 
         .nav-link {
-            color: #333;
-            transition: color 0.2s ease;
+            color: #334155;
+            padding: .5rem .9rem;
+            border-radius: 8px;
+            transition: all .15s ease;
         }
 
             .nav-link:hover {
-                color: #a0522d;
+                background: #f1f5f9;
+                color: #0f172a;
             }
 
-        footer {
-            background-color: #fff4e1;
-            color: #333;
-            padding: 15px 0;
-            text-align: center;
-            border-top: 1px solid #ddd;
-            margin-top: 30px;
-        }
-
-        h1, h2, h3 {
-            color: #7b3e1d;
-        }
+            .nav-link.active {
+                color: #fff !important;
+                background: var(--brand);
+                box-shadow: 0 2px 6px var(--ring);
+            }
 
         .container {
             max-width: 1100px;
         }
+
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e6ebf2;
+            color: #64748b;
+            padding: 16px 0;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light">
+    <header class="sticky-top">
+        <!-- เพิ่ม navbar-light เพื่อให้ปุ่ม toggler มองเห็นชัด -->
+        <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    🍺 เบียร์ท้องถิ่นไทย
-                </a>
+                <!-- Brand -->
+                <a class="navbar-brand fw-bold" asp-area="" asp-page="/Index">🍹 Sip &amp; Trip</a>
+
+                <!-- Mobile toggle -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!-- Menu -->
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
+                    @{
+                        // ตรวจ path ปัจจุบันแบบยืดหยุ่น
+                        var path = Context?.Request?.Path.Value?.ToLowerInvariant() ?? "";
+                        bool IsActive(string p)
+                        {
+                            p = p.ToLowerInvariant();
+                            if (p == "/index") return path == "/" || path == "/index";
+                            if (p == "/list") return path.StartsWith("/list") || path.StartsWith("/detail"); // ให้ /Detail นับเป็นหมวดรายการ
+                            return path.StartsWith(p);
+                        }
+                        Func<string, string> active = p => IsActive(p) ? "active fw-semibold" : "";
+                    }
+                    <ul class="navbar-nav align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Index">หน้าแรก</a>
-                        </li>                 
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/List">รายชื่อเบียร์</a>
+                            <a class="nav-link @active("/Index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Review">รีวิว</a>
+                            <!-- เปลี่ยนข้อความให้ครอบคลุม (ไม่จำกัดแค่เบียร์) -->
+                            <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/About">เกี่ยวกับเรา</a>
+                            <a class="nav-link @active("/Review")" asp-area="" asp-page="/Review">⭐ รีวิว</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @active("/About")" asp-area="" asp-page="/About">ℹ️ เกี่ยวกับเรา</a>
                         </li>
                     </ul>
                 </div>
@@ -90,22 +128,24 @@
         </nav>
     </header>
 
+    <!-- Main -->
     <div class="container my-4">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            &copy; 2568 - เบียร์ท้องถิ่นไทย - แนะนำเบียร์จากทั่วประเทศไทย
+        <div class="container text-center">
+            &copy; 2568 • Sip &amp; Trip • แผนที่เครื่องดื่มท้องถิ่นไทย
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

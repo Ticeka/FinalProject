@@ -4,6 +4,7 @@ using FinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250812065539_AddAlcoholDetailToLocalBeer")]
+    partial class AddAlcoholDetailToLocalBeer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,58 +161,6 @@ namespace FinalProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LocalBeers");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.QuickRating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeviceId")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<string>("IpHash")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int>("LocalBeerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocalBeerId", "DeviceId")
-                        .IsUnique();
-
-                    b.ToTable("QuickRatings", t =>
-                        {
-                            t.HasCheckConstraint("CK_QuickRatings_Score", "[Score] BETWEEN 1 AND 5");
-                        });
-                });
-
-            modelBuilder.Entity("FinalProject.Models.QuickRating", b =>
-                {
-                    b.HasOne("FinalProject.Models.LocalBeer", "LocalBeer")
-                        .WithMany()
-                        .HasForeignKey("LocalBeerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LocalBeer");
                 });
 #pragma warning restore 612, 618
         }
