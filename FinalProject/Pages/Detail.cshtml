@@ -18,15 +18,15 @@
     }
 
     // Safe values
-    var priceSafe = b?.Price ?? 0m;     // decimal
-    var abvSafe = b?.AlcoholLevel ?? 0d;     // double
-    var ratingSafe = b?.Rating ?? 0d;     // double
-    var countSafe = b?.RatingCount ?? 0;      // int
+    var priceSafe = b?.Price ?? 0m;
+    var abvSafe = b?.AlcoholLevel ?? 0d;
+    var ratingSafe = b?.Rating ?? 0d;
+    var countSafe = b?.RatingCount ?? 0;
 
-    string ChipIconByType(string? type)
-        => (type ?? "").ToLower().Contains("ไวน์") || (type ?? "").ToLower().Contains("wine") ? "🍷"
-         : (type ?? "").ToLower().Contains("เบียร์") || (type ?? "").ToLower().Contains("beer") || (type ?? "").ToLower().Contains("ลาเกอร์") || (type ?? "").ToLower().Contains("ipa") ? "🍺"
-         : (type ?? "").ToLower().Contains("วิสกี้") || (type ?? "").ToLower().Contains("เหล้า") || (type ?? "").ToLower().Contains("rum") || (type ?? "").ToLower().Contains("whisky") || (type ?? "").ToLower().Contains("liquor") ? "🥃"
+    string ChipIconByType(string? t)
+        => (t ?? "").ToLower().Contains("ไวน์") || (t ?? "").ToLower().Contains("wine") ? "🍷"
+         : (t ?? "").ToLower().Contains("เบียร์") || (t ?? "").ToLower().Contains("beer") || (t ?? "").ToLower().Contains("ลาเกอร์") || (t ?? "").ToLower().Contains("ipa") ? "🍺"
+         : (t ?? "").ToLower().Contains("วิสกี้") || (t ?? "").ToLower().Contains("เหล้า") || (t ?? "").ToLower().Contains("rum") || (t ?? "").ToLower().Contains("whisky") || (t ?? "").ToLower().Contains("liquor") ? "🥃"
          : "🍶";
 }
 
@@ -43,7 +43,7 @@
 }
 else
 {
-    <!-- ข้อมูลสำหรับ JS -->
+    <!-- data สำหรับ JS -->
     <div id="beerData"
          data-id="@b.Id"
          data-name="@b.Name"
@@ -59,7 +59,7 @@ else
          data-website="@b.Website"
          data-facebook="@b.FacebookPage"
          data-phone="@b.PhoneNumber"
-         data-auth="@(User?.Identity?.IsAuthenticated ?? false)">
+         data-auth="@(User?.Identity?.IsAuthenticated == true)">
     </div>
 
     <div class="container py-4" itemscope itemtype="https://schema.org/Product">
@@ -73,35 +73,48 @@ else
         </nav>
 
         <!-- Hero -->
-        <header class="page-hero rounded-4 p-4 p-md-5 mb-4">
-            <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-4">
-                <img itemprop="image" src="@imageSrc" alt="@b.Name" class="thumb-lg"
-                     onerror="this.src='https://via.placeholder.com/640x853?text=Image'" />
+        <header class="page-hero rounded-4 p-3 p-md-4 p-lg-5 mb-4">
+            <div class="row g-4 align-items-lg-center">
+                <div class="col-lg-5">
+                    <div class="hero-wrap">
+                        <img itemprop="image" src="@imageSrc" alt="@b.Name" class="thumb-lg w-100"
+                             onerror="this.src='https://via.placeholder.com/640x853?text=Image'" />
+                        <!-- ปุ่มถูกใจลอยบนรูป -->
+                        <button id="favBtn" class="fav-fab" type="button" aria-pressed="false" aria-label="ถูกใจรายการนี้" title="เพิ่มในรายการถูกใจ">❤</button>
+                    </div>
+                </div>
 
-                <div class="flex-grow-1">
-                    <h1 class="h3 h-md-2 mb-2" itemprop="name">@b.Name</h1>
+                <div class="col-lg-7">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                        <h1 class="h3 h-md-2 mb-0" itemprop="name">@b.Name</h1>
 
-                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <!-- ปุ่มถูกใจแบบอินไลน์ (สำรองสำหรับจอเล็ก) -->
+                        <button class="btn btn-outline-danger fav-inline d-lg-none" type="button" title="เพิ่มในรายการถูกใจ" onclick="document.getElementById('favBtn').click()">
+                            ❤ ถูกใจ
+                        </button>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2 mt-3">
                         @if (!string.IsNullOrWhiteSpace(b.Province))
                         {
-                            <span class="chip">📍 @b.Province</span>
+                            <span class="chip" title="จังหวัด">📍 @b.Province</span>
                         }
                         @if (!string.IsNullOrWhiteSpace(b.Type))
                         {
-                            <span class="chip">@ChipIconByType(b.Type) @b.Type</span>
+                            <span class="chip" title="ประเภทเครื่องดื่ม">@ChipIconByType(b.Type) @b.Type</span>
                         }
                         @if (abvSafe > 0d)
                         {
-                            <span class="chip">🔥 @abvSafe% ABV</span>
+                            <span class="chip" title="ปริมาณแอลกอฮอล์">🔥 @abvSafe% ABV</span>
                         }
                         @if (priceSafe > 0m)
                         {
-                            <span class="chip">💰 <span id="priceVal">@priceSafe</span> บาท</span>
+                            <span class="chip" title="ราคา">💰 <span id="priceVal">@priceSafe</span> บาท</span>
                         }
                     </div>
 
-                    <!-- ⭐ ให้ดาวแบบไม่ล็อกอิน -->
-                    <div class="ratebox" data-id="@b.Id"
+                    <!-- ให้ดาวแบบไม่ล็อกอิน -->
+                    <div class="ratebox mt-3" data-id="@b.Id"
                          data-avg="@ratingSafe.ToString("0.0")"
                          data-count="@countSafe">
                         <div class="stars" role="radiogroup" aria-label="ให้คะแนน">
@@ -118,48 +131,39 @@ else
 
                     @if (!string.IsNullOrWhiteSpace(b.Description))
                     {
-                        <p class="text-secondary" itemprop="description">@b.Description</p>
+                        <p class="text-secondary mt-3 mb-0" itemprop="description">@b.Description</p>
                     }
 
-                    <!-- Static summary stars (อ่านอย่างเดียว) -->
                     @if (ratingSafe > 0d)
                     {
                         var stars = Math.Round(ratingSafe);
-                        <div class="rating-stars mb-2" aria-label="คะแนนเฉลี่ย @ratingSafe จาก @countSafe รีวิว">
+                        <div class="rating-stars mt-3" aria-label="คะแนนเฉลี่ย @ratingSafe จาก @countSafe รีวิว">
                             @Html.Raw(new string('★', (int)stars))@Html.Raw(new string('☆', 5 - (int)stars))
                             <span class="text-muted">(@ratingSafe.ToString("0.0"))</span>
                         </div>
                     }
                     @if (countSafe > 0)
                     {
-                        <div class="text-muted mb-2">รีวิวทั้งหมด: <strong>@countSafe</strong></div>
+                        <div class="text-muted mt-1">รีวิวทั้งหมด: <strong>@countSafe</strong></div>
                     }
 
                     <!-- Quick actions -->
-                    <div class="d-flex flex-wrap gap-2 mt-2">
-                        <a asp-page="/List" class="btn btn-outline-secondary">⬅️ กลับไปรายการ</a>
+                    <div class="d-flex flex-wrap gap-2 mt-4">
+                        <a asp-page="/List" class="btn btn-soft">⬅️ กลับไปรายการ</a>
                         <a asp-page="/Index" class="btn btn-primary">ดูบนแผนที่รวม</a>
                         @if (!string.IsNullOrWhiteSpace(b.Website))
                         {
-                            <a href="@b.Website" target="_blank" class="btn btn-light border">เว็บไซต์</a>
+                            <a href="@b.Website" target="_blank" rel="noopener" class="btn btn-soft" title="ไปยังเว็บไซต์">เว็บไซต์</a>
                         }
                         @if (!string.IsNullOrWhiteSpace(b.FacebookPage))
                         {
-                            <a href="@b.FacebookPage" target="_blank" class="btn btn-light border">Facebook</a>
+                            <a href="@b.FacebookPage" target="_blank" rel="noopener" class="btn btn-soft" title="ไปยัง Facebook">Facebook</a>
                         }
                         @if (!string.IsNullOrWhiteSpace(b.PhoneNumber))
                         {
-                            <a href="tel:@b.PhoneNumber" class="btn btn-light border">โทร @b.PhoneNumber</a>
+                            <a href="tel:@b.PhoneNumber" class="btn btn-soft" title="โทร">@b.PhoneNumber</a>
                         }
-                        <button id="copyLinkBtn" class="btn btn-outline-secondary">🔗 คัดลอกลิงก์</button>
-
-                        <!-- ❤ ปุ่มถูกใจ -->
-                        <button id="favBtn"
-                                class="btn btn-outline-danger"
-                                aria-pressed="false"
-                                aria-label="เพิ่มในรายการถูกใจ">
-                            ถูกใจ
-                        </button>
+                        <button id="copyLinkBtn" class="btn btn-outline-secondary" title="คัดลอกลิงก์">🔗 คัดลอกลิงก์</button>
                     </div>
                 </div>
             </div>
@@ -167,8 +171,10 @@ else
 
         <!-- Key Facts -->
         <section class="section p-4 p-md-5 mb-4">
-            <h2 class="h5 mb-3">ข้อมูลสำคัญ</h2>
-            <div class="meta-grid">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h2 class="h5 mb-0">ข้อมูลสำคัญ</h2>
+            </div>
+            <div class="meta-grid" style="--gap:1rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)">
                 @if (!string.IsNullOrWhiteSpace(b.PlaceOfOrigin))
                 {
                     <div><div class="text-muted small">แหล่งกำเนิด</div><div>@b.PlaceOfOrigin</div></div>
@@ -327,13 +333,11 @@ else
     </div>
 
     <!-- Comments -->
-    <section class="section p-4 p-md-5 mb-5">
+    <section class="section container p-4 p-md-5 mb-5">
         <h2 class="h5 mb-3">ความคิดเห็น</h2>
-
         <div class="mb-3">
             <div class="form-floating mb-2">
-                <textarea id="cmtText" class="form-control" style="height: 110px"
-                          placeholder="พิมพ์ความคิดเห็นของคุณ..."></textarea>
+                <textarea id="cmtText" class="form-control" style="height: 110px" placeholder="พิมพ์ความคิดเห็นของคุณ..."></textarea>
                 <label for="cmtText">พิมพ์ความคิดเห็นของคุณ...</label>
             </div>
 
@@ -355,6 +359,28 @@ else
         <div id="cmtList" class="d-flex flex-column gap-3"></div>
         <div id="cmtEmpty" class="text-muted">ยังไม่มีความคิดเห็น — มาเป็นคนแรกกันเลย!</div>
     </section>
+
+    <!-- JSON-LD (Structured Data) -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org/",
+          "@@type": "Product",
+          "name": "@(b.Name?.Replace("\"", "\\\""))",
+          "image": "@imageSrc",
+          "description": "@(b.Description?.Replace("\"", "\\\""))",
+          "brand": { "@@type": "Brand", "name": "@(b.Creator ?? "Unknown")" },
+          "offers": {
+            "@@type": "Offer",
+            "priceCurrency": "THB",
+            "price": "@priceSafe"
+          },
+          "aggregateRating": {
+            "@@type": "AggregateRating",
+            "ratingValue": "@ratingSafe",
+            "reviewCount": "@countSafe"
+          }
+        }
+    </script>
 }
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

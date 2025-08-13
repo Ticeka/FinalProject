@@ -15,123 +15,147 @@
     bool hasAvatar = !string.IsNullOrWhiteSpace(Model.AvatarUrl);
 }
 
-<link rel="stylesheet" href="~/css/profile.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="@Url.Content("~/css/profile.css")" asp-append-version="true" />
 
-<div class="profile-container container">
-    <!-- Header Card -->
-    <div class="profile-card glass card border-0 shadow-soft">
-        <div class="card-body d-grid d-md-flex align-items-center gap-4">
-            <!-- Avatar -->
-            <div class="avatar-section text-center">
-                <div class="avatar-wrap">
-                    @if (hasAvatar)
-                    {
-                        <img id="avatarPreview" src="@Model.AvatarUrl" alt="Avatar" class="avatar-img" />
-                    }
-                    else
-                    {
-                        <div id="avatarFallback"
-                             class="avatar-fallback"
-                             data-initials="@initials"
-                             role="img"
-                             aria-label="โปรไฟล์ @Model.DisplayName">
-                            <span>@initials</span>
-                            <svg class="avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <circle cx="12" cy="8" r="4"></circle>
-                                <path d="M4 20a8 8 0 0 1 16 0"></path>
-                            </svg>
-                        </div>
-                    }
-                    <input type="file" id="avatarUpload" accept="image/*" hidden />
+<div class="profile-page">
+    <!-- Cover / Header -->
+    <div class="profile-cover">
+        <div class="cover-gradient"></div>
+        <div class="cover-noise"></div>
+    </div>
+
+    <!-- Header Card (sticky-ish) -->
+    <header class="container profile-header">
+        <div class="ph-left">
+            <div class="avatar-wrap" role="img" aria-label="โปรไฟล์ @Model.DisplayName">
+                @if (hasAvatar)
+                {
+                    <img id="avatarPreview" src="@Model.AvatarUrl" alt="@Model.DisplayName" class="avatar-img" />
+                }
+                else
+                {
+                    <div id="avatarFallback" class="avatar-fallback" data-initials="@initials">
+                        <span>@initials</span>
+                        <svg class="avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 20a8 8 0 0 1 16 0"></path>
+                        </svg>
+                    </div>
+                }
+                <input type="file" id="avatarUpload" accept="image/*" hidden />
+                <button id="changeAvatarBtn" class="avatar-edit" title="เปลี่ยนรูปโปรไฟล์" aria-label="เปลี่ยนรูปโปรไฟล์">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path d="M12 5h.01M4 7h4l2-2h4l2 2h4v12H4V7Z" fill="none" stroke="currentColor" stroke-width="1.5" />
+                        <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="identity">
+                <div class="display-row">
+                    <h1 class="display-name">@Model.DisplayName</h1>
+                    <div class="verified-chip" title="บัญชีของฉัน">คุณ</div>
+                </div>
+                <div class="muted">@Model.Email</div>
+                @if (!string.IsNullOrWhiteSpace(Model.Location) || Model.BirthYear is not null)
+                {
+                    <div class="muted mt-1">
+                        @if (!string.IsNullOrWhiteSpace(Model.Location))
+                        {
+                            <span>📍 @Model.Location</span>
+                        }
+                        @if (Model.BirthYear is not null)
+                        {
+                            <span class="ms-2">🎂 @Model.BirthYear</span>
+                        }
+                    </div>
+                }
+                <div class="muted mt-1">เข้าร่วมเมื่อ @Model.JoinDate.ToString("dd MMM yyyy")</div>
+
+                <div class="quick-stats mt-3">
+                    <div class="stat"><div class="val">@Model.Stats?.Reviews</div><div class="lbl">รีวิว</div></div>
+                    <div class="stat"><div class="val">@Model.Stats?.Favorites</div><div class="lbl">ถูกใจ</div></div>
+                    <div class="stat"><div class="val">@Model.Stats?.Badges</div><div class="lbl">แบดจ์</div></div>
                 </div>
 
-                <div class="d-flex gap-2 justify-content-center mt-3">
-                    <button id="changeAvatarBtn" class="btn btn-brand">เปลี่ยนรูปโปรไฟล์</button>
-                    <button id="removeAvatarBtn" class="btn btn-outline-secondary" @(hasAvatar ? "" : "disabled")>
-                        ลบรูป
-                    </button>
+                <div class="actions mt-3">
+                    <button id="editProfileBtn" class="btn btn-brand">แก้ไขโปรไฟล์</button>
+                    <button id="shareProfileBtn" class="btn btn-soft">แชร์โปรไฟล์</button>
+                    <button id="removeAvatarBtn" class="btn btn-outline-danger" @(hasAvatar ? "" : "disabled")>ลบรูป</button>
                 </div>
 
-                <div class="upload-hint small text-muted mt-2">รองรับ JPG/PNG/WebP ขนาดไม่เกิน 3 MB</div>
-
+                <div class="upload-hint small text-muted mt-2">รองรับ JPG/PNG/WebP ≤ 3 MB</div>
                 <div class="progress mt-3 d-none" id="uploadProgressWrap" aria-hidden="true">
                     <div class="progress-bar" id="uploadProgress" style="width:0%"></div>
                 </div>
             </div>
-
-            <!-- Info -->
-            <div class="info-section flex-fill">
-                <div class="d-flex align-items-start justify-content-between">
-                    <div>
-                        <h1 class="display-name mb-1">@Model.DisplayName</h1>
-                        <div class="text-muted">
-                            <span class="me-3">อีเมล: <strong>@Model.Email</strong></span>
-                            <span>เข้าร่วมเมื่อ: <strong>@Model.JoinDate.ToString("dd MMMM yyyy")</strong></span>
-                        </div>
-                    </div>
-                    <div>
-                        <a class="btn btn-outline-brand" asp-page="/Edit">แก้ไขข้อมูล</a>
-                    </div>
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="quick-stats mt-4">
-                    <div class="stat">
-                        <div class="stat-value">@Model.Stats?.Reviews</div>
-                        <div class="stat-label">รีวิว</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">@Model.Stats?.Favorites</div>
-                        <div class="stat-label">รายการโปรด</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">@Model.Stats?.Badges</div>
-                        <div class="stat-label">แบดจ์</div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Activity -->
-    <div class="activity-section card border-0 shadow-soft glass mt-4">
-        <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between mb-2">
+    <!-- Tabs -->
+    <nav class="container tabs">
+        <button class="tab-btn active" data-tab="favorites">รายการถูกใจ</button>
+        <button class="tab-btn" data-tab="activity">กิจกรรม</button>
+        <button class="tab-btn" data-tab="about">เกี่ยวกับ</button>
+        <div class="tab-underline"></div>
+    </nav>
+
+    <!-- Body -->
+    <main class="container tab-panels">
+        <!-- Favorites Grid -->
+        <section id="tab-favorites" class="tab-panel active">
+            <div id="favGrid" class="fav-grid"></div>
+            <div id="favEmpty" class="muted text-center py-4 d-none">ยังไม่มีรายการถูกใจ</div>
+
+            <!-- skeletons -->
+            <div id="favSkeleton" class="fav-grid">
+                @for (var i = 0; i < 6; i++)
+                {
+                    <div class="card card-skeleton">
+                        <div class="sk-img"></div>
+                        <div class="sk-line w-60"></div>
+                        <div class="sk-line w-40"></div>
+                    </div>
+                }
+            </div>
+        </section>
+
+        <!-- Activity Timeline -->
+        <section id="tab-activity" class="tab-panel">
+            <div class="timeline-head d-flex align-items-center justify-content-between mb-2">
                 <h3 class="section-title mb-0">กิจกรรมล่าสุด</h3>
                 <button id="refreshActivityBtn" class="btn btn-light btn-sm">รีเฟรช</button>
             </div>
-            <ul id="activityList" class="activity-timeline">
+            <ul id="activityList" class="timeline">
                 @foreach (var activity in Model.RecentActivities)
                 {
-                    <li class="activity-item">
-                        <span class="dot"></span>
-                        <div class="content">
-                            <div class="title">@activity</div>
-                        </div>
-                    </li>
+                    <li class="item"><span class="dot"></span><div class="content">@activity</div></li>
                 }
             </ul>
-            <div id="activityEmpty" class="text-muted small d-none">ยังไม่มีกิจกรรม</div>
-        </div>
-    </div>
+            <div id="activityEmpty" class="muted small d-none">ยังไม่มีกิจกรรม</div>
+        </section>
 
-    <!-- Favorites -->
-    <div class="favorites-section card border-0 shadow-soft glass mt-4">
-        <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <h3 class="section-title mb-0">รายการถูกใจของฉัน</h3>
-                <div class="d-flex gap-2">
-                    <button id="refreshFavBtn" class="btn btn-light btn-sm">รีเฟรช</button>
+        <!-- About -->
+        <section id="tab-about" class="tab-panel">
+            <div class="card about-card">
+                <div class="card-body">
+                    <h3 class="section-title">เกี่ยวกับฉัน</h3>
+                    @if (!string.IsNullOrWhiteSpace(Model.Bio))
+                    {
+                        <p class="mb-0">@Model.Bio</p>
+                    }
+                    else
+                    {
+                        <p class="mb-0 muted">ยังไม่ได้เขียนแนะนำตัว</p>
+                    }
                 </div>
             </div>
-
-            <div id="favList" class="row g-3"></div>
-            <div id="favEmpty" class="text-muted small d-none">ยังไม่มีรายการถูกใจ</div>
-        </div>
-    </div>
+        </section>
+    </main>
 </div>
 
-<!-- Edit Profile Modal -->
+<!-- Modal: Edit Profile -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-soft">
@@ -151,7 +175,7 @@
                         <input type="email" class="form-control" name="Email" value="@Model.Email" required>
                         <div class="invalid-feedback">กรุณาใส่อีเมลที่ถูกต้อง</div>
                     </div>
-                    @* เพิ่มฟิลด์อื่น ๆ ได้ เช่น Location/Bio/BirthYear *@
+                    @* เพิ่มฟิลด์อื่น ๆ เช่น Location / Bio / BirthYear *@
                 </form>
             </div>
             <div class="modal-footer">
@@ -163,7 +187,7 @@
 </div>
 
 <!-- Toast -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1080;">
     <div id="profileToast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body" id="toastMsg">ดำเนินการสำเร็จ</div>
@@ -172,98 +196,17 @@
     </div>
 </div>
 
-<!-- ส่ง Endpoint ให้ JS -->
+<!-- Endpoints ให้ JS -->
 <script>
     window.ProfileEndpoints = {
       upload: '@Url.Page("/Profile", null, new { handler = "UploadAvatar" }, null)',
       remove: '@Url.Page("/Profile", null, new { handler = "RemoveAvatar" }, null)',
       edit: '@Url.Page("/Profile", null, new { handler = "Edit" }, null)',
       activities: '@Url.Page("/Profile", null, new { handler = "Activities" }, null)',
-      myFavorites: '/api/me/favorites',                          // <-- เพิ่ม endpoint รายการถูกใจ
-      toggleFavorite: (id) => `/api/beers/${id}/favorite`        // <-- สำหรับลบออกจากถูกใจ
+      myFavorites: '/api/me/favorites',
+      toggleFavorite: (id) => `/api/beers/${id}/favorite`
     };
 </script>
 
-<script src="~/js/profile.js"></script>
-
-<!-- Inline helper สำหรับโหลด "รายการถูกใจของฉัน" -->
-<script>
-    (function(){
-      const list = document.getElementById('favList');
-      const empty = document.getElementById('favEmpty');
-      const btnRefresh = document.getElementById('refreshFavBtn');
-
-      async function fetchWithTimeout(url, opts = {}, ms = 10000) {
-          const ctrl = new AbortController();
-          const id = setTimeout(() => ctrl.abort(new DOMException("timeout","AbortError")), ms);
-          const headers = Object.assign({ 'Accept': 'application/json' }, opts.headers || {});
-          try { return await fetch(url, { credentials:'same-origin', ...opts, headers, signal: ctrl.signal }); }
-          finally { clearTimeout(id); }
-      }
-
-      async function removeFavorite(beerId){
-          if(!confirm('เอาออกจากรายการถูกใจหรือไม่?')) return;
-          try{
-              const res = await fetchWithTimeout(window.ProfileEndpoints.toggleFavorite(beerId), { method:'DELETE' });
-              if(res.ok || res.status === 204){ await load(); return; }
-              const t = await res.text().catch(()=> '');
-              alert('เอาออกไม่สำเร็จ: ' + (t || res.status));
-          }catch(e){
-              console.error(e);
-              alert('เครือข่ายขัดข้อง');
-          }
-      }
-
-      function cardTemplate(it){
-          const img = it.imageUrl || 'https://via.placeholder.com/300x300?text=%F0%9F%8D%BA';
-          const rating = (typeof it.rating === 'number' ? it.rating.toFixed(1) : (it.rating || 0));
-          const rc = it.ratingCount || 0;
-          const province = it.province || '';
-          const price = (typeof it.price === 'number') ? new Intl.NumberFormat('th-TH').format(it.price) : (it.price || '');
-          return `
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card h-100 border-0 shadow-soft">
-                <div class="ratio ratio-1x1">
-                  <img src="${img}" alt="${it.name}" class="card-img-top" style="object-fit:cover;border-top-left-radius:.8rem;border-top-right-radius:.8rem">
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <div class="fw-semibold mb-1">${it.name}</div>
-                  <div class="text-muted small mb-2">${province} · ★ ${rating} (${rc})${price ? ' · ฿'+price : ''}</div>
-                  <div class="mt-auto d-flex gap-2">
-                    <a class="btn btn-outline-secondary btn-sm" href="/Detail?id=${it.id}">เปิดรายละเอียด</a>
-                    <button type="button" class="btn btn-outline-danger btn-sm btn-unfav" data-id="${it.id}">เอาออก</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-      }
-
-      async function load(){
-          list.innerHTML = '';
-          empty.classList.add('d-none');
-          try{
-              const res = await fetchWithTimeout(window.ProfileEndpoints.myFavorites);
-              if(!res.ok){ throw new Error(`GET ${res.status}`); }
-              const items = await res.json();
-              if(!items.length){ empty.classList.remove('d-none'); return; }
-              list.innerHTML = items.map(cardTemplate).join('');
-              // bind remove
-              list.querySelectorAll('.btn-unfav').forEach(btn=>{
-                  btn.addEventListener('click', e=>{
-                      const id = Number(e.currentTarget.getAttribute('data-id'));
-                      if(Number.isInteger(id) && id>0) removeFavorite(id);
-                  });
-              });
-          }catch(err){
-              console.error(err);
-              empty.classList.remove('d-none');
-              empty.textContent = 'โหลดรายการถูกใจไม่สำเร็จ';
-          }
-      }
-
-      btnRefresh?.addEventListener('click', load);
-      // auto-load
-      load();
-    })();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="@Url.Content("~/js/profile.js")" asp-append-version="true"></script>

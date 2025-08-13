@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
-using FinalProject.Models;      // ApplicationUser, BeerComment, LocalBeer, ...
+using FinalProject.Models;      // ApplicationUser, BeerComment, LocalBeer, ... (และใช้ DTO จากที่นี่)
 using FinalProject.Services;   // NullEmailSender
 using System.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 // ---------------------------
 // Configure Services
@@ -40,7 +41,7 @@ builder.Services
 // Email (mock)
 builder.Services.AddSingleton<IEmailSender, NullEmailSender>();
 
-// Cookies
+// Cookies (สำคัญ)
 builder.Services.ConfigureApplicationCookie(opt =>
 {
     opt.LoginPath = "/Identity/Account/Login";
@@ -48,7 +49,40 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.AccessDeniedPath = "/Identity/Account/AccessDenied";
     opt.SlidingExpiration = true;
     opt.ExpireTimeSpan = TimeSpan.FromDays(14);
+
+    // ตั้งค่าคุกกี้ให้แน่น
+    opt.Cookie.Name = ".FinalProject.Auth";
+    opt.Cookie.Path = "/";
+    opt.Cookie.HttpOnly = true;
     opt.Cookie.IsEssential = true;
+    opt.Cookie.SameSite = SameSiteMode.Lax;
+    // ถ้าทดสอบบน http ให้เปลี่ยนเป็น CookieSecurePolicy.None ชั่วคราว
+    opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+
+    // ให้ /api/* ได้ 401/403 แทน 302 redirect
+    opt.Events = new CookieAuthenticationEvents
+    {
+        OnRedirectToLogin = ctx =>
+        {
+            if (ctx.Request.Path.StartsWithSegments("/api"))
+            {
+                ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return Task.CompletedTask;
+            }
+            ctx.Response.Redirect(ctx.RedirectUri);
+            return Task.CompletedTask;
+        },
+        OnRedirectToAccessDenied = ctx =>
+        {
+            if (ctx.Request.Path.StartsWithSegments("/api"))
+            {
+                ctx.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return Task.CompletedTask;
+            }
+            ctx.Response.Redirect(ctx.RedirectUri);
+            return Task.CompletedTask;
+        }
+    };
 });
 
 // Razor Pages + JSON (camelCase)
@@ -192,37 +226,66 @@ app.MapGet("/api/beers/{id:int}/comments", async (
     skip = Math.Max(0, skip);
     take = Math.Clamp(take <= 0 ? 20 : take, 1, 100);
 
-    var uid = (ctx.User?.Identity?.IsAuthenticated ?? false) ? userManager.GetUserId(ctx.User) : null;
-    var ipHash = GetIpHash(ctx);
-    var now = DateTime.UtcNow;
-    var guestWindow = TimeSpan.FromDays(1);
+    string? meId = (ctx.User?.Identity?.IsAuthenticated ?? false)
+        ? userManager.GetUserId(ctx.User)
+        : null;
 
+    static string MaskEmail(string? email)
+        => string.IsNullOrWhiteSpace(email) ? "User" : email.Split('@')[0];
+
+    // ดึงคอมเมนต์ชุดหลัก
     var raw = await db.BeerComments
         .AsNoTracking()
-        .Where(c => c.LocalBeerId == id)
+        .Where(c => !c.IsDeleted && c.LocalBeerId == id)
         .OrderByDescending(c => c.CreatedAt)
         .Skip(skip).Take(take)
         .Select(c => new
         {
             c.Id,
             c.Body,
-            c.DisplayName,
-            c.UserId,
+            c.DisplayName,   // ของ guest
+            c.UserId,        // เอาไว้ map ผู้ใช้จริง
             c.UserName,
-            c.CreatedAt,
-            c.IpHash
+            c.CreatedAt
+            // ถ้าคุณมีฟิลด์ c.UserRating ใน BeerComment ให้ select มาด้วย
         })
         .ToListAsync();
 
-    var items = raw.Select(c => new CommentView(
-        c.Id,
-        c.Body,
-        string.IsNullOrWhiteSpace(c.UserName) ? (c.DisplayName ?? "Guest") : c.UserName!,
-        c.CreatedAt,
-        // CanDelete เงื่อนไข: เจ้าของผู้ใช้ หรือ guest ที่ IP เดิมภายใน 24 ชม.
-        (c.UserId != null && c.UserId == uid) ||
-        (c.UserId == null && string.Equals(c.IpHash, ipHash, StringComparison.OrdinalIgnoreCase) && (now - c.CreatedAt) <= guestWindow)
-    )).ToList();
+    // ดึงข้อมูลผู้ใช้ของทุกคอมเมนต์ทีเดียว
+    var userIds = raw.Where(r => r.UserId != null).Select(r => r.UserId!).Distinct().ToList();
+    var userMap = await db.Users
+    .AsNoTracking()
+    .Where(u => userIds.Contains(u.Id))
+    .ToDictionaryAsync(u => u.Id); // value type = ApplicationUser
+
+    // 2) ใช้งาน
+    var items = raw.Select(r =>
+    {
+        FinalProject.Models.ApplicationUser? u = null;
+        if (r.UserId != null)
+            userMap.TryGetValue(r.UserId!, out u);
+
+        static string MaskEmail(string? email) => string.IsNullOrWhiteSpace(email) ? "User" : email.Split('@')[0];
+
+        var disp = (u != null)
+            ? (u.DisplayName ?? u.UserName ?? MaskEmail(u.Email))
+            : (r.DisplayName ?? "Guest");
+
+        var avatarUrl = u?.AvatarUrl;
+        var canDelete = (meId != null && r.UserId == meId);
+        int? rating = null;
+
+        return new CommentView(
+            Id: r.Id,
+            Body: r.Body,
+            Author: disp,
+            CreatedAt: r.CreatedAt,
+            CanDelete: canDelete,
+            DisplayName: disp,
+            AvatarUrl: avatarUrl,
+            Rating: rating
+        );
+    }).ToList();
 
     return Results.Ok(items);
 })
@@ -232,7 +295,7 @@ app.MapGet("/api/beers/{id:int}/comments", async (
 // POST: /api/beers/{id}/comments
 app.MapPost("/api/beers/{id:int}/comments", async (
     int id,
-    [FromBody] NewCommentDto dto,
+    [FromBody] NewCommentDto dto, // หรือ CommentCreateDto ก็ได้ (ทั้งคู่อยู่ใน FinalProject.Models แล้ว)
     AppDbContext db,
     HttpContext ctx,
     UserManager<ApplicationUser> userManager) =>
@@ -246,20 +309,19 @@ app.MapPost("/api/beers/{id:int}/comments", async (
     if (beer is null) return Results.NotFound("beer not found");
 
     string? uid = null, uname = null, display = dto.DisplayName?.Trim();
+    ApplicationUser? me = null;
 
     if (ctx.User?.Identity?.IsAuthenticated == true)
     {
-        uid = userManager.GetUserId(ctx.User);
-        // ถ้า Name ว่าง ลองดึงจาก store
-        uname = ctx.User.Identity!.Name ?? (await userManager.GetUserNameAsync(await userManager.GetUserAsync(ctx.User)));
+        me = await userManager.GetUserAsync(ctx.User);
+        uid = me?.Id;
+        uname = me?.UserName;
     }
     else
     {
         display = string.IsNullOrWhiteSpace(display) ? "Guest" : display;
-        if (!string.IsNullOrEmpty(display) && display.Length > 100) display = display[..100];
+        if (display.Length > 100) display = display[..100];
     }
-
-    var ipHash = GetIpHash(ctx);
 
     var cmt = new BeerComment
     {
@@ -268,36 +330,43 @@ app.MapPost("/api/beers/{id:int}/comments", async (
         DisplayName = uid is null ? display : null,
         UserId = uid,
         UserName = uname,
-        IpHash = ipHash,
         CreatedAt = DateTime.UtcNow
+        // ถ้าคุณมี BeerComment.UserRating และอยากบันทึก:
+        // UserRating = dto.UserRating is >=1 and <=5 ? dto.UserRating : null
     };
 
-    try
-    {
-        db.BeerComments.Add(cmt);
-        await db.SaveChangesAsync();
-    }
-    catch (DbUpdateException)
-    {
-        return Results.Problem("cannot save comment", statusCode: 500);
-    }
+    db.BeerComments.Add(cmt);
+    await db.SaveChangesAsync();
 
-    // ผู้โพสต์พึ่งโพสต์เอง ให้ CanDelete = true
+    // สร้าง response พร้อมชื่อ/รูป
+    static string MaskEmail(string? email)
+        => string.IsNullOrWhiteSpace(email) ? "User" : email.Split('@')[0];
+
+    var disp = me != null
+        ? (me.DisplayName ?? me.UserName ?? MaskEmail(me.Email))
+        : (cmt.DisplayName ?? "Guest");
+
+    var avatarUrl = me?.AvatarUrl;
+    int? rating = null; // ถ้าบันทึกคะแนนต่อคอมเมนต์ ใช้ dto.UserRating แทน
+
     var view = new CommentView(
-        cmt.Id,
-        cmt.Body,
-        string.IsNullOrWhiteSpace(cmt.UserName) ? (cmt.DisplayName ?? "Guest") : cmt.UserName!,
-        cmt.CreatedAt,
-        true
+        Id: cmt.Id,
+        Body: cmt.Body,
+        Author: disp,
+        CreatedAt: cmt.CreatedAt,
+        CanDelete: true,
+        DisplayName: disp,
+        AvatarUrl: avatarUrl,
+        Rating: rating
     );
 
     return Results.Created($"/api/beers/{id}/comments/{cmt.Id}", view);
 })
+.AllowAnonymous()
 .Produces<CommentView>(StatusCodes.Status201Created)
 .Produces(StatusCodes.Status400BadRequest)
-.Produces(StatusCodes.Status404NotFound)
-.Produces(StatusCodes.Status500InternalServerError)
-.AllowAnonymous();
+.Produces(StatusCodes.Status404NotFound);
+
 
 // DELETE: /api/beers/{beerId}/comments/{commentId}
 app.MapDelete("/api/beers/{beerId:int}/comments/{commentId:int}", async (
@@ -344,6 +413,10 @@ app.MapDelete("/api/beers/{beerId:int}/comments/{commentId:int}", async (
 .Produces(StatusCodes.Status401Unauthorized)
 .Produces(StatusCodes.Status403Forbidden)
 .Produces(StatusCodes.Status404NotFound);
+
+// ==============================
+// Favorites API (ต้องล็อกอิน)
+// ==============================
 
 // GET: /api/beers/{id}/favorite  -> { isFavorite: bool }
 app.MapGet("/api/beers/{id:int}/favorite", async (
@@ -461,15 +534,16 @@ app.MapGet("/api/me/favorites", async (
 .Produces(StatusCodes.Status200OK)
 .Produces(StatusCodes.Status401Unauthorized);
 
+// Debug: เช็คว่า API เห็น Auth ไหม
+app.MapGet("/api/debug/whoami", (HttpContext ctx) =>
+{
+    var u = ctx.User;
+    return Results.Ok(new
+    {
+        isAuth = u?.Identity?.IsAuthenticated ?? false,
+        name = u?.Identity?.Name,
+        claims = u?.Claims.Select(c => new { c.Type, c.Value })
+    });
+});
+
 app.Run();
-
-// ---------------------------------
-// DTO / View Models (สำหรับ API)
-// ---------------------------------
-public record QuickRateDto(int BeerId, int Score);
-
-// ส่งชื่อที่แสดงมาได้ในกรณี guest
-public record NewCommentDto(string? DisplayName, string Body);
-
-// ใช้ให้ฝั่ง JS render + คุมปุ่มลบ
-public record CommentView(int Id, string Body, string Author, DateTime CreatedAt, bool CanDelete);

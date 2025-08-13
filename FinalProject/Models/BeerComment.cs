@@ -8,20 +8,27 @@ namespace FinalProject.Models
         public int Id { get; set; }
 
         [Required]
-        public int LocalBeerId { get; set; }
+        public int LocalBeerId { get; set; }      // ← ใช้ชื่อนี้ตามสคีมาของคุณ
 
         [Required, MaxLength(1000)]
         public string Body { get; set; } = string.Empty;
 
+        // ชื่อโชว์ของ Guest (ถ้าล็อกอินจะไม่ใช้ฟิลด์นี้)
         [MaxLength(100)]
-        public string? DisplayName { get; set; }   // ชื่อโชว์ (ถ้าไม่ล็อกอิน)
+        public string? DisplayName { get; set; }
 
-        public string? UserId { get; set; }       // ถ้าล็อกอินจะเก็บ
+        // ข้อมูลผู้ใช้ที่ล็อกอิน
+        public string? UserId { get; set; }
+
         [MaxLength(100)]
-        public string? UserName { get; set; }     // ชื่อผู้ใช้ตอนคอมเมนต์
+        public string? UserName { get; set; }
 
         [MaxLength(128)]
-        public string? IpHash { get; set; }       // ไว้วิเคราะห์/กันสแปมภายหลัง
+        public string? IpHash { get; set; }
+
+        // ถ้าต้องการผูกคะแนนของผู้คอมเมนต์กับคอมเมนต์เลย (แสดงใต้ชื่อ)
+        [Range(1, 5)]
+        public int? UserRating { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsDeleted { get; set; } = false;

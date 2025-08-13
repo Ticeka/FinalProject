@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ricrn3mo0f</Fingerprint>
-      <Integrity>3cTx/5zCoCOLcd5W/vcBuw8yE3betfZuqcG0AjiAKS0=</Integrity>
+      <Fingerprint>ua3gb4oknl</Fingerprint>
+      <Integrity>tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\detail.css'))</OriginalItemSpec>
@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>u1dk4vbovc</Fingerprint>
-      <Integrity>7nD2vijid+SZxtZ6Zz+VVqBfGRjRF3b4yruCeLiMYlc=</Integrity>
+      <Fingerprint>fmasti1jwf</Fingerprint>
+      <Integrity>OUYbuW9P/FP0tuo0DYapnffPdQlza16Fc02Sa2GN7Qg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\profile.css'))</OriginalItemSpec>
@@ -408,8 +408,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>gkn1haph0i</Fingerprint>
-      <Integrity>kBbCExoseRVYo2YhZ8JthoZFzGVqSqenh+90jcHD7QQ=</Integrity>
+      <Fingerprint>17m0w0lqnm</Fingerprint>
+      <Integrity>XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\detail.js'))</OriginalItemSpec>
@@ -462,8 +462,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>uitjlguuhe</Fingerprint>
-      <Integrity>NvF6T7SzgOZoocsV0yz369H7M9fflNKmfMboLXlWfKs=</Integrity>
+      <Fingerprint>usvkny4qbm</Fingerprint>
+      <Integrity>AiP4jqaJMjDlIhAV2fuGapEVhLG6We0W6uMWeAYL/78=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\profile.js'))</OriginalItemSpec>
@@ -1511,6 +1511,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\d6cd953c-1363-4b2b-86a5-8aa6bb644c15_638907088624329991.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>FinalProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/FinalProject</BasePath>
+      <RelativePath>uploads/avatars/d6cd953c-1363-4b2b-86a5-8aa6bb644c15_638907088624329991.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>muakpaesro</Fingerprint>
+      <Integrity>7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\d6cd953c-1363-4b2b-86a5-8aa6bb644c15_638907088624329991.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg'))">
       <SourceType>Package</SourceType>

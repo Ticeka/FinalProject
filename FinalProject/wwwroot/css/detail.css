@@ -4,44 +4,36 @@
     --ink: #1f2937;
     --muted: #6b7280;
     --brand: #2563eb;
-    --ring: rgba(37,99,235,.2)
+    --ring: rgba(37,99,235,.2);
+    --radius: 16px;
+    --transition: all 0.25s ease;
 }
 
+/* ===== Global ===== */
 body {
     background: var(--bg);
-    font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color: var(--ink)
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
 }
 
+* {
+    transition: var(--transition);
+}
+
+/* ===== Hero Section ===== */
 .page-hero {
-    background: linear-gradient(180deg,#f8fafc,#fff);
-    border: 1px solid #e6ebf2
+    background: linear-gradient(180deg, #f8fafc, #fff);
+    border: 1px solid #e6ebf2;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
-.chip {
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    border-radius: 999px;
-    padding: 6px 10px;
-    font-size: .85rem;
-    color: #0f172a
-}
-
-.meta-grid {
-    --gap: 1rem;
-    display: grid;
-    grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: var(--gap)
-}
-/* (เลี่ยง @media ตามที่คุณบอก ถ้าต้องการจริง ๆ ค่อยเพิ่มภายหลัง) */
-
-.spec-table th {
-    width: 220px;
-    color: #475569
-}
-
-.spec-table td {
-    color: #0f172a
+.hero-wrap {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 380px;
 }
 
 .thumb-lg {
@@ -49,34 +41,143 @@ body {
     max-width: 380px;
     aspect-ratio: 3/4;
     object-fit: cover;
-    border-radius: 16px;
-    background: #eef2f7
+    border-radius: var(--radius);
+    background: #eef2f7;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+    .thumb-lg:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+
+/* ===== Chips ===== */
+.chip {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    color: #0f172a;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+    .chip:hover {
+        background: #e2e8f0;
+    }
+
+/* ===== Card Sections ===== */
 .section {
     background: var(--card);
     border: 1px solid #e6ebf2;
-    border-radius: 16px
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.03);
 }
 
+    .section:hover {
+        box-shadow: 0 5px 16px rgba(0,0,0,0.06);
+    }
+
+/* ===== Table ===== */
+.spec-table th {
+    width: 220px;
+    color: #475569;
+}
+
+.spec-table td {
+    color: #0f172a;
+}
+
+/* ===== Rating Stars (summary) ===== */
 .rating-stars {
     font-size: 1.05rem;
-    letter-spacing: 2px
+    letter-spacing: 2px;
 }
 
-.backlink {
-    color: #475569
+/* ===== Quick Rating widget ===== */
+.ratebox .stars {
+    display: inline-flex;
+    gap: 4px;
+    margin-bottom: 6px;
 }
 
-/* Map */
+    .ratebox .stars button {
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        cursor: pointer;
+        color: #cbd5e1;
+        transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+        .ratebox .stars button:hover {
+            transform: scale(1.2);
+            color: #f59e0b;
+        }
+
+        .ratebox .stars button.active {
+            color: #f59e0b;
+        }
+
+.ratebox .small {
+    color: var(--muted);
+}
+
+/* ===== Favorite Button ===== */
+.fav-fab {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255,255,255,.92);
+    color: var(--brand);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
+    user-select: none;
+    font-size: 20px;
+}
+
+    .fav-fab:hover {
+        transform: translateY(-2px) scale(1.05);
+        background: #fff;
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .fav-fab.fav-on {
+        background-color: #e63946;
+        color: #fff;
+    }
+
+        .fav-fab.fav-on:hover {
+            background-color: #d62839;
+        }
+
+/* ===== Buttons ===== */
+.btn-soft {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+}
+
+    .btn-soft:hover {
+        background: #e2e8f0;
+    }
+
+/* ===== Map ===== */
 #map {
     height: 300px;
-    border-radius: 12px
-}
-
-.leaflet-div-icon {
-    background: transparent;
-    border: none
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .poi-pin {
@@ -89,64 +190,109 @@ body {
     border: 1px solid rgba(0,0,0,.15);
     box-shadow: 0 2px 6px rgba(0,0,0,.15);
     font-size: 18px;
-    background: #fff
+    background: #fff;
 }
 
 .poi-beer {
-    background: #fff7e6
+    background: #fff7e6;
 }
 
 .poi-wine {
-    background: #fde2e4
+    background: #fde2e4;
 }
 
 .poi-liquor {
-    background: #e6f4ff
+    background: #e6f4ff;
 }
 
 .poi-default {
-    background: #eef2f7
+    background: #eef2f7;
 }
 
-/* ===== Quick rating (stars) ===== */
-.ratebox .stars {
-    display: inline-flex;
-    gap: 4px;
-    margin-bottom: 6px
+/* ===== Comments (ใหม่: รองรับอวตาร์ + ดาวต่อคน) ===== */
+#cmtList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-    .ratebox .stars button {
-        border: none;
-        background: transparent;
-        font-size: 22px;
-        line-height: 1;
-        cursor: pointer;
-        color: #cbd5e1;
-        transition: transform .1s ease,color .1s ease
+.cmt-item {
+    display: flex;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--radius);
+    padding: 12px 14px;
+}
+
+    .cmt-item:hover {
+        background: #fdfdfd;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     }
 
-        .ratebox .stars button:hover {
-            transform: scale(1.15);
-            color: #f59e0b
-        }
-
-        .ratebox .stars button.active {
-            color: #f59e0b
-        }
-
-.ratebox .small {
-    color: #6b7280
-}
-/* Favorite button state */
-#favBtn.fav-on {
-    border-color: #ef4444;
-    background: #fee2e2;
+.cmt-avatar {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
 }
 
-    #favBtn.fav-on::before {
-        content: "♥ ";
+    .cmt-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
-#favBtn:not(.fav-on)::before {
-    content: "♡ ";
+.cmt-content {
+    flex: 1 1 auto;
+    min-width: 0;
 }
+
+.cmt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.cmt-name {
+    font-weight: 600;
+}
+
+.cmt-time {
+    color: var(--muted);
+    font-size: .85rem;
+    white-space: nowrap;
+}
+
+.cmt-stars {
+    color: #f59e0b;
+    letter-spacing: 1px;
+    font-size: .95rem;
+}
+
+.cmt-text {
+    white-space: pre-wrap;
+    word-wrap: anywhere;
+}
+.cmt-item .cmt-link {
+    text-decoration: none;
+}
+
+.cmt-item .cmt-name.text-decoration-none {
+    color: inherit;
+}
+
+    .cmt-item .cmt-name.text-decoration-none:hover {
+        text-decoration: underline;
+    }

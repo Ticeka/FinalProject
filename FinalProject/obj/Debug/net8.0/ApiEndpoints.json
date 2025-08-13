@@ -88,13 +88,13 @@
       },
       {
         "Name": "dto",
-        "Type": "NewCommentDto",
+        "Type": "FinalProject.Models.NewCommentDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "CommentView",
+        "Type": "FinalProject.Models.CommentView",
         "MediaTypes": [
           "application/json"
         ],
@@ -109,11 +109,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 404
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
       }
     ]
   },
@@ -205,6 +200,22 @@
   },
   {
     "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_14",
+    "RelativePath": "api/debug/whoami",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Program\u002B\u003C\u003Ec",
     "Method": "\u003C\u003CMain\u003E$\u003Eb__0_13",
     "RelativePath": "api/me/favorites",
     "HttpMethod": "GET",
@@ -234,7 +245,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "QuickRateDto",
+        "Type": "FinalProject.Models.QuickRateDto",
         "IsRequired": true
       }
     ],
