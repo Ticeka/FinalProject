@@ -137,3 +137,16 @@ body {
 .ratebox .small {
     color: #6b7280
 }
+/* Favorite button state */
+#favBtn.fav-on {
+    border-color: #ef4444;
+    background: #fee2e2;
+}
+
+    #favBtn.fav-on::before {
+        content: "♥ ";
+    }
+
+#favBtn:not(.fav-on)::before {
+    content: "♡ ";
+}

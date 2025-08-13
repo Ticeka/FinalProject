@@ -3,12 +3,65 @@
 @inject SignInManager<FinalProject.Models.ApplicationUser> SignInManager
 @inject UserManager<FinalProject.Models.ApplicationUser> UserManager
 
+@{
+    // ===== ผู้ใช้ + โปรไฟล์ =====
+    ApplicationUser? me = null;
+    string avatar = "";
+    string displayName = "";
+    bool isSignedIn = SignInManager.IsSignedIn(User);
+
+    if (isSignedIn)
+    {
+        me = await UserManager.GetUserAsync(User);
+        displayName = !string.IsNullOrWhiteSpace(me?.DisplayName)
+            ? me!.DisplayName
+            : await UserManager.GetUserNameAsync(me!);
+
+        avatar = string.IsNullOrWhiteSpace(me?.AvatarUrl) ? "" : me!.AvatarUrl;
+    }
+
+    string Initials(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return "?";
+        var parts = name.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 1) return parts[0].Substring(0, 1).ToUpperInvariant();
+        return (parts[0].Substring(0, 1) + parts[^1].Substring(0, 1)).ToUpperInvariant();
+    }
+    var initials = isSignedIn ? Initials(displayName) : "";
+
+    // ===== สร้างสีพื้นหลังอวตารแบบ deterministic จากชื่อ =====
+    int HashHue(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return 210;
+        unchecked
+        {
+            int hash = 23;
+            foreach (var ch in s) hash = hash * 31 + ch;
+            if (hash < 0) hash = -hash;
+            return hash % 360;
+        }
+    }
+    var hue = HashHue(displayName);
+    bool hasAvatar = !string.IsNullOrWhiteSpace(avatar);
+
+    // ===== Active link helper =====
+    var path = Context?.Request?.Path.Value?.ToLowerInvariant() ?? "";
+    bool IsActive(string p)
+    {
+        p = p.ToLowerInvariant();
+        if (p == "/index") return path == "/" || path == "/index";
+        if (p == "/list") return path.StartsWith("/list") || path.StartsWith("/detail");
+        return path.StartsWith(p);
+    }
+    Func<string, string> active = p => IsActive(p) ? "active fw-semibold" : "";
+}
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Sip &amp; Trip</title>
+    <title>@(ViewData["Title"] ?? "Sip & Trip") - Sip &amp; Trip</title>
 
     <meta name="description" content="Sip &amp; Trip – แผนที่เครื่องดื่มท้องถิ่นไทย สำรวจคราฟต์เบียร์ ไวน์ และสุราทั่วประเทศ พร้อมรายละเอียดสถานที่และรสชาติ" />
 
@@ -27,11 +80,11 @@
             --ink: #1f2937;
             --muted: #6b7280;
             --brand: #2563eb;
-            --ring: rgba(37,99,235,.2)
+            --ring: rgba(37,99,235,.2);
         }
 
         html, body {
-            height: 100%;
+            height: 100%
         }
 
         body {
@@ -39,42 +92,143 @@
             color: var(--ink);
             font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
         }
-
+        /* ===== Navbar ===== */
         .navbar {
             background: linear-gradient(180deg,#f8fafc,#ffffff);
             border-bottom: 1px solid #e6ebf2;
+            transition: box-shadow .2s ease, border-color .2s ease;
         }
+
+            .navbar.is-scrolled {
+                box-shadow: 0 8px 24px rgba(15,23,42,.06);
+                border-color: transparent;
+            }
 
         .navbar-brand {
             font-weight: 700;
             color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
         }
 
-            .navbar-brand:hover {
-                color: #0f172a;
-            }
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #60a5fa, #2563eb);
+            box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+        }
 
         .nav-link {
             color: #334155;
             padding: .5rem .9rem;
-            border-radius: 8px;
-            transition: all .15s ease;
+            border-radius: 10px;
+            transition: transform .1s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+            position: relative;
+            overflow: hidden;
         }
 
             .nav-link:hover {
-                background: #f1f5f9;
+                background: #eef2f7;
                 color: #0f172a;
+                transform: translateY(-1px)
             }
 
             .nav-link.active {
                 color: #fff !important;
                 background: var(--brand);
-                box-shadow: 0 2px 6px var(--ring);
+                box-shadow: 0 2px 10px var(--ring);
             }
 
-        .container {
-            max-width: 1100px;
+                .nav-link.active::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(90deg,rgba(255,255,255,.18),transparent 40%,rgba(255,255,255,.18));
+                    transform: translateX(-100%);
+                    animation: shine 1.6s ease-in-out infinite;
+                }
+        @@keyframes shine {
+            to
+
+        {
+            transform: translateX(100%)
         }
+
+        }
+
+        .container {
+            max-width: 1100px
+        }
+
+        /* ===== Avatar ===== */
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #e2e8f0;
+            margin-right: .5rem;
+            flex: 0 0 auto;
+        }
+
+        .nav-avatar-fallback {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: .9rem;
+            border: 1px solid rgba(255,255,255,.5);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+            .nav-avatar-fallback .avatar-icon {
+                position: absolute;
+                inset: 0;
+                margin: auto;
+                width: 70%;
+                height: 70%;
+                opacity: .18;
+                z-index: 0; /* ไอคอนจางไว้หลังตัวอักษร */
+            }
+
+            .nav-avatar-fallback > * {
+                z-index: 1
+            }
+
+        .avatar-lg {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #e2e8f0
+        }
+
+            .avatar-lg.nav-avatar-fallback {
+                font-size: 1rem
+            }
+
+        /* ===== Dropdown ===== */
+        .dropdown-menu {
+            border-radius: 14px;
+            border: 1px solid #e6ebf2;
+            padding: .4rem;
+        }
+
+        .dropdown-item {
+            border-radius: 10px;
+            padding: .6rem .75rem;
+        }
+
+            .dropdown-item:hover {
+                background: #eef2f7
+            }
 
         footer {
             background: #ffffff;
@@ -82,13 +236,28 @@
             color: #64748b;
             padding: 16px 0;
         }
+
+        /* ปุ่ม CTA ขวาสุด (ทางเลือก) */
+        .btn-ghost {
+            border: 1px solid #c7d2fe;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: .45rem .75rem;
+            font-weight: 600;
+        }
+
+            .btn-ghost:hover {
+                background: #eff6ff
+            }
     </style>
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand fw-bold" asp-area="" asp-page="/Index">🍹 Sip &amp; Trip</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <span class="brand-dot"></span> 🍹 Sip &amp; Trip
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,17 +265,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    @{
-                        var path = Context?.Request?.Path.Value?.ToLowerInvariant() ?? "";
-                        bool IsActive(string p)
-                        {
-                            p = p.ToLowerInvariant();
-                            if (p == "/index") return path == "/" || path == "/index";
-                            if (p == "/list") return path.StartsWith("/list") || path.StartsWith("/detail");
-                            return path.StartsWith(p);
-                        }
-                        Func<string, string> active = p => IsActive(p) ? "active fw-semibold" : "";
-                    }
+
                     <ul class="navbar-nav align-items-center me-3">
                         <li class="nav-item">
                             <a class="nav-link @active("/Index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
@@ -120,24 +279,75 @@
                     </ul>
 
                     <ul class="navbar-nav align-items-center">
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (isSignedIn)
                         {
-                            <li class="nav-item">
-                                <span class="nav-link text-dark">👤 @UserManager.GetUserName(User)</span>
-                            </li>
-                            <li class="nav-item">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                    <button type="submit" class="btn btn-link nav-link">ออกจากระบบ</button>
-                                </form>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    @if (hasAvatar)
+                                    {
+                                        <img src="@avatar" alt="avatar" class="nav-avatar" />
+                                    }
+                                    else
+                                    {
+                                        <span class="nav-avatar-fallback"
+                                              style="background: conic-gradient(from 180deg, hsl(@hue,85%,55%), hsl(@( (hue+60)%360 ),85%,55%) 50%, hsl(@( (hue+120)%360 ),85%,55%));">
+                                            @initials
+                                            <svg class="avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="4"></circle>
+                                                <path d="M4 20a8 8 0 0 1 16 0"></path>
+                                            </svg>
+                                        </span>
+                                    }
+                                    <span class="text-dark">@displayName</span>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                                    <li class="px-3 py-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            @if (hasAvatar)
+                                            {
+                                                <img src="@avatar" class="avatar-lg" alt="avatar" />
+                                            }
+                                            else
+                                            {
+                                                <span class="avatar-lg nav-avatar-fallback"
+                                                      style="background: conic-gradient(from 180deg, hsl(@hue,85%,55%), hsl(@( (hue+60)%360 ),85%,55%) 50%, hsl(@( (hue+120)%360 ),85%,55%));">
+                                                    @initials
+                                                    <svg class="avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                                        <circle cx="12" cy="8" r="4"></circle>
+                                                        <path d="M4 20a8 8 0 0 1 16 0"></path>
+                                                    </svg>
+                                                </span>
+                                            }
+                                            <div>
+                                                <div class="fw-semibold">@displayName</div>
+                                                <div class="text-muted small">บัญชีของฉัน</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><hr class="dropdown-divider" /></li>
+
+                                    <!-- เลือกหนึ่งแบบตามโครงของคุณ -->
+                                    <li><a class="dropdown-item" asp-page="/Profile">โปรไฟล์ของฉัน</a></li>
+                                    @* หรือใช้หน้า Manage ของ Identity Area *@
+                                    @* <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">โปรไฟล์ของฉัน</a></li> *@
+
+                                    <li>
+                                        <form class="px-2 py-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                            <button type="submit" class="dropdown-item">ออกจากระบบ</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
+                            <li class="nav-item me-1">
                                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">🔑 เข้าสู่ระบบ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">📝 สมัครสมาชิก</a>
+                                <a class="btn btn-ghost" asp-area="Identity" asp-page="/Account/Register">สมัครสมาชิก</a>
                             </li>
                         }
                     </ul>
@@ -154,13 +364,27 @@
 
     <footer>
         <div class="container text-center">
-            &copy; 2568 • Sip &amp; Trip • แผนที่เครื่องดื่มท้องถิ่นไทย
+            &copy; @(DateTime.Now.Year + 543) • Sip &amp; Trip • แผนที่เครื่องดื่มท้องถิ่นไทย
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // เงา Navbar เมื่อเลื่อนหน้า
+        (function(){
+            const nav = document.querySelector('.navbar');
+            const toggle = () => {
+                if (window.scrollY > 6) nav.classList.add('is-scrolled');
+                else nav.classList.remove('is-scrolled');
+            };
+            toggle();
+            window.addEventListener('scroll', toggle, {passive:true});
+        })();
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

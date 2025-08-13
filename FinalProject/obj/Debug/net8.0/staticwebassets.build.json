@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZstRpGJS9wMVG++nRD6NJDhYCHFZ+lL+tkTrgcoSIMs=",
+  "Hash": "rIrisbDnxQUNnWv73cLYr8DZ2iOCw421GZoZVz+iaCk=",
   "Source": "FinalProject",
   "BasePath": "_content/FinalProject",
   "Mode": "Default",
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "nacmf4m657",
-      "Integrity": "v8Y8Ijd2xmkbmpJSZqHx8f2RSquFfqxrFwnKG0C9yaQ=",
+      "Fingerprint": "ricrn3mo0f",
+      "Integrity": "3cTx/5zCoCOLcd5W/vcBuw8yE3betfZuqcG0AjiAKS0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\detail.css"
@@ -1382,6 +1382,27 @@
       "OriginalItemSpec": "wwwroot\\css\\list.css"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "css/profile#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "u1dk4vbovc",
+      "Integrity": "7nD2vijid+SZxtZ6Zz+VVqBfGRjRF3b4yruCeLiMYlc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\profile.css"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\site.css",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -1424,27 +1445,6 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\maekhong.jpg",
-      "SourceId": "FinalProject",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
-      "BasePath": "_content/FinalProject",
-      "RelativePath": "images/beers/maekhong#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "muakpaesro",
-      "Integrity": "7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\beers\\maekhong.jpg"
-    },
-    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\jibthai-logo-duoglass.svg",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -1466,6 +1466,300 @@
       "OriginalItemSpec": "wwwroot\\images\\jibthai-logo-duoglass.svg"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\BanBeerChingmai.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/BanBeerChingmai#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "tmp4lkybin",
+      "Integrity": "xT+9bTtHdxkrEZeT4F+jgU4Zn+J0zGdhsxuDY4pYryk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\BanBeerChingmai.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\chaingraistoneage.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/chaingraistoneage#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "5wxar8dhim",
+      "Integrity": "6wpf6FLzl8iPpbx7LUwbaks7KIsR4nUCR1+aushK82k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\chaingraistoneage.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\Khonkhanecraft el.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/Khonkhanecraft el#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1n6ceudzrq",
+      "Integrity": "Y71n5NdbP57qdjierbJ4uCz/7PqCUDm0FzTihF2AjN8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\Khonkhanecraft el.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krabeewinepalm.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/krabeewinepalm#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jgjs7c3yxb",
+      "Integrity": "gxim81l6U8QkttNj3ndZVjXjGsP6kly7y4yZmqi4tyk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\krabeewinepalm.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krungtepwcraftipa.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/krungtepwcraftipa#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "t45l2aurrf",
+      "Integrity": "w6j3+SZCFb3FNSjczqxoGezuGA2WSKDgY+R1F/viuBQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\krungtepwcraftipa.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\lumpanglaker.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/lumpanglaker#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "max8ic1xny",
+      "Integrity": "clPIoay3oDeWVG9Grywn3EZQ3THeQixSMVimyeudsrQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\lumpanglaker.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\maekhong.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/maekhong#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "muakpaesro",
+      "Integrity": "7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\maekhong.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\nongkhaibeeresan.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/nongkhaibeeresan#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ok59f8ard7",
+      "Integrity": "eHN8omWU4E9AYYVxBuZUKRdaCK/LwyaIOEqLc9dbkts=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\nongkhaibeeresan.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\petchboonmhagmaowine.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/petchboonmhagmaowine#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6yhofkoalr",
+      "Integrity": "IlCwOjwZzD6grjPf/jR4Wqfd3i6x8JIYTkItHwhkMKU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\petchboonmhagmaowine.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\PhuketLaker.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/PhuketLaker#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0mtl6c04x0",
+      "Integrity": "2ABdxx7d90vefgaMMMJqe4IbSXNiazfCAwuaOqwnDAE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\PhuketLaker.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\puttayagoldenel.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/puttayagoldenel#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "u3fnoifksm",
+      "Integrity": "Ojz65DH5LY89/ojnAuB0kWIHQju+FTs4KTToA+u8BfI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\puttayagoldenel.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\supunbeerkhaw.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/supunbeerkhaw#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "b7xc34482e",
+      "Integrity": "F+aYuuoNGpFwYxpFDUin5I8UKm9ajv5bgOWMbioKAiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\supunbeerkhaw.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\suratsage.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/suratsage#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4c718xuwup",
+      "Integrity": "nBh1yQU5jb33/PmWGI0LSvTMMYcHWclpxx+ai1XVdVg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\suratsage.jfif"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\ubolwine.jfif",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/localbeers/ubolwine#[.{fingerprint}]?.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "lu30e81xy8",
+      "Integrity": "g678FvR1e16bbBOmIjBIKY93UgUu2KyfDW5utHAuV60=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\localbeers\\ubolwine.jfif"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -1480,8 +1774,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ldx6cxa7wt",
-      "Integrity": "ef6V14+yIb9XKNDKnkVptq0pAmPUFDhmSnMzViuXPuw=",
+      "Fingerprint": "gkn1haph0i",
+      "Integrity": "kBbCExoseRVYo2YhZ8JthoZFzGVqSqenh+90jcHD7QQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\detail.js"
@@ -1527,6 +1821,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\list.js"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "js/profile#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "uitjlguuhe",
+      "Integrity": "NvF6T7SzgOZoocsV0yz369H7M9fflNKmfMboLXlWfKs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\profile.js"
     },
     {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\site.js",
@@ -2745,6 +3060,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "muakpaesro",
+      "Integrity": "7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "js9s5wzixr",
+      "Integrity": "k3W1+KE45hkGriYKuwrZSqL1ER1WMbXnlaPk5D8b+iw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg"
     }
   ],
   "Endpoints": [
@@ -2759,7 +3116,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2586"
+          "Value": "2812"
         },
         {
           "Name": "Content-Type",
@@ -2767,11 +3124,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"v8Y8Ijd2xmkbmpJSZqHx8f2RSquFfqxrFwnKG0C9yaQ=\""
+          "Value": "\"3cTx/5zCoCOLcd5W/vcBuw8yE3betfZuqcG0AjiAKS0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 09:53:50 GMT"
+          "Value": "Wed, 13 Aug 2025 09:58:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2781,12 +3138,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-v8Y8Ijd2xmkbmpJSZqHx8f2RSquFfqxrFwnKG0C9yaQ="
+          "Value": "sha256-3cTx/5zCoCOLcd5W/vcBuw8yE3betfZuqcG0AjiAKS0="
         }
       ]
     },
     {
-      "Route": "css/detail.nacmf4m657.css",
+      "Route": "css/detail.ricrn3mo0f.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2796,7 +3153,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2586"
+          "Value": "2812"
         },
         {
           "Name": "Content-Type",
@@ -2804,11 +3161,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"v8Y8Ijd2xmkbmpJSZqHx8f2RSquFfqxrFwnKG0C9yaQ=\""
+          "Value": "\"3cTx/5zCoCOLcd5W/vcBuw8yE3betfZuqcG0AjiAKS0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 09:53:50 GMT"
+          "Value": "Wed, 13 Aug 2025 09:58:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2818,7 +3175,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nacmf4m657"
+          "Value": "ricrn3mo0f"
         },
         {
           "Name": "label",
@@ -2826,7 +3183,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-v8Y8Ijd2xmkbmpJSZqHx8f2RSquFfqxrFwnKG0C9yaQ="
+          "Value": "sha256-3cTx/5zCoCOLcd5W/vcBuw8yE3betfZuqcG0AjiAKS0="
         }
       ]
     },
@@ -2991,6 +3348,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-n3pNH6zVObNkHxwgG2b+b9nTmGewkOV9npNiLRoou7A="
+        }
+      ]
+    },
+    {
+      "Route": "css/profile.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7nD2vijid+SZxtZ6Zz+VVqBfGRjRF3b4yruCeLiMYlc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:00:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7nD2vijid+SZxtZ6Zz+VVqBfGRjRF3b4yruCeLiMYlc="
+        }
+      ]
+    },
+    {
+      "Route": "css/profile.u1dk4vbovc.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7nD2vijid+SZxtZ6Zz+VVqBfGRjRF3b4yruCeLiMYlc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:00:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "u1dk4vbovc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/profile.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7nD2vijid+SZxtZ6Zz+VVqBfGRjRF3b4yruCeLiMYlc="
         }
       ]
     },
@@ -3181,7 +3620,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 16:49:24 GMT"
+          "Value": "Wed, 13 Aug 2025 10:08:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3226,7 +3665,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 16:49:24 GMT"
+          "Value": "Wed, 13 Aug 2025 10:08:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3271,7 +3710,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 16:49:24 GMT"
+          "Value": "Wed, 13 Aug 2025 10:08:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3308,7 +3747,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 16:49:24 GMT"
+          "Value": "Wed, 13 Aug 2025 10:08:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5543,88 +5982,6 @@
       ]
     },
     {
-      "Route": "images/beers/maekhong.jpg",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\maekhong.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "105181"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 07:04:46 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ="
-        }
-      ]
-    },
-    {
-      "Route": "images/beers/maekhong.muakpaesro.jpg",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\maekhong.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "105181"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 07:04:46 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "muakpaesro"
-        },
-        {
-          "Name": "label",
-          "Value": "images/beers/maekhong.jpg"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ="
-        }
-      ]
-    },
-    {
       "Route": "images/jibthai-logo-duoglass.6gujs1nz2q.svg",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\jibthai-logo-duoglass.svg",
       "Selectors": [],
@@ -5707,6 +6064,1199 @@
       ]
     },
     {
+      "Route": "images/localbeers/BanBeerChingmai.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\BanBeerChingmai.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14014"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xT+9bTtHdxkrEZeT4F+jgU4Zn+J0zGdhsxuDY4pYryk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xT+9bTtHdxkrEZeT4F+jgU4Zn+J0zGdhsxuDY4pYryk="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/BanBeerChingmai.tmp4lkybin.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\BanBeerChingmai.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14014"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xT+9bTtHdxkrEZeT4F+jgU4Zn+J0zGdhsxuDY4pYryk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tmp4lkybin"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/BanBeerChingmai.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xT+9bTtHdxkrEZeT4F+jgU4Zn+J0zGdhsxuDY4pYryk="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/chaingraistoneage.5wxar8dhim.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\chaingraistoneage.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28697"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6wpf6FLzl8iPpbx7LUwbaks7KIsR4nUCR1+aushK82k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5wxar8dhim"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/chaingraistoneage.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6wpf6FLzl8iPpbx7LUwbaks7KIsR4nUCR1+aushK82k="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/chaingraistoneage.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\chaingraistoneage.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28697"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6wpf6FLzl8iPpbx7LUwbaks7KIsR4nUCR1+aushK82k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6wpf6FLzl8iPpbx7LUwbaks7KIsR4nUCR1+aushK82k="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/Khonkhanecraft el.1n6ceudzrq.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\Khonkhanecraft el.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32522"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y71n5NdbP57qdjierbJ4uCz/7PqCUDm0FzTihF2AjN8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1n6ceudzrq"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/Khonkhanecraft el.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y71n5NdbP57qdjierbJ4uCz/7PqCUDm0FzTihF2AjN8="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/Khonkhanecraft el.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\Khonkhanecraft el.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32522"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y71n5NdbP57qdjierbJ4uCz/7PqCUDm0FzTihF2AjN8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y71n5NdbP57qdjierbJ4uCz/7PqCUDm0FzTihF2AjN8="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/krabeewinepalm.jgjs7c3yxb.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krabeewinepalm.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "170249"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gxim81l6U8QkttNj3ndZVjXjGsP6kly7y4yZmqi4tyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jgjs7c3yxb"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/krabeewinepalm.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gxim81l6U8QkttNj3ndZVjXjGsP6kly7y4yZmqi4tyk="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/krabeewinepalm.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krabeewinepalm.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "170249"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gxim81l6U8QkttNj3ndZVjXjGsP6kly7y4yZmqi4tyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gxim81l6U8QkttNj3ndZVjXjGsP6kly7y4yZmqi4tyk="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/krungtepwcraftipa.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krungtepwcraftipa.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30931"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w6j3+SZCFb3FNSjczqxoGezuGA2WSKDgY+R1F/viuBQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-w6j3+SZCFb3FNSjczqxoGezuGA2WSKDgY+R1F/viuBQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/krungtepwcraftipa.t45l2aurrf.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krungtepwcraftipa.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30931"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w6j3+SZCFb3FNSjczqxoGezuGA2WSKDgY+R1F/viuBQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t45l2aurrf"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/krungtepwcraftipa.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-w6j3+SZCFb3FNSjczqxoGezuGA2WSKDgY+R1F/viuBQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/lumpanglaker.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\lumpanglaker.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "46503"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"clPIoay3oDeWVG9Grywn3EZQ3THeQixSMVimyeudsrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-clPIoay3oDeWVG9Grywn3EZQ3THeQixSMVimyeudsrQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/lumpanglaker.max8ic1xny.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\lumpanglaker.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "46503"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"clPIoay3oDeWVG9Grywn3EZQ3THeQixSMVimyeudsrQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "max8ic1xny"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/lumpanglaker.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-clPIoay3oDeWVG9Grywn3EZQ3THeQixSMVimyeudsrQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/maekhong.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\maekhong.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "105181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 07:04:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/maekhong.muakpaesro.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\maekhong.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "105181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 07:04:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "muakpaesro"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/maekhong.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/nongkhaibeeresan.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\nongkhaibeeresan.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "143759"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eHN8omWU4E9AYYVxBuZUKRdaCK/LwyaIOEqLc9dbkts=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eHN8omWU4E9AYYVxBuZUKRdaCK/LwyaIOEqLc9dbkts="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/nongkhaibeeresan.ok59f8ard7.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\nongkhaibeeresan.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "143759"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eHN8omWU4E9AYYVxBuZUKRdaCK/LwyaIOEqLc9dbkts=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ok59f8ard7"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/nongkhaibeeresan.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eHN8omWU4E9AYYVxBuZUKRdaCK/LwyaIOEqLc9dbkts="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/petchboonmhagmaowine.6yhofkoalr.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\petchboonmhagmaowine.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "174702"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IlCwOjwZzD6grjPf/jR4Wqfd3i6x8JIYTkItHwhkMKU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6yhofkoalr"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/petchboonmhagmaowine.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IlCwOjwZzD6grjPf/jR4Wqfd3i6x8JIYTkItHwhkMKU="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/petchboonmhagmaowine.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\petchboonmhagmaowine.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "174702"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IlCwOjwZzD6grjPf/jR4Wqfd3i6x8JIYTkItHwhkMKU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IlCwOjwZzD6grjPf/jR4Wqfd3i6x8JIYTkItHwhkMKU="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/PhuketLaker.0mtl6c04x0.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\PhuketLaker.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19448"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2ABdxx7d90vefgaMMMJqe4IbSXNiazfCAwuaOqwnDAE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0mtl6c04x0"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/PhuketLaker.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2ABdxx7d90vefgaMMMJqe4IbSXNiazfCAwuaOqwnDAE="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/PhuketLaker.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\PhuketLaker.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19448"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2ABdxx7d90vefgaMMMJqe4IbSXNiazfCAwuaOqwnDAE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2ABdxx7d90vefgaMMMJqe4IbSXNiazfCAwuaOqwnDAE="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/puttayagoldenel.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\puttayagoldenel.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24203"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ojz65DH5LY89/ojnAuB0kWIHQju+FTs4KTToA+u8BfI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ojz65DH5LY89/ojnAuB0kWIHQju+FTs4KTToA+u8BfI="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/puttayagoldenel.u3fnoifksm.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\puttayagoldenel.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24203"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ojz65DH5LY89/ojnAuB0kWIHQju+FTs4KTToA+u8BfI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "u3fnoifksm"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/puttayagoldenel.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ojz65DH5LY89/ojnAuB0kWIHQju+FTs4KTToA+u8BfI="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/supunbeerkhaw.b7xc34482e.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\supunbeerkhaw.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17497"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F+aYuuoNGpFwYxpFDUin5I8UKm9ajv5bgOWMbioKAiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "b7xc34482e"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/supunbeerkhaw.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-F+aYuuoNGpFwYxpFDUin5I8UKm9ajv5bgOWMbioKAiI="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/supunbeerkhaw.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\supunbeerkhaw.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17497"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F+aYuuoNGpFwYxpFDUin5I8UKm9ajv5bgOWMbioKAiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-F+aYuuoNGpFwYxpFDUin5I8UKm9ajv5bgOWMbioKAiI="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/suratsage.4c718xuwup.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\suratsage.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nBh1yQU5jb33/PmWGI0LSvTMMYcHWclpxx+ai1XVdVg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4c718xuwup"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/suratsage.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nBh1yQU5jb33/PmWGI0LSvTMMYcHWclpxx+ai1XVdVg="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/suratsage.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\suratsage.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nBh1yQU5jb33/PmWGI0LSvTMMYcHWclpxx+ai1XVdVg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nBh1yQU5jb33/PmWGI0LSvTMMYcHWclpxx+ai1XVdVg="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/ubolwine.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\ubolwine.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10276"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"g678FvR1e16bbBOmIjBIKY93UgUu2KyfDW5utHAuV60=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-g678FvR1e16bbBOmIjBIKY93UgUu2KyfDW5utHAuV60="
+        }
+      ]
+    },
+    {
+      "Route": "images/localbeers/ubolwine.lu30e81xy8.jfif",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\ubolwine.jfif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10276"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/pjpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"g678FvR1e16bbBOmIjBIKY93UgUu2KyfDW5utHAuV60=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 07:14:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lu30e81xy8"
+        },
+        {
+          "Name": "label",
+          "Value": "images/localbeers/ubolwine.jfif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-g678FvR1e16bbBOmIjBIKY93UgUu2KyfDW5utHAuV60="
+        }
+      ]
+    },
+    {
+      "Route": "js/detail.gkn1haph0i.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15227"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kBbCExoseRVYo2YhZ8JthoZFzGVqSqenh+90jcHD7QQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:58:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gkn1haph0i"
+        },
+        {
+          "Name": "label",
+          "Value": "js/detail.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kBbCExoseRVYo2YhZ8JthoZFzGVqSqenh+90jcHD7QQ="
+        }
+      ]
+    },
+    {
       "Route": "js/detail.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "Selectors": [],
@@ -5717,7 +7267,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12309"
+          "Value": "15227"
         },
         {
           "Name": "Content-Type",
@@ -5725,11 +7275,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ef6V14+yIb9XKNDKnkVptq0pAmPUFDhmSnMzViuXPuw=\""
+          "Value": "\"kBbCExoseRVYo2YhZ8JthoZFzGVqSqenh+90jcHD7QQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 23:08:17 GMT"
+          "Value": "Wed, 13 Aug 2025 09:58:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5739,52 +7289,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ef6V14+yIb9XKNDKnkVptq0pAmPUFDhmSnMzViuXPuw="
-        }
-      ]
-    },
-    {
-      "Route": "js/detail.ldx6cxa7wt.js",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12309"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ef6V14+yIb9XKNDKnkVptq0pAmPUFDhmSnMzViuXPuw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 23:08:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ldx6cxa7wt"
-        },
-        {
-          "Name": "label",
-          "Value": "js/detail.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ef6V14+yIb9XKNDKnkVptq0pAmPUFDhmSnMzViuXPuw="
+          "Value": "sha256-kBbCExoseRVYo2YhZ8JthoZFzGVqSqenh+90jcHD7QQ="
         }
       ]
     },
@@ -5949,6 +7454,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-atelFl6PSFxF2XM2mO4tDdb0uxHBgi4JmiGH4NEwZbQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/profile.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9241"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NvF6T7SzgOZoocsV0yz369H7M9fflNKmfMboLXlWfKs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:28:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NvF6T7SzgOZoocsV0yz369H7M9fflNKmfMboLXlWfKs="
+        }
+      ]
+    },
+    {
+      "Route": "js/profile.uitjlguuhe.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9241"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NvF6T7SzgOZoocsV0yz369H7M9fflNKmfMboLXlWfKs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:28:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "uitjlguuhe"
+        },
+        {
+          "Name": "label",
+          "Value": "js/profile.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NvF6T7SzgOZoocsV0yz369H7M9fflNKmfMboLXlWfKs="
         }
       ]
     },
@@ -10705,6 +12292,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "105181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:26:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.muakpaesro.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "105181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:26:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "muakpaesro"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7nTm1lodC1YKXh2QVu62GO1I/iLiBmk5STb2bS3bbUQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "673441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"k3W1+KE45hkGriYKuwrZSqL1ER1WMbXnlaPk5D8b+iw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:27:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-k3W1+KE45hkGriYKuwrZSqL1ER1WMbXnlaPk5D8b+iw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.js9s5wzixr.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "673441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"k3W1+KE45hkGriYKuwrZSqL1ER1WMbXnlaPk5D8b+iw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 09:27:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "js9s5wzixr"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-k3W1+KE45hkGriYKuwrZSqL1ER1WMbXnlaPk5D8b+iw="
         }
       ]
     }

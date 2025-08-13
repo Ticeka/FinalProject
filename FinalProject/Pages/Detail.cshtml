@@ -58,7 +58,8 @@ else
          data-count="@countSafe"
          data-website="@b.Website"
          data-facebook="@b.FacebookPage"
-         data-phone="@b.PhoneNumber">
+         data-phone="@b.PhoneNumber"
+         data-auth="@(User?.Identity?.IsAuthenticated ?? false)">
     </div>
 
     <div class="container py-4" itemscope itemtype="https://schema.org/Product">
@@ -151,6 +152,14 @@ else
                             <a href="tel:@b.PhoneNumber" class="btn btn-light border">โทร @b.PhoneNumber</a>
                         }
                         <button id="copyLinkBtn" class="btn btn-outline-secondary">🔗 คัดลอกลิงก์</button>
+
+                        <!-- ❤ ปุ่มถูกใจ -->
+                        <button id="favBtn"
+                                class="btn btn-outline-danger"
+                                aria-pressed="false"
+                                aria-label="เพิ่มในรายการถูกใจ">
+                            ถูกใจ
+                        </button>
                     </div>
                 </div>
             </div>
@@ -316,6 +325,7 @@ else
             </section>
         }
     </div>
+
     <!-- Comments -->
     <section class="section p-4 p-md-5 mb-5">
         <h2 class="h5 mb-3">ความคิดเห็น</h2>
@@ -325,7 +335,6 @@ else
                 <textarea id="cmtText" class="form-control" style="height: 110px"
                           placeholder="พิมพ์ความคิดเห็นของคุณ..."></textarea>
                 <label for="cmtText">พิมพ์ความคิดเห็นของคุณ...</label>
-               
             </div>
 
             @if (!(User?.Identity?.IsAuthenticated ?? false))
@@ -340,14 +349,12 @@ else
             <div class="d-flex gap-2">
                 <button id="cmtSendBtn" type="button" class="btn btn-primary">ส่งความคิดเห็น</button>
                 <button id="cmtReloadBtn" type="button" class="btn btn-outline-secondary">โหลดใหม่</button>
-                
             </div>
         </div>
 
         <div id="cmtList" class="d-flex flex-column gap-3"></div>
         <div id="cmtEmpty" class="text-muted">ยังไม่มีความคิดเห็น — มาเป็นคนแรกกันเลย!</div>
     </section>
-
 }
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

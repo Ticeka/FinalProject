@@ -1,13 +1,28 @@
 wwwroot\css\detail.css
 wwwroot\css\index.css
 wwwroot\css\list.css
+wwwroot\css\profile.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\images\beers\maekhong.jpg
 wwwroot\images\jibthai-logo-duoglass.svg
+wwwroot\images\localbeers\BanBeerChingmai.jfif
+wwwroot\images\localbeers\chaingraistoneage.jfif
+wwwroot\images\localbeers\Khonkhanecraft el.jfif
+wwwroot\images\localbeers\krabeewinepalm.jpg
+wwwroot\images\localbeers\krungtepwcraftipa.jfif
+wwwroot\images\localbeers\lumpanglaker.jfif
+wwwroot\images\localbeers\maekhong.jpg
+wwwroot\images\localbeers\nongkhaibeeresan.jpg
+wwwroot\images\localbeers\petchboonmhagmaowine.jpg
+wwwroot\images\localbeers\PhuketLaker.jfif
+wwwroot\images\localbeers\puttayagoldenel.jfif
+wwwroot\images\localbeers\supunbeerkhaw.jfif
+wwwroot\images\localbeers\suratsage.jfif
+wwwroot\images\localbeers\ubolwine.jfif
 wwwroot\js\detail.js
 wwwroot\js\index.js
 wwwroot\js\list.js
+wwwroot\js\profile.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
@@ -66,3 +81,5 @@ wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg
+wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg

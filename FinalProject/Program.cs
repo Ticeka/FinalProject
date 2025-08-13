@@ -1,6 +1,9 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;          // For endpoint extensions (Produces, etc.)
+using Microsoft.AspNetCore.Http;             // For StatusCodes / endpoint metadata
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -162,7 +165,11 @@ app.MapPost("/api/ratings/quick", async (
 
     return Results.Ok(new { avg = beer.Rating, count = beer.RatingCount });
 })
-.AllowAnonymous();
+.AllowAnonymous()
+.Produces(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status400BadRequest)
+.Produces(StatusCodes.Status404NotFound)
+.Produces(StatusCodes.Status409Conflict);
 
 // =======================================
 // Comments API — GET / POST / DELETE
@@ -219,7 +226,8 @@ app.MapGet("/api/beers/{id:int}/comments", async (
 
     return Results.Ok(items);
 })
-.AllowAnonymous();
+.AllowAnonymous()
+.Produces(StatusCodes.Status200OK);
 
 // POST: /api/beers/{id}/comments
 app.MapPost("/api/beers/{id:int}/comments", async (
@@ -248,7 +256,7 @@ app.MapPost("/api/beers/{id:int}/comments", async (
     else
     {
         display = string.IsNullOrWhiteSpace(display) ? "Guest" : display;
-        if (display.Length > 100) display = display[..100];
+        if (!string.IsNullOrEmpty(display) && display.Length > 100) display = display[..100];
     }
 
     var ipHash = GetIpHash(ctx);
@@ -335,8 +343,123 @@ app.MapDelete("/api/beers/{beerId:int}/comments/{commentId:int}", async (
 .Produces(StatusCodes.Status204NoContent)
 .Produces(StatusCodes.Status401Unauthorized)
 .Produces(StatusCodes.Status403Forbidden)
-.Produces(StatusCodes.Status404NotFound)
-.AllowAnonymous();
+.Produces(StatusCodes.Status404NotFound);
+
+// GET: /api/beers/{id}/favorite  -> { isFavorite: bool }
+app.MapGet("/api/beers/{id:int}/favorite", async (
+    int id,
+    AppDbContext db,
+    HttpContext ctx,
+    UserManager<ApplicationUser> userManager
+) =>
+{
+    if (!(ctx.User?.Identity?.IsAuthenticated ?? false)) return Results.Unauthorized();
+    var uid = userManager.GetUserId(ctx.User);
+    var isFav = await db.BeerFavorites.AsNoTracking()
+        .AnyAsync(f => f.LocalBeerId == id && f.UserId == uid);
+    return Results.Ok(new { isFavorite = isFav });
+})
+.RequireAuthorization()
+.Produces(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status401Unauthorized);
+
+// POST: /api/beers/{id}/favorite  -> add (idempotent)
+app.MapPost("/api/beers/{id:int}/favorite", async (
+    int id,
+    AppDbContext db,
+    HttpContext ctx,
+    UserManager<ApplicationUser> userManager
+) =>
+{
+    if (!(ctx.User?.Identity?.IsAuthenticated ?? false)) return Results.Unauthorized();
+    var uid = userManager.GetUserId(ctx.User);
+
+    var beer = await db.LocalBeers.FindAsync(id);
+    if (beer is null) return Results.NotFound("beer not found");
+
+    var exists = await db.BeerFavorites
+        .AnyAsync(f => f.LocalBeerId == id && f.UserId == uid);
+    if (exists) return Results.Ok(new { ok = true }); // idempotent
+
+    db.BeerFavorites.Add(new BeerFavorite { UserId = uid!, LocalBeerId = id });
+
+    // อัปเดตสถิติ
+    var stats = await db.UserStats.FindAsync(uid);
+    if (stats == null)
+    {
+        stats = new UserStats { UserId = uid!, Reviews = 0, Favorites = 0, Badges = 0 };
+        db.UserStats.Add(stats);
+    }
+    stats.Favorites = Math.Max(0, stats.Favorites + 1);
+
+    await db.SaveChangesAsync();
+    return Results.Ok(new { ok = true });
+})
+.RequireAuthorization()
+.Produces(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status401Unauthorized)
+.Produces(StatusCodes.Status404NotFound);
+
+// DELETE: /api/beers/{id}/favorite  -> remove (idempotent)
+app.MapDelete("/api/beers/{id:int}/favorite", async (
+    int id,
+    AppDbContext db,
+    HttpContext ctx,
+    UserManager<ApplicationUser> userManager
+) =>
+{
+    if (!(ctx.User?.Identity?.IsAuthenticated ?? false)) return Results.Unauthorized();
+    var uid = userManager.GetUserId(ctx.User);
+
+    var fav = await db.BeerFavorites
+        .FirstOrDefaultAsync(f => f.LocalBeerId == id && f.UserId == uid);
+    if (fav != null) db.BeerFavorites.Remove(fav);
+
+    // อัปเดตสถิติ
+    var stats = await db.UserStats.FindAsync(uid);
+    if (stats != null) stats.Favorites = Math.Max(0, stats.Favorites - 1);
+
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+})
+.RequireAuthorization()
+.Produces(StatusCodes.Status204NoContent)
+.Produces(StatusCodes.Status401Unauthorized);
+
+// GET: /api/me/favorites  -> รายการเบียร์ที่ถูกใจของฉัน
+app.MapGet("/api/me/favorites", async (
+    AppDbContext db,
+    HttpContext ctx,
+    UserManager<ApplicationUser> userManager
+) =>
+{
+    if (!(ctx.User?.Identity?.IsAuthenticated ?? false)) return Results.Unauthorized();
+    var uid = userManager.GetUserId(ctx.User);
+
+    var items = await db.BeerFavorites
+        .AsNoTracking()
+        .Where(f => f.UserId == uid)
+        .OrderByDescending(f => f.CreatedAt)
+        .Join(db.LocalBeers,
+              f => f.LocalBeerId,
+              b => b.Id,
+              (f, b) => new {
+                  id = b.Id,
+                  name = b.Name,
+                  province = b.Province,
+                  imageUrl = b.ImageUrl,
+                  type = b.Type,
+                  rating = b.Rating,
+                  ratingCount = b.RatingCount,
+                  price = b.Price
+              })
+        .ToListAsync();
+
+    return Results.Ok(items);
+})
+.RequireAuthorization()
+.Produces(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status401Unauthorized);
 
 app.Run();
 

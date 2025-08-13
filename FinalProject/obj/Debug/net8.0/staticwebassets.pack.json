@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\list.css"
     },
     {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
+      "PackagePath": "staticwebassets\\css\\profile.css"
+    },
+    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -25,12 +29,64 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\maekhong.jpg",
-      "PackagePath": "staticwebassets\\images\\beers\\maekhong.jpg"
-    },
-    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\jibthai-logo-duoglass.svg",
       "PackagePath": "staticwebassets\\images\\jibthai-logo-duoglass.svg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\BanBeerChingmai.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\BanBeerChingmai.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\Khonkhanecraft el.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\Khonkhanecraft el.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\PhuketLaker.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\PhuketLaker.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\chaingraistoneage.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\chaingraistoneage.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krabeewinepalm.jpg",
+      "PackagePath": "staticwebassets\\images\\localbeers\\krabeewinepalm.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\krungtepwcraftipa.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\krungtepwcraftipa.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\lumpanglaker.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\lumpanglaker.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\maekhong.jpg",
+      "PackagePath": "staticwebassets\\images\\localbeers\\maekhong.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\nongkhaibeeresan.jpg",
+      "PackagePath": "staticwebassets\\images\\localbeers\\nongkhaibeeresan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\petchboonmhagmaowine.jpg",
+      "PackagePath": "staticwebassets\\images\\localbeers\\petchboonmhagmaowine.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\puttayagoldenel.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\puttayagoldenel.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\supunbeerkhaw.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\supunbeerkhaw.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\suratsage.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\suratsage.jfif"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\localbeers\\ubolwine.jfif",
+      "PackagePath": "staticwebassets\\images\\localbeers\\ubolwine.jfif"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
@@ -43,6 +99,10 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\list.js",
       "PackagePath": "staticwebassets\\js\\list.js"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
+      "PackagePath": "staticwebassets\\js\\profile.js"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\site.js",
@@ -275,6 +335,14 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.FinalProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

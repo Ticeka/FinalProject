@@ -272,3 +272,75 @@ document.addEventListener('DOMContentLoaded', () => {
     // auto-load
     load();
 })();
+// 5) Favorite (ต้องล็อกอิน)
+(function favoriteFeature() {
+    const root = document.getElementById('beerData');
+    if (!root) return;
+    const beerId = parseInt(root.dataset.id || '0', 10);
+    const isAuth = (root.dataset.auth || 'false') === 'true';
+    const btn = document.getElementById('favBtn');
+    if (!btn || !beerId) return;
+
+    const loginUrl = '/Identity/Account/Login?returnUrl=' + encodeURIComponent(location.pathname + location.search);
+
+    async function fetchWithTimeout(url, opts = {}, ms = 10000) {
+        const ctrl = new AbortController();
+        const id = setTimeout(() => ctrl.abort(new DOMException("timeout", "AbortError")), ms);
+        const headers = Object.assign({ 'Accept': 'application/json' }, opts.headers || {});
+        try {
+            return await fetch(url, { credentials: 'same-origin', ...opts, headers, signal: ctrl.signal });
+        } finally {
+            clearTimeout(id);
+        }
+    }
+
+    function setUI(on) {
+        btn.classList.toggle('fav-on', !!on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.textContent = (on ? 'ถูกใจแล้ว' : 'ถูกใจ'); // ไว้ใช้กับ ::before
+    }
+
+    async function getStatus() {
+        if (!isAuth) { setUI(false); return; }
+        try {
+            const res = await fetchWithTimeout(`/api/beers/${beerId}/favorite`);
+            if (!res.ok) throw new Error();
+            const js = await res.json();
+            setUI(!!js.isFavorite);
+        } catch {
+            // เงียบ ๆ
+        }
+    }
+
+    async function toggle() {
+        if (!isAuth) {
+            if (confirm('ต้องล็อกอินก่อนถึงจะเพิ่ม “ถูกใจ” ได้\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?')) {
+                location.href = loginUrl;
+            }
+            return;
+        }
+        const on = btn.classList.contains('fav-on');
+        btn.disabled = true;
+        try {
+            const res = await fetchWithTimeout(`/api/beers/${beerId}/favorite`, {
+                method: on ? 'DELETE' : 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            if (!res.ok && res.status !== 204) {
+                const t = await res.text().catch(() => '');
+                alert('ดำเนินการไม่สำเร็จ: ' + (t || res.status));
+                return;
+            }
+            setUI(!on);
+        } catch (e) {
+            console.error(e);
+            alert('เครือข่ายขัดข้อง ลองใหม่อีกครั้ง');
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    btn.addEventListener('click', toggle);
+    getStatus();
+})();
+
