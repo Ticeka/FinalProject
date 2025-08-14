@@ -1,6 +1,8 @@
 wwwroot\css\detail.css
+wwwroot\css\flavor-match.css
 wwwroot\css\index.css
 wwwroot\css\list.css
+wwwroot\css\mixtrip.css
 wwwroot\css\profile.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
@@ -19,9 +21,12 @@ wwwroot\images\localbeers\puttayagoldenel.jfif
 wwwroot\images\localbeers\supunbeerkhaw.jfif
 wwwroot\images\localbeers\suratsage.jfif
 wwwroot\images\localbeers\ubolwine.jfif
+wwwroot\images\logo.png
 wwwroot\js\detail.js
+wwwroot\js\flavor-match.js
 wwwroot\js\index.js
 wwwroot\js\list.js
+wwwroot\js\mixtrip.js
 wwwroot\js\profile.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
@@ -84,3 +89,4 @@ wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\uploads\avatars\d6cd953c-1363-4b2b-86a5-8aa6bb644c15_638907088624329991.jpg
 wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg
 wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg
+wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg

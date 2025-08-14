@@ -9,12 +9,20 @@
       "PackagePath": "staticwebassets\\css\\detail.css"
     },
     {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
+      "PackagePath": "staticwebassets\\css\\flavor-match.css"
+    },
+    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\index.css",
       "PackagePath": "staticwebassets\\css\\index.css"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\list.css",
       "PackagePath": "staticwebassets\\css\\list.css"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\mixtrip.css",
+      "PackagePath": "staticwebassets\\css\\mixtrip.css"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
@@ -89,8 +97,16 @@
       "PackagePath": "staticwebassets\\images\\localbeers\\ubolwine.jfif"
     },
     {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "PackagePath": "staticwebassets\\js\\detail.js"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+      "PackagePath": "staticwebassets\\js\\flavor-match.js"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\index.js",
@@ -99,6 +115,10 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\list.js",
       "PackagePath": "staticwebassets\\js\\list.js"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\mixtrip.js",
+      "PackagePath": "staticwebassets\\js\\mixtrip.js"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
@@ -347,6 +367,10 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg",
       "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.FinalProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

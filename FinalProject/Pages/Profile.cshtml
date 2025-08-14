@@ -15,198 +15,158 @@
     bool hasAvatar = !string.IsNullOrWhiteSpace(Model.AvatarUrl);
 }
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="@Url.Content("~/css/profile.css")" asp-append-version="true" />
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>@ViewData["Title"]</title>
 
-<div class="profile-page">
-    <!-- Cover / Header -->
-    <div class="profile-cover">
-        <div class="cover-gradient"></div>
-        <div class="cover-noise"></div>
-    </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/profile.css")" asp-append-version="true" />
+</head>
+<body>
+    <div class="profile-page container">
 
-    <!-- Header Card (sticky-ish) -->
-    <header class="container profile-header">
-        <div class="ph-left">
-            <div class="avatar-wrap" role="img" aria-label="โปรไฟล์ @Model.DisplayName">
-                @if (hasAvatar)
-                {
-                    <img id="avatarPreview" src="@Model.AvatarUrl" alt="@Model.DisplayName" class="avatar-img" />
-                }
-                else
-                {
-                    <div id="avatarFallback" class="avatar-fallback" data-initials="@initials">
-                        <span>@initials</span>
-                        <svg class="avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="12" cy="8" r="4"></circle>
-                            <path d="M4 20a8 8 0 0 1 16 0"></path>
-                        </svg>
-                    </div>
-                }
-                <input type="file" id="avatarUpload" accept="image/*" hidden />
-                <button id="changeAvatarBtn" class="avatar-edit" title="เปลี่ยนรูปโปรไฟล์" aria-label="เปลี่ยนรูปโปรไฟล์">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                        <path d="M12 5h.01M4 7h4l2-2h4l2 2h4v12H4V7Z" fill="none" stroke="currentColor" stroke-width="1.5" />
-                        <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
-                    </svg>
-                </button>
-            </div>
+        <!-- Header -->
+        <header class="profile-header">
+            <div class="d-flex w-100 align-items-center gap-3 gap-md-4">
 
-            <div class="identity">
-                <div class="display-row">
-                    <h1 class="display-name">@Model.DisplayName</h1>
-                    <div class="verified-chip" title="บัญชีของฉัน">คุณ</div>
-                </div>
-                <div class="muted">@Model.Email</div>
-                @if (!string.IsNullOrWhiteSpace(Model.Location) || Model.BirthYear is not null)
-                {
-                    <div class="muted mt-1">
-                        @if (!string.IsNullOrWhiteSpace(Model.Location))
-                        {
-                            <span>📍 @Model.Location</span>
-                        }
-                        @if (Model.BirthYear is not null)
-                        {
-                            <span class="ms-2">🎂 @Model.BirthYear</span>
-                        }
-                    </div>
-                }
-                <div class="muted mt-1">เข้าร่วมเมื่อ @Model.JoinDate.ToString("dd MMM yyyy")</div>
-
-                <div class="quick-stats mt-3">
-                    <div class="stat"><div class="val">@Model.Stats?.Reviews</div><div class="lbl">รีวิว</div></div>
-                    <div class="stat"><div class="val">@Model.Stats?.Favorites</div><div class="lbl">ถูกใจ</div></div>
-                    <div class="stat"><div class="val">@Model.Stats?.Badges</div><div class="lbl">แบดจ์</div></div>
-                </div>
-
-                <div class="actions mt-3">
-                    <button id="editProfileBtn" class="btn btn-brand">แก้ไขโปรไฟล์</button>
-                    <button id="shareProfileBtn" class="btn btn-soft">แชร์โปรไฟล์</button>
-                    <button id="removeAvatarBtn" class="btn btn-outline-danger" @(hasAvatar ? "" : "disabled")>ลบรูป</button>
-                </div>
-
-                <div class="upload-hint small text-muted mt-2">รองรับ JPG/PNG/WebP ≤ 3 MB</div>
-                <div class="progress mt-3 d-none" id="uploadProgressWrap" aria-hidden="true">
-                    <div class="progress-bar" id="uploadProgress" style="width:0%"></div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Tabs -->
-    <nav class="container tabs">
-        <button class="tab-btn active" data-tab="favorites">รายการถูกใจ</button>
-        <button class="tab-btn" data-tab="activity">กิจกรรม</button>
-        <button class="tab-btn" data-tab="about">เกี่ยวกับ</button>
-        <div class="tab-underline"></div>
-    </nav>
-
-    <!-- Body -->
-    <main class="container tab-panels">
-        <!-- Favorites Grid -->
-        <section id="tab-favorites" class="tab-panel active">
-            <div id="favGrid" class="fav-grid"></div>
-            <div id="favEmpty" class="muted text-center py-4 d-none">ยังไม่มีรายการถูกใจ</div>
-
-            <!-- skeletons -->
-            <div id="favSkeleton" class="fav-grid">
-                @for (var i = 0; i < 6; i++)
-                {
-                    <div class="card card-skeleton">
-                        <div class="sk-img"></div>
-                        <div class="sk-line w-60"></div>
-                        <div class="sk-line w-40"></div>
-                    </div>
-                }
-            </div>
-        </section>
-
-        <!-- Activity Timeline -->
-        <section id="tab-activity" class="tab-panel">
-            <div class="timeline-head d-flex align-items-center justify-content-between mb-2">
-                <h3 class="section-title mb-0">กิจกรรมล่าสุด</h3>
-                <button id="refreshActivityBtn" class="btn btn-light btn-sm">รีเฟรช</button>
-            </div>
-            <ul id="activityList" class="timeline">
-                @foreach (var activity in Model.RecentActivities)
-                {
-                    <li class="item"><span class="dot"></span><div class="content">@activity</div></li>
-                }
-            </ul>
-            <div id="activityEmpty" class="muted small d-none">ยังไม่มีกิจกรรม</div>
-        </section>
-
-        <!-- About -->
-        <section id="tab-about" class="tab-panel">
-            <div class="card about-card">
-                <div class="card-body">
-                    <h3 class="section-title">เกี่ยวกับฉัน</h3>
-                    @if (!string.IsNullOrWhiteSpace(Model.Bio))
+                <!-- Avatar -->
+                <div class="avatar-wrap" id="changeAvatarBtn" role="img" aria-label="โปรไฟล์ @Model.DisplayName">
+                    @if (hasAvatar)
                     {
-                        <p class="mb-0">@Model.Bio</p>
+                        <img id="avatarPreview" src="@Model.AvatarUrl" alt="@Model.DisplayName" class="avatar-img" />
                     }
                     else
                     {
-                        <p class="mb-0 muted">ยังไม่ได้เขียนแนะนำตัว</p>
+                        <div id="avatarFallback" class="avatar-fallback" data-initials="@initials">
+                            <span>@initials</span>
+                        </div>
                     }
+                    <input type="file" id="avatarUpload" accept="image/*" hidden />
+                </div>
+                <!-- Identity + stats + actions -->
+                <div class="flex-grow-1 min-w-0">
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <h1 class="display-name mb-0 text-truncate">@Model.DisplayName</h1>
+                        <span class="chip-you">คุณ</span>
+                    </div>
+
+                    <div class="muted small mt-1 text-truncate">
+                        @Model.Email
+                        @if (Model.BirthYear is not null)
+                        {
+                            <span class="ms-2">• 🎂 @Model.BirthYear</span>
+                        }
+                        <span class="ms-2">• เข้าร่วม @Model.JoinDate.ToString("dd MMM yyyy")</span>
+                    </div>
+
+                    <div class="header-row mt-3">
+                        <div class="quick-stats">
+                            <div class="stat">
+                                <div class="val">@Model.Stats?.Reviews</div>
+                                <div class="lbl">รีวิว</div>
+                            </div>
+                            <div class="stat">
+                                <div class="val">@Model.Stats?.Favorites</div>
+                                <div class="lbl">ถูกใจ</div>
+                            </div>
+                            <div class="stat">
+                                <div class="val">@Model.Stats?.Badges</div>
+                                <div class="lbl">แบดจ์</div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button id="editProfileBtn" class="btn btn-brand btn-sm">แก้ไขโปรไฟล์</button>
+                            <button id="shareProfileBtn" class="btn btn-soft btn-sm">แชร์โปรไฟล์</button>  
+                        </div>
+                    </div>
+
+                    
+                    <div class="progress mt-2 d-none" id="uploadProgressWrap" aria-hidden="true" style="max-width:360px;">
+                        <div class="progress-bar" id="uploadProgress" style="width:0%"></div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-</div>
+        </header>
 
-<!-- Modal: Edit Profile -->
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0 shadow-soft">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editProfileLabel">แก้ไขข้อมูลโปรไฟล์</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editProfileForm" novalidate>
-                    <div class="mb-3">
-                        <label class="form-label">ชื่อที่แสดง</label>
-                        <input type="text" class="form-control" name="DisplayName" value="@Model.DisplayName" required>
-                        <div class="invalid-feedback">กรุณาใส่ชื่อที่แสดง</div>
+        <!-- Tabs -->
+        <nav class="tabs" role="tablist" aria-label="สลับหมวดโปรไฟล์">
+            <button class="tab-btn active" data-tab="favorites" role="tab" aria-selected="true">รายการถูกใจ</button>
+            <button class="tab-btn" data-tab="activity" role="tab" aria-selected="false">กิจกรรม</button>
+            <button class="tab-btn" data-tab="about" role="tab" aria-selected="false">เกี่ยวกับ</button>
+            <div class="tab-underline" aria-hidden="true"></div>
+        </nav>
+
+        <!-- Panels -->
+        <main class="tab-panels">
+            <!-- Favorites -->
+            <section id="tab-favorites" class="tab-panel active" role="tabpanel">
+                <div id="favGrid" class="fav-grid"></div>
+                <div id="favEmpty" class="muted text-center py-4 d-none">ยังไม่มีรายการถูกใจ</div>
+
+                <!-- skeletons -->
+                <div id="favSkeleton" class="fav-grid">
+                    @for (var i = 0; i < 6; i++)
+                    {
+                        <div class="card card-skeleton">
+                            <div class="sk-img"></div>
+                            <div class="sk-line w-60"></div>
+                            <div class="sk-line w-40"></div>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <!-- Activity -->
+            <section id="tab-activity" class="tab-panel" role="tabpanel" aria-labelledby="กิจกรรม">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h3 class="section-title mb-0">กิจกรรมล่าสุด</h3>
+                    <button id="refreshActivityBtn" class="btn btn-light btn-sm">รีเฟรช</button>
+                </div>
+                <ul id="activityList" class="timeline">
+                    @foreach (var activity in Model.RecentActivities)
+                    {
+                        <li class="item"><span class="dot"></span><div class="content">@activity</div></li>
+                    }
+                </ul>
+                <div id="activityEmpty" class="muted small d-none">ยังไม่มีกิจกรรม</div>
+            </section>
+
+            <!-- About -->
+            <section id="tab-about" class="tab-panel" role="tabpanel" aria-labelledby="เกี่ยวกับ">
+                <div class="card about-card">
+                    <div class="card-body">
+                        <h3 class="section-title">เกี่ยวกับฉัน</h3>
+                        @if (!string.IsNullOrWhiteSpace(Model.Bio))
+                        {
+                            <p class="mb-0">@Model.Bio</p>
+                        }
+                        else
+                        {
+                            <p class="mb-0 muted">ยังไม่ได้เขียนแนะนำตัว</p>
+                        }
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">อีเมล</label>
-                        <input type="email" class="form-control" name="Email" value="@Model.Email" required>
-                        <div class="invalid-feedback">กรุณาใส่อีเมลที่ถูกต้อง</div>
-                    </div>
-                    @* เพิ่มฟิลด์อื่น ๆ เช่น Location / Bio / BirthYear *@
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-light" data-bs-dismiss="modal">ยกเลิก</button>
-                <button id="saveProfileBtn" class="btn btn-brand">บันทึก</button>
-            </div>
-        </div>
+                </div>
+            </section>
+        </main>
     </div>
-</div>
 
-<!-- Toast -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1080;">
-    <div id="profileToast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body" id="toastMsg">ดำเนินการสำเร็จ</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="ปิด"></button>
-        </div>
-    </div>
-</div>
+    <!-- Endpoints ให้ JS (คงไว้ตามเดิม) -->
+    <script>
+        window.ProfileEndpoints = {
+          upload: '@Url.Page("/Profile", null, new { handler = "UploadAvatar" }, null)',
+          remove: '@Url.Page("/Profile", null, new { handler = "RemoveAvatar" }, null)',
+          edit: '@Url.Page("/Profile", null, new { handler = "Edit" }, null)',
+          activities: '@Url.Page("/Profile", null, new { handler = "Activities" }, null)',
+          myFavorites: '/api/me/favorites',
+          toggleFavorite: (id) => `/api/beers/${id}/favorite`
+        };
+    </script>
 
-<!-- Endpoints ให้ JS -->
-<script>
-    window.ProfileEndpoints = {
-      upload: '@Url.Page("/Profile", null, new { handler = "UploadAvatar" }, null)',
-      remove: '@Url.Page("/Profile", null, new { handler = "RemoveAvatar" }, null)',
-      edit: '@Url.Page("/Profile", null, new { handler = "Edit" }, null)',
-      activities: '@Url.Page("/Profile", null, new { handler = "Activities" }, null)',
-      myFavorites: '/api/me/favorites',
-      toggleFavorite: (id) => `/api/beers/${id}/favorite`
-    };
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="@Url.Content("~/js/profile.js")" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="@Url.Content("~/js/profile.js")" asp-append-version="true"></script>
+</body>
+</html>

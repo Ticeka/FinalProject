@@ -1,7 +1,7 @@
 [
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_9",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_4",
     "RelativePath": "api/beers/{beerId:int}/comments/{commentId:int}",
     "HttpMethod": "DELETE",
     "IsController": false,
@@ -42,8 +42,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_7",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_2",
     "RelativePath": "api/beers/{id:int}/comments",
     "HttpMethod": "GET",
     "IsController": false,
@@ -74,8 +74,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_8",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_3",
     "RelativePath": "api/beers/{id:int}/comments",
     "HttpMethod": "POST",
     "IsController": false,
@@ -113,8 +113,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_10",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_5",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "GET",
     "IsController": false,
@@ -140,8 +140,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_11",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_6",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "POST",
     "IsController": false,
@@ -172,8 +172,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_12",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_7",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "DELETE",
     "IsController": false,
@@ -199,8 +199,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_14",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_9",
     "RelativePath": "api/debug/whoami",
     "HttpMethod": "GET",
     "IsController": false,
@@ -215,8 +215,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_13",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_8",
     "RelativePath": "api/me/favorites",
     "HttpMethod": "GET",
     "IsController": false,
@@ -236,8 +236,8 @@
     ]
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_5",
+    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_0",
     "RelativePath": "api/ratings/quick",
     "HttpMethod": "POST",
     "IsController": false,
@@ -269,6 +269,35 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 409
+      }
+    ]
+  },
+  {
+    "ContainingType": "FinalProject.Endpoints.FlavorMatchEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapFlavorMatchEndpoints\u003Eb__3_0",
+    "RelativePath": "api/reco/flavor-match",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "FinalProject.Endpoints.FlavorMatchEndpoints\u002BFlavorRecoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FinalProject.Endpoints.FlavorMatchEndpoints\u002BFlavorRecoResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
       }
     ]
   }

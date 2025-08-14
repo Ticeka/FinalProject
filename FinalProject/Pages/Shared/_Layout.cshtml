@@ -256,7 +256,9 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <span class="brand-dot"></span> 🍹 Sip &amp; Trip
+                    <img src="~/images/logo.png" alt="Sip & Trip"
+                         style="height:50px; width:auto;" class="me-2" />
+                   Sip &amp; Trip
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -265,7 +267,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-
                     <ul class="navbar-nav align-items-center me-3">
                         <li class="nav-item">
                             <a class="nav-link @active("/Index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
@@ -273,6 +274,16 @@
                         <li class="nav-item">
                             <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(Context.Request.Path.Value?.StartsWith("/MixTrip") == true ? "active fw-semibold" : "")"
+                               asp-area="" asp-page="/MixTrip">🎲 Mix &amp; Trip</a>
+                        </li>
+
+                        <!-- ✅ เพิ่gม FlavorMatch -->
+                        <li class="nav-item">
+                            <a class="nav-link @active("/FlavorMatch")" asp-area="" asp-page="/FlavorMatch">🍷 FlavorMatch</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link @active("/AboutUs")" asp-area="" asp-page="/AboutUs">ℹ️ เกี่ยวกับเรา</a>
                         </li>
@@ -321,8 +332,7 @@
                                                 </span>
                                             }
                                             <div>
-                                                <div class="fw-semibold">@displayName</div>
-                                                <div class="text-muted small">บัญชีของฉัน</div>
+                                                <div class="fw-semibold">@displayName</div>  
                                             </div>
                                         </div>
                                     </li>

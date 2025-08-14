@@ -1,0 +1,83 @@
+﻿@page "/flavor-match"
+@model FinalProject.Pages.FlavorMatchModel
+@{
+    ViewData["Title"] = "Flavor Match — Sip & Trip";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/flavor-match.css" asp-append-version="true" />
+
+<div class="container py-4 mixtrip">
+    <header class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-3">
+        <div>
+            <h1 class="h4 fw-bold mb-1">🧪 Flavor Match</h1>
+            <div class="text-muted">บอกรส/ส่วนผสมที่ชอบ แล้วให้เราจับคู่เครื่องดื่มที่ใช่</div>
+        </div>
+        <div id="shareToast" class="badge bg-success-subtle text-success-emphasis d-none">คัดลอกลิงก์แล้ว!</div>
+    </header>
+
+    <form id="matchForm" class="mix-grid">
+        <div class="card shadow-soft">
+            <div class="card-body">
+                <div class="mix-field">
+                    <label for="base" class="form-label">ฐานเครื่องดื่ม</label>
+                    <select id="base" class="form-select">
+                        <option value="">— เลือก —</option>
+                        <option>Beer</option>
+                        <option>Wine</option>
+                        <option>Whisky</option>
+                        <option>Rum</option>
+                        <option>Gin</option>
+                        <option>Thai Craft</option>
+                        <option>Mocktail</option>
+                    </select>
+                </div>
+
+                <div class="mix-field mt-3">
+                    <div class="form-label">รสชาติ/โทนที่ชอบ (เลือกได้หลายข้อ)</div>
+                    <div class="chipset">
+                        @foreach (var f in Model.Flavors)
+                        {
+                            <label class="chip">
+                                <input type="checkbox" name="flavor" value="@f.Value" />
+                                <span>@f.Text</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="mix-actions mt-3">
+                    <button id="btnSuggest" class="btn btn-brand" type="submit">✨ แนะนำเลย</button>
+                    <button id="btnReset" class="btn btn-soft" type="button">รีเซ็ต</button>
+                    <button id="btnShare" class="btn btn-outline-primary" type="button">🔗 แชร์ผล</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-soft">
+            <div class="card-body">
+                <div class="r-card">
+                    <div class="r-title mb-1">ผลลัพธ์</div>
+                    <div class="r-main" id="recTitle">—</div>
+                    <div class="r-sub" id="recSub">เลือกฐานและรสที่ชอบ แล้วกด “แนะนำเลย”</div>
+                </div>
+
+                <div id="resultWrap" class="row row-cols-1 row-cols-md-3 g-3 mt-2 d-none"></div>
+            </div>
+        </div>
+
+        <div class="history card shadow-soft">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="fw-bold">ประวัติการแนะนำล่าสุด</div>
+                    <button id="btnClearHist" type="button" class="btn btn-sm btn-soft">ล้างประวัติ</button>
+                </div>
+                <div id="histList" class="hist-grid"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/flavor-match.js" asp-append-version="true"></script>
+}

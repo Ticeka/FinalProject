@@ -1,0 +1,404 @@
+﻿@page "/mix-trip"
+@model FinalProject.Pages.MixTripModel
+@{
+    ViewData["Title"] = "Mix & Trip Challenge";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+<div class="mix-hero py-4 py-md-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a asp-page="/Index">แผนที่</a></li>
+                <li class="breadcrumb-item"><a asp-page="/List">รายการ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mix &amp; Trip Challenge</li>
+            </ol>
+        </nav>
+
+        <header class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-3">
+            <div>
+                <h1 class="h3 h-md-2 fw-bold mb-1">
+                    🎲 Mix &amp; Trip Challenge
+                </h1>
+                <div class="text-muted">สุ่มส่วนผสม • ผสานเป็นเมนู • แชร์คะแนนให้เพื่อน!</div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge rounded-pill bg-brand-subtle text-brand fw-semibold px-3 py-2">
+                    รอบที่ <span id="roundText">@Model.Round</span>
+                </span>
+                <span class="badge rounded-pill bg-dark-subtle text-dark fw-semibold px-3 py-2">
+                    คะแนน: <strong id="scoreText">@Model.Score</strong>
+                </span>
+            </div>
+        </header>
+    </div>
+</div>
+
+<div class="container py-4">
+
+    <div class="row g-4">
+        <!-- PLAY AREA -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-soft">
+                <div class="card-body">
+                    <h2 class="h6 fw-bold mb-3">ผสมส่วนผสมให้ “ลงตัว”</h2>
+
+                    <div id="slotArea" class="d-flex flex-wrap gap-3 gap-md-4 mb-4">
+                        <div class="drop-slot" data-slot="1" aria-label="ช่องที่ 1">
+                            <span class="slot-hint">วางการ์ดที่นี่</span>
+                        </div>
+                        <div class="drop-slot" data-slot="2" aria-label="ช่องที่ 2">
+                            <span class="slot-hint">วางการ์ดที่นี่</span>
+                        </div>
+                        <div class="drop-slot" data-slot="3" aria-label="ช่องที่ 3">
+                            <span class="slot-hint">วางการ์ดที่นี่</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button id="btnShuffle" class="btn btn-brand">
+                            🔀 สุ่มส่วนผสมใหม่
+                        </button>
+                        <button id="btnMix" class="btn btn-success">
+                            🧪 ผสมเลย!
+                        </button>
+                        <button id="btnClear" class="btn btn-soft">
+                            ♻️ ล้างช่อง
+                        </button>
+                    </div>
+
+                    <div id="resultBox" class="alert alert-info d-none mt-3" role="status"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POOL + RULES -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-soft mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h2 class="h6 fw-bold mb-0">ส่วนผสมของรอบนี้</h2>
+                        <small class="text-muted">ลากไปใส่ 3 ช่อง</small>
+                    </div>
+
+                    <div id="pool" class="pool-grid">
+                        @foreach (var ing in Model.Ingredients)
+                        {
+                            <button class="card-pill" draggable="true" data-id="@ing.Id" aria-label="@ing.Name" title="@ing.Name">
+                                <span class="pill-emoji">@ing.Emoji</span>
+                                <span class="pill-text">@ing.Name</span>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- กติกา & วิธีเล่น -->
+            <div class="card border-0 shadow-soft rules-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start gap-2 mb-2">
+                        <div class="rules-dot"></div>
+                        <h3 class="h6 fw-bold mb-0">กติกา</h3>
+                    </div>
+                    <ul class="list-unstyled small mb-3 rules-list">
+                        <li>• เลือกการ์ดส่วนผสมให้ครบ <strong>3 ใบ</strong> แล้วกด <em>ผสมเลย!</em></li>
+                        <li>• ถ้าชุด “ลงตัว” จะได้ <strong class="text-success">+10</strong> คะแนน</li>
+                        <li>• ถ้าไม่ลงตัว จะถูกหัก <strong class="text-danger">-2</strong> คะแนน</li>
+                        <li>• คุณสามารถกด <strong>สุ่มส่วนผสมใหม่</strong> ได้ตลอด</li>
+                    </ul>
+
+                    <div class="d-flex align-items-start gap-2 mb-2">
+                        <div class="rules-dot"></div>
+                        <h3 class="h6 fw-bold mb-0">วิธีเล่น</h3>
+                    </div>
+                    <ol class="small mb-0 ps-3">
+                        <li>ดูการ์ดใน “ส่วนผสมของรอบนี้”</li>
+                        <li>ลากการ์ดไปวางในช่องว่างให้ครบ 3 ใบ</li>
+                        <li>กดปุ่ม <strong>ผสมเลย!</strong> เพื่อเช็กคะแนน</li>
+                        <li>อยากลองใหม่? กด <strong>สุ่มส่วนผสมใหม่</strong> หรือ <strong>ล้างช่อง</strong></li>
+                    </ol>
+
+                    <div class="tip mt-3">
+                        💡 <span class="text-muted">ทิป:</span> ชุดที่ลงตัวคือ
+                        <span class="badge rounded-pill bg-light text-dark border">Citrus</span>
+                        <span class="badge rounded-pill bg-light text-dark border">Herb</span>
+                        <span class="badge rounded-pill bg-light text-dark border">Fizz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --bg: #f6f8fb;
+        --card: #fff;
+        --ink: #1f2937;
+        --muted: #6b7280;
+        --brand: #2563eb;
+        --line: #e6ebf2;
+        --ring: rgba(37,99,235,.2);
+        --rad: 14px;
+    }
+
+    body {
+        color: var(--ink)
+    }
+
+    /* Hero */
+    .mix-hero {
+        background: linear-gradient(180deg,#f8fafc,#fff);
+        border-bottom: 1px solid var(--line);
+    }
+
+    .bg-brand-subtle {
+        background: rgba(37,99,235,.08) !important
+    }
+
+    .text-brand {
+        color: var(--brand) !important
+    }
+
+    /* Cards */
+    .shadow-soft {
+        box-shadow: 0 10px 30px rgba(15,23,42,.06)
+    }
+
+    .card {
+        border-radius: var(--rad)
+    }
+
+    .rules-card .rules-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--brand);
+        margin-top: .4rem;
+        box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+    }
+
+    .rules-list li {
+        margin-bottom: .25rem
+    }
+
+    /* Slots */
+    .drop-slot {
+        width: 150px;
+        height: 68px;
+        min-width: 150px;
+        border: 2px dashed #cbd5e1;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: #f8fafc;
+        color: #94a3b8;
+        position: relative;
+        transition: border .15s ease, background .15s ease, transform .1s ease;
+    }
+
+        .drop-slot:hover {
+            transform: translateY(-1px);
+            border-color: #94a3b8
+        }
+
+        .drop-slot.filled {
+            border-style: solid;
+            background: #fff;
+            color: var(--ink)
+        }
+
+    .slot-hint {
+        font-size: .85rem
+    }
+
+    /* Pool – Pills */
+    .pool-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .6rem;
+    }
+
+    .card-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        color: #0f172a;
+        border-radius: 999px;
+        padding: .55rem .8rem;
+        cursor: grab;
+        user-select: none;
+        transition: transform .08s ease, box-shadow .12s ease, border .12s ease, background .12s ease;
+    }
+
+        .card-pill:active {
+            cursor: grabbing
+        }
+
+        .card-pill:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(2,8,23,.08);
+            border-color: #dbe4f0;
+            background: #fbfdff;
+        }
+
+    .pill-emoji {
+        font-size: 1.1rem;
+        line-height: 1
+    }
+
+    .pill-text {
+        font-weight: 700;
+        font-size: .95rem
+    }
+
+    /* Buttons */
+    .btn {
+        border-radius: 10px;
+        font-weight: 700
+    }
+
+    .btn-soft {
+        background: #f8fafc;
+        border: 1px solid var(--line)
+    }
+
+        .btn-soft:hover {
+            background: #eef2f7
+        }
+
+    .btn-brand {
+        background: var(--brand);
+        border-color: var(--brand)
+    }
+
+        .btn-brand:hover {
+            filter: brightness(.95)
+        }
+
+    /* Result */
+    #resultBox {
+        border-radius: 12px
+    }
+
+    /* Responsive tweaks */
+    @@media (max-width: 480px) {
+        .drop-slot
+
+    {
+        width: 42%;
+        min-width: auto;
+        flex: 1
+    }
+
+    #slotArea {
+        justify-content: space-between
+    }
+
+    }
+</style>
+
+@section Scripts {
+    <script>
+        (() => {
+          const pool = document.getElementById('pool');
+          const slots = Array.from(document.querySelectorAll('.drop-slot'));
+          const resultBox = document.getElementById('resultBox');
+          const scoreText = document.getElementById('scoreText');
+          const roundText = document.getElementById('roundText');
+
+          const urlShuffle = '@Url.Page("/MixTrip", null, new { handler = "Shuffle" }, null)';
+          const urlMix     = '@Url.Page("/MixTrip", null, new { handler = "Mix" }, null)';
+
+          function showResult(text, good){
+            resultBox.textContent = text;
+            resultBox.classList.remove('d-none','alert-info','alert-success','alert-warning');
+            resultBox.classList.add(good ? 'alert-success' : 'alert-warning');
+          }
+
+          function currentSelection(){
+            return slots.map(s => s.firstElementChild?.dataset.id || null).filter(Boolean);
+          }
+
+          // Drag & Drop
+          pool.addEventListener('dragstart', (e) => {
+            const el = e.target;
+            if (!(el instanceof HTMLElement) || !el.matches('.card-pill')) return;
+            e.dataTransfer.setData('text/plain', el.dataset.id);
+          });
+
+          slots.forEach(slot => {
+            slot.addEventListener('dragover', e => e.preventDefault());
+            slot.addEventListener('drop', e => {
+              e.preventDefault();
+              const id = e.dataTransfer.getData('text/plain');
+              const btn = pool.querySelector(`.card-pill[data-id="${id}"]`);
+              if(!btn) return;
+              if(slot.firstElementChild) slot.firstElementChild.remove();
+              const clone = btn.cloneNode(true);
+              clone.setAttribute('draggable','false');
+              slot.innerHTML = '';
+              slot.appendChild(clone);
+              slot.classList.add('filled');
+            });
+          });
+
+          // Buttons
+          document.getElementById('btnClear').addEventListener('click', () => {
+            slots.forEach(s => { s.innerHTML = '<span class="slot-hint">วางการ์ดที่นี่</span>'; s.classList.remove('filled'); });
+            resultBox.classList.add('d-none');
+          });
+
+          document.getElementById('btnShuffle').addEventListener('click', async () => {
+            try{
+              const res = await fetch(urlShuffle, { credentials: 'same-origin' });
+              if(!res.ok) throw new Error();
+              const items = await res.json(); // [{id,name,emoji}]
+              pool.innerHTML = '';
+              items.forEach(it => {
+                const b = document.createElement('button');
+                b.className = 'card-pill';
+                b.draggable = true;
+                b.dataset.id = it.id;
+                b.innerHTML = `<span class="pill-emoji">${it.emoji}</span><span class="pill-text">${it.name}</span>`;
+                pool.appendChild(b);
+              });
+              document.getElementById('btnClear').click();
+              showResult('สุ่มชุดใหม่แล้ว ลองเลือกดู!', true);
+            }catch{
+              showResult('สุ่มไม่สำเร็จ', false);
+            }
+          });
+
+          document.getElementById('btnMix').addEventListener('click', async () => {
+            const ids = currentSelection();
+            if(ids.length < 3){ showResult('ใส่ให้ครบ 3 ส่วนผสมก่อนนะ!', false); return; }
+
+            try{
+              const res = await fetch(urlMix, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(ids),
+                credentials:'same-origin'
+              });
+              if(!res.ok){ const t = await res.text(); throw new Error(t); }
+
+              const out = await res.json(); // { ok, message, score }
+              showResult(out.message, out.ok);
+              if(typeof out.score === 'number') scoreText.textContent = out.score;
+
+              // อัปเดตรอบแบบเดา (+1 ทุกครั้งที่ mix) – ถ้าคุณส่งรอบจากเซิร์ฟเวอร์ ให้แก้ให้รับค่าจริง
+              const nextRound = parseInt(roundText.textContent || '1', 10) + 1;
+              roundText.textContent = String(nextRound);
+            }catch(e){
+              console.error(e);
+              showResult('ผสมไม่สำเร็จ ลองใหม่อีกครั้ง', false);
+            }
+          });
+        })();
+    </script>
+}

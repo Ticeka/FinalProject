@@ -12,7 +12,11 @@
 
 <div class="container py-4">
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
-        <h2 class="mb-0">🍹 รายการเครื่องดื่มทั้งหมด</h2>
+        <h2 class="mb-0">
+            <img src="~/images/Logo.png" alt="รายการเครื่องดื่มทั้งหมด"
+                 style="height:70px; width:auto; vertical-align:middle;" class="me-2" />
+            รายการเครื่องดื่มทั้งหมด
+        </h2>
         <span id="resultCount" class="count-chip">0 รายการ</span>
     </div>
 
@@ -35,7 +39,11 @@
                 </select>
             </div>
             <div class="col-6 col-lg-2">
-                <label class="form-label">🍹 ประเภท</label>
+                <label class="form-label">
+                    <img src="~/images/Logo.png" alt="ประเภท"
+                         style="height:28px; width:auto; vertical-align:middle;" class="me-1" />
+                    ประเภท
+                </label>
                 <select id="typeSelect" class="form-select">
                     <option value="">ทุกประเภท</option>
                     @foreach (var type in Model.LocalBeers.Select(b => b.Type).Where(t => !string.IsNullOrWhiteSpace(t)).Distinct())

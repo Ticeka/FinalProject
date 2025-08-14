@@ -3,44 +3,80 @@
   "WorkspaceRootPath": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\profile.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\profile.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\endpoints\\flavormatchendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\endpoints\\flavormatchendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\list.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\list.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\endpoints\\communityendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\endpoints\\communityendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\setup\\apppipeline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\setup\\apppipeline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\setup\\identityandcookies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\setup\\identityandcookies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\profile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\profile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\setup\\appcoreservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\setup\\appcoreservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\js\\profile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\js\\profile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\js\\flavor-match.js||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\js\\flavor-match.js||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\flavor-match.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\flavor-match.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\detail.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\detail.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\flavormatch.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\flavormatch.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\flavormatch.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\flavormatch.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\models\\flavorrecodtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\models\\flavorrecodtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\models\\localbeer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\models\\localbeer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\controller\\beercommentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\controller\\beercommentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\js\\mixtrip.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\js\\mixtrip.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\wwwroot\\css\\mixtrip.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\wwwroot\\css\\mixtrip.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\mixtrip.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\mixtrip.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\pages\\mixtrip.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\pages\\mixtrip.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,132 +102,249 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "FinalProject\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Shared\\_Layout.cshtml*",
+              "RelativeToolTip": "FinalProject\\Pages\\Shared\\_Layout.cshtml*",
+              "ViewState": "AgIAAP4AAAAAAAAAAAAAABkBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T09:37:32.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "FinalProject\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-08-13T19:27:24.482Z",
+              "Title": "FlavorMatchEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\FlavorMatchEndpoints.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Endpoints\\FlavorMatchEndpoints.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\FlavorMatchEndpoints.cs",
+              "RelativeToolTip": "FinalProject\\Endpoints\\FlavorMatchEndpoints.cs",
+              "ViewState": "AgIAAIkAAAAAAAAAAAAQwJYAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:35:24.037Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "list.css",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\list.css",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\list.css",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\list.css",
-              "RelativeToolTip": "FinalProject\\wwwroot\\css\\list.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-08-13T19:27:23.426Z",
+              "Title": "CommunityEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "RelativeToolTip": "FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAQwBkBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:35:07.198Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "index.css",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\index.css",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\index.css",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\index.css",
-              "RelativeToolTip": "FinalProject\\wwwroot\\css\\index.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-08-13T19:27:22.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "FinalProject\\wwwroot\\js\\site.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-13T19:24:02.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "detail.css",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\detail.css",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
-              "RelativeToolTip": "FinalProject\\wwwroot\\css\\detail.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-08-13T19:19:56.565Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "profile.js",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\js\\profile.js",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
-              "RelativeToolTip": "FinalProject\\wwwroot\\js\\profile.js",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAswAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-13T19:16:40.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "profile.css",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
-              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\profile.css",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
-              "RelativeToolTip": "FinalProject\\wwwroot\\css\\profile.css",
-              "ViewState": "AgIAAA8CAAAAAAAAAAAzwCkCAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-08-13T19:16:21.615Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Profile.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Profile.cshtml.cs",
-              "RelativeDocumentMoniker": "FinalProject\\Pages\\Profile.cshtml.cs",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Profile.cshtml.cs",
-              "RelativeToolTip": "FinalProject\\Pages\\Profile.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAALMAAAA9AAAAAAAAAA==",
+              "Title": "AppPipeline.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Setup\\AppPipeline.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Setup\\AppPipeline.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Setup\\AppPipeline.cs",
+              "RelativeToolTip": "FinalProject\\Setup\\AppPipeline.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-13T19:16:05.618Z",
+              "WhenOpened": "2025-08-14T09:34:34.521Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Profile.cshtml",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Profile.cshtml",
-              "RelativeDocumentMoniker": "FinalProject\\Pages\\Profile.cshtml",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Profile.cshtml",
-              "RelativeToolTip": "FinalProject\\Pages\\Profile.cshtml",
-              "ViewState": "AgIAALAAAAAAAAAAAAAAwMcAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-13T19:15:42.732Z",
+              "Title": "IdentityAndCookies.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Setup\\IdentityAndCookies.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Setup\\IdentityAndCookies.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Setup\\IdentityAndCookies.cs",
+              "RelativeToolTip": "FinalProject\\Setup\\IdentityAndCookies.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwC4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:34:19.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Detail.cshtml",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Detail.cshtml",
-              "RelativeDocumentMoniker": "FinalProject\\Pages\\Detail.cshtml",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Detail.cshtml",
-              "RelativeToolTip": "FinalProject\\Pages\\Detail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0BAAAAAAAAAAAAAA==",
+              "Title": "AppCoreServices.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Setup\\AppCoreServices.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Setup\\AppCoreServices.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Setup\\AppCoreServices.cs",
+              "RelativeToolTip": "FinalProject\\Setup\\AppCoreServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:33:48.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "flavor-match.js",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\js\\flavor-match.js",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+              "RelativeToolTip": "FinalProject\\wwwroot\\js\\flavor-match.js",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAAwHsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-14T09:29:04.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "flavor-match.css",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
+              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\flavor-match.css",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
+              "RelativeToolTip": "FinalProject\\wwwroot\\css\\flavor-match.css",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAwwMEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-08-14T09:28:33.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FlavorMatch.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\FlavorMatch.cshtml.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Pages\\FlavorMatch.cshtml.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\FlavorMatch.cshtml.cs",
+              "RelativeToolTip": "FinalProject\\Pages\\FlavorMatch.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:28:13.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FlavorMatch.cshtml",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\FlavorMatch.cshtml",
+              "RelativeDocumentMoniker": "FinalProject\\Pages\\FlavorMatch.cshtml",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\FlavorMatch.cshtml",
+              "RelativeToolTip": "FinalProject\\Pages\\FlavorMatch.cshtml",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAwEUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-13T19:14:06.142Z",
+              "WhenOpened": "2025-08-14T09:27:57.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FlavorRecoDtos.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Models\\FlavorRecoDtos.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\FlavorRecoDtos.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Models\\FlavorRecoDtos.cs",
+              "RelativeToolTip": "FinalProject\\Models\\FlavorRecoDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:23:52.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "FinalProject\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAQwFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:22:56.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Program.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Program.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Program.cs",
+              "RelativeToolTip": "FinalProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAQwAwAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:22:52.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LocalBeer.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Models\\LocalBeer.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Models\\LocalBeer.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Models\\LocalBeer.cs",
+              "RelativeToolTip": "FinalProject\\Models\\LocalBeer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:21:56.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BeerCommentsController.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Controller\\BeerCommentsController.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Controller\\BeerCommentsController.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Controller\\BeerCommentsController.cs",
+              "RelativeToolTip": "FinalProject\\Controller\\BeerCommentsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:21:48.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "mixtrip.css",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\mixtrip.css",
+              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\css\\mixtrip.css",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\mixtrip.css",
+              "RelativeToolTip": "FinalProject\\wwwroot\\css\\mixtrip.css",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAwwJ0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-08-14T09:20:55.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "mixtrip.js",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\mixtrip.js",
+              "RelativeDocumentMoniker": "FinalProject\\wwwroot\\js\\mixtrip.js",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\mixtrip.js",
+              "RelativeToolTip": "FinalProject\\wwwroot\\js\\mixtrip.js",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAAwKoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-14T09:11:40.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MixTrip.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\MixTrip.cshtml.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Pages\\MixTrip.cshtml.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\MixTrip.cshtml.cs",
+              "RelativeToolTip": "FinalProject\\Pages\\MixTrip.cshtml.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAiwE0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T09:11:07.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MixTrip.cshtml",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\MixTrip.cshtml",
+              "RelativeDocumentMoniker": "FinalProject\\Pages\\MixTrip.cshtml",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\MixTrip.cshtml",
+              "RelativeToolTip": "FinalProject\\Pages\\MixTrip.cshtml",
+              "ViewState": "AgIAAHABAAAAAAAAAAAQwJQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T09:11:04.835Z",
               "EditorCaption": ""
             }
           ]

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/CmGOxbtZdf3YHAd19yWOzFxZDKNZrdSjN6pRy8gx7s=",
+  "Hash": "IVZjhYoyHAo9cgjZ6r48suGmezycVSSPGL07peUTfFw=",
   "Source": "FinalProject",
   "BasePath": "_content/FinalProject",
   "Mode": "Default",
@@ -1340,6 +1340,27 @@
       "OriginalItemSpec": "wwwroot\\css\\detail.css"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "css/flavor-match#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7srp313lrj",
+      "Integrity": "509pc2Phj/xpcjPgkTiVNJuKE6+BcCNYa23ReIFMl4w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\flavor-match.css"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\index.css",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -1382,6 +1403,27 @@
       "OriginalItemSpec": "wwwroot\\css\\list.css"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\mixtrip.css",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "css/mixtrip#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vioo8jca0a",
+      "Integrity": "JwZUiAmlfopmFPeutcSss5u4FX9eqVXFsQXBvhhP25s=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\mixtrip.css"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -1396,8 +1438,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "fmasti1jwf",
-      "Integrity": "OUYbuW9P/FP0tuo0DYapnffPdQlza16Fc02Sa2GN7Qg=",
+      "Fingerprint": "uvqxce79t4",
+      "Integrity": "WjrHcag+g4oi9ThBM6r6GXAqeY0+5YL+6FwMGFhSY0A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\profile.css"
@@ -1760,6 +1802,27 @@
       "OriginalItemSpec": "wwwroot\\images\\localbeers\\ubolwine.jfif"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\logo.png",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "images/logo#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hw07bqa0tg",
+      "Integrity": "UTMnTOxSBZpAgCfDXME8AqqtTu+qnH8OeXjsYhj+qzw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.png"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -1779,6 +1842,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\detail.js"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "js/flavor-match#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "msz7l4a9vk",
+      "Integrity": "9lWgGq8yl2l6IdxrQ/0coasguiUzRwWXHzyWbjABLNI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\flavor-match.js"
     },
     {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\index.js",
@@ -1821,6 +1905,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\list.js"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\mixtrip.js",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "js/mixtrip#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yllaxfx5sh",
+      "Integrity": "5jgdFllP5AtVO+Ojdlfp15BcWv60svFzZAh5x1y/qcg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\mixtrip.js"
     },
     {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
@@ -3123,6 +3228,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bvaj8k38ql",
+      "Integrity": "OTqT507ztrnDjdXAbRq8K8j78Lkakko8NH8YOQYFzGQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg"
     }
   ],
   "Endpoints": [
@@ -3205,6 +3331,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY="
+        }
+      ]
+    },
+    {
+      "Route": "css/flavor-match.7srp313lrj.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3099"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"509pc2Phj/xpcjPgkTiVNJuKE6+BcCNYa23ReIFMl4w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 09:28:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7srp313lrj"
+        },
+        {
+          "Name": "label",
+          "Value": "css/flavor-match.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-509pc2Phj/xpcjPgkTiVNJuKE6+BcCNYa23ReIFMl4w="
+        }
+      ]
+    },
+    {
+      "Route": "css/flavor-match.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3099"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"509pc2Phj/xpcjPgkTiVNJuKE6+BcCNYa23ReIFMl4w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 09:28:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-509pc2Phj/xpcjPgkTiVNJuKE6+BcCNYa23ReIFMl4w="
         }
       ]
     },
@@ -3373,6 +3581,88 @@
       ]
     },
     {
+      "Route": "css/mixtrip.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\mixtrip.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2542"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JwZUiAmlfopmFPeutcSss5u4FX9eqVXFsQXBvhhP25s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 07:51:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JwZUiAmlfopmFPeutcSss5u4FX9eqVXFsQXBvhhP25s="
+        }
+      ]
+    },
+    {
+      "Route": "css/mixtrip.vioo8jca0a.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\mixtrip.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2542"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JwZUiAmlfopmFPeutcSss5u4FX9eqVXFsQXBvhhP25s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 07:51:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vioo8jca0a"
+        },
+        {
+          "Name": "label",
+          "Value": "css/mixtrip.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JwZUiAmlfopmFPeutcSss5u4FX9eqVXFsQXBvhhP25s="
+        }
+      ]
+    },
+    {
       "Route": "css/profile.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
       "Selectors": [],
@@ -3383,7 +3673,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12562"
+          "Value": "10049"
         },
         {
           "Name": "Content-Type",
@@ -3391,11 +3681,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"OUYbuW9P/FP0tuo0DYapnffPdQlza16Fc02Sa2GN7Qg=\""
+          "Value": "\"WjrHcag+g4oi9ThBM6r6GXAqeY0+5YL+6FwMGFhSY0A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:33:16 GMT"
+          "Value": "Wed, 13 Aug 2025 21:35:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3405,12 +3695,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-OUYbuW9P/FP0tuo0DYapnffPdQlza16Fc02Sa2GN7Qg="
+          "Value": "sha256-WjrHcag+g4oi9ThBM6r6GXAqeY0+5YL+6FwMGFhSY0A="
         }
       ]
     },
     {
-      "Route": "css/profile.fmasti1jwf.css",
+      "Route": "css/profile.uvqxce79t4.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\profile.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3420,7 +3710,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12562"
+          "Value": "10049"
         },
         {
           "Name": "Content-Type",
@@ -3428,11 +3718,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"OUYbuW9P/FP0tuo0DYapnffPdQlza16Fc02Sa2GN7Qg=\""
+          "Value": "\"WjrHcag+g4oi9ThBM6r6GXAqeY0+5YL+6FwMGFhSY0A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:33:16 GMT"
+          "Value": "Wed, 13 Aug 2025 21:35:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3442,7 +3732,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "fmasti1jwf"
+          "Value": "uvqxce79t4"
         },
         {
           "Name": "label",
@@ -3450,7 +3740,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-OUYbuW9P/FP0tuo0DYapnffPdQlza16Fc02Sa2GN7Qg="
+          "Value": "sha256-WjrHcag+g4oi9ThBM6r6GXAqeY0+5YL+6FwMGFhSY0A="
         }
       ]
     },
@@ -3641,7 +3931,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:24:25 GMT"
+          "Value": "Thu, 14 Aug 2025 09:36:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3686,7 +3976,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:24:25 GMT"
+          "Value": "Thu, 14 Aug 2025 09:36:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3731,7 +4021,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:24:25 GMT"
+          "Value": "Thu, 14 Aug 2025 09:36:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3768,7 +4058,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:24:25 GMT"
+          "Value": "Thu, 14 Aug 2025 09:36:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7233,6 +7523,88 @@
       ]
     },
     {
+      "Route": "images/logo.hw07bqa0tg.png",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\logo.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1688451"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UTMnTOxSBZpAgCfDXME8AqqtTu+qnH8OeXjsYhj+qzw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 21:51:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hw07bqa0tg"
+        },
+        {
+          "Name": "label",
+          "Value": "images/logo.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-UTMnTOxSBZpAgCfDXME8AqqtTu+qnH8OeXjsYhj+qzw="
+        }
+      ]
+    },
+    {
+      "Route": "images/logo.png",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\logo.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1688451"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UTMnTOxSBZpAgCfDXME8AqqtTu+qnH8OeXjsYhj+qzw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 21:51:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UTMnTOxSBZpAgCfDXME8AqqtTu+qnH8OeXjsYhj+qzw="
+        }
+      ]
+    },
+    {
       "Route": "js/detail.17m0w0lqnm.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "Selectors": [],
@@ -7311,6 +7683,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE="
+        }
+      ]
+    },
+    {
+      "Route": "js/flavor-match.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6210"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9lWgGq8yl2l6IdxrQ/0coasguiUzRwWXHzyWbjABLNI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 09:29:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9lWgGq8yl2l6IdxrQ/0coasguiUzRwWXHzyWbjABLNI="
+        }
+      ]
+    },
+    {
+      "Route": "js/flavor-match.msz7l4a9vk.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6210"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9lWgGq8yl2l6IdxrQ/0coasguiUzRwWXHzyWbjABLNI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 09:29:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "msz7l4a9vk"
+        },
+        {
+          "Name": "label",
+          "Value": "js/flavor-match.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9lWgGq8yl2l6IdxrQ/0coasguiUzRwWXHzyWbjABLNI="
         }
       ]
     },
@@ -7479,6 +7933,88 @@
       ]
     },
     {
+      "Route": "js/mixtrip.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\mixtrip.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8327"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5jgdFllP5AtVO+Ojdlfp15BcWv60svFzZAh5x1y/qcg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 09:12:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5jgdFllP5AtVO+Ojdlfp15BcWv60svFzZAh5x1y/qcg="
+        }
+      ]
+    },
+    {
+      "Route": "js/mixtrip.yllaxfx5sh.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\mixtrip.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8327"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5jgdFllP5AtVO+Ojdlfp15BcWv60svFzZAh5x1y/qcg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 14 Aug 2025 09:12:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yllaxfx5sh"
+        },
+        {
+          "Name": "label",
+          "Value": "js/mixtrip.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5jgdFllP5AtVO+Ojdlfp15BcWv60svFzZAh5x1y/qcg="
+        }
+      ]
+    },
+    {
       "Route": "js/profile.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
       "Selectors": [],
@@ -7501,7 +8037,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:23:10 GMT"
+          "Value": "Wed, 13 Aug 2025 21:37:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7538,7 +8074,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:23:10 GMT"
+          "Value": "Wed, 13 Aug 2025 21:37:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12559,6 +13095,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-k3W1+KE45hkGriYKuwrZSqL1ER1WMbXnlaPk5D8b+iw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.bvaj8k38ql.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "89148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OTqT507ztrnDjdXAbRq8K8j78Lkakko8NH8YOQYFzGQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 21:32:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bvaj8k38ql"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OTqT507ztrnDjdXAbRq8K8j78Lkakko8NH8YOQYFzGQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "89148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OTqT507ztrnDjdXAbRq8K8j78Lkakko8NH8YOQYFzGQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 13 Aug 2025 21:32:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OTqT507ztrnDjdXAbRq8K8j78Lkakko8NH8YOQYFzGQ="
         }
       ]
     }

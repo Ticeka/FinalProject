@@ -1,0 +1,193 @@
+﻿:root {
+    --bg: #f6f8fb;
+    --card: #fff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --brand: #2563eb;
+    --line: #e6ebf2;
+    --rad: 14px;
+    --dur: .18s;
+    --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+.mixtrip {
+    color: var(--ink);
+}
+
+.shadow-soft {
+    box-shadow: 0 8px 24px rgba(15,23,42,.06)
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: var(--rad)
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 700
+}
+
+.btn-soft {
+    background: #f8fafc;
+    border: 1px solid var(--line)
+}
+
+.btn-brand {
+    background: var(--brand);
+    color: #fff;
+    border: 1px solid var(--brand)
+}
+
+.mix-grid {
+    display: grid;
+    gap: 14px
+}
+
+@media(min-width:768px) {
+    .mix-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: start
+    }
+}
+
+.mix-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.form-label {
+    font-weight: 700
+}
+
+.chipset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none
+}
+
+    .chip input {
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border: 1px solid var(--line);
+        border-radius: 3px
+    }
+
+        .chip input:checked {
+            background: var(--brand);
+            border-color: var(--brand)
+        }
+
+    .chip span {
+        font-size: .9rem
+    }
+
+.mix-actions {
+    grid-column: 1/-1;
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.r-card {
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 12px
+}
+
+.r-title {
+    font-size: .8rem;
+    color: var(--muted)
+}
+
+.r-main {
+    font-weight: 800
+}
+
+.r-sub {
+    color: var(--muted);
+    font-size: .9rem
+}
+
+.history .hist-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2,minmax(0,1fr))
+}
+
+@media(min-width:768px) {
+    .history .hist-grid {
+        grid-template-columns: repeat(4,minmax(0,1fr))
+    }
+}
+
+.hist-item {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px;
+    background: #fff
+}
+
+    .hist-item .t {
+        font-weight: 700
+    }
+
+    .hist-item .s {
+        font-size: .85rem;
+        color: var(--muted)
+    }
+
+/* Result cards */
+.reco-card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    height: 100%
+}
+
+.reco-img {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    object-fit: cover;
+    background: #f3f6fb
+}
+
+.reco-body {
+    padding: 12px
+}
+
+.reco-name {
+    font-weight: 800
+}
+
+.reco-meta {
+    font-size: .9rem;
+    color: var(--muted)
+}
+
+.reco-why {
+    font-size: .9rem;
+    margin-top: 6px
+}
+
+.reco-badge {
+    font-size: .75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .1rem .5rem;
+}
