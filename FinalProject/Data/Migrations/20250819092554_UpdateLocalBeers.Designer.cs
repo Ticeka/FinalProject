@@ -4,16 +4,19 @@ using FinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FinalProject.Migrations
+namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250819092554_UpdateLocalBeers")]
+    partial class UpdateLocalBeers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,7 +337,7 @@ namespace FinalProject.Migrations
 
                     b.HasIndex("LocalBeerId");
 
-                    b.ToTable("LocalBeerFlavors");
+                    b.ToTable("LocalBeerFlavor");
                 });
 
             modelBuilder.Entity("FinalProject.Models.LocalBeerFoodPairing", b =>
@@ -359,7 +362,7 @@ namespace FinalProject.Migrations
 
                     b.HasIndex("LocalBeerId");
 
-                    b.ToTable("LocalBeerFoodPairings");
+                    b.ToTable("LocalBeerFoodPairing");
                 });
 
             modelBuilder.Entity("FinalProject.Models.LocalBeerMoodPairing", b =>
@@ -384,7 +387,7 @@ namespace FinalProject.Migrations
 
                     b.HasIndex("LocalBeerId");
 
-                    b.ToTable("LocalBeerMoodPairings");
+                    b.ToTable("LocalBeerMoodPairing");
                 });
 
             modelBuilder.Entity("FinalProject.Models.QuickRating", b =>

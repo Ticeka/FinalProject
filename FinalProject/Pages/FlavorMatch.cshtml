@@ -17,8 +17,10 @@
     </header>
 
     <form id="matchForm" class="mix-grid">
+        <!-- LEFT: Filters -->
         <div class="card shadow-soft">
             <div class="card-body">
+                <!-- Base -->
                 <div class="mix-field">
                     <label for="base" class="form-label">ฐานเครื่องดื่ม</label>
                     <select id="base" class="form-select">
@@ -33,18 +35,30 @@
                     </select>
                 </div>
 
+                <!-- Flavors -->
                 <div class="mix-field mt-3">
                     <div class="form-label">รสชาติ/โทนที่ชอบ (เลือกได้หลายข้อ)</div>
-                    <div class="chipset">
-                        @foreach (var f in Model.Flavors)
-                        {
-                            <label class="chip">
-                                <input type="checkbox" name="flavor" value="@f.Value" />
-                                <span>@f.Text</span>
-                            </label>
-                        }
+                    <div id="chipset-flavor" class="chipset">
+                        @* จะถูกเติมชิปด้วย JS จาก /api/reco/flavor-options *@
                     </div>
                 </div>
+
+                <!-- Foods -->
+                <div class="mix-field mt-3">
+                    <div class="form-label">อาหารที่อยากกินคู่ (เลือกได้หลายข้อ)</div>
+                    <div id="chipset-food" class="chipset">
+                        @* จะถูกเติมชิปด้วย JS *@
+                    </div>
+                </div>
+
+                <!-- Moods -->
+                <div class="mix-field mt-3">
+                    <div class="form-label">Mood / บรรยากาศ (เลือกได้หลายข้อ)</div>
+                    <div id="chipset-mood" class="chipset">
+                        @* จะถูกเติมชิปด้วย JS *@
+                    </div>
+                </div>
+
 
                 <div class="mix-actions mt-3">
                     <button id="btnSuggest" class="btn btn-brand" type="submit">✨ แนะนำเลย</button>
@@ -54,6 +68,7 @@
             </div>
         </div>
 
+        <!-- RIGHT: Result -->
         <div class="card shadow-soft">
             <div class="card-body">
                 <div class="r-card">
@@ -66,6 +81,7 @@
             </div>
         </div>
 
+        <!-- History -->
         <div class="history card shadow-soft">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">

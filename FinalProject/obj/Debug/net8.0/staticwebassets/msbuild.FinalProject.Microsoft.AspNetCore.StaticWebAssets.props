@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>7srp313lrj</Fingerprint>
-      <Integrity>509pc2Phj/xpcjPgkTiVNJuKE6+BcCNYa23ReIFMl4w=</Integrity>
+      <Fingerprint>lkhi2qnzpe</Fingerprint>
+      <Integrity>i7w8th6yK4a+Bh1ts7BhbiKrlJu38Dt/7WqXSPcBkb4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\flavor-match.css'))</OriginalItemSpec>
@@ -480,8 +480,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>msz7l4a9vk</Fingerprint>
-      <Integrity>9lWgGq8yl2l6IdxrQ/0coasguiUzRwWXHzyWbjABLNI=</Integrity>
+      <Fingerprint>i9oxnns94y</Fingerprint>
+      <Integrity>6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\flavor-match.js'))</OriginalItemSpec>

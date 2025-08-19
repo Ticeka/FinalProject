@@ -14,6 +14,11 @@ namespace FinalProject.Data
         public DbSet<UserStats> UserStats { get; set; } = default!;
         public DbSet<BeerFavorite> BeerFavorites { get; set; } = default!;
 
+        // 🆕 DbSet ใหม่
+        public DbSet<LocalBeerFlavor> LocalBeerFlavors { get; set; } = default!;
+        public DbSet<LocalBeerFoodPairing> LocalBeerFoodPairings { get; set; } = default!;
+        public DbSet<LocalBeerMoodPairing> LocalBeerMoodPairings { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,11 +37,24 @@ namespace FinalProject.Data
             modelBuilder.Entity<LocalBeer>(e =>
             {
                 e.Property(x => x.Rating).HasColumnType("float");
-
-                // ✅ กำหนด precision ให้ Price เพื่อไม่ให้เกิด warning
                 e.Property(x => x.Price).HasColumnType("decimal(18,2)");
-
                 e.Property(x => x.RatingCount).HasDefaultValue(0);
+
+                // ✅ ความสัมพันธ์
+                e.HasMany(b => b.Flavors)
+                 .WithOne(f => f.LocalBeer!)
+                 .HasForeignKey(f => f.LocalBeerId)
+                 .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasMany(b => b.FoodPairings)
+                 .WithOne(fp => fp.LocalBeer!)
+                 .HasForeignKey(fp => fp.LocalBeerId)
+                 .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasMany(b => b.MoodPairings)
+                 .WithOne(mp => mp.LocalBeer!)
+                 .HasForeignKey(mp => mp.LocalBeerId)
+                 .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<BeerComment>(e =>
@@ -55,7 +73,7 @@ namespace FinalProject.Data
             {
                 e.HasKey(s => s.UserId);
                 e.HasOne(s => s.User)
-                 .WithOne()                     // หรือ .WithOne(u => u.Stats) ถ้าคุณเปิด nav property ข้างบน
+                 .WithOne()
                  .HasForeignKey<UserStats>(s => s.UserId)
                  .OnDelete(DeleteBehavior.Cascade);
             });
@@ -65,7 +83,7 @@ namespace FinalProject.Data
                 e.ToTable("BeerFavorites");
                 e.HasKey(x => x.Id);
 
-                e.HasIndex(x => new { x.UserId, x.LocalBeerId }).IsUnique(); // 1 คน/1 เบียร์ ได้กดได้ครั้งเดียว
+                e.HasIndex(x => new { x.UserId, x.LocalBeerId }).IsUnique();
                 e.Property(x => x.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
 
                 e.HasOne(x => x.User)

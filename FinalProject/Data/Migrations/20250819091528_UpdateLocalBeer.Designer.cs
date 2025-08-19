@@ -4,16 +4,19 @@ using FinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FinalProject.Migrations
+namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250819091528_UpdateLocalBeer")]
+    partial class UpdateLocalBeer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,81 +315,6 @@ namespace FinalProject.Migrations
                     b.ToTable("LocalBeers");
                 });
 
-            modelBuilder.Entity("FinalProject.Models.LocalBeerFlavor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Flavor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Intensity")
-                        .HasColumnType("float");
-
-                    b.Property<int>("LocalBeerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocalBeerId");
-
-                    b.ToTable("LocalBeerFlavors");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.LocalBeerFoodPairing", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FoodName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LocalBeerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocalBeerId");
-
-                    b.ToTable("LocalBeerFoodPairings");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.LocalBeerMoodPairing", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("LocalBeerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Mood")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocalBeerId");
-
-                    b.ToTable("LocalBeerMoodPairings");
-                });
-
             modelBuilder.Entity("FinalProject.Models.QuickRating", b =>
                 {
                     b.Property<int>("Id")
@@ -606,39 +534,6 @@ namespace FinalProject.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FinalProject.Models.LocalBeerFlavor", b =>
-                {
-                    b.HasOne("FinalProject.Models.LocalBeer", "LocalBeer")
-                        .WithMany("Flavors")
-                        .HasForeignKey("LocalBeerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LocalBeer");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.LocalBeerFoodPairing", b =>
-                {
-                    b.HasOne("FinalProject.Models.LocalBeer", "LocalBeer")
-                        .WithMany("FoodPairings")
-                        .HasForeignKey("LocalBeerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LocalBeer");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.LocalBeerMoodPairing", b =>
-                {
-                    b.HasOne("FinalProject.Models.LocalBeer", "LocalBeer")
-                        .WithMany("MoodPairings")
-                        .HasForeignKey("LocalBeerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LocalBeer");
-                });
-
             modelBuilder.Entity("FinalProject.Models.QuickRating", b =>
                 {
                     b.HasOne("FinalProject.Models.LocalBeer", "LocalBeer")
@@ -710,15 +605,6 @@ namespace FinalProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FinalProject.Models.LocalBeer", b =>
-                {
-                    b.Navigation("Flavors");
-
-                    b.Navigation("FoodPairings");
-
-                    b.Navigation("MoodPairings");
                 });
 #pragma warning restore 612, 618
         }

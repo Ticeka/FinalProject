@@ -7,15 +7,90 @@ namespace FinalProject.Endpoints
 {
     public static class FlavorMatchEndpoints
     {
-        // DTO
-        public record FlavorRecoRequest(string Base, List<string> Flavors, int Take = 6);
-        public record FlavorRecoItem(int? Id, string Name, string Type, string Province, string ImageUrl,
-                                     double Rating, int RatingCount, decimal? Price, string Why, double Score);
-        public record FlavorRecoResponse(string Base, string[] Flavors, List<FlavorRecoItem> Items);
+        // DTO (เฉพาะ endpoint options)
+        public record FlavorOptionsResponse(List<string> Flavors, List<string> Foods, List<string> Moods);
 
         public static IEndpointRouteBuilder MapFlavorMatchEndpoints(this IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/reco/flavor-match", async ([FromBody] FlavorRecoRequest req, AppDbContext db) =>
+            // ================================
+            // 1) OPTIONS: คืนตัวเลือกตาม Base
+            // ================================
+            app.MapGet("/api/reco/flavor-options", async (
+                [FromQuery] string? @base,
+                AppDbContext db) =>
+            {
+                var baseNorm = (@base ?? "").Trim();
+                if (string.IsNullOrWhiteSpace(baseNorm))
+                {
+                    // ถ้าไม่ส่ง base มา ให้คืนทุกอย่าง (distinct ทั้งระบบ)
+                    var allFlavor = await db.LocalBeerFlavors
+                        .Select(f => f.Flavor)
+                        .Where(s => s != null && s != "")
+                        .Distinct()
+                        .OrderBy(s => s)
+                        .ToListAsync();
+
+                    var allFoods = await db.LocalBeerFoodPairings
+                        .Select(f => f.FoodName)
+                        .Where(s => s != null && s != "")
+                        .Distinct()
+                        .OrderBy(s => s)
+                        .ToListAsync();
+
+                    var allMoods = await db.LocalBeerMoodPairings
+                        .Select(m => m.Mood)
+                        .Where(s => s != null && s != "")
+                        .Distinct()
+                        .OrderBy(s => s)
+                        .ToListAsync();
+
+                    return Results.Ok(new FlavorOptionsResponse(allFlavor, allFoods, allMoods));
+                }
+
+                // โหลดเบียร์ทั้งหมด (พร้อม relations) แล้วคัดทีหลังให้รองรับคำไทย/อังกฤษ
+                var allBeers = await db.LocalBeers
+                    .AsNoTracking()
+                    .ToListAsync();
+
+                var baseFiltered = allBeers.Where(b => MatchesBaseLoose(b, baseNorm)).Select(b => b.Id).ToList();
+                if (baseFiltered.Count == 0)
+                    return Results.Ok(new FlavorOptionsResponse(new(), new(), new()));
+
+                // Query รายการ option เฉพาะเบียร์ในหมวดนั้น
+                var flavors = await db.LocalBeerFlavors
+                    .Where(f => baseFiltered.Contains(f.LocalBeerId))
+                    .Select(f => f.Flavor)
+                    .Where(s => s != null && s != "")
+                    .Distinct()
+                    .OrderBy(s => s)
+                    .ToListAsync();
+
+                var foods = await db.LocalBeerFoodPairings
+                    .Where(f => baseFiltered.Contains(f.LocalBeerId))
+                    .Select(f => f.FoodName)
+                    .Where(s => s != null && s != "")
+                    .Distinct()
+                    .OrderBy(s => s)
+                    .ToListAsync();
+
+                var moods = await db.LocalBeerMoodPairings
+                    .Where(m => baseFiltered.Contains(m.LocalBeerId))
+                    .Select(m => m.Mood)
+                    .Where(s => s != null && s != "")
+                    .Distinct()
+                    .OrderBy(s => s)
+                    .ToListAsync();
+
+                return Results.Ok(new FlavorOptionsResponse(flavors, foods, moods));
+            })
+            .AllowAnonymous()
+            .Produces<FlavorOptionsResponse>(StatusCodes.Status200OK);
+
+            // =================================
+            // 2) MATCH: แนะนำโดยกรองตาม Base ก่อน
+            // =================================
+            app.MapPost("/api/reco/flavor-match", async (
+                [FromBody] FlavorRecoRequest req, AppDbContext db) =>
             {
                 if (req is null || string.IsNullOrWhiteSpace(req.Base))
                     return Results.BadRequest("base is required");
@@ -25,37 +100,57 @@ namespace FinalProject.Endpoints
                                           .Select(s => s.Trim()).Distinct().ToList() ?? new();
                 var take = req.Take <= 0 ? 6 : Math.Clamp(req.Take, 3, 24);
 
-                if (!baseNorm.Equals("Mocktail", StringComparison.OrdinalIgnoreCase))
+                // โหลดทั้งหมดพร้อม relations (จำกัดจำนวน) แล้วกรองตาม Base ก่อนคำนวณ
+                var all = await db.LocalBeers
+                    .Include(b => b.Flavors)
+                    .Include(b => b.FoodPairings)
+                    .Include(b => b.MoodPairings)
+                    .AsNoTracking()
+                    .Take(1000)
+                    .ToListAsync();
+
+                // กรองเฉพาะหมวดที่เลือก (Beer/Wine/Whisky/…)
+                var candidates = all.Where(b => MatchesBaseLoose(b, baseNorm)).ToList();
+
+                var scored = candidates
+                    .Select(b => new { Item = b, Score = FlavorSimilarity(b, baseNorm, flavors) })
+                    .Where(x => x.Score > 0.4)
+                    .OrderByDescending(x => x.Score)
+                    .ThenByDescending(x => x.Item.Rating)
+                    .ThenByDescending(x => x.Item.RatingCount)
+                    .Take(take)
+                    .Select(x => new FlavorRecoItem
+                    {
+                        Id = x.Item.Id,
+                        Name = x.Item.Name,
+                        Type = x.Item.TypeOfLiquor ?? x.Item.Type ?? "",
+                        Province = x.Item.Province,
+                        ImageUrl = x.Item.ImageUrl ?? "",
+                        Rating = x.Item.Rating,
+                        RatingCount = x.Item.RatingCount,
+                        Price = x.Item.Price,
+                        Why = BuildWhy(x.Item, flavors),
+                        Score = Math.Round(x.Score, 2)
+                    })
+                    .ToList();
+
+                if (scored.Any())
                 {
-                    var all = await db.LocalBeers.AsNoTracking().Take(300).ToListAsync();
-                    var scored = all.Select(b => new { Item = b, Score = FlavorSimilarity(b, baseNorm, flavors) })
-                                    .Where(x => x.Score > 0.4)
-                                    .OrderByDescending(x => x.Score)
-                                    .ThenByDescending(x => x.Item.Rating)
-                                    .ThenByDescending(x => x.Item.RatingCount)
-                                    .Take(take)
-                                    .ToList();
-
-                    var items = scored.Select(x => new FlavorRecoItem(
-                        x.Item.Id,
-                        x.Item.Name,
-                        x.Item.TypeOfLiquor ?? x.Item.Type ?? "",
-                        x.Item.Province,
-                        string.IsNullOrWhiteSpace(x.Item.ImageUrl) ? "" : x.Item.ImageUrl!,
-                        x.Item.Rating,
-                        x.Item.RatingCount,
-                        x.Item.Price,
-                        $"เข้ากับโทน {string.Join(", ", flavors)} และคะแนนรีวิว {x.Item.Rating:0.0}/5",
-                        Math.Round(x.Score, 2)
-                    )).ToList();
-
-                    if (items.Any())
-                        return Results.Ok(new FlavorRecoResponse(baseNorm, flavors.ToArray(), items));
+                    return Results.Ok(new FlavorRecoResponse
+                    {
+                        Base = baseNorm,
+                        Flavors = flavors.ToArray(),
+                        Items = scored
+                    });
                 }
 
-                // fallback
-                var curated = Curated(baseNorm);
-                return Results.Ok(new FlavorRecoResponse(baseNorm, flavors.ToArray(), curated.Take(take).ToList()));
+                // fallback curated เฉพาะ base นั้น ๆ
+                return Results.Ok(new FlavorRecoResponse
+                {
+                    Base = baseNorm,
+                    Flavors = flavors.ToArray(),
+                    Items = Curated(baseNorm).Take(take).ToList()
+                });
             })
             .AllowAnonymous()
             .Produces<FlavorRecoResponse>(StatusCodes.Status200OK)
@@ -64,108 +159,115 @@ namespace FinalProject.Endpoints
             return app;
         }
 
-        // === internals ===
-        static double FlavorSimilarity(LocalBeer b, string baseName, List<string> flavors)
+        // ============ Helpers ============
+
+        // กรองตาม Base แบบหลวม ๆ รองรับคำไทย/อังกฤษหลายแบบ
+        static bool MatchesBaseLoose(LocalBeer b, string baseName)
         {
-            double baseScore = 0;
-            var baseNorm = (baseName ?? "").Trim().ToLowerInvariant();
             var typeNorm = (b.TypeOfLiquor ?? b.Type ?? "").Trim().ToLowerInvariant();
 
-            bool isBeer = typeNorm.Contains("beer") || typeNorm.Contains("เบียร์");
-            bool isWine = typeNorm.Contains("wine") || typeNorm.Contains("ไวน์");
-            bool isWhisky = typeNorm.Contains("whisky") || typeNorm.Contains("whiskey") || typeNorm.Contains("วิสกี้");
-            bool isRum = typeNorm.Contains("rum") || typeNorm.Contains("รัม");
-            bool isGin = typeNorm.Contains("gin") || typeNorm.Contains("จิน");
-            bool isThai = typeNorm.Contains("thai") || typeNorm.Contains("local") || typeNorm.Contains("สุรา") || typeNorm.Contains("ลาว");
+            string bn = baseName.Trim().ToLowerInvariant();
 
-            if ((baseNorm == "beer" && isBeer) ||
-                (baseNorm == "wine" && isWine) ||
-                (baseNorm == "whisky" && isWhisky) ||
-                (baseNorm == "rum" && isRum) ||
-                (baseNorm == "gin" && isGin) ||
-                (baseNorm == "thai craft" && isThai))
-                baseScore = 1.0;
-            else if (baseNorm == "mocktail")
-                baseScore = 0.2;
-
-            string hay = string.Join(" | ", new[]
-            { b.MainIngredients, b.Notes, b.Description, b.Type, b.TypeOfLiquor }
-            .Where(s => !string.IsNullOrWhiteSpace(s))).ToLowerInvariant();
-
-            var flavorKeywords = new Dictionary<string, string[]>
+            // keyword ของแต่ละ base
+            var map = new Dictionary<string, string[]>
             {
-                ["citrus"] = new[] { "citrus", "lemon", "lime", "ส้ม", "เปรี้ยว" },
-                ["herb"] = new[] { "herb", "rosemary", "thyme", "basil", "สมุนไพร", "ใบไม้" },
-                ["sweet"] = new[] { "sweet", "honey", "caramel", "vanilla", "หวาน" },
-                ["bitter"] = new[] { "bitter", "ipa", "ฮอป", "ขม" },
-                ["smoke"] = new[] { "smoke", "peated", "ควัน", "สโมค" },
-                ["spice"] = new[] { "spice", "pepper", "clove", "เครื่องเทศ", "ซินนามอน" },
-                ["malty"] = new[] { "malt", "toffee", "biscuit", "มอลต์" },
-                ["hoppy"] = new[] { "hop", "citra", "mosaic", "ฮอป" },
-                ["fruity"] = new[] { "fruit", "berry", "apple", "กลิ่นผลไม้" },
-                ["floral"] = new[] { "floral", "ดอกไม้", "ลาเวนเดอร์" },
-                ["woody"] = new[] { "oak", "wood", "ไม้โอ๊ก", "ไม้" },
+                ["beer"] = new[] { "beer", "เบียร์", "ipa", "ลาเกอร์", "เอล", "stout", "สโตต", "เบียร์ลาเกอร์" },
+                ["wine"] = new[] { "wine", "ไวน์", "sparkling", "สปาร์กลิ้ง" },
+                ["whisky"] = new[] { "whisky", "whiskey", "วิสกี้" },
+                ["rum"] = new[] { "rum", "รัม" },
+                ["gin"] = new[] { "gin", "จิน" },
+                ["thai craft"] = new[] { "thai", "ท้องถิ่น", "สุรา", "ลาว", "คราฟท์", "craft" },
+                ["mocktail"] = new[] { "mocktail", "ม็อคเทล", "เครื่องดื่มไร้แอลกอฮอล์" },
             };
 
+            string key = bn;
+            if (!map.ContainsKey(key)) return false;
+
+            return map[key].Any(kw => typeNorm.Contains(kw));
+        }
+
+        static double FlavorSimilarity(LocalBeer b, string baseName, List<string> flavors)
+        {
+            // Base match score
+            double baseScore = 0;
+            var baseNorm = (baseName ?? "").Trim().ToLowerInvariant();
+            if (MatchesBaseLoose(b, baseNorm)) baseScore = (baseNorm == "mocktail") ? 0.3 : 1.0;
+
+            // Flavor score จากตารางจริง
+            var beerFlavors = b.Flavors?.Select(f => f.Flavor.ToLowerInvariant()).ToHashSet()
+                              ?? new HashSet<string>();
             double flavorScore = 0;
-            foreach (var f in flavors.Select(x => x.Trim().ToLowerInvariant()))
+            foreach (var f in flavors.Select(x => x.ToLowerInvariant()))
+                if (beerFlavors.Contains(f)) flavorScore += 0.75;
+
+            // Rating score (นิ่ม ๆ)
+            var ratingScore = Math.Clamp(b.Rating / 5.0, 0, 1) * 0.5;
+
+            // รวมและจำกัด
+            var total = baseScore + flavorScore + ratingScore;
+            return Math.Clamp(total, 0, 3.5);
+        }
+
+        static string BuildWhy(LocalBeer b, List<string> reqFlavors)
+        {
+            var reasons = new List<string>();
+
+            if (b.Flavors?.Any() == true)
             {
-                if (!flavorKeywords.TryGetValue(f, out var kws)) continue;
-                foreach (var kw in kws)
-                    if (hay.Contains(kw)) flavorScore += 0.6;
+                var matched = b.Flavors
+                    .Where(f => reqFlavors.Contains(f.Flavor, StringComparer.OrdinalIgnoreCase))
+                    .Select(f => f.Flavor)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList();
+
+                if (matched.Any())
+                    reasons.Add($"รสเด่นตรงใจ: {string.Join(", ", matched)}");
             }
 
-            var ratingScore = Math.Clamp(b.Rating / 5.0, 0, 1) * 0.5;
-            return baseScore * 1.0 + flavorScore + ratingScore;
+            if (b.FoodPairings?.Any() == true)
+                reasons.Add($"อาหารแนะนำ: {string.Join(", ", b.FoodPairings.Select(f => f.FoodName))}");
+
+            if (b.MoodPairings?.Any() == true)
+                reasons.Add($"อารมณ์ที่ใช่: {string.Join(", ", b.MoodPairings.Select(m => m.Mood))}");
+
+            reasons.Add($"รีวิว {b.Rating:0.0}/5 ({b.RatingCount} คน)");
+            return string.Join(" • ", reasons);
         }
 
         static List<FlavorRecoItem> Curated(string baseNorm)
         {
-            string why(string f) => $"โทนเด่น: {f} • ครีเอตโดย Sip & Trip";
+            string why(string f) => $"โทนเด่น: {f} • curated โดย Sip & Trip";
             var list = new List<FlavorRecoItem>();
+
             if (baseNorm.Equals("Beer", StringComparison.OrdinalIgnoreCase))
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"Citrus Session IPA","Beer • Session IPA","—","",4.2,0,null,why("Citrus, Hoppy"),2.1),
-                    new FlavorRecoItem(null,"Amber Malty Ale","Beer • Amber Ale","—","",4.0,0,null,why("Malty, Caramel"),1.8),
-                    new FlavorRecoItem(null,"Herbal Pils","Beer • Pilsner","—","",3.9,0,null,why("Herb, Crisp"),1.6),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "Citrus Session IPA", Type = "Beer", Province = "—", Why = why("Citrus, Hoppy"), Score = 2.1 });
+                list.Add(new FlavorRecoItem { Name = "Amber Malty Ale", Type = "Beer", Province = "—", Why = why("Malty, Caramel"), Score = 1.8 });
+            }
             else if (baseNorm.Equals("Wine", StringComparison.OrdinalIgnoreCase))
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"Citrus-forward Riesling","White Wine","—","",4.3,0,null,why("Citrus, Floral"),2.0),
-                    new FlavorRecoItem(null,"Berry Pinot Noir","Red Wine","—","",4.1,0,null,why("Fruity, Floral"),1.8),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "Citrus-forward Riesling", Type = "Wine", Province = "—", Why = why("Citrus, Floral"), Score = 2.0 });
+            }
             else if (baseNorm.Equals("Whisky", StringComparison.OrdinalIgnoreCase))
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"Lightly Peated Malt","Single Malt","—","",4.4,0,null,why("Smoke, Woody"),2.2),
-                    new FlavorRecoItem(null,"Honey Oak Blend","Blended","—","",4.0,0,null,why("Sweet, Woody"),1.7),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "Lightly Peated Malt", Type = "Whisky", Province = "—", Why = why("Smoke, Woody"), Score = 2.0 });
+            }
             else if (baseNorm.Equals("Rum", StringComparison.OrdinalIgnoreCase))
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"Spiced Island Rum","Rum","—","",4.2,0,null,why("Spice, Sweet"),1.9),
-                    new FlavorRecoItem(null,"Citrus Highball Rum","Rum Highball","—","",4.0,0,null,why("Citrus, Fizz"),1.6),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "Island Spiced Rum", Type = "Rum", Province = "—", Why = why("Spice, Sweet"), Score = 1.9 });
+            }
             else if (baseNorm.Equals("Gin", StringComparison.OrdinalIgnoreCase))
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"Herbal Dry Gin Tonic","Gin","—","",4.1,0,null,why("Herb, Citrus"),1.8),
-                    new FlavorRecoItem(null,"Floral Gin Fizz","Gin","—","",4.0,0,null,why("Floral, Fizz"),1.6),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "Herbal Dry G&T", Type = "Gin", Province = "—", Why = why("Herb, Citrus"), Score = 1.8 });
+            }
             else if (baseNorm.Equals("Thai Craft", StringComparison.OrdinalIgnoreCase))
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"สุราท้องถิ่นสมุนไพร","Thai Craft","—","",4.0,0,null,why("Herb, Spice"),1.7),
-                    new FlavorRecoItem(null,"น้ำตาลโตนดโอ๊ค","Thai Craft","—","",3.9,0,null,why("Sweet, Woody"),1.5),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "สุราท้องถิ่นสมุนไพร", Type = "Thai Craft", Province = "—", Why = why("Herb, Spice"), Score = 1.7 });
+            }
             else // Mocktail
-                list.AddRange(new[]
-                {
-                    new FlavorRecoItem(null,"Citrus & Herb Cooler","Mocktail","—","",4.5,0,null,why("Citrus, Herb"),2.2),
-                    new FlavorRecoItem(null,"Berry Fizz","Mocktail","—","",4.3,0,null,why("Fruity, Fizz"),2.0),
-                });
+            {
+                list.Add(new FlavorRecoItem { Name = "Citrus & Herb Cooler", Type = "Mocktail", Province = "—", Why = why("Citrus, Herb"), Score = 2.2 });
+            }
 
             return list;
         }
