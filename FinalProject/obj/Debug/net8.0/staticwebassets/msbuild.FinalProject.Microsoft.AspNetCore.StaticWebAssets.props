@@ -480,8 +480,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>i9oxnns94y</Fingerprint>
-      <Integrity>6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY=</Integrity>
+      <Fingerprint>t4opj5yqk4</Fingerprint>
+      <Integrity>bQ3lKqkzYK434b4Jmqaps1pGDl/uWyC1lMMAJcRF3mc=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\flavor-match.js'))</OriginalItemSpec>

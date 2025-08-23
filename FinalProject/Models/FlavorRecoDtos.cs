@@ -8,9 +8,11 @@ namespace FinalProject.Models
     /// </summary>
     public class FlavorRecoRequest
     {
-        public string Base { get; set; } = "";               // Beer | Wine | Whisky | Rum | Gin | Thai Craft | Mocktail
-        public List<string> Flavors { get; set; } = new();   // Citrus, Herb, Sweet, Bitter, Smoke, Spice, Malty, Hoppy, Fruity, Floral, Woody
-        public int Take { get; set; } = 6;                   // จำนวนแนะนำที่ต้องการ
+        public string Base { get; set; } = "";
+        public List<string> Flavors { get; set; } = new();
+        public List<string> Foods { get; set; } = new();   // 🆕 เพิ่ม
+        public List<string> Moods { get; set; } = new();   // 🆕 เพิ่ม
+        public int Take { get; set; } = 6;
     }
 
     /// <summary>

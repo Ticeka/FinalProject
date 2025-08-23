@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AXbqZtMpQf9s+e/fA5AwZSfMYNgFCcu8FfL7ayrUlw0=",
+  "Hash": "JfRJcL7uPjvVMsdSjAKP6RcgBGco3ONV5KGfGXvOWrg=",
   "Source": "FinalProject",
   "BasePath": "_content/FinalProject",
   "Mode": "Default",
@@ -1858,8 +1858,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "i9oxnns94y",
-      "Integrity": "6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY=",
+      "Fingerprint": "t4opj5yqk4",
+      "Integrity": "bQ3lKqkzYK434b4Jmqaps1pGDl/uWyC1lMMAJcRF3mc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\flavor-match.js"
@@ -3931,7 +3931,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 10:23:53 GMT"
+          "Value": "Thu, 21 Aug 2025 19:47:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3976,7 +3976,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 10:23:53 GMT"
+          "Value": "Thu, 21 Aug 2025 19:47:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4021,7 +4021,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 10:23:53 GMT"
+          "Value": "Thu, 21 Aug 2025 19:47:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4058,7 +4058,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 10:23:53 GMT"
+          "Value": "Thu, 21 Aug 2025 19:47:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7687,51 +7687,6 @@
       ]
     },
     {
-      "Route": "js/flavor-match.i9oxnns94y.js",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "9181"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 09:52:25 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "i9oxnns94y"
-        },
-        {
-          "Name": "label",
-          "Value": "js/flavor-match.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY="
-        }
-      ]
-    },
-    {
       "Route": "js/flavor-match.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
       "Selectors": [],
@@ -7742,7 +7697,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9181"
+          "Value": "9207"
         },
         {
           "Name": "Content-Type",
@@ -7750,11 +7705,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY=\""
+          "Value": "\"bQ3lKqkzYK434b4Jmqaps1pGDl/uWyC1lMMAJcRF3mc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 09:52:25 GMT"
+          "Value": "Sat, 23 Aug 2025 09:51:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7764,7 +7719,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6tMjY12LnU6tPaNvy1guYoWfFqXRTWDYbL7ByhsQBmY="
+          "Value": "sha256-bQ3lKqkzYK434b4Jmqaps1pGDl/uWyC1lMMAJcRF3mc="
+        }
+      ]
+    },
+    {
+      "Route": "js/flavor-match.t4opj5yqk4.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9207"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bQ3lKqkzYK434b4Jmqaps1pGDl/uWyC1lMMAJcRF3mc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 23 Aug 2025 09:51:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t4opj5yqk4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/flavor-match.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bQ3lKqkzYK434b4Jmqaps1pGDl/uWyC1lMMAJcRF3mc="
         }
       ]
     },

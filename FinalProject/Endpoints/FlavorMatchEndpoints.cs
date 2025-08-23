@@ -89,18 +89,22 @@ namespace FinalProject.Endpoints
             // =================================
             // 2) MATCH: แนะนำโดยกรองตาม Base ก่อน
             // =================================
-            app.MapPost("/api/reco/flavor-match", async (
-                [FromBody] FlavorRecoRequest req, AppDbContext db) =>
+            app.MapPost("/api/reco/flavor-match", async ([FromBody] FlavorRecoRequest req, AppDbContext db) =>
             {
                 if (req is null || string.IsNullOrWhiteSpace(req.Base))
                     return Results.BadRequest("base is required");
 
                 var baseNorm = req.Base.Trim();
-                var flavors = req.Flavors?.Where(s => !string.IsNullOrWhiteSpace(s))
-                                          .Select(s => s.Trim()).Distinct().ToList() ?? new();
+                var flavors = (req.Flavors ?? new()).Where(s => !string.IsNullOrWhiteSpace(s))
+                                                    .Select(s => s.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                var foods = (req.Foods ?? new()).Where(s => !string.IsNullOrWhiteSpace(s))
+                                                    .Select(s => s.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                var moods = (req.Moods ?? new()).Where(s => !string.IsNullOrWhiteSpace(s))
+                                                    .Select(s => s.Trim()).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+
                 var take = req.Take <= 0 ? 6 : Math.Clamp(req.Take, 3, 24);
 
-                // โหลดทั้งหมดพร้อม relations (จำกัดจำนวน) แล้วกรองตาม Base ก่อนคำนวณ
+                // โหลดข้อมูลพร้อม relations
                 var all = await db.LocalBeers
                     .Include(b => b.Flavors)
                     .Include(b => b.FoodPairings)
@@ -109,12 +113,56 @@ namespace FinalProject.Endpoints
                     .Take(1000)
                     .ToListAsync();
 
-                // กรองเฉพาะหมวดที่เลือก (Beer/Wine/Whisky/…)
-                var candidates = all.Where(b => MatchesBaseLoose(b, baseNorm)).ToList();
+                // 1) Base filter (หลวม ๆ)
+                var baseCandidates = all.Where(b => MatchesBaseLoose(b, baseNorm)).ToList();
 
-                var scored = candidates
-                    .Select(b => new { Item = b, Score = FlavorSimilarity(b, baseNorm, flavors) })
-                    .Where(x => x.Score > 0.4)
+                // 2) HARD FILTER — ต้องมีครบทุกตัวเลือกที่ผู้ใช้ติ๊ก
+                bool HasAll(LocalBeer b)
+                {
+                    bool flavorsOk = !flavors.Any() || flavors.All(f =>
+                        (b.Flavors ?? new()).Any(x => string.Equals(x.Flavor, f, StringComparison.OrdinalIgnoreCase)));
+
+                    bool foodsOk = !foods.Any() || foods.All(f =>
+                        (b.FoodPairings ?? new()).Any(x => string.Equals(x.FoodName, f, StringComparison.OrdinalIgnoreCase)));
+
+                    bool moodsOk = !moods.Any() || moods.All(m =>
+                        (b.MoodPairings ?? new()).Any(x => string.Equals(x.Mood, m, StringComparison.OrdinalIgnoreCase)));
+
+                    return flavorsOk && foodsOk && moodsOk;
+                }
+
+                var strict = baseCandidates.Where(HasAll).ToList();
+
+                if (strict.Any())
+                {
+                    // ถ้าเจอจาก hard filter — เรียงคุณภาพ (ดาว/รีวิว/ราคา)
+                    var items = strict
+                        .OrderByDescending(b => b.Rating)
+                        .ThenByDescending(b => b.RatingCount)
+                        .ThenBy(b => b.Price)
+                        .Take(take)
+                        .Select(b => new FlavorRecoItem
+                        {
+                            Id = b.Id,
+                            Name = b.Name,
+                            Type = b.TypeOfLiquor ?? b.Type ?? "",
+                            Province = b.Province,
+                            ImageUrl = b.ImageUrl ?? "",
+                            Rating = b.Rating,
+                            RatingCount = b.RatingCount,
+                            Price = b.Price,
+                            Why = BuildWhy(b, flavors, foods, moods),
+                            Score = 3.5  // ให้เต็มเพื่อสื่อว่า "ตรงตามตัวกรอง"
+                        })
+                        .ToList();
+
+                    return Results.Ok(new FlavorRecoResponse { Base = baseNorm, Flavors = flavors.ToArray(), Items = items });
+                }
+
+                // 3) ถ้า hard filter ว่าง → ใช้คะแนนความใกล้เคียง (soft)
+                var scored = baseCandidates
+                    .Select(b => new { Item = b, Score = FlavorSimilarity(b, baseNorm, flavors, foods, moods) })
+                    .Where(x => x.Score > 0.4) // เกณฑ์คัดกรองเบื้องต้น
                     .OrderByDescending(x => x.Score)
                     .ThenByDescending(x => x.Item.Rating)
                     .ThenByDescending(x => x.Item.RatingCount)
@@ -129,22 +177,15 @@ namespace FinalProject.Endpoints
                         Rating = x.Item.Rating,
                         RatingCount = x.Item.RatingCount,
                         Price = x.Item.Price,
-                        Why = BuildWhy(x.Item, flavors),
+                        Why = BuildWhy(x.Item, flavors, foods, moods),
                         Score = Math.Round(x.Score, 2)
                     })
                     .ToList();
 
                 if (scored.Any())
-                {
-                    return Results.Ok(new FlavorRecoResponse
-                    {
-                        Base = baseNorm,
-                        Flavors = flavors.ToArray(),
-                        Items = scored
-                    });
-                }
+                    return Results.Ok(new FlavorRecoResponse { Base = baseNorm, Flavors = flavors.ToArray(), Items = scored });
 
-                // fallback curated เฉพาะ base นั้น ๆ
+                // 4) สุดท้ายจริง ๆ → curated fallback
                 return Results.Ok(new FlavorRecoResponse
                 {
                     Base = baseNorm,
@@ -152,9 +193,10 @@ namespace FinalProject.Endpoints
                     Items = Curated(baseNorm).Take(take).ToList()
                 });
             })
-            .AllowAnonymous()
-            .Produces<FlavorRecoResponse>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status400BadRequest);
+.AllowAnonymous()
+.Produces<FlavorRecoResponse>(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status400BadRequest);
+
 
             return app;
         }
@@ -186,29 +228,39 @@ namespace FinalProject.Endpoints
             return map[key].Any(kw => typeNorm.Contains(kw));
         }
 
-        static double FlavorSimilarity(LocalBeer b, string baseName, List<string> flavors)
+        static double FlavorSimilarity(LocalBeer b, string baseName,
+     List<string> flavors, List<string> foods, List<string> moods)
         {
-            // Base match score
-            double baseScore = 0;
-            var baseNorm = (baseName ?? "").Trim().ToLowerInvariant();
-            if (MatchesBaseLoose(b, baseNorm)) baseScore = (baseNorm == "mocktail") ? 0.3 : 1.0;
+            // 1) Base
+            double baseScore = MatchesBaseLoose(b, (baseName ?? "").Trim().ToLowerInvariant())
+                ? ((baseName ?? "").Equals("mocktail", StringComparison.OrdinalIgnoreCase) ? 0.3 : 1.0)
+                : 0;
 
-            // Flavor score จากตารางจริง
+            // 2) Flavors
             var beerFlavors = b.Flavors?.Select(f => f.Flavor.ToLowerInvariant()).ToHashSet()
-                              ?? new HashSet<string>();
+                             ?? new HashSet<string>();
             double flavorScore = 0;
             foreach (var f in flavors.Select(x => x.ToLowerInvariant()))
                 if (beerFlavors.Contains(f)) flavorScore += 0.75;
 
-            // Rating score (นิ่ม ๆ)
+            // 3) Foods/Moods — ให้คะแนนเบากว่า
+            var beerFoods = b.FoodPairings?.Select(f => f.FoodName.ToLowerInvariant()).ToHashSet()
+                           ?? new HashSet<string>();
+            var beerMoods = b.MoodPairings?.Select(m => m.Mood.ToLowerInvariant()).ToHashSet()
+                           ?? new HashSet<string>();
+
+            double foodScore = foods.Select(x => x.ToLowerInvariant()).Count(f => beerFoods.Contains(f)) * 0.40;
+            double moodScore = moods.Select(x => x.ToLowerInvariant()).Count(m => beerMoods.Contains(m)) * 0.30;
+
+            // 4) Rating (นิ่ม ๆ)
             var ratingScore = Math.Clamp(b.Rating / 5.0, 0, 1) * 0.5;
 
-            // รวมและจำกัด
-            var total = baseScore + flavorScore + ratingScore;
+            var total = baseScore + flavorScore + foodScore + moodScore + ratingScore;
             return Math.Clamp(total, 0, 3.5);
         }
 
-        static string BuildWhy(LocalBeer b, List<string> reqFlavors)
+
+        static string BuildWhy(LocalBeer b, List<string> reqFlavors, List<string> reqFoods, List<string> reqMoods)
         {
             var reasons = new List<string>();
 
@@ -219,16 +271,24 @@ namespace FinalProject.Endpoints
                     .Select(f => f.Flavor)
                     .Distinct(StringComparer.OrdinalIgnoreCase)
                     .ToList();
-
-                if (matched.Any())
-                    reasons.Add($"รสเด่นตรงใจ: {string.Join(", ", matched)}");
+                if (matched.Any()) reasons.Add($"รสเด่นตรงใจ: {string.Join(", ", matched)}");
             }
 
             if (b.FoodPairings?.Any() == true)
-                reasons.Add($"อาหารแนะนำ: {string.Join(", ", b.FoodPairings.Select(f => f.FoodName))}");
+            {
+                var mFoods = b.FoodPairings.Where(f => reqFoods.Contains(f.FoodName, StringComparer.OrdinalIgnoreCase))
+                                           .Select(f => f.FoodName).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                if (mFoods.Any()) reasons.Add($"เข้ากับเมนู: {string.Join(", ", mFoods)}");
+                else reasons.Add($"อาหารแนะนำ: {string.Join(", ", b.FoodPairings.Select(f => f.FoodName))}");
+            }
 
             if (b.MoodPairings?.Any() == true)
-                reasons.Add($"อารมณ์ที่ใช่: {string.Join(", ", b.MoodPairings.Select(m => m.Mood))}");
+            {
+                var mMoods = b.MoodPairings.Where(m => reqMoods.Contains(m.Mood, StringComparer.OrdinalIgnoreCase))
+                                           .Select(m => m.Mood).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                if (mMoods.Any()) reasons.Add($"ฟีลลิ่งที่ใช่: {string.Join(", ", mMoods)}");
+                else reasons.Add($"อารมณ์ที่ใช่: {string.Join(", ", b.MoodPairings.Select(m => m.Mood))}");
+            }
 
             reasons.Add($"รีวิว {b.Rating:0.0}/5 ({b.RatingCount} คน)");
             return string.Join(" • ", reasons);

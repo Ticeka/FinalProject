@@ -62,8 +62,8 @@
         if (moods?.length) u.searchParams.set("moods", moods.join(","));
         return u.toString();
     }
-    async function fetchMatch(base, flavors) {
-        const payload = { base, flavors, take: 6 }; // backend ตอนนี้รับเท่านี้
+    async function fetchMatch(base, flavors, foods, moods) {
+        const payload = { base, flavors, foods, moods, take: 6 };
         const res = await fetch(API_MATCH, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -119,15 +119,14 @@
         const flavors = readChecked("flavor");
         const foods = readChecked("food");
         const moods = readChecked("mood");
-
         if (!base) { alert("กรุณาเลือกฐานเครื่องดื่ม"); return; }
 
-        recTitle.textContent = "กำลังผสมรสที่ใช่...";
-        recSub.textContent = "กำลังค้นหาที่เข้ากับรสชาติและคะแนนรีวิว";
+        recTitle.textContent = "กำลังกรองตามตัวเลือกของคุณ...";
+        recSub.textContent = "จะใช้คะแนนช่วยหาเฉพาะเมื่อยังไม่เจอคำตอบตรง ๆ";
         resultWrap.classList.add("d-none");
 
         try {
-            const out = await fetchMatch(base, flavors);
+            const out = await fetchMatch(base, flavors, foods, moods);
             recTitle.textContent = `${out.base} • ${out.flavors.join(", ") || "Signature"}`;
             const extra = [
                 foods.length ? `🍽 ${foods.join(", ")}` : null,

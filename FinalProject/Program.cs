@@ -1,5 +1,5 @@
-using FinalProject.Setup;
 using FinalProject.Endpoints;
+using FinalProject.Setup; // มี IdentitySeeder
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,15 +7,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAppCoreServices(builder.Configuration);
 builder.Services.AddIdentityAndCookies();
 
-// Build
+// เพิ่มนโยบาย (ทางเลือก แต่แนะนำ)
+builder.Services.AddAuthorization(o =>
+{
+    o.AddPolicy("AdminOnly", p => p.RequireRole("Admin"));
+});
+
 var app = builder.Build();
+
+// เรียก seed roles + admin
+await IdentitySeeder.SeedAsync(app.Services);
 
 // Pipeline
 app.UseAppPipeline();
 
 // API Endpoints
-app.MapCommunityEndpoints();   // Ratings, Comments, Favorites, Me
-app.MapFlavorMatchEndpoints(); // Flavor Match (แนะนำจากรส)
+app.MapCommunityEndpoints();
+app.MapFlavorMatchEndpoints();
 
 // Pages
 app.MapRazorPages();
