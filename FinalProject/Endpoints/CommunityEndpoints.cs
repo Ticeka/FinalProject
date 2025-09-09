@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using FinalProject.Endpoints;
+using FinalProject.Services; // <<-- เพิ่ม
 
 namespace FinalProject.Endpoints
 {
@@ -17,7 +19,12 @@ namespace FinalProject.Endpoints
             var g = app.MapGroup("/api");
 
             // --- Quick Ratings ---
-            g.MapPost("/ratings/quick", async ([FromBody] QuickRateDto dto, AppDbContext db, HttpContext ctx) =>
+            g.MapPost("/ratings/quick", async (
+                [FromBody] QuickRateDto dto,
+                AppDbContext db,
+                HttpContext ctx,
+                UserManager<ApplicationUser> userManager,
+                IActivityLogger logger) =>               // <<-- เพิ่ม
             {
                 if (dto is null) return Results.BadRequest("payload is required");
                 if (dto.Score < 1 || dto.Score > 5) return Results.BadRequest("score must be 1..5");
@@ -40,6 +47,7 @@ namespace FinalProject.Endpoints
 
                 var ip = ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown";
                 var ipHash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(ip)));
+                var ua = ctx.Request.Headers.UserAgent.ToString();
 
                 var exists = await db.QuickRatings.AsNoTracking()
                     .AnyAsync(r => r.LocalBeerId == dto.BeerId && r.Fingerprint == deviceId);
@@ -61,6 +69,10 @@ namespace FinalProject.Endpoints
                 try { await db.SaveChangesAsync(); }
                 catch (DbUpdateException) { return Results.Conflict("already rated by this device"); }
 
+                // ----- LOG: rating.add -----
+                string? uid = ctx.User?.Identity?.IsAuthenticated == true ? userManager.GetUserId(ctx.User) : null;
+                await logger.LogAsync(uid, "rating.add", "LocalBeer", dto.BeerId.ToString(), $"score {dto.Score}", null, ipHash, ua);
+
                 return Results.Ok(new { avg = beer.Rating, count = beer.RatingCount });
             })
             .AllowAnonymous()
@@ -75,6 +87,7 @@ namespace FinalProject.Endpoints
                 var ip = ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown";
                 return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(ip)));
             }
+            static string Trunc(string s, int n) => string.IsNullOrEmpty(s) ? s : (s.Length <= n ? s : s.Substring(0, n));
 
             // --- Comments: GET ---
             g.MapGet("/beers/{id:int}/comments", async (int id, int skip, int take, AppDbContext db, HttpContext ctx, UserManager<ApplicationUser> userManager) =>
@@ -116,7 +129,13 @@ namespace FinalProject.Endpoints
             .Produces(StatusCodes.Status200OK);
 
             // --- Comments: POST ---
-            g.MapPost("/beers/{id:int}/comments", async (int id, [FromBody] NewCommentDto dto, AppDbContext db, HttpContext ctx, UserManager<ApplicationUser> userManager) =>
+            g.MapPost("/beers/{id:int}/comments", async (
+                int id,
+                [FromBody] NewCommentDto dto,
+                AppDbContext db,
+                HttpContext ctx,
+                UserManager<ApplicationUser> userManager,
+                IActivityLogger logger) =>                  // <<-- เพิ่ม
             {
                 if (dto is null || string.IsNullOrWhiteSpace(dto.Body)) return Results.BadRequest("comment is required");
                 if (dto.Body.Length > 1000) return Results.BadRequest("comment too long");
@@ -152,6 +171,10 @@ namespace FinalProject.Endpoints
                 db.BeerComments.Add(cmt);
                 await db.SaveChangesAsync();
 
+                // ----- LOG: comment.add -----
+                var ua = ctx.Request.Headers.UserAgent.ToString();
+                await logger.LogAsync(uid, "comment.add", "LocalBeer", id.ToString(), Trunc(cmt.Body, 120), null, cmt.IpHash, ua);
+
                 static string MaskEmail(string? email) => string.IsNullOrWhiteSpace(email) ? "User" : email.Split('@')[0];
                 var disp = me != null ? (me.DisplayName ?? me.UserName ?? MaskEmail(me.Email)) : (cmt.DisplayName ?? "Guest");
                 var avatarUrl = me?.AvatarUrl;
@@ -166,7 +189,12 @@ namespace FinalProject.Endpoints
             .Produces(StatusCodes.Status404NotFound);
 
             // --- Comments: DELETE ---
-            g.MapDelete("/beers/{beerId:int}/comments/{commentId:int}", async (int beerId, int commentId, AppDbContext db, HttpContext ctx, UserManager<ApplicationUser> userManager) =>
+            g.MapDelete("/beers/{beerId:int}/comments/{commentId:int}", async (
+                int beerId, int commentId,
+                AppDbContext db,
+                HttpContext ctx,
+                UserManager<ApplicationUser> userManager,
+                IActivityLogger logger) =>                   // <<-- เพิ่ม
             {
                 var cmt = await db.BeerComments.FirstOrDefaultAsync(c => c.Id == commentId && c.LocalBeerId == beerId);
                 if (cmt is null) return Results.NotFound();
@@ -192,6 +220,11 @@ namespace FinalProject.Endpoints
 
                 db.BeerComments.Remove(cmt);
                 await db.SaveChangesAsync();
+
+                // ----- LOG: comment.remove (จะโชว์เมื่อเลือก All actions) -----
+                var ua = ctx.Request.Headers.UserAgent.ToString();
+                await logger.LogAsync(uid, "comment.remove", "LocalBeer", beerId.ToString(), Trunc(cmt.Body ?? "", 120), null, cmt.IpHash, ua);
+
                 return Results.NoContent();
             })
             .Produces(StatusCodes.Status204NoContent)
@@ -211,7 +244,12 @@ namespace FinalProject.Endpoints
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status401Unauthorized);
 
-            g.MapPost("/beers/{id:int}/favorite", async (int id, AppDbContext db, HttpContext ctx, UserManager<ApplicationUser> userManager) =>
+            g.MapPost("/beers/{id:int}/favorite", async (
+                int id,
+                AppDbContext db,
+                HttpContext ctx,
+                UserManager<ApplicationUser> userManager,
+                IActivityLogger logger) =>                  // <<-- เพิ่ม
             {
                 if (!(ctx.User?.Identity?.IsAuthenticated ?? false)) return Results.Unauthorized();
                 var uid = userManager.GetUserId(ctx.User);
@@ -229,6 +267,11 @@ namespace FinalProject.Endpoints
                 stats.Favorites = Math.Max(0, stats.Favorites + 1);
 
                 await db.SaveChangesAsync();
+
+                // ----- LOG: favorite.add -----
+                var ua = ctx.Request.Headers.UserAgent.ToString();
+                await logger.LogAsync(uid, "favorite.add", "LocalBeer", id.ToString(), $"Favorited {beer.Name}", null, GetIpHash(ctx), ua);
+
                 return Results.Ok(new { ok = true });
             })
             .RequireAuthorization()
@@ -236,7 +279,12 @@ namespace FinalProject.Endpoints
             .Produces(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status404NotFound);
 
-            g.MapDelete("/beers/{id:int}/favorite", async (int id, AppDbContext db, HttpContext ctx, UserManager<ApplicationUser> userManager) =>
+            g.MapDelete("/beers/{id:int}/favorite", async (
+                int id,
+                AppDbContext db,
+                HttpContext ctx,
+                UserManager<ApplicationUser> userManager,
+                IActivityLogger logger) =>                  // <<-- เพิ่ม
             {
                 if (!(ctx.User?.Identity?.IsAuthenticated ?? false)) return Results.Unauthorized();
                 var uid = userManager.GetUserId(ctx.User);
@@ -248,6 +296,12 @@ namespace FinalProject.Endpoints
                 if (stats != null) stats.Favorites = Math.Max(0, stats.Favorites - 1);
 
                 await db.SaveChangesAsync();
+
+                // ----- LOG: favorite.remove -----
+                var beerName = await db.LocalBeers.AsNoTracking().Where(b => b.Id == id).Select(b => b.Name).FirstOrDefaultAsync() ?? $"beer#{id}";
+                var ua = ctx.Request.Headers.UserAgent.ToString();
+                await logger.LogAsync(uid, "favorite.remove", "LocalBeer", id.ToString(), $"Unfavorited {beerName}", null, GetIpHash(ctx), ua);
+
                 return Results.NoContent();
             })
             .RequireAuthorization()

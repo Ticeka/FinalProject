@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_4",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_5",
     "RelativePath": "api/beers/{beerId:int}/comments/{commentId:int}",
     "HttpMethod": "DELETE",
     "IsController": false,
@@ -43,7 +43,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_2",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_3",
     "RelativePath": "api/beers/{id:int}/comments",
     "HttpMethod": "GET",
     "IsController": false,
@@ -75,7 +75,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_3",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_4",
     "RelativePath": "api/beers/{id:int}/comments",
     "HttpMethod": "POST",
     "IsController": false,
@@ -114,7 +114,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_5",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_6",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "GET",
     "IsController": false,
@@ -141,7 +141,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_6",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_7",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "POST",
     "IsController": false,
@@ -173,7 +173,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_7",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_8",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "DELETE",
     "IsController": false,
@@ -200,7 +200,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_9",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_10",
     "RelativePath": "api/debug/whoami",
     "HttpMethod": "GET",
     "IsController": false,
@@ -216,7 +216,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_8",
+    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_9",
     "RelativePath": "api/me/favorites",
     "HttpMethod": "GET",
     "IsController": false,

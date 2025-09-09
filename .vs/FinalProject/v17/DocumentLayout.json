@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|c:\\users\\windows 11 pro\\source\\repos\\finalproject\\finalproject\\endpoints\\communityendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF0A5178-C38D-42DE-9991-F714EDFD7C59}|FinalProject\\FinalProject.csproj|solutionrelative:finalproject\\endpoints\\communityendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,61 +46,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "FinalProject\\Pages\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "FinalProject\\Pages\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAIUAAAAAAAAAAAApwJ0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-09T05:51:40.794Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CommunityEndpoints.cs",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\CommunityEndpoints.cs",
-              "RelativeDocumentMoniker": "FinalProject\\Endpoints\\CommunityEndpoints.cs",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\CommunityEndpoints.cs",
-              "RelativeToolTip": "FinalProject\\Endpoints\\CommunityEndpoints.cs",
-              "ViewState": "AgIAAAgBAAAAAAAAAAAQwCwBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T06:35:47.829Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ActivityLogger.cs",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\ActivityLogger.cs",
-              "RelativeDocumentMoniker": "FinalProject\\Services\\ActivityLogger.cs",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\ActivityLogger.cs",
-              "RelativeToolTip": "FinalProject\\Services\\ActivityLogger.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAADwv0UAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T06:35:34.037Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IActivityLogger.cs",
-              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\IActivityLogger.cs",
-              "RelativeDocumentMoniker": "FinalProject\\Services\\IActivityLogger.cs",
-              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\IActivityLogger.cs",
-              "RelativeToolTip": "FinalProject\\Services\\IActivityLogger.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T06:35:24.213Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -112,6 +63,69 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "FinalProject\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "FinalProject\\Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAIUAAAAAAAAAAAApwJ0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-09T05:51:40.794Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Program.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Program.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Program.cs",
+              "RelativeToolTip": "FinalProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T06:37:39.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommunityEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "RelativeToolTip": "FinalProject\\Endpoints\\CommunityEndpoints.cs",
+              "ViewState": "AgIAAD4BAAAAAAAAAAAQwEQBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T06:35:47.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ActivityLogger.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\ActivityLogger.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\ActivityLogger.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\ActivityLogger.cs",
+              "RelativeToolTip": "FinalProject\\Services\\ActivityLogger.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAADwv0UAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T06:35:34.037Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IActivityLogger.cs",
+              "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\IActivityLogger.cs",
+              "RelativeDocumentMoniker": "FinalProject\\Services\\IActivityLogger.cs",
+              "ToolTip": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Services\\IActivityLogger.cs",
+              "RelativeToolTip": "FinalProject\\Services\\IActivityLogger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T06:35:24.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "FinalProject\\Data\\AppDbContext.cs",
@@ -119,12 +133,11 @@
               "RelativeToolTip": "FinalProject\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAMkAAAAAAAAAAAAQwOoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T06:15:42.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T06:15:42.275Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Admin\\Users\\Index.cshtml",
               "RelativeDocumentMoniker": "FinalProject\\Pages\\Admin\\Users\\Index.cshtml",
@@ -132,12 +145,11 @@
               "RelativeToolTip": "FinalProject\\Pages\\Admin\\Users\\Index.cshtml",
               "ViewState": "AgIAADsBAAAAAAAAAAAAwFcBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-09T06:12:32.784Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T06:12:32.784Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "admin-users.js",
               "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-users.js",
               "RelativeDocumentMoniker": "FinalProject\\wwwroot\\js\\admin-users.js",
@@ -145,12 +157,11 @@
               "RelativeToolTip": "FinalProject\\wwwroot\\js\\admin-users.js",
               "ViewState": "AgIAALcAAAAAAAAAAAAAwMcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-09-09T06:07:16.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T06:07:16.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\Pages\\Admin\\Users\\Index.cshtml.cs",
               "RelativeDocumentMoniker": "FinalProject\\Pages\\Admin\\Users\\Index.cshtml.cs",
@@ -158,8 +169,7 @@
               "RelativeToolTip": "FinalProject\\Pages\\Admin\\Users\\Index.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T06:06:25.613Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T06:06:25.613Z"
             }
           ]
         }
