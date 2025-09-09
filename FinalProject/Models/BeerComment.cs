@@ -19,6 +19,7 @@ namespace FinalProject.Models
 
         // ข้อมูลผู้ใช้ที่ล็อกอิน
         public string? UserId { get; set; }
+        public virtual ApplicationUser? User { get; set; }
 
         [MaxLength(100)]
         public string? UserName { get; set; }
@@ -32,5 +33,6 @@ namespace FinalProject.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsDeleted { get; set; } = false;
+
     }
 }

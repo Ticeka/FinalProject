@@ -1,0 +1,201 @@
+﻿/* ============================
+   Admin Users – full page styles
+   ใช้โทนเดียวกับ layout/admin-dashboard
+   ============================ */
+
+/* ---------- Theme vars (fallback) ---------- */
+:root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --card-border: #e6ebf2;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --brand: #2563eb;
+    --brand2: #60a5fa;
+    --ring: rgba(37,99,235,.20);
+    --elev: 0 8px 24px rgba(15,23,42,.06);
+    --elev-lg: 0 12px 28px rgba(15,23,42,.08);
+}
+
+/* ---------- Page Title ---------- */
+.admin-dashboard .page-title,
+.page-title {
+    font-weight: 800;
+    letter-spacing: .3px;
+    background: linear-gradient(90deg,var(--brand2),var(--brand));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ---------- Cards / Tables container ---------- */
+.admin-dashboard .card-lite,
+.admin-dashboard .card-table,
+.card-lite,
+.card-table {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--elev);
+}
+
+.admin-dashboard .card-header,
+.card-header {
+    background: linear-gradient(180deg,#f9fbff,#ffffff);
+    color: var(--ink);
+    border-bottom: 1px solid var(--card-border);
+}
+
+/* ---------- Table modern ---------- */
+.admin-dashboard .table-modern thead th,
+.table-modern thead th {
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom-color: var(--card-border) !important;
+}
+
+.admin-dashboard .table-modern td,
+.admin-dashboard .table-modern th,
+.table-modern td,
+.table-modern th {
+    color: var(--ink);
+    vertical-align: middle;
+    border-color: var(--card-border) !important;
+}
+
+.admin-dashboard .table-modern tbody tr:hover,
+.table-modern tbody tr:hover {
+    background: #f5f7fb;
+}
+
+/* ---------- Status chips & ghost badge ---------- */
+.admin-dashboard .badge-ghost,
+.badge-ghost {
+    background: rgba(37,99,235,.08);
+    color: #2563eb;
+    border: 1px solid rgba(37,99,235,.15);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: .15rem .5rem;
+    font-size: .8rem;
+}
+
+.admin-dashboard .chip,
+.chip {
+    border-radius: 999px;
+    padding: .15rem .5rem;
+    font-size: .75rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.admin-dashboard .chip-green, .chip-green {
+    background: rgba(16,185,129,.12);
+    color: #059669;
+    border-color: rgba(16,185,129,.25);
+}
+
+.admin-dashboard .chip-red, .chip-red {
+    background: rgba(239,68,68,.12);
+    color: #dc2626;
+    border-color: rgba(239,68,68,.25);
+}
+
+.admin-dashboard .chip-blue, .chip-blue {
+    background: rgba(59,130,246,.12);
+    color: #2563eb;
+    border-color: rgba(59,130,246,.25);
+}
+
+.admin-dashboard .chip-amber, .chip-amber {
+    background: rgba(245,158,11,.12);
+    color: #b45309;
+    border-color: rgba(245,158,11,.25);
+}
+
+/* ---------- Role checkbox pill ---------- */
+.admin-dashboard .role-check,
+.role-check {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .35rem .6rem;
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    user-select: none;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+    .role-check input {
+        accent-color: var(--brand);
+    }
+
+        /* เน้นตอน checked */
+        .role-check input:checked + span {
+            font-weight: 700;
+            color: var(--brand);
+        }
+
+    .role-check:hover {
+        background: #f1f5ff;
+        border-color: rgba(37,99,235,.35);
+        box-shadow: 0 0 0 3px var(--ring);
+    }
+
+/* ---------- Filters card spacing ---------- */
+.admin-dashboard .card-lite.p-3 .form-label,
+.card-lite.p-3 .form-label {
+    font-weight: 600;
+    color: var(--muted);
+}
+
+/* ---------- Pagination footer ---------- */
+.admin-dashboard .card-table .p-3,
+.card-table .p-3 {
+    border-top: 1px solid var(--card-border);
+}
+
+/* ---------- Buttons minor tweaks ---------- */
+.btn-outline-secondary.btn-sm,
+.btn-outline-success.btn-sm,
+.btn-outline-danger.btn-sm,
+.btn-outline-primary.btn-sm {
+    border-radius: 10px;
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 576px) {
+    .admin-dashboard .page-title, .page-title {
+        font-size: 1.5rem;
+    }
+
+    .badge-ghost {
+        font-size: .75rem;
+    }
+
+    .chip {
+        font-size: .7rem;
+    }
+
+    .role-check {
+        padding: .3rem .5rem;
+    }
+}
+
+/* ---------- Optional Dark mode (auto) ---------- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f1221;
+        --card: #12172a;
+        --card-border: rgba(255,255,255,.12);
+        --ink: #e7e9f7;
+        --muted: #b9bdd6;
+        --ring: rgba(138,180,255,.25);
+    }
+
+    .table-modern tbody tr:hover {
+        background: rgba(255,255,255,.06);
+    }
+}

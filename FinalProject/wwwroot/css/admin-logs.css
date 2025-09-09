@@ -1,0 +1,28 @@
+﻿.admin-dashboard .page-title {
+    font-weight: 800;
+    letter-spacing: .3px;
+    background: linear-gradient(90deg,#2563eb,#b388ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.card-lite, .card-table {
+    background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+.table-modern thead th {
+    color: #6b7280;
+    border-bottom-color: rgba(0,0,0,.06)
+}
+
+.truncate {
+    max-width: 760px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}

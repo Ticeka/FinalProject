@@ -1,34 +1,39 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Models
 {
-    // เพิ่มฟิลด์ได้ตามต้องการ เช่น DisplayName
+    // ผู้ใช้ของระบบ (สืบทอดจาก IdentityUser)
     public class ApplicationUser : IdentityUser
     {
-        // ชื่อที่แสดงในเว็บ
+        // ===== โปรไฟล์พื้นฐาน =====
         [MaxLength(100)]
         public string? DisplayName { get; set; }
 
-        // เมือง/จังหวัด (แสดงในโปรไฟล์)
         [MaxLength(120)]
         public string? Location { get; set; }
 
-        // คำอธิบายสั้น ๆ เกี่ยวกับตัวเอง
         [MaxLength(500)]
         public string? Bio { get; set; }
 
-        // URL รูปโปรไฟล์ (เก็บเป็น path ใน wwwroot หรือ URL S3/Blob)
         [MaxLength(512)]
         public string? AvatarUrl { get; set; }
 
-        // วันเกิด (เก็บเป็นปีพอเพื่อความเป็นส่วนตัว)
         public int? BirthYear { get; set; }
 
-        // เวลาอัปเดตโปรไฟล์ล่าสุด (ใช้ทำ cache-busting ให้รูป)
+        // ใช้สำหรับ cache-busting รูป/โปรไฟล์
         public DateTime? ProfileUpdatedAt { get; set; }
 
+        // ===== ความสัมพันธ์สถิติแบบ 1-ต่อ-1 =====
         public virtual UserStats? Stats { get; set; }
+
+        // ===== Navigation Collections (ให้ตรงกับ OnModelCreating) =====
+        // คอมเมนต์ที่ผู้ใช้นี้เขียน
+        public virtual ICollection<BeerComment> Comments { get; set; } = new List<BeerComment>();
+        public virtual ICollection<QuickRating> Ratings { get; set; } = new List<QuickRating>();
+        public virtual ICollection<BeerFavorite> Favorites { get; set; } = new List<BeerFavorite>();
+
     }
 }

@@ -10,6 +10,7 @@
         public string? IpHash { get; set; }
         public string? Fingerprint { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string? UserId { get; set; }    // (ออปชัน) ผูกกับผู้ใช้ถ้ามีล็อกอิน
+        public string? UserId { get; set; }
+        public virtual ApplicationUser? User { get; set; }  // (ออปชัน) ผูกกับผู้ใช้ถ้ามีล็อกอิน
     }
 }

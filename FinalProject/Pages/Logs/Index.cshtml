@@ -1,0 +1,169 @@
+﻿@page
+@model FinalProject.Pages.Admin.Logs.IndexModel
+@{
+    ViewData["Title"] = "Audit Logs";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-users.css" asp-append-version="true" />
+}
+
+<div class="container-fluid my-4 admin-dashboard">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h1 class="page-title">Audit Logs</h1>
+        <div class="d-flex gap-2">
+            <a class="btn btn-outline-primary btn-sm"
+               href="@Url.Page("./Index", pageHandler: "Export", values: new {
+                        userId = Model.userId,
+                        action = Model.action,
+                        q = Model.q,
+                        subjectType = Model.subjectType,
+                        dateFrom = Model.dateFrom?.ToString("yyyy-MM-dd"),
+                        dateTo = Model.dateTo?.ToString("yyyy-MM-dd")
+               })">
+                Export CSV
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <form method="get" class="card card-lite p-3 mb-3" role="search" aria-label="Filter logs" id="filtersForm">
+        <div class="row g-2 align-items-end">
+            <div class="col-sm-3">
+                <label class="form-label" for="q">ค้นหา</label>
+                <input id="q" name="q" value="@Model.q" class="form-control" placeholder="message, subjectId, meta..." />
+            </div>
+            <div class="col-sm-2">
+                <label class="form-label" for="userId">UserId</label>
+                <input id="userId" name="userId" value="@Model.userId" class="form-control" />
+            </div>
+            <div class="col-sm-2">
+                <label class="form-label" for="action">Action</label>
+                <input id="action" name="action" value="@Model.action" class="form-control" placeholder="rating.add, admin.lock, ..." />
+            </div>
+            <div class="col-sm-2">
+                <label class="form-label" for="subjectType">SubjectType</label>
+                <input id="subjectType" name="subjectType" value="@Model.subjectType" class="form-control" placeholder="User, LocalBeer, ..." />
+            </div>
+            <div class="col-sm-3">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <label class="form-label" for="dateFrom">From</label>
+                        <input type="date" id="dateFrom" name="dateFrom" value="@(Model.dateFrom?.ToString("yyyy-MM-dd"))" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="dateTo">To</label>
+                        <input type="date" id="dateTo" name="dateTo" value="@(Model.dateTo?.ToString("yyyy-MM-dd"))" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-2">
+            <button class="btn btn-secondary btn-sm" id="applyBtn" type="submit">Apply</button>
+            <a class="btn btn-outline-secondary btn-sm" href="@Url.Page("./Index")">Clear</a>
+        </div>
+    </form>
+
+    <!-- Table -->
+    <div class="card card-lite">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="text-muted small" id="logsSummary"></div>
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-secondary" id="logsPrevBtn" type="button">Prev</button>
+                    <button class="btn btn-outline-secondary" id="logsNextBtn" type="button">Next</button>
+                </div>
+            </div>
+
+            <div id="logsSpinner" class="text-center py-3 d-none">
+                <div class="spinner-border" role="status" aria-label="Loading"></div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="small text-uppercase text-muted">
+                            <th style="width: 120px;">Time (UTC)</th>
+                            <th style="width: 140px;">User</th>
+                            <th style="width: 140px;">Action</th>
+                            <th style="width: 140px;">Subject</th>
+                            <th>Message</th>
+                            <th style="width: 120px;">SubjectId</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logsBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const qs = new URLSearchParams(window.location.search);
+            let page = parseInt(qs.get("page") || "1");
+            const pageSize = 20;
+
+            const els = {
+                body: document.getElementById("logsBody"),
+                summary: document.getElementById("logsSummary"),
+                prev: document.getElementById("logsPrevBtn"),
+                next: document.getElementById("logsNextBtn"),
+                spinner: document.getElementById("logsSpinner")
+            };
+
+            function setLoading(on) { els.spinner.classList.toggle("d-none", !on); }
+
+            function rowHtml(x) {
+                const dt = new Date(x.createdAt);
+                const when = dt.toISOString().replace('T',' ').substring(0, 19) + "Z";
+                const user = (x.userDisplayName || x.userName || x.userId || "-");
+                const subj = (x.subjectType || "-");
+                const sid  = (x.subjectId || "-");
+                return `<tr>
+                    <td class="text-nowrap">${when}</td>
+                    <td class="text-nowrap">${user}</td>
+                    <td class="text-nowrap">${x.action}</td>
+                    <td class="text-nowrap">${subj}</td>
+                    <td>${x.message ?? ""}</td>
+                    <td class="text-muted">${sid}</td>
+                </tr>`;
+            }
+
+            async function load() {
+                setLoading(true);
+                try {
+                    const params = new URLSearchParams(window.location.search);
+                    params.set("handler", "List");
+                    params.set("page", String(page));
+                    params.set("pageSize", String(pageSize));
+
+                    const res = await fetch(`?${params.toString()}`, { headers: { "Accept": "application/json" } });
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+
+                    els.body.innerHTML = (data.items || []).map(rowHtml).join("");
+                    const start = (data.total === 0) ? 0 : ((data.page - 1) * data.pageSize + 1);
+                    const end = Math.min(data.page * data.pageSize, data.total);
+                    els.summary.textContent = `${start}-${end} of ${data.total}`;
+
+                    els.prev.disabled = (data.page <= 1);
+                    els.next.disabled = (data.page * data.pageSize >= data.total);
+                } catch (e) {
+                    console.error(e);
+                    els.body.innerHTML = `<tr><td colspan="6" class="text-danger">Load failed: ${e.message}</td></tr>`;
+                    els.summary.textContent = "";
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            els.prev.addEventListener("click", () => { page = Math.max(1, page - 1); load(); });
+            els.next.addEventListener("click", () => { page = page + 1; load(); });
+
+            load();
+        })();
+    </script>
+}

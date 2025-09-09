@@ -22,6 +22,63 @@ namespace FinalProject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("FinalProject.Models.ActivityLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("IpHash")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("MetaJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectId")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("SubjectType")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("UserAgent")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("Action", "CreatedAt");
+
+                    b.HasIndex("SubjectType", "SubjectId");
+
+                    b.ToTable("ActivityLogs", (string)null);
+                });
+
             modelBuilder.Entity("FinalProject.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -89,9 +146,6 @@ namespace FinalProject.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StatsUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -108,8 +162,6 @@ namespace FinalProject.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("StatsUserId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -147,7 +199,10 @@ namespace FinalProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(100)
@@ -157,6 +212,12 @@ namespace FinalProject.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocalBeerId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.HasIndex("LocalBeerId", "CreatedAt");
 
@@ -248,7 +309,7 @@ namespace FinalProject.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -276,7 +337,7 @@ namespace FinalProject.Migrations
 
                     b.Property<string>("Province")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
@@ -309,6 +370,10 @@ namespace FinalProject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name");
+
+                    b.HasIndex("Province");
+
                     b.ToTable("LocalBeers");
                 });
 
@@ -322,7 +387,8 @@ namespace FinalProject.Migrations
 
                     b.Property<string>("Flavor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<double>("Intensity")
                         .HasColumnType("float");
@@ -334,7 +400,10 @@ namespace FinalProject.Migrations
 
                     b.HasIndex("LocalBeerId");
 
-                    b.ToTable("LocalBeerFlavors");
+                    b.ToTable("LocalBeerFlavors", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_LocalBeerFlavor_Intensity", "[Intensity] >= 0 AND [Intensity] <= 1");
+                        });
                 });
 
             modelBuilder.Entity("FinalProject.Models.LocalBeerFoodPairing", b =>
@@ -347,19 +416,21 @@ namespace FinalProject.Migrations
 
                     b.Property<string>("FoodName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("LocalBeerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LocalBeerId");
 
-                    b.ToTable("LocalBeerFoodPairings");
+                    b.ToTable("LocalBeerFoodPairings", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Models.LocalBeerMoodPairing", b =>
@@ -375,16 +446,18 @@ namespace FinalProject.Migrations
 
                     b.Property<string>("Mood")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LocalBeerId");
 
-                    b.ToTable("LocalBeerMoodPairings");
+                    b.ToTable("LocalBeerMoodPairings", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Models.QuickRating", b =>
@@ -416,14 +489,30 @@ namespace FinalProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocalBeerId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.HasIndex("LocalBeerId", "Fingerprint")
                         .IsUnique();
 
-                    b.ToTable("QuickRatings", (string)null);
+                    b.HasIndex("LocalBeerId", "UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("QuickRatings", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_QuickRatings_Score", "[Score] >= 0 AND [Score] <= 5");
+                        });
                 });
 
             modelBuilder.Entity("FinalProject.Models.UserStats", b =>
@@ -432,16 +521,24 @@ namespace FinalProject.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Badges")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("Comments")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("Favorites")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("Reviews")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("UserId");
 
@@ -581,13 +678,34 @@ namespace FinalProject.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FinalProject.Models.ApplicationUser", b =>
+            modelBuilder.Entity("FinalProject.Models.ActivityLog", b =>
                 {
-                    b.HasOne("FinalProject.Models.UserStats", "Stats")
+                    b.HasOne("FinalProject.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("StatsUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
-                    b.Navigation("Stats");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FinalProject.Models.BeerComment", b =>
+                {
+                    b.HasOne("FinalProject.Models.LocalBeer", null)
+                        .WithMany()
+                        .HasForeignKey("LocalBeerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Models.ApplicationUser", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("FinalProject.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FinalProject.Models.BeerFavorite", b =>
@@ -599,7 +717,7 @@ namespace FinalProject.Migrations
                         .IsRequired();
 
                     b.HasOne("FinalProject.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Favorites")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -650,13 +768,24 @@ namespace FinalProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FinalProject.Models.ApplicationUser", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("FinalProject.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
                     b.Navigation("LocalBeer");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FinalProject.Models.UserStats", b =>
                 {
                     b.HasOne("FinalProject.Models.ApplicationUser", "User")
-                        .WithOne()
+                        .WithOne("Stats")
                         .HasForeignKey("FinalProject.Models.UserStats", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -713,6 +842,17 @@ namespace FinalProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FinalProject.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Ratings");
+
+                    b.Navigation("Stats");
                 });
 
             modelBuilder.Entity("FinalProject.Models.LocalBeer", b =>

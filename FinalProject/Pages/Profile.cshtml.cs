@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using FinalProject.Data;                   // <-- AppDbContext
-using FinalProject.Models;                 // <-- ApplicationUser, UserStats
+using FinalProject.Data;                   // AppDbContext
+using FinalProject.Models;                 // ApplicationUser, UserStats
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +33,7 @@ namespace FinalProject.Pages
         public string DisplayName { get; set; } = "";
         public string Email { get; set; } = "";
         public string AvatarUrl { get; set; } = "";
-        public DateTime JoinDate { get; set; } = DateTime.UtcNow; // ถ้าอยากดึงจริง ให้เพิ่ม CreatedAt ใน ApplicationUser
+        public DateTime JoinDate { get; set; } = DateTime.UtcNow;
         public List<string> RecentActivities { get; set; } = new();
         public UserStats Stats { get; set; } = new();
 
@@ -44,9 +44,9 @@ namespace FinalProject.Pages
         public async Task OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user is null) { return; }
+            if (user is null) return;
 
-            // 1) ข้อมูลโปรไฟล์จาก AspNetUsers (ApplicationUser)
+            // 1) โปรไฟล์พื้นฐาน
             DisplayName = string.IsNullOrWhiteSpace(user.DisplayName)
                 ? (User.Identity?.Name ?? "User")
                 : user.DisplayName;
@@ -56,32 +56,97 @@ namespace FinalProject.Pages
             Bio = user.Bio;
             BirthYear = user.BirthYear;
 
-            // 2) JoinDate: ถ้ายังไม่มีฟิลด์ใน AspNetUsers ให้เพิ่ม CreatedAt เองในภายหลัง
-            // ตอนนี้ fallback เป็น 3 เดือนที่ผ่านมา
+            // 2) JoinDate (ถ้าต้องการจริงจัง แนะนำเพิ่ม CreatedAt ใน ApplicationUser แล้ว map)
             JoinDate = DateTime.UtcNow.AddMonths(-3);
 
-            // 3) สถิติจากตาราง UserStats (1-1 กับผู้ใช้)
-            var stats = await _db.UserStats.AsNoTracking().FirstOrDefaultAsync(s => s.UserId == user.Id);
+            var userId = user.Id;
+            var userName = user.UserName ?? "";
+
+            // ---------- 🔧 Backfill เรตติ้ง guest → ของผู้ใช้ ----------
+            var fp = GetFingerprintFromCookies(Request.Cookies);
+            if (!string.IsNullOrWhiteSpace(fp))
+            {
+                await BackfillRatingsToUserAsync(fp!, userId);
+            }
+
+            // ---------- ดึง "จำนวน" ปัจจุบัน ----------
+            // Reviews (QuickRating): นับของผู้ใช้ + เผื่อแถวเก่าที่ยังไม่ได้ backfill แต่ fingerprint ตรง
+            var reviewsQuery = _db.QuickRatings.AsQueryable().Where(r => r.UserId == userId);
+            if (!string.IsNullOrWhiteSpace(fp))
+                reviewsQuery = reviewsQuery.Concat(
+                    _db.QuickRatings.Where(r => r.UserId == null && r.Fingerprint == fp)
+                );
+            var reviewsCount = await reviewsQuery.CountAsync();
+
+            // Comments (BeerComment): UserId เป็นหลัก + fallback ด้วย UserName
+            var commentsCount = await _db.BeerComments
+                .Where(c => c.UserId == userId || (c.UserId == null && c.UserName == userName))
+                .CountAsync();
+
+            // Favorites
+            var favoritesCount = await _db.BeerFavorites
+                .Where(f => f.UserId == userId)
+                .CountAsync();
+
+            // ---------- Sync กับ UserStats ----------
+            var stats = await _db.UserStats.FirstOrDefaultAsync(s => s.UserId == userId);
             if (stats == null)
             {
-                // สร้างเริ่มต้นถ้ายังไม่มี
-                stats = new UserStats { UserId = user.Id, Reviews = 0, Favorites = 0, Badges = 0 };
+                stats = new UserStats
+                {
+                    UserId = userId,
+                    Reviews = reviewsCount,
+                    Comments = commentsCount,
+                    Favorites = favoritesCount,
+                    Badges = 0
+                };
                 _db.UserStats.Add(stats);
                 await _db.SaveChangesAsync();
             }
+            else
+            {
+                bool changed = false;
+                if (stats.Reviews != reviewsCount) { stats.Reviews = reviewsCount; changed = true; }
+                if (stats.Comments != commentsCount) { stats.Comments = commentsCount; changed = true; }
+                if (stats.Favorites != favoritesCount) { stats.Favorites = favoritesCount; changed = true; }
+                if (changed) await _db.SaveChangesAsync();
+            }
             Stats = stats;
 
-            // 4) กิจกรรมล่าสุด: ดึงจาก BeerComments ของผู้ใช้ (ตาม UserName) และใส่ชื่อเบียร์
-            RecentActivities = await _db.BeerComments
-                .Where(c => c.UserName == user.UserName)                     // ถ้ามี UserId ให้เปลี่ยนเป็น c.UserId == user.Id
+            // ---------- กิจกรรมล่าสุด: รวม "คอมเมนต์" + "รีวิว" ----------
+            var commentActs = await _db.BeerComments
+                .Where(c => c.UserId == userId || (c.UserId == null && c.UserName == userName))
                 .OrderByDescending(c => c.CreatedAt)
-                .Take(10)
+                .Take(20)
                 .Join(_db.LocalBeers,
                       c => c.LocalBeerId,
                       b => b.Id,
-                      (c, b) => new { c, b })
-                .Select(x => $"คอมเมนต์ที่ “{x.b.Name}”: {x.c.Body}")
+                      (c, b) => new ActivityItem { When = c.CreatedAt, Text = $"คอมเมนต์ที่ “{b.Name}”: {c.Body}" })
                 .ToListAsync();
+
+            var ratingFilter = _db.QuickRatings.Where(r => r.UserId == userId);
+            if (!string.IsNullOrWhiteSpace(fp))
+            {
+                ratingFilter = ratingFilter.Concat(
+                    _db.QuickRatings.Where(r => r.UserId == null && r.Fingerprint == fp)
+                );
+            }
+
+            var ratingActs = await ratingFilter
+                .OrderByDescending(r => r.CreatedAt)
+                .Take(20)
+                .Join(_db.LocalBeers,
+                      r => r.LocalBeerId,
+                      b => b.Id,
+                      (r, b) => new ActivityItem { When = r.CreatedAt, Text = $"ให้คะแนน “{b.Name}” = {r.Score:0.0}/5" })
+                .ToListAsync();
+
+            RecentActivities = commentActs
+                .Concat(ratingActs)
+                .OrderByDescending(a => a.When)
+                .Take(10)
+                .Select(a => a.Text)
+                .ToList();
         }
 
         // ========= Handlers =========
@@ -180,19 +245,78 @@ namespace FinalProject.Pages
             var user = await _userManager.GetUserAsync(User);
             if (user is null) return Unauthorized();
 
-            // ดึงกิจกรรมล่าสุดจากฐานข้อมูล (เหมือนใน OnGet แต่แยก endpoint)
-            var items = await _db.BeerComments
-                .Where(c => c.UserName == user.UserName)                     // ถ้ามี UserId ให้เปลี่ยนเงื่อนไขนี้
+            var userId = user.Id;
+            var userName = user.UserName ?? "";
+            var fp = GetFingerprintFromCookies(Request.Cookies);
+
+            // รวมกิจกรรมคอมเมนต์ + รีวิว (เหมือน OnGet)
+            var commentActs = await _db.BeerComments
+                .Where(c => c.UserId == userId || (c.UserId == null && c.UserName == userName))
                 .OrderByDescending(c => c.CreatedAt)
-                .Take(10)
-                .Join(_db.LocalBeers,
-                      c => c.LocalBeerId,
-                      b => b.Id,
-                      (c, b) => new { c, b })
-                .Select(x => $"คอมเมนต์ที่ “{x.b.Name}”: {x.c.Body}")
+                .Take(20)
+                .Join(_db.LocalBeers, c => c.LocalBeerId, b => b.Id,
+                    (c, b) => new ActivityItem { When = c.CreatedAt, Text = $"คอมเมนต์ที่ “{b.Name}”: {c.Body}" })
                 .ToListAsync();
 
+            var ratingFilter = _db.QuickRatings.Where(r => r.UserId == userId);
+            if (!string.IsNullOrWhiteSpace(fp))
+            {
+                ratingFilter = ratingFilter.Concat(
+                    _db.QuickRatings.Where(r => r.UserId == null && r.Fingerprint == fp)
+                );
+            }
+
+            var ratingActs = await ratingFilter
+                .OrderByDescending(r => r.CreatedAt)
+                .Take(20)
+                .Join(_db.LocalBeers, r => r.LocalBeerId, b => b.Id,
+                    (r, b) => new ActivityItem { When = r.CreatedAt, Text = $"ให้คะแนน “{b.Name}” = {r.Score:0.0}/5" })
+                .ToListAsync();
+
+            var items = commentActs
+                .Concat(ratingActs)
+                .OrderByDescending(a => a.When)
+                .Take(10)
+                .Select(a => a.Text)
+                .ToList();
+
             return new JsonResult(items);
+        }
+
+        // ===== Helpers =====
+        private static string? GetFingerprintFromCookies(IRequestCookieCollection cookies)
+        {
+            // ปรับ key ให้ตรงกับที่โค้ดส่วนให้เรตตั้งไว้ (เติม key ได้ตามโปรเจกต์)
+            string[] keys = { "qr_fp", "rating_fp", "fingerprint", "st_fp" };
+            foreach (var k in keys)
+                if (cookies.TryGetValue(k, out var v) && !string.IsNullOrWhiteSpace(v))
+                    return v.Trim();
+            return null;
+        }
+
+        private async Task BackfillRatingsToUserAsync(string fingerprint, string userId)
+        {
+            // ถ้าใช้ EF Core 7+ ใช้ ExecuteUpdateAsync จะไวกว่า:
+            // await _db.QuickRatings
+            //   .Where(r => r.UserId == null && r.Fingerprint == fingerprint)
+            //   .ExecuteUpdateAsync(s => s.SetProperty(r => r.UserId, userId));
+
+            var orphan = await _db.QuickRatings
+                .Where(r => r.UserId == null && r.Fingerprint == fingerprint)
+                .ToListAsync();
+
+            if (orphan.Count == 0) return;
+
+            foreach (var r in orphan)
+                r.UserId = userId;
+
+            await _db.SaveChangesAsync();
+        }
+
+        private sealed class ActivityItem
+        {
+            public DateTime When { get; set; }
+            public string Text { get; set; } = "";
         }
     }
 }

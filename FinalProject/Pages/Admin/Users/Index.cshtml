@@ -1,0 +1,351 @@
+﻿@page
+@model FinalProject.Pages.Admin.Users.IndexModel
+@{
+    ViewData["Title"] = "Users";
+
+    // รายการ action ที่ระบบล็อกไว้ (ให้ตรงกับ ActivityLogger)
+    string[] logActions = new[]
+    {
+        "", // (All)
+        "rating.add",
+        "comment.add",
+        "favorite.add",
+        "favorite.remove",
+        "profile.edit",
+        "avatar.upload",
+        "avatar.remove",
+        "admin.lock",
+        "admin.unlock",
+        "admin.2fa.enable",
+        "admin.2fa.disable",
+        "admin.roles.update"
+    };
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-users.css" asp-append-version="true" />
+}
+
+<div class="container-fluid my-4 admin-dashboard">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h1 class="page-title">Users</h1>
+
+        <div class="d-flex flex-wrap gap-2">
+            @if (TempData["Msg"] is string msg)
+            {
+                <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">@msg</span>
+            }
+            @if (TempData["Err"] is string err)
+            {
+                <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">@err</span>
+            }
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <form method="get" class="card card-lite p-3 mb-3" role="search" aria-label="Filter users">
+        <div class="row g-2 align-items-end">
+            <div class="col-sm-4">
+                <label class="form-label" for="q">Search</label>
+                <input id="q" name="q" value="@Model.q" class="form-control" placeholder="name, email, display name" />
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label" for="role">Role</label>
+                <select id="role" name="role" class="form-select">
+                    <option value="">(all)</option>
+                    @foreach (var r in Model.VM.AllRoles)
+                    {
+                        <option value="@r" selected="@(Model.role==r ? "selected" : null)">@r</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label" for="status">Status</label>
+                <select id="status" name="status" class="form-select">
+                    <option value="">(all)</option>
+                    <option value="active" selected="@(Model.status=="active" ? "selected": null)">Active</option>
+                    <option value="locked" selected="@(Model.status=="locked" ? "selected": null)">Locked</option>
+                    <option value="2fa" selected="@(Model.status=="2fa" ? "selected": null)">2FA Enabled</option>
+                    <option value="unconfirmed" selected="@(Model.status=="unconfirmed" ? "selected": null)">Unconfirmed Email</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label class="form-label" for="sort">Sort</label>
+                <select id="sort" name="sort" class="form-select">
+                    <option value="name" selected="@(Model.sort is null || Model.sort=="name" ? "selected": null)">Name</option>
+                    <option value="email" selected="@(Model.sort=="email" ? "selected": null)">Email</option>
+                    <option value="lock" selected="@(Model.sort=="lock" ? "selected": null)">Lockout</option>
+                </select>
+            </div>
+            <div class="col-sm-12 d-flex gap-2">
+                <button class="btn btn-primary" aria-label="Apply filters">Apply</button>
+                <a class="btn btn-outline-secondary" asp-page="./Index" aria-label="Reset filters">Reset</a>
+            </div>
+        </div>
+    </form>
+
+    <!-- Table -->
+    <div class="card card-table">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0 table-hover table-modern">
+                <thead>
+                    <tr>
+                        <th scope="col">Name / Email</th>
+                        <th scope="col">Roles</th>
+                        <th scope="col">Stats</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.VM.Items.Count == 0)
+                    {
+                        <tr><td colspan="5" class="text-center text-muted py-4">No users found.</td></tr>
+                    }
+                    else
+                    {
+                        foreach (var u in Model.VM.Items)
+                        {
+                            var isLocked = u.LockoutEnd != null && u.LockoutEnd > DateTimeOffset.UtcNow;
+                            <tr>
+                                <td>
+                                    <div class="fw-semibold">@(!string.IsNullOrWhiteSpace(u.DisplayName) ? u.DisplayName : u.UserName)</div>
+                                    <div class="text-muted small">@u.Email</div>
+                                </td>
+
+                                <td>
+                                    @if (u.Roles.Count == 0)
+                                    {
+                                        <span class="badge-ghost">no role</span>
+                                    }
+                                    else
+                                    {
+                                        foreach (var r in u.Roles)
+                                        {
+                                            <span class="badge-ghost me-1">@r</span>
+                                        }
+                                    }
+                                </td>
+
+                                <td class="text-muted small">
+                                    <span class="me-2">Reviews: <strong>@u.Reviews</strong></span>
+                                    <span class="me-2">Comments: <strong>@u.Comments</strong></span>
+                                    <span class="me-2">Favs: <strong>@u.Favorites</strong></span>
+                                    <span>Badges: <strong>@u.Badges</strong></span>
+                                </td>
+
+                                <td>
+                                    <div class="d-flex flex-wrap gap-1">
+                                        @if (isLocked)
+                                        {
+                                            <span class="chip chip-red">Locked</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="chip chip-green">Active</span>
+                                        }
+                                        @if (u.TwoFactorEnabled)
+                                        {
+                                            <span class="chip chip-blue">2FA</span>
+                                        }
+                                        @if (!u.EmailConfirmed)
+                                        {
+                                            <span class="chip chip-amber">Unconfirmed</span>
+                                        }
+                                    </div>
+                                    @if (isLocked)
+                                    {
+                                        <div class="text-muted small mt-1">Until @u.LockoutEnd?.LocalDateTime.ToString("yyyy-MM-dd HH:mm")</div>
+                                    }
+                                </td>
+
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="User actions for @u.UserName">
+                                        @if (isLocked)
+                                        {
+                                            <form method="post" asp-page-handler="Unlock" class="d-inline">
+                                                <input type="hidden" name="id" value="@u.Id" />
+                                                <button class="btn btn-outline-success" data-confirm="Unlock this user?">Unlock</button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <form method="post" asp-page-handler="Lock" class="d-inline">
+                                                <input type="hidden" name="id" value="@u.Id" />
+                                                <input type="hidden" name="days" value="7" />
+                                                <button class="btn btn-outline-danger" data-confirm="Lock 7 days?">Lock</button>
+                                            </form>
+                                        }
+
+                                        <form method="post" asp-page-handler="Toggle2fa" class="d-inline">
+                                            <input type="hidden" name="id" value="@u.Id" />
+                                            <input type="hidden" name="enable" value="@(!u.TwoFactorEnabled)" />
+                                            <button class="btn btn-outline-secondary" data-confirm="@(u.TwoFactorEnabled ? "Disable 2FA?" : "Enable 2FA?")">
+                                                @(u.TwoFactorEnabled ? "Disable 2FA" : "Enable 2FA")
+                                            </button>
+                                        </form>
+
+                                        <button class="btn btn-outline-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#rolesModal"
+                                                data-userid="@u.Id"
+                                                data-username="@(!string.IsNullOrWhiteSpace(u.DisplayName) ? u.DisplayName : u.UserName)"
+                                                data-roles="@string.Join(",", u.Roles)">
+                                            Roles
+                                        </button>
+
+                                        <!-- Logs -->
+                                        <button class="btn btn-outline-dark"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#logsModal"
+                                                data-userid="@u.Id"
+                                                data-username="@(!string.IsNullOrWhiteSpace(u.DisplayName) ? u.DisplayName : u.UserName)">
+                                            Logs
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center p-3">
+            <div class="text-muted small">
+                Page <strong>@Model.VM.Page</strong> / @Model.VM.TotalPages • @Model.VM.TotalItems users
+            </div>
+            <div class="btn-group" role="group" aria-label="Pagination">
+                <a class="btn btn-outline-secondary btn-sm @(Model.VM.Page<=1?"disabled":null)"
+                   asp-page="./Index"
+                   asp-route-q="@Model.q"
+                   asp-route-role="@Model.role"
+                   asp-route-status="@Model.status"
+                   asp-route-sort="@Model.sort"
+                   asp-route-page="@(Model.VM.Page-1)">Prev</a>
+
+                <a class="btn btn-outline-secondary btn-sm @(Model.VM.Page>=Model.VM.TotalPages?"disabled":null)"
+                   asp-page="./Index"
+                   asp-route-q="@Model.q"
+                   asp-route-role="@Model.role"
+                   asp-route-status="@Model.status"
+                   asp-route-sort="@Model.sort"
+                   asp-route-page="@(Model.VM.Page+1)">Next</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Roles Modal -->
+<div class="modal fade" id="rolesModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post" asp-page-handler="UpdateRoles" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Roles: <span id="rolesModalUser"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id" id="rolesModalUserId" />
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach (var r in Model.VM.AllRoles)
+                    {
+                        <label class="role-check">
+                            <input type="checkbox" name="selectedRoles" value="@r" />
+                            <span>@r</span>
+                        </label>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Logs Modal (with filters) -->
+<div class="modal fade" id="logsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Activity Logs: <span id="logsModalUser"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="logsModalUserId" value="" />
+
+                <!-- Filters -->
+                <form class="row g-2 align-items-end mb-3" onsubmit="return false;">
+                    <div class="col-sm-4">
+                        <label class="form-label" for="logsFilterAction">Action</label>
+                        <select id="logsFilterAction" class="form-select">
+                            @foreach (var a in logActions)
+                            {
+                                <option value="@a">@((string.IsNullOrEmpty(a) ? "(all actions)" : a))</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="form-label" for="logsFilterFrom">From</label>
+                        <input id="logsFilterFrom" type="date" class="form-control" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="form-label" for="logsFilterTo">To</label>
+                        <input id="logsFilterTo" type="date" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="form-label" for="logsFilterQ">Search</label>
+                        <input id="logsFilterQ" type="text" class="form-control" placeholder="keyword" />
+                    </div>
+                </form>
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="text-muted small" id="logsSummary"></div>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-secondary" id="logsApplyBtn">Apply</button>
+                        <button class="btn btn-outline-secondary" id="logsRefreshBtn">Refresh</button>
+                        <button class="btn btn-outline-secondary" id="logsClearBtn">Clear</button>
+                    </div>
+                </div>
+
+                <div id="logsSpinner" class="text-center py-3 d-none">
+                    <div class="spinner-border" role="status" aria-label="Loading"></div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 170px;">When (UTC)</th>
+                                <th>Action</th>
+                                <th>Message</th>
+                                <th style="width: 130px;">Subject</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody">
+                            <!-- rows via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="text-muted small" id="logsPageInfo"></div>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-secondary" id="logsPrevBtn">Prev</button>
+                        <button class="btn btn-outline-secondary" id="logsNextBtn">Next</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin-users.js" asp-append-version="true"></script>
+}

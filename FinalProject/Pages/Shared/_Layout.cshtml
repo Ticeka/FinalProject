@@ -29,7 +29,7 @@
     }
     var initials = isSignedIn ? Initials(displayName) : "";
 
-    // ===== สร้างสีพื้นหลังอวตารแบบ deterministic จากชื่อ =====
+    // ===== สีพื้นหลังอวตารแบบ deterministic จากชื่อ =====
     int HashHue(string s)
     {
         if (string.IsNullOrEmpty(s)) return 210;
@@ -44,26 +44,36 @@
     var hue = HashHue(displayName);
     bool hasAvatar = !string.IsNullOrWhiteSpace(avatar);
 
-    // ===== Active link helper =====
-    var path = Context?.Request?.Path.Value?.ToLowerInvariant() ?? "";
-    bool IsActive(string p)
-    {
-        p = p.ToLowerInvariant();
-        if (p == "/index") return path == "/" || path == "/index";
-        if (p == "/list") return path.StartsWith("/list") || path.StartsWith("/detail");
-        return path.StartsWith(p);
-    }
-    Func<string, string> active = p => IsActive(p) ? "active fw-semibold" : "";
+    // ===== Current page (Razor Pages) =====
+    var currentPage = (ViewContext?.RouteData?.Values["page"]?.ToString() ?? "").ToLowerInvariant();
 
     // ===== Admin / Page Context =====
     bool isAdmin = User?.IsInRole("Admin") ?? false;
-    bool onDetail = path.StartsWith("/detail");
-    bool onAdmin = path.StartsWith("/admin");
+    bool onDetail = currentPage.StartsWith("/detail");
+    bool onAdmin = currentPage.StartsWith("/admin");
+    bool onAdd = currentPage.StartsWith("/admin/adddetail");
+    bool onList = currentPage.StartsWith("/list");
 
     int currentId = 0;
     var idVal = ViewContext?.RouteData?.Values["id"]?.ToString();
     if (!string.IsNullOrWhiteSpace(idVal))
         int.TryParse(idVal, out currentId);
+
+    // ===== Active link helper =====
+    bool IsActive(string p)
+    {
+        p = p.ToLowerInvariant();
+
+        if (p == "/index") return currentPage == "/index" || currentPage == "";
+        if (p == "/list") return currentPage == "/list" || currentPage.StartsWith("/detail");
+        if (p == "/admin/dashboard") return currentPage == "/admin/dashboard";
+        if (p == "/admin/adddetail") return currentPage == "/admin/adddetail" || currentPage.StartsWith("/admin/adddetail/");
+        if (p == "/flavormatch") return currentPage == "/flavormatch";
+        if (p == "/aboutus") return currentPage == "/aboutus";
+
+        return currentPage == p;
+    }
+    Func<string, string> active = p => IsActive(p) ? "active fw-semibold" : "";
 }
 
 <!DOCTYPE html>
@@ -83,180 +93,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
 
-    <style>
-        :root {
-            --bg: #f6f8fb;
-            --card: #ffffff;
-            --ink: #1f2937;
-            --muted: #6b7280;
-            --brand: #2563eb;
-            --ring: rgba(37,99,235,.2);
-        }
+    <!-- ธีมของ Layout (ย้ายออกจาก inline แล้ว) -->
+    <link rel="stylesheet" href="~/css/layout-theme.css" asp-append-version="true" />
 
-        html, body {
-            height: 100%
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-        }
-        /* ===== Navbar ===== */
-        .navbar {
-            background: linear-gradient(180deg,#f8fafc,#ffffff);
-            border-bottom: 1px solid #e6ebf2;
-            transition: box-shadow .2s ease, border-color .2s ease;
-        }
-
-            .navbar.is-scrolled {
-                box-shadow: 0 8px 24px rgba(15,23,42,.06);
-                border-color: transparent;
-            }
-
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--ink);
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-        }
-
-        .brand-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #60a5fa, #2563eb);
-            box-shadow: 0 0 0 3px rgba(37,99,235,.15);
-        }
-
-        .nav-link {
-            color: #334155;
-            padding: .5rem .9rem;
-            border-radius: 10px;
-            transition: transform .1s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-            .nav-link:hover {
-                background: #eef2f7;
-                color: #0f172a;
-                transform: translateY(-1px)
-            }
-
-            .nav-link.active {
-                color: #fff !important;
-                background: var(--brand);
-                box-shadow: 0 2px 10px var(--ring);
-            }
-
-                .nav-link.active::after {
-                    content: "";
-                    position: absolute;
-                    inset: 0;
-                    background: linear-gradient(90deg,rgba(255,255,255,.18),transparent 40%,rgba(255,255,255,.18));
-                    transform: translateX(-100%);
-                    animation: shine 1.6s ease-in-out infinite;
-                }
-
-        @@keyframes shine {
-            to {
-                transform: translateX(100%)
-            }
-        }
-
-        .container {
-            max-width: 1100px
-        }
-
-        /* ===== Avatar ===== */
-        .nav-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #e2e8f0;
-            margin-right: .5rem;
-            flex: 0 0 auto;
-        }
-
-        .nav-avatar-fallback {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: .9rem;
-            border: 1px solid #e2e8f0;
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-            .nav-avatar-fallback .avatar-icon {
-                position: absolute;
-                inset: 0;
-                margin: auto;
-                width: 70%;
-                height: 70%;
-                opacity: .18;
-                z-index: 0;
-            }
-
-            .nav-avatar-fallback > * {
-                z-index: 1
-            }
-
-        .avatar-lg {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #e2e8f0
-        }
-
-            .avatar-lg.nav-avatar-fallback {
-                font-size: 1rem
-            }
-
-        /* ===== Dropdown ===== */
-        .dropdown-menu {
-            border-radius: 14px;
-            border: 1px solid #e6ebf2;
-            padding: .4rem;
-        }
-
-        .dropdown-item {
-            border-radius: 10px;
-            padding: .6rem .75rem;
-        }
-
-            .dropdown-item:hover {
-                background: #eef2f7
-            }
-
-        footer {
-            background: #fff;
-            border-top: 1px solid #e6ebf2;
-            color: #64748b;
-            padding: 16px 0;
-        }
-
-        .btn-ghost {
-            border: 1px solid #c7d2fe;
-            background: #fff;
-            border-radius: 12px;
-            padding: .45rem .75rem;
-            font-weight: 600;
-        }
-
-            .btn-ghost:hover {
-                background: #eff6ff
-            }
-    </style>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header class="sticky-top">
@@ -277,43 +117,51 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    @* ===== LEFT: Main nav (แตกต่างตามสิทธิ์) ===== *@
+                    @* ===== LEFT: Main nav ===== *@
                     @if (!isAdmin)
                     {
                         <!-- USER NAV -->
                         <ul class="navbar-nav align-items-center me-3">
                             <li class="nav-item">
-                                <a class="nav-link @active("/Index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
+                                <a class="nav-link @active("/index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
+                                <a class="nav-link @active("/list")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @active("/FlavorMatch")" asp-area="" asp-page="/FlavorMatch">🍷 FlavorMatch</a>
+                                <a class="nav-link @active("/flavormatch")" asp-area="" asp-page="/FlavorMatch">🍷 FlavorMatch</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @active("/AboutUs")" asp-area="" asp-page="/AboutUs">ℹ️ เกี่ยวกับเรา</a>
+                                <a class="nav-link @active("/aboutus")" asp-area="" asp-page="/AboutUs">ℹ️ เกี่ยวกับเรา</a>
                             </li>
                         </ul>
                     }
                     else
                     {
-                        <!-- ADMIN NAV: ให้เห็นแค่ที่จำเป็น -->
+                        <!-- ADMIN NAV -->
                         <ul class="navbar-nav align-items-center me-3">
                             <li class="nav-item">
-                                <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการ</a>
+                                <a class="nav-link @active("/admin/adddetail")"
+                                   asp-area=""
+                                   asp-page="/Admin/AddDetail">➕ เพิ่มรายการ</a>
                             </li>
-
-                            <!-- ✅ ใส่ปุ่ม Dashboard (แอดมินเท่านั้นเห็นอยู่แล้วเพราะอยู่ในบล็อก isAdmin) -->
                             <li class="nav-item">
-                                <a class="nav-link @active("/Admin")" asp-area="" asp-page="/Admin/dashboard">📊 Dashboard</a>
+                                <a class="nav-link @active("/list")" asp-area="" asp-page="/List">📋 รายการ</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link @active("/admin/dashboard")" asp-area="" asp-page="/Admin/Dashboard">📊 Dashboard</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link @active("/admin/users/index")" asp-area="" asp-page="/Admin/Users/Index">👥 Users</a>
+                            </li>
+                           
 
                             @* ปุ่มตามคอนเท็กซ์ *@
                             @if (onDetail && currentId > 0)
                             {
                                 <li class="nav-item">
-                                    <a class="btn btn-warning ms-lg-2" asp-page="/Admin/editdetail" asp-route-id="@currentId">✏️ แก้ไขรายการนี้</a>
+                                    <a class="btn btn-warning ms-lg-2" asp-page="/Admin/EditDetail" asp-route-id="@currentId">✏️ แก้ไขรายการนี้</a>
                                 </li>
                             }
                             @if (onAdmin && currentId > 0)
@@ -325,7 +173,7 @@
                         </ul>
                     }
 
-                    @* ===== RIGHT: Profile / Auth (เหมือนกันทั้งสองโหมด) ===== *@
+                    @* ===== RIGHT: Profile / Auth ===== *@
                     <ul class="navbar-nav align-items-center">
                         @if (isSignedIn)
                         {
@@ -418,18 +266,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script>
-        // เงา Navbar เมื่อเลื่อนหน้า
-        (function(){
-            const nav = document.querySelector('.navbar');
-            const toggle = () => {
-                if (window.scrollY > 6) nav.classList.add('is-scrolled');
-                else nav.classList.remove('is-scrolled');
-            };
-            toggle();
-            window.addEventListener('scroll', toggle, {passive:true});
-        })();
-    </script>
+    <!-- สคริปต์ของ Layout (เงา navbar ตอนเลื่อน) -->
+    <script src="~/js/layout-nav.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

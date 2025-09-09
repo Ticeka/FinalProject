@@ -192,12 +192,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXRVcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/Admin/adddetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cYWRkZGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/Admin/dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cZGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/Admin/editdetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cZWRpdGRldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/Admin/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/Detail.cshtml]
@@ -222,6 +230,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/Logs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/WiNDOWS 11 PRO/source/repos/FinalProject/FinalProject/Pages/MixTrip.cshtml]
