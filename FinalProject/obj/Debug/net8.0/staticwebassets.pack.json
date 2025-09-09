@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\FinalProject.5hr53ju77v.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-dashboard.css",
+      "PackagePath": "staticwebassets\\css\\admin-dashboard.css"
+    },
+    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
       "PackagePath": "staticwebassets\\css\\detail.css"
     },
@@ -343,6 +347,10 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-dashboard.js",
+      "PackagePath": "staticwebassets\\js\\admin-dashboard.js"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",

@@ -1,3 +1,4 @@
+wwwroot\css\admin-dashboard.css
 wwwroot\css\detail.css
 wwwroot\css\flavor-match.css
 wwwroot\css\index.css
@@ -83,6 +84,7 @@ wwwroot\images\localbeers\supunbeerkhaw.jfif
 wwwroot\images\localbeers\suratsage.jfif
 wwwroot\images\localbeers\ubolwine.jfif
 wwwroot\images\logo.png
+wwwroot\js\admin-dashboard.js
 wwwroot\js\detail.js
 wwwroot\js\flavor-match.js
 wwwroot\js\index.js

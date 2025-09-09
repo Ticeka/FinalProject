@@ -1,0 +1,130 @@
+﻿/* ===========================
+   Admin Dashboard – Light Theme (match navbar)
+   Scope ทุกอย่างด้วย .admin-dashboard
+   =========================== */
+.admin-dashboard {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --card-border: #e6ebf2;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --brand: #2563eb; /* ให้เข้ากับปุ่ม/ลิงก์ใน nav */
+    --brand2: #60a5fa; /* ไล่เฉดกับ --brand */
+    --ring: rgba(37,99,235,.20);
+    --elev: 0 8px 24px rgba(15,23,42,.06);
+    --elev-lg: 0 12px 28px rgba(15,23,42,.08);
+    color: var(--ink);
+}
+
+    /* ใช้พื้นหลังจาก layout (อย่า override body) */
+    .admin-dashboard .page-title {
+        font-weight: 800;
+        letter-spacing: .3px;
+        background: linear-gradient(90deg,var(--brand2),var(--brand));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* ===== KPI Cards ===== */
+    .admin-dashboard .kpi-card {
+        background: linear-gradient(180deg, #fff, #fbfdff);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 16px 18px;
+        box-shadow: var(--elev);
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+        .admin-dashboard .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--elev-lg);
+            border-color: var(--ring);
+        }
+
+    .admin-dashboard .kpi-title {
+        font-size: .95rem;
+        color: var(--muted);
+    }
+
+    .admin-dashboard .kpi-value {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--ink);
+    }
+
+        .admin-dashboard .kpi-value.small {
+            font-size: 1.8rem;
+        }
+
+    .admin-dashboard .kpi-sub {
+        margin-top: 6px;
+        font-size: .85rem;
+        color: var(--muted);
+    }
+
+    /* ===== Content Cards / Tables ===== */
+    .admin-dashboard .card-lite,
+    .admin-dashboard .card-table {
+        background: #fff;
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--elev);
+    }
+
+    .admin-dashboard .card-header {
+        background: linear-gradient(180deg,#f9fbff,#ffffff);
+        color: var(--ink);
+        border-bottom: 1px solid var(--card-border);
+    }
+
+    /* Tables */
+    .admin-dashboard .table-modern thead th {
+        color: var(--muted);
+        font-weight: 600;
+        border-bottom-color: var(--card-border);
+    }
+
+    .admin-dashboard .table-modern td,
+    .admin-dashboard .table-modern th {
+        color: var(--ink);
+        vertical-align: middle;
+        border-color: var(--card-border);
+    }
+
+    .admin-dashboard .table-modern tbody tr:hover {
+        background: #f5f7fb;
+    }
+
+    /* Truncate cell */
+    .admin-dashboard .truncate {
+        max-width: 520px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Charts */
+    .admin-dashboard canvas {
+        max-height: 360px;
+        background: transparent; /* ให้ดูกลืนกับการ์ด */
+    }
+
+    /* Utilities (spacing/glow) */
+    .admin-dashboard .badge-brand {
+        background: rgba(37,99,235,.08);
+        color: var(--brand);
+        border: 1px solid rgba(37,99,235,.15);
+        border-radius: 999px;
+        font-weight: 600;
+        padding: .25rem .6rem;
+    }
+
+/* Small responsive nuance */
+@media (max-width: 576px) {
+    .admin-dashboard .kpi-value {
+        font-size: 1.9rem;
+    }
+}

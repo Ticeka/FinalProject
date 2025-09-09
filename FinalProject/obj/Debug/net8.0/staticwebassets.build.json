@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lRLVKCjESsPxwQB1g12KclT/N3UspPZrZ9o/SsOMe9I=",
+  "Hash": "rr9QekDYz6wIXe/nD0s+FNEthv7WtNPKXXWabz1GYrs=",
   "Source": "FinalProject",
   "BasePath": "_content/FinalProject",
   "Mode": "Default",
@@ -57,6 +57,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FinalProject.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-dashboard.css",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "css/admin-dashboard#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1qm5w4vvsd",
+      "Integrity": "SWKvv/BNk8FYOEqJy4nWo0NV7ryPhi2uf7ui/+Q5aPw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\admin-dashboard.css"
     },
     {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
@@ -1844,6 +1865,27 @@
       "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-dashboard.js",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "js/admin-dashboard#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "t95tn5ihzt",
+      "Integrity": "DzXAeqLa5KamOkf55X5haz+MTCap52alWhRT3AB9gCc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\admin-dashboard.js"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -3295,6 +3337,88 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/admin-dashboard.1qm5w4vvsd.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-dashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3755"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SWKvv/BNk8FYOEqJy4nWo0NV7ryPhi2uf7ui/+Q5aPw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 09 Sep 2025 02:28:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1qm5w4vvsd"
+        },
+        {
+          "Name": "label",
+          "Value": "css/admin-dashboard.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SWKvv/BNk8FYOEqJy4nWo0NV7ryPhi2uf7ui/+Q5aPw="
+        }
+      ]
+    },
+    {
+      "Route": "css/admin-dashboard.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-dashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3755"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SWKvv/BNk8FYOEqJy4nWo0NV7ryPhi2uf7ui/+Q5aPw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 09 Sep 2025 02:28:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SWKvv/BNk8FYOEqJy4nWo0NV7ryPhi2uf7ui/+Q5aPw="
+        }
+      ]
+    },
+    {
       "Route": "css/detail.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
       "Selectors": [],
@@ -3973,7 +4097,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 02:07:46 GMT"
+          "Value": "Tue, 09 Sep 2025 02:14:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4018,7 +4142,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 02:07:46 GMT"
+          "Value": "Tue, 09 Sep 2025 02:14:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4063,7 +4187,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 02:07:46 GMT"
+          "Value": "Tue, 09 Sep 2025 02:14:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4100,7 +4224,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 02:07:46 GMT"
+          "Value": "Tue, 09 Sep 2025 02:14:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10425,6 +10549,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-UTMnTOxSBZpAgCfDXME8AqqtTu+qnH8OeXjsYhj+qzw="
+        }
+      ]
+    },
+    {
+      "Route": "js/admin-dashboard.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-dashboard.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2524"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DzXAeqLa5KamOkf55X5haz+MTCap52alWhRT3AB9gCc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 09 Sep 2025 02:24:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-DzXAeqLa5KamOkf55X5haz+MTCap52alWhRT3AB9gCc="
+        }
+      ]
+    },
+    {
+      "Route": "js/admin-dashboard.t95tn5ihzt.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-dashboard.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2524"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DzXAeqLa5KamOkf55X5haz+MTCap52alWhRT3AB9gCc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 09 Sep 2025 02:24:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t95tn5ihzt"
+        },
+        {
+          "Name": "label",
+          "Value": "js/admin-dashboard.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DzXAeqLa5KamOkf55X5haz+MTCap52alWhRT3AB9gCc="
         }
       ]
     },
