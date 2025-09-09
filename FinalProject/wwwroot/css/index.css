@@ -72,6 +72,7 @@ body {
     width: 100%;
 }
 
+
 .map-legend {
     position: absolute;
     left: 12px;
@@ -187,4 +188,36 @@ body {
         height: 28px;
         font-size: 16px;
     }
+}
+/* ทำให้หมุดอีโมจิชัดเสมอ */
+.poi-pin {
+    opacity: 1 !important;
+}
+
+.leaflet-marker-icon {
+    opacity: 1 !important;
+}
+
+/* จุดขนาดเล็กที่แสดงทุกซูม (อยู่ใน dotsLayer) */
+.leaflet-interactive {
+    pointer-events: auto;
+}
+/* ให้คลิกได้ */
+/* ย่อ–ขยายหมุดอัตโนมัติตามซูม */
+.poi-pin {
+    transform: scale(var(--poi-scale, 1));
+    transform-origin: center center;
+    will-change: transform;
+    user-select: none;
+}
+
+/* หมุดขนาดเล็กในลิสต์ */
+.poi-mini {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15);
 }

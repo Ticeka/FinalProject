@@ -34,6 +34,50 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="~/css/detail.css" />
 
+<style>
+    /* ===== Floating Edit Button (Admin only) ===== */
+    .fab-edit {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 1050;
+        border-radius: 999px;
+        box-shadow: 0 12px 28px rgba(0,0,0,.18);
+        display: grid;
+        place-items: center;
+        gap: .35rem;
+        padding: .9rem 1rem;
+        font-weight: 700;
+    }
+
+        .fab-edit .label {
+            display: none;
+        }
+
+        .fab-edit:hover {
+            transform: translateY(-2px);
+        }
+
+        .fab-edit:active {
+            transform: translateY(0);
+        }
+
+    @@media (min-width: 992px) {
+        .fab-edit .label
+
+    {
+        display: inline;
+        margin-left: .35rem;
+    }
+
+    }
+
+    .fab-edit.dragging {
+        cursor: grabbing;
+        user-select: none;
+    }
+</style>
+
 @if (b is null)
 {
     <div class="container py-5">
@@ -232,7 +276,6 @@ else
             <div class="table-responsive">
                 <table class="table align-middle spec-table mb-0">
                     <tbody>
-                        
                         @if (!string.IsNullOrWhiteSpace(b.ProductId))
                         {
                             <tr><th>Product ID</th><td>@b.ProductId</td></tr>
@@ -360,6 +403,19 @@ else
         <div id="cmtEmpty" class="text-muted">ยังไม่มีความคิดเห็น — มาเป็นคนแรกกันเลย!</div>
     </section>
 
+    @* ===== FAB: ปุ่มแก้ไข (แสดงเฉพาะแอดมิน) ===== *@
+    @if (User?.IsInRole("Admin") ?? false)
+    {
+        <a id="fabEdit"
+           class="fab-edit btn btn-warning"
+           asp-page="/Admin/editdetail"
+           asp-route-id="@b.Id"
+           title="แก้ไขรายการนี้ (Admin)"
+           aria-label="แก้ไขรายการนี้">
+            ✏️ <span class="label">แก้ไข</span>
+        </a>
+    }
+
     <!-- JSON-LD (Structured Data) -->
     <script type="application/ld+json">
         {
@@ -385,3 +441,59 @@ else
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="~/js/detail.js"></script>
+
+<script>
+    /* ทำ FAB ให้ "ลากได้" แบบเบา ๆ */
+    (function () {
+      const fab = document.getElementById('fabEdit');
+      if (!fab) return;
+
+      let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+      const setPos = (x, y) => {
+        // เปลี่ยนจากยึดขวาล่าง → เป็นยึดพิกัดซ้ายบนเมื่อถูกลาก
+        fab.style.right = 'auto';
+        fab.style.bottom = 'auto';
+        // กันล้นขอบหน้าจอเล็กน้อย
+        const w = fab.offsetWidth, h = fab.offsetHeight;
+        const maxX = Math.max(0, window.innerWidth - w - 6);
+        const maxY = Math.max(0, window.innerHeight - h - 6);
+        x = Math.min(Math.max(6, x), maxX);
+        y = Math.min(Math.max(6, y), maxY);
+        fab.style.left = x + 'px';
+        fab.style.top  = y + 'px';
+      };
+
+      const down = (e) => {
+        dragging = true;
+        fab.classList.add('dragging');
+        const p = e.touches ? e.touches[0] : e;
+        const r = fab.getBoundingClientRect();
+        sx = p.clientX; sy = p.clientY; ox = r.left; oy = r.top;
+
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', up);
+        document.addEventListener('touchmove', move, { passive: false });
+        document.addEventListener('touchend', up);
+      };
+
+      const move = (e) => {
+        if (!dragging) return;
+        if (e.cancelable) e.preventDefault();
+        const p = e.touches ? e.touches[0] : e;
+        setPos(ox + (p.clientX - sx), oy + (p.clientY - sy));
+      };
+
+      const up = () => {
+        dragging = false;
+        fab.classList.remove('dragging');
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+        document.removeEventListener('touchmove', move);
+        document.removeEventListener('touchend', up);
+      };
+
+      fab.addEventListener('mousedown', down);
+      fab.addEventListener('touchstart', down, { passive: false });
+    })();
+</script>

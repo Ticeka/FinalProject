@@ -15,6 +15,11 @@
     const API_OPTS = "/api/reco/flavor-options";
     const HISTORY_KEY = "flavor_match_hist";
 
+    // ----- fixed option sets (ตามที่ผู้ใช้กำหนด) -----
+    const FIXED_FLAVORS = ["หวาน", "เปรี้ยว", "ขม", "เค็ม", "อูมามิ"];
+    const FIXED_FOODS = ["ทะเล", "เนื้อ", "ไก่", "หมู"];
+    const FIXED_MOODS = ["Party", "Chill", "Celebration", "Fresh", "Sport"];
+
     // ---------- helpers ----------
     function chipHtml(name, value, checked = false) {
         const safe = String(value);
@@ -25,7 +30,7 @@
       </label>`;
     }
     function renderChipset(name, items, preset = []) {
-        const host = $(`#chipset-${name}`);
+        const host = document.querySelector(`#chipset-${name}`);
         if (!host) return;
         host.innerHTML = (items || [])
             .map(v => chipHtml(name, v, preset.includes(v)))
@@ -42,26 +47,44 @@
     }
     function renderHistory() {
         const arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
-        histList.innerHTML = arr.map(it => `
-      <div class="hist-item">
-        <div class="t">${it.title}</div>
-        <div class="s">
-          ${it.base || "—"}
-          ${it.flavors?.length ? " • " + it.flavors.join(", ") : ""}
-          ${it.foods?.length ? " • 🍽 " + it.foods.join(", ") : ""}
-          ${it.moods?.length ? " • 🎭 " + it.moods.join(", ") : ""}
-        </div>
-      </div>
-    `).join("");
+        if (!histList) return;
+        histList.innerHTML = arr.map(h => {
+            const extra = [
+                (h.foods?.length ? `🍽 ${h.foods.join(", ")}` : null),
+                (h.moods?.length ? `🎭 ${h.moods.join(", ")}` : null)
+            ].filter(Boolean).join(" • ");
+            const dt = new Date(h.t || Date.now());
+            return `
+              <div class="hist-item">
+                <div class="hist-head">
+                  <div class="hist-title">${h.base} • ${(h.flavors || []).join(", ") || "Signature"}</div>
+                  <time class="hist-time">${dt.toLocaleString()}</time>
+                </div>
+                <div class="hist-sub">${extra || ""}</div>
+              </div>`;
+        }).join("");
     }
+
+    // ---------- deep link ----------
+    const sp = new URLSearchParams(location.search);
+    const dl = {
+        base: sp.get("base") || "",
+        flavors: (sp.get("flavors") || "").split(",").map(s => s.trim()).filter(Boolean),
+        foods: (sp.get("foods") || "").split(",").map(s => s.trim()).filter(Boolean),
+        moods: (sp.get("moods") || "").split(",").map(s => s.trim()).filter(Boolean),
+    };
+    if (dl.base) baseEl.value = dl.base;
+
     function buildShareUrl({ base, flavors, foods, moods }) {
         const u = new URL(location.href);
-        if (base) u.searchParams.set("base", base);
-        if (flavors?.length) u.searchParams.set("flavors", flavors.join(","));
-        if (foods?.length) u.searchParams.set("foods", foods.join(","));
-        if (moods?.length) u.searchParams.set("moods", moods.join(","));
+        const sp = u.searchParams;
+        sp.set("base", base || "");
+        sp.set("flavors", (flavors || []).join(","));
+        sp.set("foods", (foods || []).join(","));
+        sp.set("moods", (moods || []).join(","));
         return u.toString();
     }
+
     async function fetchMatch(base, flavors, foods, moods) {
         const payload = { base, flavors, foods, moods, take: 6 };
         const res = await fetch(API_MATCH, {
@@ -81,30 +104,20 @@
         return res.json(); // { flavors:[], foods:[], moods:[] }
     }
 
-    // ---------- deep link ----------
-    const sp = new URLSearchParams(location.search);
-    const dl = {
-        base: sp.get("base") || "",
-        flavors: (sp.get("flavors") || "").split(",").map(s => s.trim()).filter(Boolean),
-        foods: (sp.get("foods") || "").split(",").map(s => s.trim()).filter(Boolean),
-        moods: (sp.get("moods") || "").split(",").map(s => s.trim()).filter(Boolean),
-    };
-    if (dl.base) baseEl.value = dl.base;
-
-    // ---------- load options when base changes ----------
+    // ---------- load options ----------
     async function loadOptionsAndRender() {
         try {
             const base = baseEl.value || "";
             const { flavors = [], foods = [], moods = [] } = await fetchOptions(base);
-            renderChipset("flavor", flavors, dl.flavors);
-            renderChipset("food", foods, dl.foods);
-            renderChipset("mood", moods, dl.moods);
+            renderChipset("flavor", flavors.length ? flavors : FIXED_FLAVORS, dl.flavors);
+            renderChipset("food", foods.length ? foods : FIXED_FOODS, dl.foods);
+            renderChipset("mood", moods.length ? moods : FIXED_MOODS, dl.moods);
         } catch (e) {
             console.error("load options failed", e);
-            // fallback minimal (ถ้าอยากมี default)
-            renderChipset("flavor", ["Citrus", "Herb", "Sweet", "Bitter", "Smoke", "Spice", "Malty", "Hoppy", "Fruity", "Floral", "Woody"], dl.flavors);
-            renderChipset("food", ["ลาบหมูคั่ว", "หมูแดดเดียว", "ชีสเค้ก", "ซูชิ"], dl.foods);
-            renderChipset("mood", ["Chill", "Party", "Celebration", "Romantic"], dl.moods);
+            // fallback: ใช้ชุดตายตัว
+            renderChipset("flavor", FIXED_FLAVORS, dl.flavors);
+            renderChipset("food", FIXED_FOODS, dl.foods);
+            renderChipset("mood", FIXED_MOODS, dl.moods);
         } finally {
             // ใช้ deep-link รอบแรกครั้งเดียวพอ
             dl.flavors = []; dl.foods = []; dl.moods = [];
@@ -119,9 +132,8 @@
         const flavors = readChecked("flavor");
         const foods = readChecked("food");
         const moods = readChecked("mood");
-        if (!base) { alert("กรุณาเลือกฐานเครื่องดื่ม"); return; }
 
-        recTitle.textContent = "กำลังกรองตามตัวเลือกของคุณ...";
+        recTitle.textContent = "กำลังประมวลผล…";
         recSub.textContent = "จะใช้คะแนนช่วยหาเฉพาะเมื่อยังไม่เจอคำตอบตรง ๆ";
         resultWrap.classList.add("d-none");
 
@@ -156,24 +168,35 @@
             </div>
           </div>`;
             }).join("");
+
             resultWrap.classList.remove("d-none");
 
-            // history + deep link
-            saveHistory({ title: recTitle.textContent, base: out.base, flavors: out.flavors, foods, moods });
+            saveHistory({ base, flavors, foods, moods });
             renderHistory();
-            history.replaceState(null, "", buildShareUrl({ base, flavors, foods, moods }));
-
         } catch (err) {
+            alert(err?.message || "เกิดข้อผิดพลาด");
             console.error(err);
-            recTitle.textContent = "ขออภัย แนะนำไม่สำเร็จ";
-            recSub.textContent = "ลองใหม่อีกครั้ง หรือตรวจสอบการเชื่อมต่อ";
-            resultWrap.classList.add("d-none");
         }
+    });
+
+    // ---------- reset ----------
+    $("#btnReset")?.addEventListener("click", () => {
+        $all('input[type="checkbox"]').forEach(i => i.checked = false);
+        resultWrap.innerHTML = "";
+        resultWrap.classList.add("d-none");
+        recTitle.textContent = "ยังไม่มีคำแนะนำ";
+        recSub.textContent = "เลือกตัวกรองด้านซ้ายแล้วกด “แนะนำเลย”";
+    });
+
+    // ---------- clear history ----------
+    $("#btnClearHist")?.addEventListener("click", () => {
+        localStorage.removeItem(HISTORY_KEY);
+        renderHistory();
     });
 
     // ---------- share ----------
     btnShare?.addEventListener("click", async () => {
-        const base = baseEl.value || "";
+        const base = baseEl.value;
         const flavors = readChecked("flavor");
         const foods = readChecked("food");
         const moods = readChecked("mood");

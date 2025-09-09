@@ -2,6 +2,8 @@
 @model FinalProject.Pages.ListModel
 @{
     ViewData["Title"] = "Sip & Trip — รายการเครื่องดื่มทั้งหมด";
+    // แสดงปุ่มแก้ไขเฉพาะแอดมิน
+    bool isAdmin = User?.IsInRole("Admin") ?? false;
 }
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +19,16 @@
                  style="height:70px; width:auto; vertical-align:middle;" class="me-2" />
             รายการเครื่องดื่มทั้งหมด
         </h2>
-        <span id="resultCount" class="count-chip">0 รายการ</span>
+
+        <div class="d-flex align-items-center gap-2">
+            <span id="resultCount" class="count-chip">0 รายการ</span>
+            @* ถ้ามีหน้า Create ในอนาคต ค่อยเปิดปุ่มนี้ได้
+            @if (isAdmin)
+            {
+                <a class="btn btn-sm btn-success" asp-page="/Admin/Beers/Create">➕ เพิ่มใหม่</a>
+            }
+            *@
+        </div>
     </div>
 
     <!-- Toolbar / Filters -->
@@ -56,7 +67,8 @@
                 <label class="form-label">🔥 ดีกรี</label>
                 <select id="alcoholSelect" class="form-select">
                     <option value="">ทุกดีกรี</option>
-                    @foreach (var alc in Model.LocalBeers.Select(b => b.AlcoholLevel).Where(a => a != null).Distinct())
+                    @* AlcoholLevel เป็น double ไม่ nullable — กรองค่ามากกว่า 0 *@
+                    @foreach (var alc in Model.LocalBeers.Select(b => b.AlcoholLevel).Where(a => a > 0).Distinct())
                     {
                         <option value="@alc">@alc%</option>
                     }
@@ -127,9 +139,22 @@
                         }
                     </div>
 
-                    <div class="row-right">
-                        <span class="muted">ABV: <strong>@(beer.AlcoholLevel > 0 ? $"{beer.AlcoholLevel}%" : "–")</strong></span>
-                        <span class="muted">ราคา: <span class="price">@((beer.Price > 0 ? beer.Price.ToString("N0") : "–"))</span> บาท</span>
+                    <div class="row-right text-end">
+                        <span class="muted d-block">ABV: <strong>@(beer.AlcoholLevel > 0 ? $"{beer.AlcoholLevel}%" : "–")</strong></span>
+                        <span class="muted d-block">ราคา: <span class="price">@((beer.Price > 0 ? beer.Price.ToString("N0") : "–"))</span> บาท</span>
+
+                        @* ปุ่มแก้ไข (เฉพาะแอดมิน) *@
+                        @if (isAdmin)
+                        {
+                            <div class="mt-2">
+                                <button type="button"
+                                        class="btn btn-sm btn-warning"
+                                        title="แก้ไขรายการนี้ (Admin)"
+                                        onclick="event.stopPropagation(); location.href='@Url.Page("/Admin/editdetail", new { id = beer.Id })'">
+                                    ✏️ แก้ไข
+                                </button>
+                            </div>
+                        }
                     </div>
                 </div>
             }

@@ -6,6 +6,67 @@ wwwroot\css\mixtrip.css
 wwwroot\css\profile.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\beers\asura.jpg
+wwwroot\images\beers\aummara.jpg
+wwwroot\images\beers\aumpai.jpg
+wwwroot\images\beers\Chalong Bay.jpg
+wwwroot\images\beers\Chalong_Bay.jpg
+wwwroot\images\beers\chalong-bay.jpg
+wwwroot\images\beers\changtongcome.jpg
+wwwroot\images\beers\doklumduan.jpg
+wwwroot\images\beers\gintara.jpg
+wwwroot\images\beers\Grandma jinn.jpg
+wwwroot\images\beers\Iron Balls.jpg
+wwwroot\images\beers\Iron_Balls.jpg
+wwwroot\images\beers\ISSAN RUM.jpg
+wwwroot\images\beers\kaengsuaten.jpg
+wwwroot\images\beers\Kilo Spirits.jpg
+wwwroot\images\beers\Kilo_Spirits.jpg
+wwwroot\images\beers\Kilo_Spirits.jpg.url
+wwwroot\images\beers\kirikhan.jpg
+wwwroot\images\beers\Kirikhan-Spirits-Product.jpg
+wwwroot\images\beers\koon.jpg
+wwwroot\images\beers\koyotelumka.jpg
+wwwroot\images\beers\lungnid.jpg
+wwwroot\images\beers\MAA JAI DUM.jpg
+wwwroot\images\beers\Mahkeawmunggon.jpg
+wwwroot\images\beers\malai.png
+wwwroot\images\beers\Masuk.jpg
+wwwroot\images\beers\meekhawmeena.jpg
+wwwroot\images\beers\morkmungmueng.jpg
+wwwroot\images\beers\nangfah.jpg
+wwwroot\images\beers\nasan.jpg
+wwwroot\images\beers\ngutong.jpg
+wwwroot\images\beers\ONSON.jpg
+wwwroot\images\beers\pardtho.jpg
+wwwroot\images\beers\phuket.jpg
+wwwroot\images\beers\pur.jpg
+wwwroot\images\beers\raifah.jpg
+wwwroot\images\beers\raiyoddoy.jpg
+wwwroot\images\beers\ratchanakarn.jpg
+wwwroot\images\beers\Red jungle.jpg
+wwwroot\images\beers\renudrunk.jpg
+wwwroot\images\beers\rocka.jpg
+wwwroot\images\beers\r-rit.jpg
+wwwroot\images\beers\Saku.jpeg
+wwwroot\images\beers\Sangvein.jpeg
+wwwroot\images\beers\sato_khawhom_esan.jpg
+wwwroot\images\beers\satom.jpg
+wwwroot\images\beers\seekaew.jpg
+wwwroot\images\beers\shan.png
+wwwroot\images\beers\singhnaka.jpg
+wwwroot\images\beers\singnakha.jpg
+wwwroot\images\beers\SOD CHAENG.jpg
+wwwroot\images\beers\Spirit of Laen kha.jpg
+wwwroot\images\beers\summerbleach.jpg
+wwwroot\images\beers\suramaprawchaiya.jpg
+wwwroot\images\beers\suratewa.jpg
+wwwroot\images\beers\taolao.jpeg
+wwwroot\images\beers\The Spirit of ChaiyaPhum.jpg
+wwwroot\images\beers\tumnan.jpg
+wwwroot\images\beers\whiteshark.jpg
+wwwroot\images\beers\yoddoi.jpg
+wwwroot\images\beers\yodkhaw.png
 wwwroot\images\jibthai-logo-duoglass.svg
 wwwroot\images\localbeers\BanBeerChingmai.jfif
 wwwroot\images\localbeers\chaingraistoneage.jfif
@@ -28,7 +89,6 @@ wwwroot\js\index.js
 wwwroot\js\list.js
 wwwroot\js\mixtrip.js
 wwwroot\js\profile.js
-wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
@@ -90,3 +150,5 @@ wwwroot\uploads\avatars\d6cd953c-1363-4b2b-86a5-8aa6bb644c15_638907088624329991.
 wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740136695698.jpg
 wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638906740317952199.jpg
 wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg
+wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638926187679322860.jpg
+wwwroot\uploads\avatars\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638926187778805113.jpg

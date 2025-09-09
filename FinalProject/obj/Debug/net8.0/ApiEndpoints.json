@@ -274,7 +274,7 @@
   },
   {
     "ContainingType": "FinalProject.Endpoints.FlavorMatchEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapFlavorMatchEndpoints\u003Eb__1_1",
+    "Method": "\u003CMapFlavorMatchEndpoints\u003Eb__7_1",
     "RelativePath": "api/reco/flavor-match",
     "HttpMethod": "POST",
     "IsController": false,
@@ -288,22 +288,15 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "FinalProject.Models.FlavorRecoResponse",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 400
+        "StatusCode": 200
       }
     ]
   },
   {
     "ContainingType": "FinalProject.Endpoints.FlavorMatchEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapFlavorMatchEndpoints\u003Eb__1_0",
+    "Method": "\u003CMapFlavorMatchEndpoints\u003Eb__7_0",
     "RelativePath": "api/reco/flavor-options",
     "HttpMethod": "GET",
     "IsController": false,

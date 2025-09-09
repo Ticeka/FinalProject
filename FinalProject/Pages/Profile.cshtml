@@ -73,13 +73,16 @@
                                 <div class="lbl">ถูกใจ</div>
                             </div>
                             <div class="stat">
-                                <div class="val">@Model.Stats?.Badges</div>
-                                <div class="lbl">แบดจ์</div>
+                                <div class="val">@Model.Stats?.Comments</div>
+                                <div class="lbl">คอมเมนต์</div>
                             </div>
                         </div>
 
                         <div class="actions">
-                            <button id="editProfileBtn" class="btn btn-brand btn-sm">แก้ไขโปรไฟล์</button>
+                            <a asp-page="/Edit" class="btn btn-brand btn-sm">
+                                แก้ไขโปรไฟล์
+                            </a>
+
                             <button id="shareProfileBtn" class="btn btn-soft btn-sm">แชร์โปรไฟล์</button>  
                         </div>
                     </div>
@@ -96,7 +99,7 @@
         <nav class="tabs" role="tablist" aria-label="สลับหมวดโปรไฟล์">
             <button class="tab-btn active" data-tab="favorites" role="tab" aria-selected="true">รายการถูกใจ</button>
             <button class="tab-btn" data-tab="activity" role="tab" aria-selected="false">กิจกรรม</button>
-            <button class="tab-btn" data-tab="about" role="tab" aria-selected="false">เกี่ยวกับ</button>
+            
             <div class="tab-underline" aria-hidden="true"></div>
         </nav>
 
@@ -135,22 +138,8 @@
                 <div id="activityEmpty" class="muted small d-none">ยังไม่มีกิจกรรม</div>
             </section>
 
-            <!-- About -->
-            <section id="tab-about" class="tab-panel" role="tabpanel" aria-labelledby="เกี่ยวกับ">
-                <div class="card about-card">
-                    <div class="card-body">
-                        <h3 class="section-title">เกี่ยวกับฉัน</h3>
-                        @if (!string.IsNullOrWhiteSpace(Model.Bio))
-                        {
-                            <p class="mb-0">@Model.Bio</p>
-                        }
-                        else
-                        {
-                            <p class="mb-0 muted">ยังไม่ได้เขียนแนะนำตัว</p>
-                        }
-                    </div>
-                </div>
-            </section>
+           
+            
         </main>
     </div>
 

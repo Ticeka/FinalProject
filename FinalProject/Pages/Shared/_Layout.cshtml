@@ -54,6 +54,16 @@
         return path.StartsWith(p);
     }
     Func<string, string> active = p => IsActive(p) ? "active fw-semibold" : "";
+
+    // ===== Admin / Page Context =====
+    bool isAdmin = User?.IsInRole("Admin") ?? false;
+    bool onDetail = path.StartsWith("/detail");
+    bool onAdmin = path.StartsWith("/admin");
+
+    int currentId = 0;
+    var idVal = ViewContext?.RouteData?.Values["id"]?.ToString();
+    if (!string.IsNullOrWhiteSpace(idVal))
+        int.TryParse(idVal, out currentId);
 }
 
 <!DOCTYPE html>
@@ -149,13 +159,11 @@
                     transform: translateX(-100%);
                     animation: shine 1.6s ease-in-out infinite;
                 }
+
         @@keyframes shine {
-            to
-
-        {
-            transform: translateX(100%)
-        }
-
+            to {
+                transform: translateX(100%)
+            }
         }
 
         .container {
@@ -182,7 +190,7 @@
             color: #fff;
             font-weight: 700;
             font-size: .9rem;
-            border: 1px solid rgba(255,255,255,.5);
+            border: 1px solid #e2e8f0;
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -195,7 +203,7 @@
                 width: 70%;
                 height: 70%;
                 opacity: .18;
-                z-index: 0; /* ไอคอนจางไว้หลังตัวอักษร */
+                z-index: 0;
             }
 
             .nav-avatar-fallback > * {
@@ -231,16 +239,15 @@
             }
 
         footer {
-            background: #ffffff;
+            background: #fff;
             border-top: 1px solid #e6ebf2;
             color: #64748b;
             padding: 16px 0;
         }
 
-        /* ปุ่ม CTA ขวาสุด (ทางเลือก) */
         .btn-ghost {
             border: 1px solid #c7d2fe;
-            background: #ffffff;
+            background: #fff;
             border-radius: 12px;
             padding: .45rem .75rem;
             font-weight: 600;
@@ -256,9 +263,12 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="~/images/logo.png" alt="Sip & Trip"
-                         style="height:50px; width:auto;" class="me-2" />
-                   Sip &amp; Trip
+                    <img src="~/images/logo.png" alt="Sip & Trip" style="height:50px; width:auto;" class="me-2" />
+                    Sip &amp; Trip
+                    @if (isAdmin)
+                    {
+                        <span class="badge text-bg-warning ms-2">Admin</span>
+                    }
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -267,28 +277,55 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav align-items-center me-3">
-                        <li class="nav-item">
-                            <a class="nav-link @active("/Index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link @(Context.Request.Path.Value?.StartsWith("/MixTrip") == true ? "active fw-semibold" : "")"
-                               asp-area="" asp-page="/MixTrip">🎲 Mix &amp; Trip</a>
-                        </li>-->
+                    @* ===== LEFT: Main nav (แตกต่างตามสิทธิ์) ===== *@
+                    @if (!isAdmin)
+                    {
+                        <!-- USER NAV -->
+                        <ul class="navbar-nav align-items-center me-3">
+                            <li class="nav-item">
+                                <a class="nav-link @active("/Index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @active("/FlavorMatch")" asp-area="" asp-page="/FlavorMatch">🍷 FlavorMatch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @active("/AboutUs")" asp-area="" asp-page="/AboutUs">ℹ️ เกี่ยวกับเรา</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <!-- ADMIN NAV: ให้เห็นแค่ที่จำเป็น -->
+                        <ul class="navbar-nav align-items-center me-3">
+                            <li class="nav-item">
+                                <a class="nav-link @active("/List")" asp-area="" asp-page="/List">📋 รายการ</a>
+                            </li>
 
-                        <!-- ✅ เพิ่gม FlavorMatch -->
-                        <li class="nav-item">
-                            <a class="nav-link @active("/FlavorMatch")" asp-area="" asp-page="/FlavorMatch">🍷 FlavorMatch</a>
-                        </li>
+                            <!-- ✅ ใส่ปุ่ม Dashboard (แอดมินเท่านั้นเห็นอยู่แล้วเพราะอยู่ในบล็อก isAdmin) -->
+                            <li class="nav-item">
+                                <a class="nav-link @active("/Admin")" asp-area="" asp-page="/Admin/Dashboard">📊 Dashboard</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link @active("/AboutUs")" asp-area="" asp-page="/AboutUs">ℹ️ เกี่ยวกับเรา</a>
-                        </li>
-                    </ul>
+                            @* ปุ่มตามคอนเท็กซ์ *@
+                            @if (onDetail && currentId > 0)
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-warning ms-lg-2" asp-page="/Admin/editdetail" asp-route-id="@currentId">✏️ แก้ไขรายการนี้</a>
+                                </li>
+                            }
+                            @if (onAdmin && currentId > 0)
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary ms-lg-2" asp-page="/Detail" asp-route-id="@currentId">👁️ ดูหน้าแสดงผล</a>
+                                </li>
+                            }
+                        </ul>
+                    }
 
+                    @* ===== RIGHT: Profile / Auth (เหมือนกันทั้งสองโหมด) ===== *@
                     <ul class="navbar-nav align-items-center">
                         @if (isSignedIn)
                         {
@@ -332,16 +369,15 @@
                                                 </span>
                                             }
                                             <div>
-                                                <div class="fw-semibold">@displayName</div>  
+                                                <div class="fw-semibold">@displayName</div>
                                             </div>
                                         </div>
                                     </li>
                                     <li><hr class="dropdown-divider" /></li>
 
-                                    <!-- เลือกหนึ่งแบบตามโครงของคุณ -->
                                     <li><a class="dropdown-item" asp-page="/Profile">โปรไฟล์ของฉัน</a></li>
-                                    @* หรือใช้หน้า Manage ของ Identity Area *@
-                                    @* <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">โปรไฟล์ของฉัน</a></li> *@
+                                    @* หรือใช้หน้า Manage ของ Identity Area:
+                                       <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">โปรไฟล์ของฉัน</a></li> *@
 
                                     <li>
                                         <form class="px-2 py-1" asp-area="Identity" asp-page="/Account/Logout" method="post">

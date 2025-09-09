@@ -13,13 +13,16 @@ namespace FinalProject.Models
         // จำนวนรีวิวที่ผู้ใช้เขียน
         public int Reviews { get; set; }
 
+        // จำนวนความคิดเห็นที่ผู้ใช้เขียน
+        public int Comments { get; set; }
+
         // จำนวนรายการที่ผู้ใช้กดเป็นรายการโปรด
         public int Favorites { get; set; }
 
         // จำนวนแบดจ์/เหรียญรางวัลที่ผู้ใช้ได้รับ
         public int Badges { get; set; }
 
-        // นำทางกลับไปยังผู้ใช้ (ไม่จำเป็นต้องใส่ก็ได้ แต่ช่วยเวลา include)
+        // นำทางกลับไปยังผู้ใช้ (optional)
         public virtual ApplicationUser User { get; set; } = default!;
     }
 }

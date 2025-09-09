@@ -37,6 +37,250 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Chalong Bay.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Chalong Bay.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Chalong_Bay.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Chalong_Bay.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Grandma jinn.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Grandma jinn.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\ISSAN RUM.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\ISSAN RUM.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Iron Balls.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Iron Balls.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Iron_Balls.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Iron_Balls.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Kilo Spirits.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Kilo Spirits.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Kilo_Spirits.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Kilo_Spirits.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Kilo_Spirits.jpg.url",
+      "PackagePath": "staticwebassets\\images\\beers\\Kilo_Spirits.jpg.url"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Kirikhan-Spirits-Product.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Kirikhan-Spirits-Product.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\MAA JAI DUM.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\MAA JAI DUM.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Mahkeawmunggon.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Mahkeawmunggon.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Masuk.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Masuk.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\ONSON.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\ONSON.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Red jungle.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Red jungle.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\SOD CHAENG.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\SOD CHAENG.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Saku.jpeg",
+      "PackagePath": "staticwebassets\\images\\beers\\Saku.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Sangvein.jpeg",
+      "PackagePath": "staticwebassets\\images\\beers\\Sangvein.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\Spirit of Laen kha.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\Spirit of Laen kha.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\The Spirit of ChaiyaPhum.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\The Spirit of ChaiyaPhum.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\asura.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\asura.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\aummara.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\aummara.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\aumpai.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\aumpai.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\chalong-bay.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\chalong-bay.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\changtongcome.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\changtongcome.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\doklumduan.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\doklumduan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\gintara.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\gintara.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\kaengsuaten.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\kaengsuaten.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\kirikhan.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\kirikhan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\koon.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\koon.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\koyotelumka.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\koyotelumka.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\lungnid.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\lungnid.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\malai.png",
+      "PackagePath": "staticwebassets\\images\\beers\\malai.png"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\meekhawmeena.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\meekhawmeena.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\morkmungmueng.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\morkmungmueng.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\nangfah.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\nangfah.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\nasan.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\nasan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\ngutong.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\ngutong.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\pardtho.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\pardtho.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\phuket.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\phuket.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\pur.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\pur.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\r-rit.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\r-rit.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\raifah.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\raifah.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\raiyoddoy.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\raiyoddoy.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\ratchanakarn.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\ratchanakarn.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\renudrunk.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\renudrunk.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\rocka.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\rocka.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\sato_khawhom_esan.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\sato_khawhom_esan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\satom.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\satom.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\seekaew.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\seekaew.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\shan.png",
+      "PackagePath": "staticwebassets\\images\\beers\\shan.png"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\singhnaka.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\singhnaka.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\singnakha.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\singnakha.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\summerbleach.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\summerbleach.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\suramaprawchaiya.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\suramaprawchaiya.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\suratewa.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\suratewa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\taolao.jpeg",
+      "PackagePath": "staticwebassets\\images\\beers\\taolao.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\tumnan.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\tumnan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\whiteshark.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\whiteshark.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\yoddoi.jpg",
+      "PackagePath": "staticwebassets\\images\\beers\\yoddoi.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\beers\\yodkhaw.png",
+      "PackagePath": "staticwebassets\\images\\beers\\yodkhaw.png"
+    },
+    {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\images\\jibthai-logo-duoglass.svg",
       "PackagePath": "staticwebassets\\images\\jibthai-logo-duoglass.svg"
     },
@@ -123,10 +367,6 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\profile.js",
       "PackagePath": "staticwebassets\\js\\profile.js"
-    },
-    {
-      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\lib\\bootstrap\\LICENSE",
@@ -371,6 +611,14 @@
     {
       "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg",
       "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638907175789536659.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638926187679322860.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638926187679322860.jpg"
+    },
+    {
+      "Id": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638926187778805113.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\ea7a5f66-4a88-4a31-b44c-51f66a3c071b_638926187778805113.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.FinalProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

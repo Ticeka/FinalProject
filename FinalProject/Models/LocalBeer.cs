@@ -80,14 +80,12 @@
         public LocalBeer? LocalBeer { get; set; }
     }
 
-    /// <summary>
-    /// Mood ที่เข้ากับเบียร์
-    /// </summary>
+
     public class LocalBeerMoodPairing
     {
         public int Id { get; set; }
         public int LocalBeerId { get; set; }
-        public string Mood { get; set; } = default!;  // Relax, Party, Romantic...
+        public string Mood { get; set; } = default!;  
         public string? Reason { get; set; }
 
         public LocalBeer? LocalBeer { get; set; }

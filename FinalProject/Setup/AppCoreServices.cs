@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FinalProject.Data;
 using FinalProject.Services;
 
+
 namespace FinalProject.Setup
 {
     public static class AppCoreServices

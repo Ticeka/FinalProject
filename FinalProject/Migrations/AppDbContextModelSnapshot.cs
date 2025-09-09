@@ -434,6 +434,9 @@ namespace FinalProject.Migrations
                     b.Property<int>("Badges")
                         .HasColumnType("int");
 
+                    b.Property<int>("Comments")
+                        .HasColumnType("int");
+
                     b.Property<int>("Favorites")
                         .HasColumnType("int");
 

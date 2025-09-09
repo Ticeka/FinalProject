@@ -61,19 +61,6 @@
               "target": "Package",
               "version": "[8.0.7, )"
             },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.7, )"
@@ -84,23 +71,7 @@
               "target": "Package",
               "version": "[8.0.7, )"
             },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Core": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Templating": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
               "target": "Package",
               "version": "[8.0.7, )"
             }

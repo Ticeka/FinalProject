@@ -1,3 +1,8 @@
+// Program.cs
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using FinalProject.Models;
 using FinalProject.Endpoints;
 using FinalProject.Setup; // มี IdentitySeeder
 
@@ -15,8 +20,10 @@ builder.Services.AddAuthorization(o =>
 
 var app = builder.Build();
 
-// เรียก seed roles + admin
+// เรียก seed roles + admin เริ่มต้น (ถ้ามีใน seeder)
 await IdentitySeeder.SeedAsync(app.Services);
+
+
 
 // Pipeline
 app.UseAppPipeline();
