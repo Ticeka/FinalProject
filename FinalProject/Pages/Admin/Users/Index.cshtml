@@ -3,10 +3,9 @@
 @{
     ViewData["Title"] = "Users";
 
-    // รายการ action ที่ระบบล็อกไว้ (ให้ตรงกับ ActivityLogger)
     string[] logActions = new[]
     {
-        "", // (All)
+        "", 
         "rating.add",
         "comment.add",
         "favorite.add",
@@ -16,7 +15,7 @@
         "avatar.remove",
         "admin.lock",
         "admin.unlock",
-        "admin.2fa.enable",
+        //"admin.2fa.enable",
         "admin.2fa.disable",
         "admin.roles.update"
     };
@@ -24,6 +23,46 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/admin-users.css" asp-append-version="true" />
+    <style>
+        /* ====== BIG Toast (ชัดขึ้น) ====== */
+        .toast-container.top-right {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1080;
+        }
+
+        .toast.toast-big {
+            min-width: 360px;
+            border: 1px solid #d0e7d5;
+            border-radius: .75rem;
+            box-shadow: 0 20px 48px rgba(2,6,23,.22);
+            overflow: hidden;
+        }
+
+            .toast.toast-big .toast-header {
+                padding: .85rem 1rem;
+            }
+
+            .toast.toast-big .toast-body {
+                padding: 1rem 1rem;
+                font-size: 1rem;
+            }
+
+        .toast-icon {
+            font-size: 1.1rem;
+            margin-right: .5rem;
+        }
+
+        /* badge-ghost เล็กน้อยให้ดูชัด */
+        .badge-ghost {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            border-radius: .5rem;
+            padding: .25rem .5rem
+        }
+    </style>
 }
 
 <div class="container-fluid my-4 admin-dashboard">
@@ -41,6 +80,10 @@
             }
         </div>
     </div>
+
+    <!-- Flash + Toast area (ย้ายขึ้นบนขวาให้เด่น) -->
+    <div id="flash" data-msg="@TempData["Msg"]" data-err="@TempData["Err"]"></div>
+    <div id="toastArea" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
 
     <!-- Filters -->
     <form method="get" class="card card-lite p-3 mb-3" role="search" aria-label="Filter users">
@@ -107,13 +150,13 @@
                         foreach (var u in Model.VM.Items)
                         {
                             var isLocked = u.LockoutEnd != null && u.LockoutEnd > DateTimeOffset.UtcNow;
-                            <tr>
+                            <tr data-user-id="@u.Id">
                                 <td>
                                     <div class="fw-semibold">@(!string.IsNullOrWhiteSpace(u.DisplayName) ? u.DisplayName : u.UserName)</div>
                                     <div class="text-muted small">@u.Email</div>
                                 </td>
 
-                                <td>
+                                <td id="rolesCell-@u.Id">
                                     @if (u.Roles.Count == 0)
                                     {
                                         <span class="badge-ghost">no role</span>
@@ -138,11 +181,11 @@
                                     <div class="d-flex flex-wrap gap-1">
                                         @if (isLocked)
                                         {
-                                            <span class="chip chip-red">Locked</span>
+                                            <span class="chip chip-red" data-status="state">Locked</span>
                                         }
                                         else
                                         {
-                                            <span class="chip chip-green">Active</span>
+                                            <span class="chip chip-green" data-status="state">Active</span>
                                         }
                                         @if (u.TwoFactorEnabled)
                                         {
@@ -155,7 +198,7 @@
                                     </div>
                                     @if (isLocked)
                                     {
-                                        <div class="text-muted small mt-1">Until @u.LockoutEnd?.LocalDateTime.ToString("yyyy-MM-dd HH:mm")</div>
+                                        <div class="text-muted small mt-1" data-status="lockend">Until @u.LockoutEnd?.LocalDateTime.ToString("yyyy-MM-dd HH:mm")</div>
                                     }
                                 </td>
 
@@ -163,27 +206,31 @@
                                     <div class="btn-group btn-group-sm" role="group" aria-label="User actions for @u.UserName">
                                         @if (isLocked)
                                         {
-                                            <form method="post" asp-page-handler="Unlock" class="d-inline">
+                                            <form method="post" asp-page-handler="Unlock" class="d-inline ajax-form" data-handler="Unlock">
                                                 <input type="hidden" name="id" value="@u.Id" />
-                                                <button class="btn btn-outline-success" data-confirm="Unlock this user?">Unlock</button>
+                                                <button class="btn btn-outline-success"
+                                                        data-confirm="Unlock this user?"
+                                                        data-busy="กำลังปลดล็อก..."
+                                                        data-pending="กำลังส่งคำสั่งปลดล็อก">
+                                                    Unlock
+                                                </button>
                                             </form>
                                         }
                                         else
                                         {
-                                            <form method="post" asp-page-handler="Lock" class="d-inline">
+                                            <form method="post" asp-page-handler="Lock" class="d-inline ajax-form" data-handler="Lock">
                                                 <input type="hidden" name="id" value="@u.Id" />
                                                 <input type="hidden" name="days" value="7" />
-                                                <button class="btn btn-outline-danger" data-confirm="Lock 7 days?">Lock</button>
+                                                <button class="btn btn-outline-danger"
+                                                        data-confirm="Lock 7 days?"
+                                                        data-busy="กำลังล็อก..."
+                                                        data-pending="กำลังส่งคำสั่งล็อก">
+                                                    Lock
+                                                </button>
                                             </form>
                                         }
 
-                                        <form method="post" asp-page-handler="Toggle2fa" class="d-inline">
-                                            <input type="hidden" name="id" value="@u.Id" />
-                                            <input type="hidden" name="enable" value="@(!u.TwoFactorEnabled)" />
-                                            <button class="btn btn-outline-secondary" data-confirm="@(u.TwoFactorEnabled ? "Disable 2FA?" : "Enable 2FA?")">
-                                                @(u.TwoFactorEnabled ? "Disable 2FA" : "Enable 2FA")
-                                            </button>
-                                        </form>
+                                       
 
                                         <button class="btn btn-outline-primary"
                                                 data-bs-toggle="modal"
@@ -194,7 +241,6 @@
                                             Roles
                                         </button>
 
-                                        <!-- Logs -->
                                         <button class="btn btn-outline-dark"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#logsModal"
@@ -240,7 +286,8 @@
 <!-- Roles Modal -->
 <div class="modal fade" id="rolesModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form method="post" asp-page-handler="UpdateRoles" class="modal-content">
+        <!-- ใส่ ajax-form เพื่อยิง JSON + Toast -->
+        <form method="post" asp-page-handler="UpdateRoles" class="modal-content ajax-form" data-handler="UpdateRoles">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Roles: <span id="rolesModalUser"></span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -258,7 +305,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-primary" data-busy="กำลังบันทึก..." data-pending="กำลังอัปเดตบทบาท">Save</button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </form>

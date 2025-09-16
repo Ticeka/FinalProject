@@ -33,16 +33,18 @@ namespace FinalProject.Pages.Admin.Users
         [BindProperty(SupportsGet = true)] public string? sort { get; set; }
         [BindProperty(SupportsGet = true)] public int page { get; set; } = 1;
 
+        [TempData] public string? Msg { get; set; }
+        [TempData] public string? Err { get; set; }
+
         public UsersIndexVM VM { get; private set; } = new();
 
         public async Task OnGetAsync()
         {
             VM.Q = q; VM.Role = role; VM.Status = status; VM.Sort = sort; VM.Page = Math.Max(page, 1);
 
-            // ----- เตรียม Role ทั้งหมด -----
-            VM.AllRoles = await _roles.Roles.AsNoTracking().Select(r => r.Name!).OrderBy(n => n).ToListAsync();
+            VM.AllRoles = await _roles.Roles.AsNoTracking()
+                .Select(r => r.Name!).OrderBy(n => n).ToListAsync();
 
-            // ----- Query ผู้ใช้พื้นฐาน -----
             var query = _db.Users.AsNoTracking().AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(q))
@@ -55,7 +57,6 @@ namespace FinalProject.Pages.Admin.Users
                 );
             }
 
-            // ----- กรองตามสถานะ -----
             if (!string.IsNullOrWhiteSpace(status))
             {
                 switch (status.ToLower())
@@ -75,7 +76,6 @@ namespace FinalProject.Pages.Admin.Users
                 }
             }
 
-            // ----- กรอง Role (join AspNetUserRoles) -----
             if (!string.IsNullOrWhiteSpace(role))
             {
                 var roleEntity = await _roles.FindByNameAsync(role);
@@ -90,7 +90,6 @@ namespace FinalProject.Pages.Admin.Users
                 }
             }
 
-            // ----- เรียงลำดับ -----
             query = sort?.ToLower() switch
             {
                 "email" => query.OrderBy(u => u.Email),
@@ -98,17 +97,14 @@ namespace FinalProject.Pages.Admin.Users
                 _ => query.OrderBy(u => u.DisplayName).ThenBy(u => u.UserName),
             };
 
-            // ----- นับทั้งหมด ก่อนตัดหน้า -----
             VM.TotalItems = await query.CountAsync();
 
-            // ----- ตัดหน้า -----
             int pageSize = VM.PageSize;
             int skip = (VM.Page - 1) * pageSize;
             var pageUsers = await query.Skip(skip).Take(pageSize).ToListAsync();
 
             var userIds = pageUsers.Select(u => u.Id).ToList();
 
-            // ----- ดึง Roles ของผู้ใช้ในหน้านี้ทีเดียว -----
             var rolesJoin = await (
                 from ur in _db.UserRoles.AsNoTracking()
                 join r in _db.Roles.AsNoTracking() on ur.RoleId equals r.Id
@@ -119,12 +115,10 @@ namespace FinalProject.Pages.Admin.Users
             var roleMap = rolesJoin.GroupBy(x => x.UserId)
                                    .ToDictionary(g => g.Key, g => g.Select(x => x.RoleName).OrderBy(n => n).ToList());
 
-            // ----- ดึง UserStats -----
             var stats = await _db.Set<UserStats>().AsNoTracking()
                             .Where(s => userIds.Contains(s.UserId))
                             .ToDictionaryAsync(s => s.UserId, s => s);
 
-            // ----- สร้าง VM -----
             VM.Items = pageUsers.Select(u => new UserRowVM
             {
                 Id = u.Id,
@@ -144,45 +138,95 @@ namespace FinalProject.Pages.Admin.Users
             }).ToList();
         }
 
-        // ====== Actions ======
+        // ---- Helper: ถ้า Accept เป็น JSON จะส่ง JSON; ถ้าไม่ใช่ ให้ Redirect กลับ ./Index พร้อมตัวกรองเดิม
+        private IActionResult JsonOrRedirect(object payload, string okMsg, string? errMsg = null)
+        {
+            var accept = Request.Headers["Accept"].ToString();
+            var wantsJson = accept.Contains("application/json", StringComparison.OrdinalIgnoreCase);
+
+            if (wantsJson) return new JsonResult(payload);
+
+            if (errMsg is null) Msg = okMsg; else Err = errMsg;
+
+            // ระบุชื่อหน้าให้ชัดเจน ป้องกัน No page named ''
+            return RedirectToPage("./Index", new { q = this.q, role = this.role, status = this.status, sort = this.sort, page = this.page });
+        }
+
+        // ===== Actions =====
         public async Task<IActionResult> OnPostLockAsync(string id, int days = 7)
         {
             var user = await _users.FindByIdAsync(id);
-            if (user == null) return NotFound();
+            if (user == null)
+                return JsonOrRedirect(new { ok = false, message = "User not found." }, "", "User not found.");
 
-            user.LockoutEnabled = true;
-            user.LockoutEnd = DateTimeOffset.UtcNow.AddDays(days);
-            var res = await _users.UpdateAsync(user);
-            TempData["Msg"] = res.Succeeded ? $"Locked {user.UserName} {days} days" : string.Join(";", res.Errors.Select(e => e.Description));
-            return RedirectToPage(new { q, role, status, sort, page });
+            var errors = new List<string>();
+
+            var enRes = await _users.SetLockoutEnabledAsync(user, true);
+            if (!enRes.Succeeded) errors.AddRange(enRes.Errors.Select(e => e.Description));
+
+            var endRes = await _users.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow.AddDays(days));
+            if (!endRes.Succeeded) errors.AddRange(endRes.Errors.Select(e => e.Description));
+
+            var ok = errors.Count == 0;
+            var message = ok ? $"Locked {user.UserName} {days} days" : string.Join("; ", errors);
+
+            return JsonOrRedirect(new
+            {
+                ok,
+                message,
+                isLocked = ok,
+                lockoutEndLocal = ok ? DateTimeOffset.UtcNow.AddDays(days).ToLocalTime().ToString("yyyy-MM-dd HH:mm") : null
+            }, ok ? message : "", ok ? null : message);
         }
 
         public async Task<IActionResult> OnPostUnlockAsync(string id)
         {
             var user = await _users.FindByIdAsync(id);
-            if (user == null) return NotFound();
+            if (user == null)
+                return JsonOrRedirect(new { ok = false, message = "User not found." }, "", "User not found.");
 
-            user.LockoutEnd = null;
-            var res = await _users.UpdateAsync(user);
-            TempData["Msg"] = res.Succeeded ? $"Unlocked {user.UserName}" : string.Join(";", res.Errors.Select(e => e.Description));
-            return RedirectToPage(new { q, role, status, sort, page });
+            var errors = new List<string>();
+
+            var enRes = await _users.SetLockoutEnabledAsync(user, true);
+            if (!enRes.Succeeded) errors.AddRange(enRes.Errors.Select(e => e.Description));
+
+            var endRes = await _users.SetLockoutEndDateAsync(user, null);
+            if (!endRes.Succeeded) errors.AddRange(endRes.Errors.Select(e => e.Description));
+
+            await _users.ResetAccessFailedCountAsync(user);
+
+            var ok = errors.Count == 0;
+            var message = ok ? $"Unlocked {user.UserName}" : string.Join("; ", errors);
+
+            return JsonOrRedirect(new
+            {
+                ok,
+                message,
+                isLocked = false,
+                lockoutEndLocal = (string?)null
+            }, ok ? message : "", ok ? null : message);
         }
 
         public async Task<IActionResult> OnPostToggle2faAsync(string id, bool enable)
         {
             var user = await _users.FindByIdAsync(id);
-            if (user == null) return NotFound();
+            if (user == null)
+                return JsonOrRedirect(new { ok = false, message = "User not found." }, "", "User not found.");
 
-            user.TwoFactorEnabled = enable;
-            var res = await _users.UpdateAsync(user);
-            TempData["Msg"] = res.Succeeded ? (enable ? "2FA enabled" : "2FA disabled") : string.Join(";", res.Errors.Select(e => e.Description));
-            return RedirectToPage(new { q, role, status, sort, page });
+            var res = await _users.SetTwoFactorEnabledAsync(user, enable);
+            var ok = res.Succeeded;
+            var message = ok ? (enable ? "2FA enabled" : "2FA disabled") : string.Join("; ", res.Errors.Select(e => e.Description));
+
+            return JsonOrRedirect(new { ok, message, twoFactorEnabled = enable }, ok ? message : "", ok ? null : message);
         }
 
-        public async Task<IActionResult> OnPostUpdateRolesAsync(string id, List<string> selectedRoles)
+        public async Task<IActionResult> OnPostUpdateRolesAsync(string id, List<string>? selectedRoles)
         {
             var user = await _users.FindByIdAsync(id);
-            if (user == null) return NotFound();
+            if (user == null)
+                return JsonOrRedirect(new { ok = false, message = "User not found." }, "", "User not found.");
+
+            selectedRoles ??= new List<string>();
 
             var allRoles = await _roles.Roles.Select(r => r.Name!).ToListAsync();
             var current = await _users.GetRolesAsync(user);
@@ -190,22 +234,28 @@ namespace FinalProject.Pages.Admin.Users
             var toAdd = selectedRoles.Except(current).Where(r => allRoles.Contains(r)).ToList();
             var toRemove = current.Except(selectedRoles).Where(r => allRoles.Contains(r)).ToList();
 
+            var errors = new List<string>();
+
             if (toAdd.Any())
             {
                 var addRes = await _users.AddToRolesAsync(user, toAdd);
-                if (!addRes.Succeeded) { TempData["Msg"] = string.Join(";", addRes.Errors.Select(e => e.Description)); return RedirectToPage(new { q, role, status, sort, page }); }
+                if (!addRes.Succeeded) errors.AddRange(addRes.Errors.Select(e => e.Description));
             }
             if (toRemove.Any())
             {
                 var rmRes = await _users.RemoveFromRolesAsync(user, toRemove);
-                if (!rmRes.Succeeded) { TempData["Msg"] = string.Join(";", rmRes.Errors.Select(e => e.Description)); return RedirectToPage(new { q, role, status, sort, page }); }
+                if (!rmRes.Succeeded) errors.AddRange(rmRes.Errors.Select(e => e.Description));
             }
 
-            TempData["Msg"] = "Roles updated.";
-            return RedirectToPage(new { q, role, status, sort, page });
+            var ok = errors.Count == 0;
+            var message = ok ? "Roles updated." : string.Join("; ", errors);
+
+            var newRoles = await _users.GetRolesAsync(user);
+
+            return JsonOrRedirect(new { ok, message, roles = newRoles }, ok ? message : "", ok ? null : message);
         }
 
-        // ===== Logs JSON (for modal in Users page) =====
+        // ===== Logs JSON =====
         public async Task<IActionResult> OnGetLogsAsync(
             string userId,
             int page = 1,
@@ -272,16 +322,7 @@ namespace FinalProject.Pages.Admin.Users
                 .ToListAsync();
 
             var totalPages = Math.Max(1, (int)Math.Ceiling((double)total / pageSize));
-            // ใส่ทั้ง 2 ชุด field เพื่อเข้ากันได้กับ JS เก่า/ใหม่
-            return new JsonResult(new
-            {
-                total,
-                page,
-                pageSize,
-                items,
-                totalItems = total,
-                totalPages
-            });
+            return new JsonResult(new { total, page, pageSize, items, totalItems = total, totalPages });
         }
     }
 }

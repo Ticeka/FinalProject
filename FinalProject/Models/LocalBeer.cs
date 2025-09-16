@@ -47,7 +47,7 @@
         public double? AverageRating { get; set; }
         public string? ProductId { get; set; }
         public string? TypeOfLiquor { get; set; }
-
+        public int ViewCount { get; set; }
         // 🆕 ความสัมพันธ์
         public List<LocalBeerFlavor> Flavors { get; set; } = new();
         public List<LocalBeerFoodPairing> FoodPairings { get; set; } = new();

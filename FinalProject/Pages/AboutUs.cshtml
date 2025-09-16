@@ -1,387 +1,190 @@
 ﻿@page
-@model FinalProject.Pages.AboutModel
 @{
-    ViewData["Title"] = "เกี่ยวกับเรา - Sip & Trip";
+    ViewData["Title"] = "About Us — Sip & Trip";
 }
+<link rel="stylesheet" href="~/css/aboutus.css" />
+<script defer src="~/js/aboutus.js"></script>
 
-<header class="about-hero rounded-4 p-4 p-md-5 mb-4">
-    <div class="container">
-        <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-4">
-            <div class="flex-grow-1">
-                <span class="badge text-bg-dark-subtle text-dark mb-2">About Sip & Trip</span>
-                <h1 class="display-6 fw-bold mb-2">
-                    <img src="~/images/Logo.png" alt="Sip &amp; Trip"
-                         style="height:120px; width:auto; vertical-align:middle;" class="me-2" />
-                    Sip &amp; Trip — ที่ ๆ “จิบ” พบ “ทริป”
-                </h1>
-                <p class="lead text-hero-sub mb-3">
-                    เราเริ่มจากคำถามง่าย ๆ ว่า “อยากลองเครื่องดื่มท้องถิ่นที่ไหนบ้าง?”
-                    เลยรวมแผนที่คราฟต์เบียร์ ไวน์ และสุราทั่วไทย พร้อมตัวกรองค้นหาไว ๆ
-                    ให้คุณวางแผนเที่ยว + ชิม ได้ในที่เดียว
+<!-- ================== HERO ================== -->
+<header class="au-hero">
+    <div class="au-container">
+        <div class="au-hero__grid">
+            <div class="au-hero__copy">
+                <span class="eyebrow">เกี่ยวกับเรา</span>
+                <h1 class="title">Sip & Trip — แพลตฟอร์มสำรวจ “เครื่องดื่มท้องถิ่นไทย”</h1>
+                <p class="subtitle">
+                    ค้นหาเรื่องราวรสชาติจากชุมชน ท่องเมืองผ่านแก้วโปรด ภาพชัด อ่านง่าย สีสันกำลังดี
                 </p>
-                <div class="d-flex flex-wrap gap-2">
-                    <a asp-page="/Index" class="btn btn-primary">เริ่มสำรวจบนแผนที่</a>
-                    <button type="button" class="btn btn-outline-secondary" id="confettiBtn">🎉 ฉลองเปิดทริป</button>
+                <div class="cta">
+                    <a href="/List" class="btn btn-solid">ดูรายการทั้งหมด</a>
+                    <a href="/Map" class="btn btn-ghost">สำรวจบนแผนที่</a>
                 </div>
+
+                <ul class="hero-points">
+                    <li class="chip chip-blue">แนะนำจากผู้ใช้จริง</li>
+                    <li class="chip chip-teal">แผนที่ใช้งานง่าย</li>
+                    <li class="chip chip-amber">อัปเดตต่อเนื่อง</li>
+                </ul>
             </div>
-            <div class="about-blob d-none d-lg-block"></div>
+
+            <div class="au-hero__visual">
+                <!-- ใส่รูปของคุณเองที่โฟลเดอร์ wwwroot/img/about/* -->
+                <figure class="card-photo lift">
+                    <img src="/img/about/a.jpg" alt="ชิมเครื่องดื่มท้องถิ่น">
+                </figure>
+                <figure class="card-photo lift delay">
+                    <img src="/img/about/b.jpg" alt="บรรยากาศชุมชน">
+                </figure>
+                <figure class="card-photo lift">
+                    <img src="/img/about/c.jpg" alt="ส่วนผสมท้องถิ่น">
+                </figure>
+                <div class="glow" aria-hidden="true"></div>
+            </div>
         </div>
     </div>
+    <div class="stripe" aria-hidden="true"></div>
 </header>
 
-<div class="container">
-    <!-- จุดเด่น -->
-    <section class="mb-4">
-        <h2 class="h4 fw-bold mb-3">ทำไมต้อง Sip & Trip</h2>
-        <div class="row g-3">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="icon">🗺️</div>
-                    <h5>แผนที่โต้ตอบ</h5>
-                    <p class="text-muted">ดูพิกัดร้าน/ผู้ผลิตจริง คลิกหมุดเพื่ออ่านรายละเอียด แล้วกดไป “ดูเส้นทาง” ได้ทันที</p>
-                    <span class="chip">Leaflet + Cluster</span>
-                </div>
+<!-- ================== HIGHLIGHTS ================== -->
+<section class="au-highlights">
+    <div class="au-container">
+        <div class="hl-grid">
+            <article class="hl-card hl-blue reveal">
+                <h3>คัดคุณภาพ</h3>
+                <p>ข้อมูลเรียบง่าย อ่านไว ไม่รกตา</p>
+            </article>
+            <article class="hl-card hl-teal reveal">
+                <h3>ค้นหาไว</h3>
+                <p>จัดหมวดหมู่ชัดเจน เห็นภาพทันที</p>
+            </article>
+            <article class="hl-card hl-violet reveal">
+                <h3>สวยพอดี</h3>
+                <p>ขนาดตัวอักษร/การ์ดพอดีตา ทุกหน้าจอ</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ================== STATS ================== -->
+<section class="au-stats">
+    <div class="au-container">
+        <ul class="stats">
+            <!-- ถ้าต้องการผูกค่าจาก backend: ใส่จำนวนจริงที่ data-target ได้เลย -->
+            <li class="stat reveal">
+                <div class="value count-up" data-target="128">0</div>
+                <div class="label">ผู้ผลิต/แบรนด์</div>
+            </li>
+            <li class="stat reveal">
+                <div class="value count-up" data-target="346">0</div>
+                <div class="label">รายการเครื่องดื่ม</div>
+            </li>
+            <li class="stat reveal">
+                <div class="value count-up" data-target="51">0</div>
+                <div class="label">จังหวัด/พื้นที่</div>
+            </li>
+            <li class="stat reveal">
+                <div class="value count-up" data-target="972">0</div>
+                <div class="label">รีวิว/ให้คะแนน</div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- ================== FEATURES ================== -->
+<section class="au-features">
+    <div class="au-container">
+        <div class="grid-3">
+            <article class="f-card reveal">
+                <h3>ดีไซน์สะอาด</h3>
+                <p>เว้นวรรคพอดี สีสันกำลังดี ใช้งานง่าย</p>
+            </article>
+            <article class="f-card reveal">
+                <h3>เน้นภาพเล่าเรื่อง</h3>
+                <p>แสดงภาพตัวอย่างช่วยตัดสินใจเร็ว</p>
+            </article>
+            <article class="f-card reveal">
+                <h3>เร็วและเบา</h3>
+                <p>โค้ดกระชับ ไม่มีของฟุ่มเฟือย</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ================== GALLERY (ใส่รูปได้/ไม่มีก็สวย) ================== -->
+<section class="au-gallery">
+    <div class="au-container">
+        <div class="gallery-grid">
+            <figure class="g-item tall reveal">
+                <img src="/img/about/g1.jpg" alt="แหล่งผลิตชุมชน">
+                <figcaption>ชุมชน</figcaption>
+            </figure>
+            <figure class="g-item reveal">
+                <img src="/img/about/g2.jpg" alt="บาร์ท้องถิ่น">
+                <figcaption>บาร์ท้องถิ่น</figcaption>
+            </figure>
+            <figure class="g-item wide reveal">
+                <img src="/img/about/g3.jpg" alt="ส่วนผสมสดใหม่">
+                <figcaption>วัตถุดิบ</figcaption>
+            </figure>
+            <figure class="g-item reveal">
+                <img src="/img/about/g4.jpg" alt="เมนูแนะนำ">
+                <figcaption>เมนูแนะนำ</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ================== TESTIMONIALS ================== -->
+<section class="au-testimonials">
+    <div class="au-container">
+        <div id="testiWrap" class="testi-wrap">
+            <figure class="testi-card show">
+                <blockquote>“หน้า About ใหม่ สีสวยสะอาด อ่านง่ายมาก”</blockquote>
+                <figcaption>&#64;foodietrip</figcaption>
+            </figure>
+            <figure class="testi-card">
+                <blockquote>“ไฮไลต์ชัดเจน เลือกจุดเที่ยว/ชิมได้ไว”</blockquote>
+                <figcaption>&#64;wanderth</figcaption>
+            </figure>
+            <figure class="testi-card">
+                <blockquote>“ขนาดทุกอย่างพอดีตา ไม่ล้น ไม่โล่ง”</blockquote>
+                <figcaption>&#64;nattyreview</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ================== FAQ (native <details>) ================== -->
+<section class="au-faq">
+    <div class="au-container">
+        <h2 class="section-title">ถาม–ตอบ</h2>
+        <details class="qa reveal">
+            <summary>ข้อมูลมาจากไหน?</summary>
+            <div>คัดจากผู้ใช้ รีวิวจริง และทีมคอนเทนต์ ตรวจสอบซ้ำก่อนเผยแพร่</div>
+        </details>
+        <details class="qa reveal">
+            <summary>รองรับมือถือไหม?</summary>
+            <div>รองรับเต็มรูปแบบ ขนาดและระยะถูกปรับให้พอดีตา</div>
+        </details>
+        <details class="qa reveal">
+            <summary>ถ้าร้านของฉันอยากขึ้นหน้าเว็บ?</summary>
+            <div>ติดต่อทีมงานผ่านเมนู “ติดต่อเรา” เพื่อส่งข้อมูลตรวจสอบ</div>
+        </details>
+    </div>
+</section>
+
+<!-- ================== CTA ================== -->
+<section class="au-cta">
+    <div class="au-container">
+        <div class="cta-box">
+            <div class="cta-copy">
+                <h3>เริ่มสำรวจรสชาติท้องถิ่นวันนี้</h3>
+                <p>ค้นพบเครื่องดื่มถูกใจจากทุกภูมิภาค</p>
             </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h5>ค้นหาไวมาก</h5>
-                    <p class="text-muted">กรองตามจังหวัด ประเภท และดีกรี (ABV) ตัวเลขขึ้นแบบเรียลไทม์ ไม่เสียจังหวะ</p>
-                    <span class="chip">Live Filter</span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="icon">💬</div>
-                    <h5>ให้ดาวเร็ว ไม่ต้องล็อกอิน</h5>
-                    <p class="text-muted">กดให้ดาวได้ทันที (กันซ้ำต่ออุปกรณ์) พร้อมค่าเฉลี่ยอัปเดตอัตโนมัติ</p>
-                    <span class="chip">Quick Rating</span>
-                </div>
+            <div class="cta-actions">
+                <a href="/Map" class="btn btn-solid">ดูบนแผนที่</a>
+                <a href="/List" class="btn btn-ghost">ดูทั้งหมด</a>
             </div>
         </div>
-    </section>
-
-    <!-- สถิติ (ตัวเลขวิ่ง) -->
-    <section class="mb-4">
-        <div class="stats-grid">
-            <div class="stat">
-                <div class="stat-num" data-target="120">0</div>
-                <div class="stat-label">รายการเครื่องดื่มในระบบ</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num" data-target="77">0</div>
-                <div class="stat-label">จังหวัดที่ตั้งใจจะครอบคลุม</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num" data-target="5">0</div>
-                <div class="stat-label">วินาทีจากค้นหาถึงปักหมุด</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ไทม์ไลน์ -->
-    <section class="mb-4">
-        <h2 class="h4 fw-bold mb-3">เส้นทางของเรา</h2>
-        <ol class="timeline">
-            <li>
-                <div class="dot">🍺</div>
-                <div class="body">
-                    <h6 class="mb-1">เวอร์ชันแรก — เฉพาะเบียร์</h6>
-                    <p class="mb-0 text-muted small">เริ่มต้นจากไฟล์ CSV เล็ก ๆ และหมุดไม่กี่จุดบนแผนที่</p>
-                </div>
-            </li>
-            <li>
-                <div class="dot">🍷</div>
-                <div class="body">
-                    <h6 class="mb-1">ขยายหมวดหมู่ — ไวน์และสุรา</h6>
-                    <p class="mb-0 text-muted small">เพิ่มตัวกรองประเภท + ABV ให้ค้นได้หลากหลายขึ้น</p>
-                </div>
-            </li>
-            <li>
-                <div class="dot">🥃</div>
-                <div class="body">
-                    <h6 class="mb-1">โหวตเร็ว — ไม่ต้องล็อกอิน</h6>
-                    <p class="mb-0 text-muted small">กดให้ดาวได้ทันที ค่าเฉลี่ยขยับแบบเรียลไทม์</p>
-                </div>
-            </li>
-            <li>
-                <div class="dot">🧭</div>
-                <div class="body">
-                    <h6 class="mb-1">ทิศทางต่อไป</h6>
-                    <p class="mb-0 text-muted small">ลิสต์ทริปชิม + เส้นทางวันเดียว/สุดสัปดาห์ + รีวิวเชิงลึก</p>
-                </div>
-            </li>
-        </ol>
-    </section>
-
-    <!-- คำถามสั้น ๆ (ไม่น่าเบื่อ) -->
-    <section class="mb-5">
-        <div class="quiz-card">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <h5 class="mb-0">อยากได้คำแนะนำสไตล์ไหน?</h5>
-                <small class="text-muted">คลิกเลือก 1 ตัวเลือก</small>
-            </div>
-            <div class="d-flex flex-wrap gap-2">
-                <button class="pill-btn" data-answer="light">ดื่มเบา ๆ ชิล ๆ</button>
-                <button class="pill-btn" data-answer="bold">เข้มจัดจ้าน</button>
-                <button class="pill-btn" data-answer="local">โคตรท้องถิ่นแท้</button>
-                <button class="pill-btn" data-answer="surprise">เซอร์ไพรส์ฉันที!</button>
-            </div>
-            <div id="quizResult" class="text-muted small mt-2"></div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta rounded-4 p-4 p-md-5 mb-4 text-center">
-        <h3 class="fw-bold mb-2">พร้อมออกทริปแล้วหรือยัง?</h3>
-        <p class="text-muted mb-3">เริ่มจากจังหวัดที่อยากไป แล้วปล่อยให้เราแนะนำที่ “จิบ” ให้คุณ</p>
-        <a asp-page="/Index" class="btn btn-lg btn-primary">ไปหน้าแผนที่</a>
-    </section>
-</div>
-
-@section Scripts {
-    <script>
-        /* ===== Counters (ตัวเลขวิ่งเมื่อเลื่อนถึง) ===== */
-        (function(){
-          const els = document.querySelectorAll('.stat-num');
-          if(!els.length) return;
-          const animate = (el)=>{
-            const target = parseInt(el.dataset.target||'0',10);
-            const dur = 800;
-            const t0 = performance.now();
-            function step(t){
-              const p = Math.min(1, (t - t0)/dur);
-              el.textContent = Math.floor(target * p).toLocaleString('th-TH');
-              if(p<1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-          };
-          const io = new IntersectionObserver(entries=>{
-            entries.forEach(e=>{
-              if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); }
-            });
-          }, {threshold:.4});
-          els.forEach(el=>io.observe(el));
-        })();
-
-        /* ===== Confetti Emoji (เบา ๆ ไม่ใช้ไลบ์ราลี) ===== */
-        (function(){
-          const btn = document.getElementById('confettiBtn');
-          if(!btn) return;
-          const EMOJIS = ['🍺','🍷','🥃','🍹','✨'];
-          btn.addEventListener('click', ()=>{
-            for(let i=0;i<40;i++){
-              const s = document.createElement('div');
-              s.className='confetti';
-              s.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
-              s.style.left = Math.random()*100+'vw';
-              s.style.animationDuration = (1.2+Math.random()*1.4)+'s';
-              s.style.fontSize = (18+Math.random()*14)+'px';
-              document.body.appendChild(s);
-              setTimeout(()=>s.remove(), 2200);
-            }
-          });
-        })();
-
-        /* ===== Mini quiz ===== */
-        (function(){
-          const out = document.getElementById('quizResult');
-          document.querySelectorAll('.pill-btn').forEach(btn=>{
-            btn.addEventListener('click', ()=>{
-              document.querySelectorAll('.pill-btn').forEach(b=>b.classList.remove('active'));
-              btn.classList.add('active');
-              const a = btn.dataset.answer;
-              const msg = {
-                light: 'ลองลาเกอร์/เซสชั่น IPA แอลกอฮอล์ไม่สูง จิบเพลิน ๆ 🍺',
-                bold: 'จัดสเตาท์/บาร์เลย์ไวน์ เข้มเต็มตัว ดุดันแต่กลมกล่อม 🥃',
-                local: 'ชิมคราฟต์ท้องถิ่น + ผลไม้พื้นถิ่น กลิ่นอายบ้านเราแท้ ๆ 🌾',
-                surprise: 'สุ่มสไตล์ลับจากแผนที่ — เปิดประตูสู่รสชาติใหม่ ๆ 🎲'
-              }[a] || '';
-              out.textContent = msg;
-            });
-          });
-        })();
-    </script>
-}
-
-<style>
-    :root {
-        --bg: #f6f8fb;
-        --card: #fff;
-        --ink: #1f2937;
-        --muted: #6b7280;
-        --brand: #2563eb;
-        --ring: rgba(37,99,235,.2);
-    }
-
-    /* Hero */
-    .about-hero {
-        background: radial-gradient(1200px 400px at 20% -10%, #dbeafe, transparent), linear-gradient(180deg,#eff6ff,#ffffff);
-        border: 1px solid #e6ebf2;
-    }
-
-    .text-hero-sub {
-        color: var(--muted);
-    }
-
-    .about-blob {
-        width: 360px;
-        height: 260px;
-        border-radius: 24px;
-        background: conic-gradient(from 180deg at 50% 50%, #fee2e2, #fef9c3, #d1fae5, #e0e7ff, #fee2e2);
-        filter: blur(14px) saturate(130%);
-        opacity: .7;
-    }
-
-    /* Feature cards */
-    .feature-card {
-        background: var(--card);
-        border: 1px solid #e6ebf2;
-        border-radius: 14px;
-        padding: 16px;
-        transition: transform .15s ease, box-shadow .15s ease;
-    }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(0,0,0,.06);
-        }
-
-        .feature-card .icon {
-            font-size: 26px;
-        }
-
-        .feature-card .chip {
-            display: inline-block;
-            margin-top: 6px;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            border: 1px solid #e2e8f0;
-            background: #f8fafc;
-            color: #0f172a;
-        }
-
-    /* Stats */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3,minmax(0,1fr));
-        gap: 12px;
-    }
-
-    .stat {
-        padding: 16px;
-        background: var(--card);
-        border: 1px solid #e6ebf2;
-        border-radius: 14px;
-        text-align: center;
-    }
-
-    .stat-num {
-        font-size: 34px;
-        font-weight: 800;
-        line-height: 1;
-    }
-
-    .stat-label {
-        color: #64748b;
-        margin-top: 6px;
-        font-size: 14px;
-    }
-
-    /* Timeline */
-    .timeline {
-        list-style: none;
-        padding-left: 0;
-        margin: 0;
-        border-left: 2px dashed #e5e7eb;
-    }
-
-        .timeline li {
-            position: relative;
-            padding: 0 0 14px 16px;
-        }
-
-        .timeline .dot {
-            position: absolute;
-            left: -13px;
-            top: 0;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 6px rgba(0,0,0,.06);
-            font-size: 16px;
-        }
-
-        .timeline .body {
-            padding-top: 2px;
-        }
-
-    /* Quiz */
-    .quiz-card {
-        background: var(--card);
-        border: 1px solid #e6ebf2;
-        border-radius: 14px;
-        padding: 16px;
-    }
-
-    .pill-btn {
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
-        border-radius: 999px;
-        padding: 6px 12px;
-        font-size: .95rem;
-        cursor: pointer;
-        transition: all .15s ease;
-    }
-
-        .pill-btn:hover {
-            background: #eef2f7;
-        }
-
-        .pill-btn.active {
-            background: var(--brand);
-            color: #fff;
-            border-color: var(--brand);
-        }
-
-    /* CTA */
-    .cta {
-        background: linear-gradient(180deg,#ffffff,#f8fafc);
-        border: 1px solid #e6ebf2;
-    }
-
-    /* Confetti */
-    .confetti {
-        position: fixed;
-        top: -10vh;
-        will-change: transform;
-        animation: fall linear forwards;
-        pointer-events: none;
-        z-index: 9999;
-    }
-    @@keyframes fall {
-        to
-
-    {
-        transform: translateY(120vh) rotate(360deg);
-        opacity: .9;
-    }
-
-    }
-
-    /* Responsive */
-    @@media (max-width: 768px) {
-        .stats-grid
-
-    {
-        grid-template-columns: 1fr;
-    }
-
-    }
-</style>
+    </div>
+</section>

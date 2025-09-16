@@ -1,7 +1,7 @@
 [
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_5",
+    "ContainingType": "FinalProject.Endpoints.CommentsEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommentsEndpoints\u003Eb__0_2",
     "RelativePath": "api/beers/{beerId:int}/comments/{commentId:int}",
     "HttpMethod": "DELETE",
     "IsController": false,
@@ -42,8 +42,8 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_3",
+    "ContainingType": "FinalProject.Endpoints.CommentsEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommentsEndpoints\u003Eb__0_0",
     "RelativePath": "api/beers/{id:int}/comments",
     "HttpMethod": "GET",
     "IsController": false,
@@ -56,13 +56,13 @@
       },
       {
         "Name": "skip",
-        "Type": "System.Int32",
-        "IsRequired": true
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       },
       {
         "Name": "take",
-        "Type": "System.Int32",
-        "IsRequired": true
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -74,8 +74,8 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_4",
+    "ContainingType": "FinalProject.Endpoints.CommentsEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCommentsEndpoints\u003Eb__0_1",
     "RelativePath": "api/beers/{id:int}/comments",
     "HttpMethod": "POST",
     "IsController": false,
@@ -88,16 +88,14 @@
       },
       {
         "Name": "dto",
-        "Type": "FinalProject.Models.NewCommentDto",
+        "Type": "FinalProject.Endpoints.CommentCreateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "FinalProject.Models.CommentView",
-        "MediaTypes": [
-          "application/json"
-        ],
+        "Type": "System.Void",
+        "MediaTypes": [],
         "StatusCode": 201
       },
       {
@@ -108,13 +106,18 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
+        "StatusCode": 401
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
         "StatusCode": 404
       }
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_6",
+    "ContainingType": "FinalProject.Endpoints.FavoritesEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapFavoritesEndpoints\u003Eb__0_0",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "GET",
     "IsController": false,
@@ -140,8 +143,8 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_7",
+    "ContainingType": "FinalProject.Endpoints.FavoritesEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapFavoritesEndpoints\u003Eb__0_1",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "POST",
     "IsController": false,
@@ -172,8 +175,8 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_8",
+    "ContainingType": "FinalProject.Endpoints.FavoritesEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapFavoritesEndpoints\u003Eb__0_2",
     "RelativePath": "api/beers/{id:int}/favorite",
     "HttpMethod": "DELETE",
     "IsController": false,
@@ -199,8 +202,8 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_10",
+    "ContainingType": "FinalProject.Endpoints.DebugEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapDebugEndpoints\u003Eb__0_0",
     "RelativePath": "api/debug/whoami",
     "HttpMethod": "GET",
     "IsController": false,
@@ -215,13 +218,24 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_9",
+    "ContainingType": "FinalProject.Endpoints.FavoritesEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapFavoritesEndpoints\u003Eb__0_3",
     "RelativePath": "api/me/favorites",
     "HttpMethod": "GET",
     "IsController": false,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "take",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Void",
@@ -236,8 +250,8 @@
     ]
   },
   {
-    "ContainingType": "FinalProject.Endpoints.CommunityEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapCommunityEndpoints\u003Eb__1_0",
+    "ContainingType": "FinalProject.Endpoints.RatingsEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapRatingsEndpoints\u003Eb__0_0",
     "RelativePath": "api/ratings/quick",
     "HttpMethod": "POST",
     "IsController": false,
@@ -263,12 +277,39 @@
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 404
+        "StatusCode": 401
       },
       {
         "Type": "System.Void",
         "MediaTypes": [],
-        "StatusCode": 409
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "FinalProject.Endpoints.RatingsEndpoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapRatingsEndpoints\u003Eb__0_1",
+    "RelativePath": "api/ratings/quick/mine",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "beerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 401
       }
     ]
   },

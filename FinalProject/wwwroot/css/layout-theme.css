@@ -1,177 +1,293 @@
-﻿:root {
+﻿/* ================================
+   ธีมส่วนหัว/แถบนำทาง (ฉบับสีสัน)
+   - เพิ่มความสดใสด้วยเกรเดียนต์และแถบไฮไลต์สีแบรนด์
+   - ยังเข้ากับธีมเดิม (น้ำเงิน #2563EB) อ่านง่าย ไม่แยงตา
+=================================== */
+
+/* ตัวแปรสีหลักของธีม */
+:root {
     --bg: #f6f8fb;
     --card: #ffffff;
-    --ink: #1f2937;
-    --muted: #6b7280;
-    --brand: #2563eb;
-    --ring: rgba(37,99,235,.2);
+    --ink: #0f172a; /* ตัวอักษรหลัก */
+    --muted: #64748b; /* ตัวอักษรรอง */
+    --border: #e6ebf2; /* เส้นขอบนุ่ม */
+    --ring: rgba(37,99,235,.22); /* วงแหวนโฟกัส */
+    /* โทนแบรนด์ (สดใสขึ้น) */
+    --brand: #2563eb; /* Blue-600 */
+    --brand-700: #1d4ed8; /* Blue-700 */
+    --c-teal: #22d3ee; /* Cyan/Teal */
+    --c-violet: #a78bfa; /* Violet */
+    --c-rose: #fb7185; /* Rose */
+    --c-amber: #f59e0b; /* Amber */
+    /* ความเข้มของพื้นหลังแถบ (ปรับได้ 0–1) */
+    --navbar-tint: .06; /* เกรเดียนต์จาง ๆ จากแบรนด์ */
 }
 
-/* Layout base */
+/* พื้นหลัง/ฟอนต์ฐาน */
 html, body {
-    height: 100%;
-}
-
-body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 }
 
-/* ===== Navbar ===== */
-.navbar {
-    background: linear-gradient(180deg,#f8fafc,#ffffff);
-    border-bottom: 1px solid #e6ebf2;
-    transition: box-shadow .2s ease, border-color .2s ease;
+/* =========================
+   แถบนำทาง (Navbar) – สีสันแบบละมุน
+   - พื้นหลัง: ขาวโปร่ง + ไล่สีบาง ๆ จากน้ำเงินแบรนด์
+   - เส้นขอบ + เงาอ่อน
+   - แถบไฮไลต์สีรุ้งด้านล่าง (accent stripe)
+========================= */
+.app-navbar {
+    background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.92)), linear-gradient(180deg, rgba(37,99,235,var(--navbar-tint)), rgba(255,255,255,0));
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    padding: 8px 0;
+    transition: box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+    position: relative;
+    z-index: 100;
 }
 
-    .navbar.is-scrolled {
-        box-shadow: 0 8px 24px rgba(15,23,42,.06);
-        border-color: transparent;
+    /* แถบไฮไลต์สี (เส้นบาง ๆ ล่าง Navbar) */
+    .app-navbar::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--brand), var(--c-teal), var(--c-violet), var(--c-rose), var(--c-amber), var(--brand));
+        background-size: 300% 100%;
+        animation: stripeMove 12s linear infinite;
+        opacity: .65;
     }
 
-.navbar-brand {
+@keyframes stripeMove {
+    0% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
+}
+
+/* เมื่อเลื่อนลง: ทำให้ทึบขึ้น + เงาชัดขึ้น + เส้นไฮไลต์ชัดขึ้น */
+.app-navbar.is-scrolled {
+    background: linear-gradient(180deg, #ffffff, #ffffff), linear-gradient(180deg, rgba(37,99,235,.08), rgba(255,255,255,0));
+    border-bottom-color: #e5eaf1;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+
+    .app-navbar.is-scrolled::after {
+        opacity: .9;
+    }
+
+/* เบราว์เซอร์ที่ไม่รองรับ backdrop-filter */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+    .app-navbar {
+        background: linear-gradient(180deg, #ffffff, #ffffff), linear-gradient(180deg, rgba(37,99,235,.06), rgba(255,255,255,0));
+    }
+}
+
+/* โลโก้/ข้อความแบรนด์ */
+.brand-mark {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.brand-text {
     font-weight: 700;
+    letter-spacing: .2px;
     color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: .5rem;
 }
 
-.brand-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #60a5fa, #2563eb);
-    box-shadow: 0 0 0 3px rgba(37,99,235,.15);
-}
-
-.nav-link {
-    color: #334155;
-    padding: .5rem .9rem;
-    border-radius: 10px;
-    transition: transform .1s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+/* =========================
+   เมนูหลัก: สี/เอฟเฟกต์
+========================= */
+.navbar .nav-link {
+    color: rgba(15,23,42,.92);
+    font-weight: 600;
+    padding: 0.6rem .9rem;
+    border-radius: 12px;
     position: relative;
-    overflow: hidden;
+    transition: background-color .15s ease, color .15s ease, transform .12s ease;
 }
 
-    .nav-link:hover {
-        background: #eef2f7;
-        color: #0f172a;
+    /* เส้นเน้นด้านล่างเมนูแบบเกรเดียนต์ (ซ่อนอยู่ปกติ) */
+    .navbar .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 6px;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--brand), var(--c-teal), var(--c-violet));
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity .15s ease, transform .15s ease;
+    }
+
+    /* โทน hover/active: พื้นหลังมีสี + ข้อความไล่สีอย่างนุ่มนวล */
+    .navbar .nav-link:hover {
+        background: linear-gradient(180deg, rgba(37,99,235,.10), rgba(37,99,235,.06));
+        color: var(--brand-700);
         transform: translateY(-1px);
     }
 
-    .nav-link.active {
-        color: #fff !important;
-        background: var(--brand);
-        box-shadow: 0 2px 10px var(--ring);
-    }
-
-        .nav-link.active::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg,rgba(255,255,255,.18),transparent 40%,rgba(255,255,255,.18));
-            transform: translateX(-100%);
-            animation: shine 1.6s ease-in-out infinite;
+        .navbar .nav-link:hover::after {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-@keyframes shine {
-    to {
-        transform: translateX(100%);
+    .navbar .nav-link.active {
+        background: linear-gradient(180deg, rgba(37,99,235,.16), rgba(37,99,235,.08));
+        color: var(--brand-700);
     }
+
+        .navbar .nav-link.active::after {
+            opacity: 1;
+            transform: translateY(0);
+            background: linear-gradient(90deg, var(--brand), var(--c-teal), var(--c-violet), var(--c-rose));
+        }
+
+    /* ทำตัวอักษรไล่สี (เฉพาะ hover/active เพื่อคงความอ่านง่ายปกติ) */
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+        background-clip: padding-box;
+    }
+
+        .navbar .nav-link:hover > span,
+        .navbar .nav-link.active > span {
+            background-image: linear-gradient(90deg, var(--brand), var(--c-teal), var(--c-violet));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* fallback ให้ใช้ gradient text */
+        }
+
+/* ปุ่มกึ่งโปร่ง (สมัครสมาชิก) */
+.btn-ghost {
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: .45rem .9rem;
+    font-weight: 600;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .12s ease;
 }
 
-/* Container กำหนด max-width ให้คงลุค */
-.container {
-    max-width: 1100px;
+    .btn-ghost:hover {
+        border-color: #cbd5e1;
+        box-shadow: 0 6px 18px rgba(37,99,235,.16);
+        transform: translateY(-1px);
+    }
+
+/* ป้ายผู้ดูแล/เตือน */
+.badge.text-bg-warning {
+    background: linear-gradient(135deg, #fde68a, #f59e0b);
+    color: #7c2d12;
 }
 
-/* ===== Avatar ===== */
+/* อวตาร์ */
 .nav-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid #e2e8f0;
-    margin-right: .5rem;
-    flex: 0 0 auto;
+    display: block;
+    border: 1px solid rgba(0,0,0,.06);
 }
 
 .nav-avatar-fallback {
+    position: relative;
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
     font-weight: 700;
-    font-size: .9rem;
-    border: 1px solid #e2e8f0;
-    position: relative;
+    letter-spacing: .3px;
     overflow: hidden;
-    isolation: isolate;
 }
 
     .nav-avatar-fallback .avatar-icon {
         position: absolute;
-        inset: 0;
-        margin: auto;
-        width: 70%;
-        height: 70%;
-        opacity: .18;
-        z-index: 0;
-    }
-
-    .nav-avatar-fallback > * {
-        z-index: 1;
+        width: 100%;
+        height: 100%;
+        opacity: .1;
+        top: 0;
+        left: 0;
+        fill: #000;
     }
 
 .avatar-lg {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid #e2e8f0;
 }
 
-    .avatar-lg.nav-avatar-fallback {
-        font-size: 1rem;
-    }
-
-/* ===== Dropdown ===== */
+/* เมนูดรอปดาวน์ */
 .dropdown-menu {
-    border-radius: 14px;
-    border: 1px solid #e6ebf2;
+    border: 1px solid var(--border);
+    border-radius: 12px;
     padding: .4rem;
 }
 
 .dropdown-item {
     border-radius: 10px;
-    padding: .6rem .75rem;
+    padding: .5rem .75rem;
+    font-weight: 500;
+    position: relative;
+    transition: background-color .12s ease, color .12s ease, transform .1s ease;
 }
 
     .dropdown-item:hover {
-        background: #eef2f7;
+        background: linear-gradient(90deg, rgba(37,99,235,.08), rgba(37,99,235,.02));
     }
 
-/* Footer */
+        .dropdown-item:hover::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, var(--brand) 30%, var(--c-teal));
+        }
+
+/* ส่วนท้าย */
 footer {
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .95rem;
+    padding: 22px 0;
     background: #fff;
-    border-top: 1px solid #e6ebf2;
-    color: #64748b;
-    padding: 16px 0;
+    margin-top: 32px;
 }
 
-/* Ghost button */
-.btn-ghost {
-    border: 1px solid #c7d2fe;
-    background: #fff;
-    border-radius: 12px;
-    padding: .45rem .75rem;
-    font-weight: 600;
+/* ปุ่มเปิดเมนูบนมือถือ */
+.navbar-toggler {
+    border-color: #e5e7eb;
 }
 
-    .btn-ghost:hover {
-        background: #eff6ff;
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px var(--ring);
     }
+
+/* รองรับ safe-area (iOS) */
+@supports (padding: max(0px)) {
+    .app-navbar {
+        padding-top: max(8px, env(safe-area-inset-top));
+    }
+}
+
+/* ปรับระยะบนจอกลาง/เล็ก */
+@media (max-width: 99

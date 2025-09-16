@@ -41,25 +41,79 @@ const $loadMore = document.getElementById('loadMoreBtn');
 const $shareBtn = document.getElementById('shareBtn');
 
 const formatPrice = p => (p == null ? '–' : new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', maximumFractionDigits: 0 }).format(p));
-const starRating = r => r == null ? '<span class="text-muted">–</span>' : '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r)) + ` <span class="text-muted">(${r.toFixed(1)})</span>`;
+// แทนที่ของเดิมทั้งฟังก์ชันนี้
+const starRating = (r) => {
+    if (r == null) return '<span class="text-muted">–</span>';
+    const filled = Math.round(r);
+    const stars = Array.from({ length: 5 }, (_, i) =>
+        `<span class="star ${i < filled ? 'filled' : 'empty'}">★</span>`
+    ).join('');
+    return `<span class="stars" aria-label="rating">${stars}</span> <span class="rating-num">(${r.toFixed(1)})</span>`;
+};
+
+// แทนที่ของเดิมทั้งฟังก์ชันนี้
+function buildPopup(loc) {
+    const alc = loc.AlcoholLevel != null ? `${loc.AlcoholLevel}%` : '–';
+    const imgHtml = loc.ImageUrl
+        ? `<div class="popup-img"><img src="${loc.ImageUrl}" alt="${loc.Name ?? ''}" loading="lazy"></div>`
+        : '';
+
+    return `
+  <div class="popup">
+    ${imgHtml}
+    <div class="popup-header">${loc.Name ?? 'ไม่ทราบชื่อ'}</div>
+    <div class="small text-muted mb-2">${loc.Type ?? '-'} • ${loc.Province ?? '-'}</div>
+    <div class="mb-2">${loc.Description ?? ''}</div>
+
+    <div class="d-flex flex-wrap gap-2 mb-2">
+      <span class="chip">แอลกอฮอล์: <strong>${alc}</strong></span>
+      <span class="chip">ราคา: <strong>${formatPrice(loc.Price)}</strong></span>
+    </div>
+
+    <div class="mb-2 d-flex align-items-center gap-2">
+      <span>คะแนน:</span>
+      ${starRating(loc.Rating)}
+      ${loc.RatingCount ? `<span class="text-muted">• ${loc.RatingCount} รีวิว</span>` : ''}
+    </div>
+
+    <div class="d-grid">
+      <a href="/Detail?id=${loc.Id}" class="btn btn-sm btn-outline-primary">ดูรายละเอียด</a>
+    </div>
+  </div>`;
+}
+
 const debounce = (fn, wait = 300) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), wait); }; };
 
 // ====== Renderers ======
 let idToMarker = new Map(); // sync list <-> marker
 function buildPopup(loc) {
     const alc = loc.AlcoholLevel != null ? `${loc.AlcoholLevel}%` : '–';
+    const imgHtml = loc.ImageUrl
+        ? `<div class="popup-img"><img src="${loc.ImageUrl}" alt="${loc.Name ?? ''}" loading="lazy"></div>`
+        : '';
+
     return `
-    <div class="popup">
-      <div class="popup-header">${loc.Name ?? 'ไม่ทราบชื่อ'}</div>
-      <div class="small text-muted mb-2">${loc.Type ?? '-'} • ${loc.Province ?? '-'}</div>
-      <div class="mb-2">${loc.Description ?? ''}</div>
-      <div class="d-flex flex-wrap gap-2 mb-2">
-        <span class="chip">แอลกอฮอล์: <strong>${alc}</strong></span>
-        <span class="chip">ราคา: <strong>${formatPrice(loc.Price)}</strong></span>
-      </div>
-      <div class="mb-2">คะแนน: ${starRating(loc.Rating)} <span class="text-muted">${loc.RatingCount ? loc.RatingCount + ' รีวิว' : ''}</span></div>
-      <div class="d-grid"><a href="/Detail?id=${loc.Id}" class="btn btn-sm btn-outline-primary">ดูรายละเอียด</a></div>
-    </div>`;
+  <div class="popup">
+    ${imgHtml}
+    <div class="popup-header">${loc.Name ?? 'ไม่ทราบชื่อ'}</div>
+    <div class="small text-muted mb-2">${loc.Type ?? '-'} • ${loc.Province ?? '-'}</div>
+    <div class="mb-2">${loc.Description ?? ''}</div>
+
+    <div class="d-flex flex-wrap gap-2 mb-2">
+      <span class="chip">แอลกอฮอล์: <strong>${alc}</strong></span>
+      <span class="chip">ราคา: <strong>${formatPrice(loc.Price)}</strong></span>
+    </div>
+
+    <div class="mb-2 d-flex align-items-center gap-2">
+      <span>คะแนน:</span>
+      ${starRating(loc.Rating)}
+      ${loc.RatingCount ? `<span class="text-muted">• ${loc.RatingCount} รีวิว</span>` : ''}
+    </div>
+
+    <div class="d-grid">
+      <a href="/Detail?id=${loc.Id}" class="btn btn-sm btn-outline-primary">ดูรายละเอียด</a>
+    </div>
+  </div>`;
 }
 
 function renderMarkers(data) {

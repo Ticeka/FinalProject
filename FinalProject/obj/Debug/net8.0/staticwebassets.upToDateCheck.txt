@@ -1,3 +1,4 @@
+wwwroot\css\aboutus.css
 wwwroot\css\admin-dashboard.css
 wwwroot\css\admin-logs.css
 wwwroot\css\admin-users.css
@@ -88,6 +89,7 @@ wwwroot\images\localbeers\supunbeerkhaw.jfif
 wwwroot\images\localbeers\suratsage.jfif
 wwwroot\images\localbeers\ubolwine.jfif
 wwwroot\images\logo.png
+wwwroot\js\aboutus.js
 wwwroot\js\admin-dashboard.js
 wwwroot\js\admin-logs.js
 wwwroot\js\admin-users.js

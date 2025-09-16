@@ -2,7 +2,6 @@
 @model FinalProject.Pages.ListModel
 @{
     ViewData["Title"] = "Sip & Trip — รายการเครื่องดื่มทั้งหมด";
-    // แสดงปุ่มแก้ไขเฉพาะแอดมิน
     bool isAdmin = User?.IsInRole("Admin") ?? false;
 }
 
@@ -10,24 +9,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/list.css" />
+<link rel="stylesheet" href="~/css/list.css" asp-append-version="true" />
 
-<div class="container py-4">
+<div class="container py-4 list-minimal">
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
-        <h2 class="mb-0">
-            <img src="~/images/Logo.png" alt="รายการเครื่องดื่มทั้งหมด"
-                 style="height:70px; width:auto; vertical-align:middle;" class="me-2" />
+        <h2 class="mb-0 d-flex align-items-center gap-2">
+            <img src="~/images/Logo.png" alt="รายการเครื่องดื่มทั้งหมด" class="brand-logo" />
             รายการเครื่องดื่มทั้งหมด
         </h2>
 
         <div class="d-flex align-items-center gap-2">
             <span id="resultCount" class="count-chip">0 รายการ</span>
-            @* ถ้ามีหน้า Create ในอนาคต ค่อยเปิดปุ่มนี้ได้
-            @if (isAdmin)
+            @* ปุ่มเพิ่มใหม่ (ถ้ามีหน้า Create ค่อยเปิด) *@
+            @* @if (isAdmin)
             {
                 <a class="btn btn-sm btn-success" asp-page="/Admin/Beers/Create">➕ เพิ่มใหม่</a>
-            }
-            *@
+            } *@
         </div>
     </div>
 
@@ -37,7 +34,7 @@
             <div class="col-12 col-sm-6 col-lg-3 position-relative">
                 <label class="form-label">🔍 ค้นหาชื่อเครื่องดื่ม/ร้าน</label>
                 <input type="text" id="searchInput" class="form-control" placeholder="เช่น สิงห์, Phuket, IPA, ไวน์แดง">
-                <span class="position-absolute text-muted" id="clearSearch" title="ล้างคำค้น" style="right:.5rem; top:50%; transform:translateY(-50%); cursor:pointer">✕</span>
+                <span class="clear-x" id="clearSearch" title="ล้างคำค้น">✕</span>
             </div>
             <div class="col-6 col-lg-2">
                 <label class="form-label">🌍 จังหวัด</label>
@@ -51,8 +48,7 @@
             </div>
             <div class="col-6 col-lg-2">
                 <label class="form-label">
-                    <img src="~/images/Logo.png" alt="ประเภท"
-                         style="height:28px; width:auto; vertical-align:middle;" class="me-1" />
+                    <img src="~/images/Logo.png" alt="ประเภท" class="label-icon" />
                     ประเภท
                 </label>
                 <select id="typeSelect" class="form-select">
@@ -67,7 +63,6 @@
                 <label class="form-label">🔥 ดีกรี</label>
                 <select id="alcoholSelect" class="form-select">
                     <option value="">ทุกดีกรี</option>
-                    @* AlcoholLevel เป็น double ไม่ nullable — กรองค่ามากกว่า 0 *@
                     @foreach (var alc in Model.LocalBeers.Select(b => b.AlcoholLevel).Where(a => a > 0).Distinct())
                     {
                         <option value="@alc">@alc%</option>
@@ -94,11 +89,10 @@
 
     @if (Model.LocalBeers == null || !Model.LocalBeers.Any())
     {
-        <div class="empty p-4 text-center text-muted">ไม่มีข้อมูลในระบบ</div>
+        <div class="empty">ไม่มีข้อมูลในระบบ</div>
     }
     else
     {
-        <!-- มุมมองแบบแถวเดียว -->
         <div id="beerList" class="list-wrap">
             @foreach (var beer in Model.LocalBeers)
             {
@@ -110,7 +104,7 @@
                 ? (beer.ImageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase) || beer.ImageUrl.StartsWith("/")
                 ? beer.ImageUrl
                 : $"/images/beers/{beer.ImageUrl}")
-                : "https://via.placeholder.com/72x72?text=Drink";
+                : "https://via.placeholder.com/64x64?text=Drink";
 
                 <div class="beer-row beer-item"
                      data-name="@name"
@@ -121,38 +115,60 @@
                      data-price="@price"
                      onclick="location.href='@Url.Page("/Detail", new { id = beer.Id })'">
 
-                    <img src="@imgSrc" alt="@beer.Name" class="thumb" onerror="this.src='https://via.placeholder.com/72x72?text=Drink'" />
+                    <img src="@imgSrc"
+                         alt="@beer.Name"
+                         class="thumb"
+                         width="56" height="56"
+                         loading="lazy" decoding="async"
+                         onerror="this.src='https://via.placeholder.com/64x64?text=Drink'" />
 
                     <div class="row-main">
                         <h5 class="beer-title truncate">@beer.Name</h5>
-                        @if (!string.IsNullOrWhiteSpace(beer.Province))
-                        {
-                            <span class="pill">@beer.Province</span>
-                        }
-                        @if (!string.IsNullOrWhiteSpace(beer.Type))
-                        {
-                            <span class="pill">@beer.Type</span>
-                        }
-                        @if (!string.IsNullOrWhiteSpace(beer.Description))
-                        {
-                            <span class="muted truncate">@beer.Description</span>
-                        }
+                        <div class="chips">
+                            @if (!string.IsNullOrWhiteSpace(beer.Province))
+                            {
+                                <span class="pill">@beer.Province</span>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(beer.Type))
+                            {
+                                <span class="pill">@beer.Type</span>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(beer.Description))
+                            {
+                                <span class="muted truncate d-none d-md-inline">@beer.Description</span>
+                            }
+                        </div>
                     </div>
 
-                    <div class="row-right text-end">
-                        <span class="muted d-block">ABV: <strong>@(beer.AlcoholLevel > 0 ? $"{beer.AlcoholLevel}%" : "–")</strong></span>
-                        <span class="muted d-block">ราคา: <span class="price">@((beer.Price > 0 ? beer.Price.ToString("N0") : "–"))</span> บาท</span>
+                    <div class="row-right">
+                        <div class="kpis">
+                            <span class="muted">ABV: <strong>@(beer.AlcoholLevel > 0 ? $"{beer.AlcoholLevel}%" : "–")</strong></span>
+                            <span class="muted">ราคา: <span class="price">@((beer.Price > 0 ? beer.Price.ToString("N0") : "–"))</span> บาท</span>
+                        </div>
 
-                        @* ปุ่มแก้ไข (เฉพาะแอดมิน) *@
                         @if (isAdmin)
                         {
-                            <div class="mt-2">
+                            <div class="action-bar">
                                 <button type="button"
                                         class="btn btn-sm btn-warning"
                                         title="แก้ไขรายการนี้ (Admin)"
                                         onclick="event.stopPropagation(); location.href='@Url.Page("/Admin/editdetail", new { id = beer.Id })'">
                                     ✏️ แก้ไข
                                 </button>
+
+                                <form method="post"
+                                      asp-page-handler="Delete"
+                                      asp-route-id="@beer.Id"
+                                      class="delete-form"
+                                      onsubmit="event.stopPropagation(); return window.confirm('ยืนยันลบรายการนี้หรือไม่? การลบไม่สามารถย้อนกลับได้');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            title="ลบรายการนี้ (Admin)"
+                                            onclick="event.stopPropagation();">
+                                        🗑️ ลบ
+                                    </button>
+                                </form>
                             </div>
                         }
                     </div>
@@ -160,11 +176,10 @@
             }
         </div>
 
-        <!-- Pagination -->
         <nav aria-label="รายการเครื่องดื่ม pagination" class="mt-3">
             <ul class="pagination pagination-sm justify-content-center" id="pager"></ul>
         </nav>
     }
 </div>
 
-<script src="~/js/list.js"></script>
+<script src="~/js/list.js" asp-append-version="true"></script>

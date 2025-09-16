@@ -4,7 +4,7 @@
 @inject UserManager<FinalProject.Models.ApplicationUser> UserManager
 
 @{
-    // ===== ผู้ใช้ + โปรไฟล์ =====
+    // ===== ข้อมูลผู้ใช้/โปรไฟล์ =====
     ApplicationUser? me = null;
     string avatar = "";
     string displayName = "";
@@ -20,6 +20,7 @@
         avatar = string.IsNullOrWhiteSpace(me?.AvatarUrl) ? "" : me!.AvatarUrl;
     }
 
+    // ===== ฟังก์ชันสร้างตัวอักษรย่อจากชื่อ =====
     string Initials(string name)
     {
         if (string.IsNullOrWhiteSpace(name)) return "?";
@@ -29,7 +30,7 @@
     }
     var initials = isSignedIn ? Initials(displayName) : "";
 
-    // ===== สีพื้นหลังอวตารแบบ deterministic จากชื่อ =====
+    // ===== สร้างสีพื้นหลังอวตาร์แบบคงที่จากชื่อ =====
     int HashHue(string s)
     {
         if (string.IsNullOrEmpty(s)) return 210;
@@ -44,10 +45,10 @@
     var hue = HashHue(displayName);
     bool hasAvatar = !string.IsNullOrWhiteSpace(avatar);
 
-    // ===== Current page (Razor Pages) =====
+    // ===== หน้าปัจจุบัน (สำหรับไฮไลท์เมนู) =====
     var currentPage = (ViewContext?.RouteData?.Values["page"]?.ToString() ?? "").ToLowerInvariant();
 
-    // ===== Admin / Page Context =====
+    // ===== บทบาท/คอนเท็กซ์หน้า =====
     bool isAdmin = User?.IsInRole("Admin") ?? false;
     bool onDetail = currentPage.StartsWith("/detail");
     bool onAdmin = currentPage.StartsWith("/admin");
@@ -59,7 +60,7 @@
     if (!string.IsNullOrWhiteSpace(idVal))
         int.TryParse(idVal, out currentId);
 
-    // ===== Active link helper =====
+    // ===== ตัวช่วยกำหนดสถานะ active ให้ลิงก์เมนู =====
     bool IsActive(string p)
     {
         p = p.ToLowerInvariant();
@@ -85,6 +86,7 @@
 
     <meta name="description" content="Sip &amp; Trip – แผนที่เครื่องดื่มท้องถิ่นไทย สำรวจคราฟต์เบียร์ ไวน์ และสุราทั่วประเทศ พร้อมรายละเอียดสถานที่และรสชาติ" />
 
+    <!-- ฟอนต์/ไลบรารีหลัก -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -93,34 +95,35 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
 
-    <!-- ธีมของ Layout (ย้ายออกจาก inline แล้ว) -->
+    <!-- ธีมของส่วนหัว/แถบนำทาง -->
     <link rel="stylesheet" href="~/css/layout-theme.css" asp-append-version="true" />
 
     @RenderSection("Styles", required: false)
 </head>
 <body>
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <!-- ใช้คลาส .app-navbar เพื่อให้สไตล์เฉพาะของเรา -->
+        <nav class="navbar navbar-expand-lg app-navbar">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="~/images/logo.png" alt="Sip & Trip" style="height:50px; width:auto;" class="me-2" />
-                    Sip &amp; Trip
+                <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-page="/Index" title="ไปหน้าแรก">
+                    <img src="~/images/logo.png" alt="โลโก้ Sip & Trip" class="brand-mark" />
+                    <span class="brand-text">Sip &amp; Trip</span>
                     @if (isAdmin)
                     {
-                        <span class="badge text-bg-warning ms-2">Admin</span>
+                        <span class="badge text-bg-warning ms-1">ผู้ดูแล</span>
                     }
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="เปิด/ปิดเมนู">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    @* ===== LEFT: Main nav ===== *@
+                    @* ===== เมนูหลัก (ซ้าย) ===== *@
                     @if (!isAdmin)
                     {
-                        <!-- USER NAV -->
+                        <!-- เมนูสำหรับผู้ใช้ทั่วไป -->
                         <ul class="navbar-nav align-items-center me-3">
                             <li class="nav-item">
                                 <a class="nav-link @active("/index")" asp-area="" asp-page="/Index">🏠 หน้าแรก</a>
@@ -129,7 +132,7 @@
                                 <a class="nav-link @active("/list")" asp-area="" asp-page="/List">📋 รายการเครื่องดื่ม</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @active("/flavormatch")" asp-area="" asp-page="/FlavorMatch">🍷 FlavorMatch</a>
+                                <a class="nav-link @active("/flavormatch")" asp-area="" asp-page="/FlavorMatch">🍷 จับคู่รสชาติ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link @active("/aboutus")" asp-area="" asp-page="/AboutUs">ℹ️ เกี่ยวกับเรา</a>
@@ -138,7 +141,7 @@
                     }
                     else
                     {
-                        <!-- ADMIN NAV -->
+                        <!-- เมนูสำหรับผู้ดูแล -->
                         <ul class="navbar-nav align-items-center me-3">
                             <li class="nav-item">
                                 <a class="nav-link @active("/admin/adddetail")"
@@ -149,15 +152,13 @@
                                 <a class="nav-link @active("/list")" asp-area="" asp-page="/List">📋 รายการ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @active("/admin/dashboard")" asp-area="" asp-page="/Admin/Dashboard">📊 Dashboard</a>
+                                <a class="nav-link @active("/admin/dashboard")" asp-area="" asp-page="/Admin/Dashboard">📊 แดชบอร์ด</a>
                             </li>
-                            
                             <li class="nav-item">
-                                <a class="nav-link @active("/admin/users/index")" asp-area="" asp-page="/Admin/Users/Index">👥 Users</a>
+                                <a class="nav-link @active("/admin/users/index")" asp-area="" asp-page="/Admin/Users/Index">👥 ผู้ใช้</a>
                             </li>
-                           
 
-                            @* ปุ่มตามคอนเท็กซ์ *@
+                            @* ปุ่มตามบริบทหน้า *@
                             @if (onDetail && currentId > 0)
                             {
                                 <li class="nav-item">
@@ -173,7 +174,7 @@
                         </ul>
                     }
 
-                    @* ===== RIGHT: Profile / Auth ===== *@
+                    @* ===== โปรไฟล์/เข้าสู่ระบบ (ขวา) ===== *@
                     <ul class="navbar-nav align-items-center">
                         @if (isSignedIn)
                         {
@@ -182,12 +183,13 @@
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     @if (hasAvatar)
                                     {
-                                        <img src="@avatar" alt="avatar" class="nav-avatar" />
+                                        <img src="@avatar" alt="อวตาร์" class="nav-avatar" />
                                     }
                                     else
                                     {
                                         <span class="nav-avatar-fallback"
-                                              style="background: conic-gradient(from 180deg, hsl(@hue,85%,55%), hsl(@( (hue+60)%360 ),85%,55%) 50%, hsl(@( (hue+120)%360 ),85%,55%));">
+                                              style="background: conic-gradient(from 180deg, hsl(@hue,85%,55%), hsl(@( (hue+60)%360 ),85%,55%) 50%, hsl(@( (hue+120)%360 ),85%,55%));"
+                                              title="@displayName">
                                             @initials
                                             <svg class="avatar-icon" viewBox="0 0 24 24" aria-hidden="true">
                                                 <circle cx="12" cy="8" r="4"></circle>
@@ -203,7 +205,7 @@
                                         <div class="d-flex align-items-center gap-2">
                                             @if (hasAvatar)
                                             {
-                                                <img src="@avatar" class="avatar-lg" alt="avatar" />
+                                                <img src="@avatar" class="avatar-lg" alt="อวตาร์" />
                                             }
                                             else
                                             {
@@ -224,9 +226,6 @@
                                     <li><hr class="dropdown-divider" /></li>
 
                                     <li><a class="dropdown-item" asp-page="/Profile">โปรไฟล์ของฉัน</a></li>
-                                    @* หรือใช้หน้า Manage ของ Identity Area:
-                                       <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">โปรไฟล์ของฉัน</a></li> *@
-
                                     <li>
                                         <form class="px-2 py-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
                                             <button type="submit" class="dropdown-item">ออกจากระบบ</button>
@@ -262,11 +261,12 @@
         </div>
     </footer>
 
+    <!-- สคริปต์หลัก -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <!-- สคริปต์ของ Layout (เงา navbar ตอนเลื่อน) -->
+    <!-- สคริปต์ควบคุมการแสดงผลแถบนำทาง -->
     <script src="~/js/layout-nav.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)

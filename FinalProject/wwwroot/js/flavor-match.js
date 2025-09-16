@@ -15,20 +15,43 @@
     const API_OPTS = "/api/reco/flavor-options";
     const HISTORY_KEY = "flavor_match_hist";
 
-    // ----- fixed option sets (ตามที่ผู้ใช้กำหนด) -----
+    // ----- fixed option sets (ตามที่ผู้ใช้กำหนด/สำรอง) -----
     const FIXED_FLAVORS = ["หวาน", "เปรี้ยว", "ขม", "เค็ม", "อูมามิ"];
     const FIXED_FOODS = ["ทะเล", "เนื้อ", "ไก่", "หมู"];
     const FIXED_MOODS = ["Party", "Chill", "Celebration", "Fresh", "Sport"];
 
+    // ====== SVG ไอคอนสำหรับหมวด 'อาหาร' ======
+    // (ขนาดจะถูกบีบด้วย CSS .chip__img svg { width:20px;height:20px })
+    const FOOD_ICON_SVGS = {
+        "ทะเล": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c2.5 0 3.5-2 6-2s3.5 2 6 2 3.5-2 6-2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 16c1.8 0 2.7-1.5 5-1.5S12.2 16 14 16s2.7-1.5 5-1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="10.5" r="0.8" fill="currentColor"/></svg>`,
+        "ไก่": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6c-1 0-2 .5-2 1.8 0 1.2 1 2.2 2.4 2.2H17a4.5 4.5 0 0 1 0 9H9.5A4.5 4.5 0 0 1 5 14V8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="18.2" cy="5.2" r="1.2" fill="currentColor"/></svg>`,
+        "เนื้อ": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6h10c3 0 5 2.5 5 5.5S20 17 17 17H7c-3 0-5-2.5-5-5.5S4 6 7 6Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9.5c0-.8.7-1.5 1.5-1.5S12 8.7 12 9.5 11.3 11 10.5 11 9 10.3 9 9.5Z" fill="currentColor"/></svg>`,
+        "หมู": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12c0-3 2.5-5.5 6-5.5h4c3.5 0 6 2.5 6 5.5v2a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-2Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="12.5" r="0.8" fill="currentColor"/><circle cx="15.5" cy="12.5" r="0.8" fill="currentColor"/></svg>`
+    };
+
     // ---------- helpers ----------
+    function iconForFood(value) {
+        // คืน SVG ของหมวดอาหาร ถ้าไม่มีตรงชื่อจะวาดเป็น emoji fallback
+        const svg = FOOD_ICON_SVGS[value];
+        if (svg) return svg;
+        return `<span style="font-size:16px">${value === "ทะเล" ? "🦐" : value === "ไก่" ? "🍗" : value === "เนื้อ" ? "🥩" : value === "หมู" ? "🐖" : "🍽"}</span>`;
+    }
+
     function chipHtml(name, value, checked = false) {
         const safe = String(value);
+        const isFood = name === "food";
+        // ใส่รูปเฉพาะหมวดอาหาร
+        const img = isFood ? `<span class="chip__img" aria-hidden="true">${iconForFood(safe)}</span>` : "";
+        const cls = isFood ? "chip chip--withimg chip--food" : "chip";
+
         return `
-      <label class="chip" title="${safe}">
-        <input type="checkbox" name="${name}" value="${safe}" ${checked ? "checked" : ""} />
-        <span>${safe}</span>
-      </label>`;
+<label class="${cls}" title="${safe}">
+  <input type="checkbox" name="${name}" value="${safe}" ${checked ? "checked" : ""} />
+  ${img}
+  <span class="chip__text">${safe}</span>
+</label>`;
     }
+
     function renderChipset(name, items, preset = []) {
         const host = document.querySelector(`#chipset-${name}`);
         if (!host) return;
@@ -36,9 +59,9 @@
             .map(v => chipHtml(name, v, preset.includes(v)))
             .join("");
     }
-    function readChecked(name) {
-        return $all(`input[name="${name}"]:checked`).map(i => i.value);
-    }
+
+    function readChecked(name) { return $all(`input[name="${name}"]:checked`).map(i => i.value); }
+
     function saveHistory(entry) {
         const arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
         arr.unshift({ ...entry, t: Date.now() });
@@ -55,13 +78,13 @@
             ].filter(Boolean).join(" • ");
             const dt = new Date(h.t || Date.now());
             return `
-              <div class="hist-item">
-                <div class="hist-head">
-                  <div class="hist-title">${h.base} • ${(h.flavors || []).join(", ") || "Signature"}</div>
-                  <time class="hist-time">${dt.toLocaleString()}</time>
-                </div>
-                <div class="hist-sub">${extra || ""}</div>
-              </div>`;
+<div class="hist-item">
+  <div class="hist-head">
+    <div class="hist-title">${h.base} • ${(h.flavors || []).join(", ") || "Signature"}</div>
+    <time class="hist-time">${dt.toLocaleString()}</time>
+  </div>
+  <div class="hist-sub">${extra || ""}</div>
+</div>`;
         }).join("");
     }
 
@@ -152,21 +175,21 @@
                 const rating = x.rating ? `⭐ ${x.rating.toFixed(1)} (${x.ratingCount || 0})` : "";
                 const meta = [x.type, x.province].filter(Boolean).join(" • ");
                 return `
-          <div class="col">
-            <div class="reco-card">
-              <img class="reco-img" src="${img}" alt="${x.name}">
-              <div class="reco-body">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                  <div class="reco-name">${x.name}</div>
-                  <span class="reco-badge">Score ${x.score?.toFixed?.(2) ?? "—"}</span>
-                </div>
-                <div class="reco-meta">${meta}${price}</div>
-                ${rating ? `<div class="reco-meta mt-1">${rating}</div>` : ``}
-                <div class="reco-why">${x.why || ""}</div>
-                ${x.id ? `<a class="btn btn-sm btn-soft mt-2" href="/Detail?id=${x.id}">ดูข้อมูล</a>` : ``}
-              </div>
-            </div>
-          </div>`;
+<div class="col">
+  <div class="reco-card">
+    <img class="reco-img" src="${img}" alt="${x.name}">
+    <div class="reco-body">
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <div class="reco-name">${x.name}</div>
+        <span class="reco-badge">Score ${x.score?.toFixed?.(2) ?? "—"}</span>
+      </div>
+      <div class="reco-meta">${meta}${price}</div>
+      ${rating ? `<div class="reco-meta mt-1">${rating}</div>` : ``}
+      <div class="reco-why">${x.why || ""}</div>
+      ${x.id ? `<a class="btn btn-sm btn-soft mt-2" href="/Detail?id=${x.id}">ดูข้อมูล</a>` : ``}
+    </div>
+  </div>
+</div>`;
             }).join("");
 
             resultWrap.classList.remove("d-none");

@@ -1,79 +1,63 @@
-﻿:root {
+﻿/* ===== Theme basics (เฉพาะหน้านี้) ===== */
+:root {
     --bg: #f6f8fb;
     --card: #ffffff;
     --ink: #1f2937;
     --muted: #6b7280;
-    --brand: #2563eb;
-    --ring: rgba(37,99,235,.2)
+    --ring: rgba(37,99,235,.2);
+    --border: #e6ebf2;
+    --warn: #f59e0b; /* amber-500 */
+    --warn-600: #d97706;
+    --del: #ef4444; /* red-500 */
+    --del-600: #dc2626;
+    --chip-bg: #f8fafc;
+    --chip-bd: #e2e8f0;
 }
 
 body {
     background: var(--bg);
+    color: var(--ink);
     font-family: 'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color: var(--ink)
 }
 
-.toolbar {
-    background: linear-gradient(180deg,#f8fafc,#fff);
-    border: 1px solid #e6ebf2
+/* ===== Page header ===== */
+.list-minimal .brand-logo {
+    height: 52px;
+    width: auto;
+    vertical-align: middle;
 }
 
-.count-chip {
+.list-minimal .count-chip {
     background: #111827;
     color: #fff;
     border-radius: 999px;
     padding: 6px 10px;
-    font-size: .85rem
+    font-size: .85rem;
 }
 
-/* แถวเดียวแบบลิสต์ */
-.beer-row {
-    border: 1px solid #e6ebf2;
-    background: #fff;
-    border-radius: 12px;
-    padding: 12px 14px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: box-shadow .15s ease, transform .15s ease;
+/* ===== Toolbar ===== */
+.toolbar {
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg,#f8fafc,#fff);
+}
+
+.clear-x {
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
+    color: #9ca3af;
 }
 
-    .beer-row:hover {
-        box-shadow: 0 8px 20px rgba(0,0,0,.06);
-        transform: translateY(-1px);
-    }
-
-.thumb {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    border-radius: 10px;
-    background: #eef2f7
+.label-icon {
+    height: 24px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: .25rem;
 }
 
-.beer-title {
-    margin: 0;
-    font-weight: 700;
-}
-
-.muted {
-    color: #6b7280;
-    font-size: .9rem;
-}
-
-.pill {
-    border: 1px solid #e2e8f0;
-    background: #f8fafc;
-    border-radius: 999px;
-    padding: 2px 8px;
-    font-size: .8rem;
-}
-
-.price {
-    font-weight: 700
-}
-
+/* ===== List layout ===== */
 .list-wrap {
     display: flex;
     flex-direction: column;
@@ -83,23 +67,53 @@ body {
 .empty {
     border: 1px dashed #d1d5db;
     border-radius: 12px;
-    background: #fff
+    background: #fff;
+    color: #6b7280;
+    text-align: center;
+    padding: 24px;
 }
 
+/* ===== Row card ===== */
+.beer-row {
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow .15s ease, transform .15s ease;
+    cursor: pointer;
+}
+
+    .beer-row:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,.06);
+        transform: translateY(-1px);
+    }
+
+/* thumb */
+.thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #eef2f7;
+    display: block;
+}
+
+/* main text */
 .row-main {
     flex: 1;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.row-right {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-left: auto;
+.beer-title {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.25;
 }
 
 .truncate {
@@ -109,24 +123,152 @@ body {
     text-overflow: ellipsis;
 }
 
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.pill {
+    border: 1px solid var(--chip-bd);
+    background: var(--chip-bg);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: .8rem;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.price {
+    font-weight: 700;
+}
+
+/* right side: KPIs + actions (แนวนอนติดกัน) */
+.row-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.kpis {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+    min-width: 150px;
+}
+
+/* ===== Horizontal action bar (edit + delete) ===== */
+.action-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* ระยะห่างปุ่ม */
+    flex-wrap: nowrap; /* ไม่ตัดบรรทัดในจอกว้าง */
+}
+
+    .action-bar .btn {
+        min-width: 86px; /* กว้างพอดีไม่ล้น */
+        height: 36px; /* สูงเท่ากัน */
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 6px 10px;
+    }
+
+/* Warning (แก้ไข) */
+.btn-warning {
+    background: var(--warn);
+    border-color: var(--warn);
+    color: #fff;
+}
+
+    .btn-warning:hover {
+        background: var(--warn-600);
+        border-color: var(--warn-600);
+        color: #fff;
+    }
+
+    .btn-warning:focus {
+        box-shadow: 0 0 0 4px var(--ring);
+    }
+
+/* Danger (ลบ) */
+.btn-danger {
+    background: var(--del);
+    border-color: var(--del);
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background: var(--del-600);
+        border-color: var(--del-600);
+        color: #fff;
+    }
+
+    .btn-danger:focus {
+        box-shadow: 0 0 0 4px var(--ring);
+    }
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+    .truncate {
+        max-width: 360px;
+    }
+
+    .kpis {
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .beer-row {
+        align-items: flex-start;
+    }
+
+    .row-right {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
+
+    .action-bar {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+        .action-bar .btn {
+            min-width: auto;
+        }
+}
+
 @media (max-width: 576px) {
     .truncate {
         max-width: 220px;
     }
-}
 
-/* Pagination */
-.pagination .page-link {
-    color: #1f2937;
-    border-color: #e5e7eb;
-}
+    .thumb {
+        width: 52px;
+        height: 52px;
+        border-radius: 10px;
+    }
 
-.pagination .page-item.active .page-link {
-    background: #2563eb;
-    border-color: #2563eb;
-    color: #fff;
-}
+    .kpis {
+        min-width: auto;
+        text-align: left;
+    }
 
-.pagination .page-item.disabled .page-link {
-    color: #9ca3af;
+    .row-right {
+        align-items: stretch;
+    }
+
+    .action-bar {
+        justify-content: flex-start;
+    }
 }

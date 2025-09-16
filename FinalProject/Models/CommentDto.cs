@@ -1,13 +1,12 @@
-﻿// Models/CommentDtos.cs
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FinalProject.Models
 {
-    // ใช้ตอน POST คอมเมนต์ (Minimal API หรือ Controller ก็ใช้ตัวนี้ได้)
-    public record CommentCreateDto(string Body, string? DisplayName, int? UserRating = null);
-    public record NewCommentDto(string Body, string? DisplayName, int? UserRating = null);
+    // ข้อมูลรับเข้า (รองรับ reply ผ่าน ParentId)
+    public record CommentCreateDto(string Body, int? ParentId);
 
-    // ใช้ตอนส่งกลับให้หน้าบ้าน (GET/POST)
+    // ข้อมูลส่งออก (เป็นโครงสร้าง tree)
     public record CommentOutDto(
         int Id,
         string DisplayName,
@@ -16,10 +15,12 @@ namespace FinalProject.Models
         bool CanDelete,
         string? AvatarUrl,
         int? Rating,
-        string? ProfileUrl   // <— ใหม่
+        string? ProfileUrl,
+        int? ParentId,
+        List<CommentOutDto> Replies
     );
 
-    // สำหรับ Minimal API ที่เดิมใช้ CommentView (ใส่ฟิลด์ใหม่เป็น optional)
+    // คง type เก่าไว้เพื่อ Compatibility หากที่อื่นยังอ้างถึง
     public record CommentView(
         int Id,
         string Body,
@@ -29,6 +30,6 @@ namespace FinalProject.Models
         string? DisplayName = null,
         string? AvatarUrl = null,
         int? Rating = null,
-        string? ProfileUrl = null // <— ใหม่
+        string? ProfileUrl = null
     );
 }

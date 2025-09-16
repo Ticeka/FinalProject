@@ -29,6 +29,19 @@
          : (t ?? "").ToLower().Contains("วิสกี้") || (t ?? "").ToLower().Contains("เหล้า") || (t ?? "").ToLower().Contains("rum") || (t ?? "").ToLower().Contains("whisky") || (t ?? "").ToLower().Contains("liquor") ? "🥃"
          : "🍶";
 }
+@functions {
+    string IconByFlavor(string? f)
+    {
+        var s = (f ?? string.Empty).ToLowerInvariant();
+        if (s.Contains("citrus") || s.Contains("ส้ม") || s.Contains("เลมอน") || s.Contains("lime")) return "🍊";
+        if (s.Contains("herb") || s.Contains("สมุนไพร") || s.Contains("ใบไม้")) return "🌿";
+        if (s.Contains("sweet") || s.Contains("หวาน") || s.Contains("คาราเมล") || s.Contains("vanilla")) return "🍯";
+        if (s.Contains("bitter") || s.Contains("ขม") || s.Contains("hop") || s.Contains("ฮ็อป")) return "🌱";
+        if (s.Contains("roast") || s.Contains("คั่ว") || s.Contains("ช็อกโกแลต") || s.Contains("coffee")) return "🍫";
+        if (s.Contains("spice") || s.Contains("เผ็ดร้อน")) return "🌶️";
+        return "🟡";
+    }
+}
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -63,13 +76,10 @@
         }
 
     @@media (min-width: 992px) {
-        .fab-edit .label
-
-    {
-        display: inline;
-        margin-left: .35rem;
-    }
-
+        .fab-edit .label {
+            display: inline;
+            margin-left: .35rem;
+        }
     }
 
     .fab-edit.dragging {
@@ -357,6 +367,79 @@ else
             </div>
         </section>
 
+        <!-- ลักษณะรสชาติ & เมนูที่เข้ากัน -->
+        <section class="section p-4 p-md-5 mb-4">
+            <header class="section-head">
+                <h2 class="h5 mb-0">ลักษณะรสชาติ & เมนูที่เข้ากัน</h2>
+            </header>
+
+            <div class="row g-4">
+                <!-- ลักษณะรสชาติ -->
+                <div class="col-12 col-lg-6">
+                    <h3 class="h6 mb-3">ลักษณะรสชาติ</h3>
+
+                    @if (b?.Flavors != null && b.Flavors.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var f in b.Flavors.OrderByDescending(x => x.Intensity))
+                            {
+                                var raw = f.Intensity; // 0.01..1
+                                var pct = Math.Clamp((int)Math.Round(raw * 100), 1, 100);
+                                var level = pct >= 70 ? "เด่นชัด" : (pct >= 40 ? "ปานกลาง" : "อ่อน");
+
+                                <li class="list-group-item px-0">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="me-2">@IconByFlavor(f.Flavor)</span>
+                                            <strong>@f.Flavor</strong>
+                                            <span class="badge rounded-pill bg-light text-secondary ms-2">@level</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress mt-2" style="height:8px;">
+                                        <div class="progress-bar" role="progressbar" style="width:@pct%"></div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="text-muted">ยังไม่มีข้อมูลลักษณะรสชาติ</div>
+                    }
+                </div>
+
+                <!-- เมนูที่เข้ากัน -->
+                <div class="col-12 col-lg-6">
+                    <h3 class="h6 mb-3">เมนูที่เข้ากัน</h3>
+
+                    @if (b?.FoodPairings != null && b.FoodPairings.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var p in b.FoodPairings)
+                            {
+                                <li class="list-group-item px-0">
+                                    <div class="d-flex align-items-start">
+                                        <div class="me-2" aria-hidden="true">🍽️</div>
+                                        <div>
+                                            <strong>@p.FoodName</strong>
+                                            @if (!string.IsNullOrWhiteSpace(p.Reason))
+                                            {
+                                                <div class="text-muted small">@p.Reason</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="text-muted">ยังไม่มีคำแนะนำเมนูที่เข้ากัน</div>
+                    }
+                </div>
+            </div>
+        </section>
+
         <!-- Map -->
         @if (b.Latitude != 0 && b.Longitude != 0)
         {
@@ -375,45 +458,89 @@ else
         }
     </div>
 
-    <!-- Comments -->
+    <!-- ===== Comments (ล็อกอินเท่านั้นสำหรับการคอมเมนต์/ตอบกลับ) ===== -->
     <section class="section container p-4 p-md-5 mb-5">
-        <h2 class="h5 mb-3">ความคิดเห็น</h2>
-        <div class="mb-3">
-            <div class="form-floating mb-2">
-                <textarea id="cmtText" class="form-control" style="height: 110px" placeholder="พิมพ์ความคิดเห็นของคุณ..."></textarea>
-                <label for="cmtText">พิมพ์ความคิดเห็นของคุณ...</label>
-            </div>
-
-            @if (!(User?.Identity?.IsAuthenticated ?? false))
-            {
-                <div class="input-group mb-2">
-                    <span class="input-group-text">ชื่อที่แสดง</span>
-                    <input id="cmtName" class="form-control" maxlength="100" placeholder="Guest">
-                </div>
-                <div class="text-muted small mb-2">* ถ้าล็อกอินแล้วจะใช้ชื่อผู้ใช้ของคุณโดยอัตโนมัติ</div>
-            }
-
-            <div class="d-flex gap-2">
-                <button id="cmtSendBtn" type="button" class="btn btn-primary">ส่งความคิดเห็น</button>
-                <button id="cmtReloadBtn" type="button" class="btn btn-outline-secondary">โหลดใหม่</button>
-            </div>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <h2 class="h5 mb-0">ความคิดเห็น</h2>
+            <button id="cmtReloadBtn" type="button" class="btn btn-outline-secondary btn-sm">โหลดใหม่</button>
         </div>
 
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            <form id="cmtForm" class="mb-3" onsubmit="return false">
+                <div class="form-floating mb-2">
+                    <textarea id="cmtText" class="form-control" style="height:110px" maxlength="1000" placeholder="พิมพ์ความคิดเห็นของคุณ…"></textarea>
+                    <label for="cmtText">พิมพ์ความคิดเห็นของคุณ…</label>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">* จำกัด 1,000 ตัวอักษร · สามารถตอบกลับคอมเมนต์ของคนอื่นได้จากปุ่ม “ตอบกลับ” ใต้คอมเมนต์</small>
+                    <button id="cmtSendBtn" type="button" class="btn btn-primary">ส่งความคิดเห็น</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-warning mb-3" role="alert">
+                ต้องเข้าสู่ระบบก่อนจึงจะคอมเมนต์หรือ “ตอบกลับ” ได้
+                <a class="alert-link" href="/Identity/Account/Login?returnUrl=@Url.Page("/Detail", new { id = b.Id })">เข้าสู่ระบบ</a>
+            </div>
+        }
+
+        <!-- รายการคอมเมนต์ (JS จะเรนเดอร์ให้ พร้อมปุ่ม 'ตอบกลับ' ใต้แต่ละคอมเมนต์) -->
         <div id="cmtList" class="d-flex flex-column gap-3"></div>
         <div id="cmtEmpty" class="text-muted">ยังไม่มีความคิดเห็น — มาเป็นคนแรกกันเลย!</div>
+
+        <!-- เทมเพลตฟอร์มตอบกลับ (JS จะ clone/แทรกใต้คอมเมนต์เมื่อกดปุ่ม "ตอบกลับ") -->
+        <template id="replyFormTpl">
+            <div class="reply-form mt-2">
+                <textarea class="form-control reply-text" rows="2" maxlength="1000" placeholder="พิมพ์คำตอบของคุณ…"></textarea>
+                <div class="d-flex justify-content-end gap-2 mt-2">
+                    <button type="button" class="btn btn-light btn-sm reply-cancel">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary btn-sm reply-send">ส่งคำตอบ</button>
+                </div>
+            </div>
+        </template>
+        <noscript><div class="alert alert-info mt-3">ต้องเปิดใช้ JavaScript เพื่อแสดงและตอบกลับคอมเมนต์</div></noscript>
     </section>
 
-    @* ===== FAB: ปุ่มแก้ไข (แสดงเฉพาะแอดมิน) ===== *@
-    @if (User?.IsInRole("Admin") ?? false)
+    @* ===== FAB: ปุ่มแก้ไข/ลบ (เฉพาะ Admin) ===== *@
+    @if ((User?.IsInRole("Admin") ?? false) && Model?.LocalBeer != null)
     {
-        <a id="fabEdit"
-           class="fab-edit btn btn-warning"
-           asp-page="/Admin/editdetail"
-           asp-route-id="@b.Id"
-           title="แก้ไขรายการนี้ (Admin)"
-           aria-label="แก้ไขรายการนี้">
-            ✏️ <span class="label">แก้ไข</span>
-        </a>
+        <div class="fab-group" aria-label="fab-actions">
+            <a id="fabEdit"
+               class="fab fab-edit"
+               asp-page="/Admin/editdetail"
+               asp-route-id="@Model.LocalBeer.Id"
+               title="แก้ไขรายการนี้ (Admin)"
+               aria-label="แก้ไขรายการนี้">
+                ✏️ <span class="label">แก้ไข</span>
+            </a>
+
+            <form id="deleteBeerForm"
+                  method="post"
+                  asp-page-handler="Delete"
+                  asp-route-id="@Model.LocalBeer.Id"
+                  class="fab-form"
+                  onsubmit="return confirm('ยืนยันลบรายการนี้หรือไม่? การลบจะไม่สามารถย้อนกลับได้');">
+                @Html.AntiForgeryToken()
+                <button type="submit"
+                        id="fabDelete"
+                        class="fab fab-delete"
+                        title="ลบรายการนี้ (Admin)"
+                        aria-label="ลบรายการนี้">
+                    🗑️ <span class="label">ลบ</span>
+                </button>
+            </form>
+        </div>
+    }
+
+
+    @section Scripts {
+    <script>
+        function confirmDelete() {
+            return window.confirm('ยืนยันลบรายการนี้หรือไม่? การลบจะไม่สามารถย้อนกลับได้');
+        }
+    </script>
     }
 
     <!-- JSON-LD (Structured Data) -->
@@ -440,7 +567,8 @@ else
 }
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="~/js/detail.js"></script>
+<!-- โหลด JS หลักแบบกันแคช -->
+<script src="~/js/detail.js" asp-append-version="true"></script>
 
 <script>
     /* ทำ FAB ให้ "ลากได้" แบบเบา ๆ */
@@ -451,10 +579,8 @@ else
       let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
 
       const setPos = (x, y) => {
-        // เปลี่ยนจากยึดขวาล่าง → เป็นยึดพิกัดซ้ายบนเมื่อถูกลาก
         fab.style.right = 'auto';
         fab.style.bottom = 'auto';
-        // กันล้นขอบหน้าจอเล็กน้อย
         const w = fab.offsetWidth, h = fab.offsetHeight;
         const maxX = Math.max(0, window.innerWidth - w - 6);
         const maxY = Math.max(0, window.innerHeight - h - 6);

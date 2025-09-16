@@ -7,10 +7,6 @@ function getEmojiByType(type) {
     if (t.includes('วิสกี้') || t.includes('เหล้า') || t.includes('rum') || t.includes('whisky') || t.includes('liquor')) return { emoji: '🥃', cls: 'poi-liquor' };
     return { emoji: '🍶', cls: 'poi-default' };
 }
-function createEmojiIcon(type) {
-    const { emoji, cls } = getEmojiByType(type);
-    return L.divIcon({ html: `<div class="poi-pin ${cls}">${emoji}</div>`, className: '', iconSize: [32, 32], iconAnchor: [16, 16], popupAnchor: [0, -14] });
-}
 async function fetchWithTimeout(url, opts = {}, ms = 10000) {
     const ctrl = new AbortController();
     const id = setTimeout(() => ctrl.abort(new DOMException("timeout", "AbortError")), ms);
@@ -22,15 +18,8 @@ function truthy(s) { const v = (s ?? '').toString().trim().toLowerCase(); return
 function escapeHtml(s) { const d = document.createElement('div'); d.innerText = s ?? ""; return d.innerHTML; }
 function escapeAttr(s) { return String(s ?? '').replace(/"/g, '&quot;'); }
 function getInitials(name) { const t = (name || '').trim(); if (!t) return 'U'; const parts = t.split(/\s+/).slice(0, 2); return parts.map(p => p[0]).join('').toUpperCase(); }
-function stringToHsl(seed) {
-    let h = 0; const str = String(seed || '');
-    for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 360;
-    return `hsl(${h} 70% 85%)`;
-}
-function renderStars(n) {
-    const x = Math.max(1, Math.min(5, Number(n) || 0));
-    return '★★★★★'.slice(0, x) + '☆☆☆☆☆'.slice(0, 5 - x);
-}
+function stringToHsl(seed) { let h = 0; const str = String(seed || ''); for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 360; return `hsl(${h} 70% 85%)`; }
+function renderStars(n) { const x = Math.max(1, Math.min(5, Number(n) || 0)); return '★★★★★'.slice(0, x) + '☆☆☆☆☆'.slice(0, 5 - x); }
 
 // ========= Init =========
 document.addEventListener('DOMContentLoaded', () => {
@@ -69,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isNaN(data.lat) && !isNaN(data.lng) && data.lat !== 0 && data.lng !== 0) {
         const gbtn = document.getElementById('gmapsBtn');
         if (gbtn) gbtn.href = `https://www.google.com/maps?q=${data.lat},${data.lng}`;
-
         const map = L.map('map').setView([data.lat, data.lng], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' }).addTo(map);
-        const icon = createEmojiIcon(data.type);
-        L.marker([data.lat, data.lng], { icon }).addTo(map).bindPopup(data.name || 'ตำแหน่ง');
+        const icon = getEmojiByType(data.type);
+        L.marker([data.lat, data.lng], { icon: L.divIcon({ html: `<div class="poi-pin ${icon.cls}">${icon.emoji}</div>`, className: '', iconSize: [32, 32], iconAnchor: [16, 16], popupAnchor: [0, -14] }) })
+            .addTo(map).bindPopup(data.name || 'ตำแหน่ง');
     }
 
-    // 4) ให้ดาวแบบไม่ล็อกอิน (Quick Rating)
+    // ===== Quick Rating (ต้องล็อกอิน, เปลี่ยนคะแนนได้ตลอด, ไม่มี localStorage/อิงเครื่อง) =====
     (function quickRating() {
         const box = document.querySelector('.ratebox');
         if (!box || !data.id) return;
@@ -84,83 +73,94 @@ document.addEventListener('DOMContentLoaded', () => {
         const avgEl = box.querySelector('.avg');
         const cntEl = box.querySelector('.cnt');
         const btns = Array.from(box.querySelectorAll('.stars button'));
-        const key = `qrated_${data.id}`;
+        const isAuth = truthy(root.dataset.auth);
+        const loginUrl = '/Identity/Account/Login?returnUrl=' + encodeURIComponent(location.pathname + location.search);
 
-        const voted = parseInt(localStorage.getItem(key) || '0', 10);
-        if (voted) {
-            btns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.score, 10) <= voted));
-            box.title = `คุณให้ ${voted} ดาวไว้แล้ว`;
+        let myScore = 0; // คะแนนที่ "ฉัน" ให้ (ของผู้ใช้ที่ล็อกอิน)
+
+        function paint(score) {
+            btns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.score, 10) <= score));
+            if (score > 0) box.title = `คุณให้ ${score} ดาวไว้แล้ว`;
+            else box.title = 'คลิกเพื่อให้คะแนน';
         }
 
-        function getFingerprint() {
-            let fp = localStorage.getItem('fp_uid');
-            if (!fp) {
-                fp = crypto.getRandomValues(new Uint32Array(4)).join('-');
-                localStorage.setItem('fp_uid', fp);
-            }
-            return fp;
+        async function fetchMine() {
+            if (!isAuth) { paint(0); return; }
+            try {
+                const res = await fetchWithTimeout(`/api/ratings/quick/mine?beerId=${data.id}`, {}, 8000);
+                if (!res.ok) { paint(0); return; }
+                const js = await res.json();
+                myScore = (js && js.score >= 1 && js.score <= 5) ? js.score : 0;
+                paint(myScore);
+            } catch { paint(0); }
         }
 
         async function send(score) {
+            if (!isAuth) {
+                if (confirm('ต้องเข้าสู่ระบบก่อนจึงจะให้คะแนนได้\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?')) location.href = loginUrl;
+                return;
+            }
             if (box.dataset.loading === '1') return;
             box.dataset.loading = '1';
             try {
                 const res = await fetchWithTimeout('/api/ratings/quick', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ beerId: data.id, score, fingerprint: getFingerprint() })
+                    body: JSON.stringify({ beerId: data.id, score })
                 });
                 if (!res.ok) {
                     const t = await res.text().catch(() => '');
-                    alert('ให้คะแนนไม่สำเร็จ: ' + (t || res.status));
-                    return;
+                    alert('ให้คะแนนไม่สำเร็จ: ' + (t || res.status)); return;
                 }
                 const out = await res.json(); // { avg, count }
-                if (avgEl) avgEl.textContent = Number(out.avg).toFixed(1);
-                if (cntEl) cntEl.textContent = out.count;
-                btns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.score, 10) <= score));
-                localStorage.setItem(key, String(score));
-                box.title = `ขอบคุณสำหรับคะแนน ${score} ดาว!`;
+                if (avgEl && typeof out.avg === 'number') avgEl.textContent = Number(out.avg).toFixed(1);
+                if (cntEl && typeof out.count === 'number') cntEl.textContent = out.count;
+                myScore = score;
+                paint(myScore);
+                // อัปเดตดาวในคอมเมนต์ให้เป็นคะแนนของฉันด้วย
+                window.__myRatingForThisBeer = myScore;
+                // repaint ปุ่มดาวในคอมเมนต์ (เฉพาะส่วนแสดง)
+                document.querySelectorAll('.cmt-item .cmt-stars').forEach(el => {
+                    el.innerHTML = myScore ? `${renderStars(myScore)} <span class="text-muted small">(${myScore})</span>` : '';
+                });
             } catch (e) {
-                console.error(e);
-                alert('เครือข่ายมีปัญหา ลองใหม่อีกครั้ง');
-            } finally {
-                box.dataset.loading = '0';
-            }
+                console.error(e); alert('เครือข่ายมีปัญหา ลองใหม่อีกครั้ง');
+            } finally { box.dataset.loading = '0'; }
         }
 
+        // hover/leave แสดงตัวอย่างตามปุ่มที่ชี้ แต่ปล่อยเมาส์กลับมาเป็น myScore
         btns.forEach(btn => {
             btn.addEventListener('mouseenter', () => {
                 const s = parseInt(btn.dataset.score, 10);
-                btns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.score, 10) <= s));
+                paint(s);
             });
-            btn.addEventListener('mouseleave', () => {
-                const s = parseInt(localStorage.getItem(key) || '0', 10);
-                btns.forEach(b => b.classList.toggle('active', s && parseInt(b.dataset.score, 10) <= s));
-            });
+            btn.addEventListener('mouseleave', () => paint(myScore));
             btn.addEventListener('click', () => send(parseInt(btn.dataset.score, 10)));
             btn.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); send(parseInt(btn.dataset.score, 10)); }
             });
         });
+
+        // โหลดคะแนนของฉันตอนเริ่ม
+        fetchMine();
+        // ให้ global สำหรับส่วนคอมเมนต์ใช้
+        window.__myRatingForThisBeer = myScore;
     })();
 
-    // ===== Comments =====
+    // ===== Comments (ต้องล็อกอินตอนกดส่ง, รองรับ reply, แอดมินลบได้หมด) =====
     (function () {
         const beerEl = document.getElementById("beerData");
         if (!beerEl) return;
 
         const beerId = Number(beerEl.dataset.id);
-        if (!Number.isInteger(beerId) || beerId <= 0) {
-            console.error("Invalid beerId:", beerEl.dataset.id);
-            return;
-        }
+        if (!Number.isInteger(beerId) || beerId <= 0) { console.error("Invalid beerId:", beerEl.dataset.id); return; }
+
+        const loginUrl = '/Identity/Account/Login?returnUrl=' + encodeURIComponent(location.pathname + location.search);
 
         const $ = s => document.querySelector(s);
         const list = $("#cmtList");
         const empty = $("#cmtEmpty");
         const txt = $("#cmtText");
-        const name = $("#cmtName");
         const btnSend = $("#cmtSendBtn");
         const btnReload = $("#cmtReloadBtn");
 
@@ -180,76 +180,137 @@ document.addEventListener('DOMContentLoaded', () => {
                 : `<strong>${escapeHtml(nameSafe)}</strong>`;
         }
 
-        function renderItem(it) {
-            const el = document.createElement("div");
-            el.className = "p-3 border rounded-3";
-
-            const nameRaw = it.displayName || it.author || (it.email ? String(it.email).split("@")[0] : "") || "Guest";
-            const nameSafe = nameRaw.trim() || "Guest";
-            const avatarUrl = (it.avatarUrl || it.avatar || it.photoUrl || "").trim() || null;
-            const profileUrl = (it.profileUrl || "").trim() || null;
-
-            const rRaw = Number(it.rating ?? it.userRating ?? it.stars);
-            const starNum = Number.isFinite(rRaw) ? Math.max(1, Math.min(5, Math.round(rRaw))) : 0;
-
+        function itemHeader(it, nameSafe) {
             const when = new Date(it.createdAt);
-            const whenStr = isNaN(when.getTime())
-                ? ""
-                : when.toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" });
+            const whenStr = isNaN(when.getTime()) ? "" : when.toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" });
 
-            const delBtnHtml = it.canDelete
-                ? `<button type="button" class="btn btn-sm btn-outline-danger cmt-del" data-id="${it.id}" aria-label="ลบความคิดเห็น">ลบ</button>`
-                : "";
+            // ให้ดาวที่โชว์ตรงคอมเมนต์ = คะแนนที่ฉันให้ (ถ้ามี)
+            const my = window.__myRatingForThisBeer || 0;
+            const starHtml = my ? `<span class="text-warning cmt-stars" title="คะแนนของฉัน">${renderStars(my)} <span class="text-muted small">(${my})</span></span>` : `<span class="cmt-stars"></span>`;
 
-            el.innerHTML = `
-        <div class="d-flex justify-content-between align-items-start gap-3">
-          <div class="d-flex align-items-center gap-2">
-            ${avatarBlock(nameSafe, avatarUrl, profileUrl)}
-            <div class="d-flex align-items-center gap-2">
-              ${nameBlock(nameSafe, profileUrl)}
-              ${starNum ? `<span class="text-warning" title="ให้คะแนน ${starNum} ดาว">${renderStars(starNum)} <span class="text-muted small">(${starNum})</span></span>` : ``}
-            </div>
-          </div>
-          <div class="d-flex align-items-center gap-2">
-            <span class="text-muted small">${escapeHtml(whenStr)}</span>
-            ${delBtnHtml}
-          </div>
-        </div>
-        <div class="mt-2" style="white-space:pre-wrap">${escapeHtml(it.body || "")}</div>
-      `;
-
-            if (it.canDelete) {
-                el.querySelector(".cmt-del")?.addEventListener("click", (e) => {
-                    const id = Number(e.currentTarget.getAttribute("data-id"));
-                    if (Number.isInteger(id) && id > 0) removeComment(id);
-                });
-            }
-            return el;
+            const delBtnHtml = it.canDelete ? `<button type="button" class="btn btn-sm btn-outline-danger cmt-del" data-id="${it.id}" aria-label="ลบความคิดเห็น">ลบ</button>` : "";
+            const replyBtnHtml = `<button type="button" class="btn btn-sm btn-outline-primary cmt-reply" data-id="${it.id}">ตอบกลับ</button>`;
+            return `
+                <div class="d-flex justify-content-between align-items-start gap-3">
+                  <div class="d-flex align-items-center gap-2">
+                    ${avatarBlock(nameSafe, it.avatarUrl || null, it.profileUrl || null)}
+                    <div class="d-flex align-items-center gap-2">
+                      ${nameBlock(nameSafe, it.profileUrl || null)}
+                      ${starHtml}
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted small">${escapeHtml(whenStr)}</span>
+                    ${replyBtnHtml}
+                    ${delBtnHtml}
+                  </div>
+                </div>`;
         }
 
-        async function removeComment(commentId) {
-            if (!confirm("ลบความคิดเห็นนี้ใช่ไหม?")) return;
-            try {
-                const res = await fetchWithTimeout(`/api/beers/${beerId}/comments/${commentId}`, { method: "DELETE" }, 10000);
-                if (res.status === 204) { await load(); return; }
-                const t = await res.text().catch(() => "");
-                alert("ลบคอมเมนต์ไม่สำเร็จ: " + (t || res.status));
-            } catch (err) {
-                console.error(err);
-                const isAbort = err?.name === "AbortError" || err === "timeout";
-                alert(isAbort ? "เครือข่ายช้า/ขาดการเชื่อมต่อ" : "ลบคอมเมนต์ไม่สำเร็จ");
+        function renderItem(it, depth = 0) {
+            const nameRaw = it.displayName || it.author || "User";
+            const nameSafe = (nameRaw?.trim() || "User");
+            const el = document.createElement("div");
+            el.className = "p-3 border rounded-3 cmt-item";
+            el.setAttribute("data-id", it.id);
+            if (depth > 0) el.style.marginLeft = Math.min(depth * 16, 48) + "px";
+
+            el.innerHTML = `
+                ${itemHeader(it, nameSafe)}
+                <div class="mt-2 cmt-text">${escapeHtml(it.body || "")}</div>
+                <div class="cmt-children" data-parent="${it.id}"></div>
+            `;
+
+            // ลบ
+            el.querySelector(".cmt-del")?.addEventListener("click", async (e) => {
+                const id = Number(e.currentTarget.getAttribute("data-id"));
+                if (!Number.isInteger(id) || id <= 0) return;
+                if (!confirm("ลบความคิดเห็นนี้ใช่ไหม?")) return;
+                try {
+                    const res = await fetchWithTimeout(`/api/beers/${beerId}/comments/${id}`, { method: "DELETE" }, 10000);
+                    if (res.status === 204) await load();
+                    else { const t = await res.text().catch(() => ""); alert("ลบคอมเมนต์ไม่สำเร็จ: " + (t || res.status)); }
+                } catch (err) { console.error(err); alert("ลบคอมเมนต์ไม่สำเร็จ"); }
+            });
+
+            // ตอบกลับ
+            el.querySelector(".cmt-reply")?.addEventListener("click", () => {
+                const isAuth = truthy(root.dataset.auth);
+                if (!isAuth) {
+                    if (confirm("ต้องล็อกอินก่อนจึงจะตอบกลับได้\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?")) location.href = loginUrl;
+                    return;
+                }
+                const holder = el.querySelector(".cmt-children");
+                if (!holder) return;
+
+                const existing = holder.querySelector("textarea.reply-text");
+                if (existing) { existing.focus(); return; }
+
+                const form = document.createElement("div");
+                form.className = "reply-form mt-2";
+                form.innerHTML = `
+                    <textarea class="form-control reply-text" rows="2" maxlength="1000" placeholder="พิมพ์คำตอบของคุณ…"></textarea>
+                    <div class="d-flex justify-content-end gap-2 mt-2">
+                        <button type="button" class="btn btn-light btn-sm reply-cancel">ยกเลิก</button>
+                        <button type="button" class="btn btn-primary btn-sm reply-send">ส่งคำตอบ</button>
+                    </div>
+                `;
+                holder.prepend(form);
+
+                form.querySelector(".reply-cancel").addEventListener("click", () => form.remove());
+                form.querySelector(".reply-send").addEventListener("click", async () => {
+                    const ta = form.querySelector(".reply-text");
+                    const body = (ta.value || "").trim();
+                    if (!body) { ta.focus(); return; }
+                    if (body.length > 1000) { alert("ข้อความยาวเกิน 1000 ตัวอักษร"); return; }
+
+                    try {
+                        const res = await fetchWithTimeout(`/api/beers/${beerId}/comments`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ body, parentId: it.id })
+                        }, 10000);
+
+                        if (!res.ok) { const msg = await res.text().catch(() => ""); throw new Error(msg || `POST ${res.status}`); }
+                        await load();
+                    } catch (err) {
+                        console.error(err);
+                        alert("ส่งคำตอบไม่สำเร็จ");
+                    }
+                });
+            });
+
+            // วาดลูก
+            if (Array.isArray(it.replies) && it.replies.length) {
+                const childBox = el.querySelector(".cmt-children");
+                it.replies.forEach(ch => childBox.appendChild(renderItem(ch, depth + 1)));
             }
+
+            return el;
         }
 
         async function load() {
             try {
-                const res = await fetchWithTimeout(`/api/beers/${beerId}/comments?skip=0&take=20`);
-                if (!res.ok) throw new Error(`GET ${res.status}`);
-                const items = await res.json();
+                // โหลดคอมเมนต์ + โหลดคะแนนของฉัน เพื่อเอาไปโชว์ในหัวคอมเมนต์
+                const [resComments, resMine] = await Promise.all([
+                    fetchWithTimeout(`/api/beers/${beerId}/comments`),
+                    fetchWithTimeout(`/api/ratings/quick/mine?beerId=${beerId}`, {}, 8000).catch(() => null)
+                ]);
+
+                if (!resComments.ok) throw new Error(`GET comments ${resComments.status}`);
+                const items = await resComments.json();
+
+                // อัปเดตคะแนนของฉัน (ถ้ามี)
+                let my = 0;
+                if (resMine && resMine.ok) {
+                    const js = await resMine.json();
+                    if (js && js.score >= 1 && js.score <= 5) my = js.score;
+                }
+                window.__myRatingForThisBeer = my;
 
                 list.innerHTML = "";
-                if (!items.length) { empty.style.display = ""; return; }
-                empty.style.display = "none";
+                if (!items.length) { if (empty) empty.style.display = ""; return; }
+                if (empty) empty.style.display = "none";
 
                 items.forEach(it => list.appendChild(renderItem(it)));
             } catch (err) {
@@ -258,8 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        async function send(e) {
-            e?.preventDefault?.();
+        async function sendTopLevel() {
+            const isAuth = truthy(root.dataset.auth);
+            if (!isAuth) {
+                if (confirm("ต้องล็อกอินก่อนจึงจะคอมเมนต์ได้\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?")) location.href = loginUrl;
+                return;
+            }
             const body = (txt?.value || "").trim();
             if (body.length === 0) { txt?.focus(); return; }
             if (body.length > 1000) { alert("ข้อความยาวเกิน 1000 ตัวอักษร"); return; }
@@ -268,40 +333,32 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSend.textContent = "กำลังส่ง...";
 
             try {
-                const key = `qrated_${beerId}`;
-                const userRating = parseInt(localStorage.getItem(key) || '0', 10) || null;
-                const payload = { body, displayName: name ? name.value : null, userRating };
                 const res = await fetchWithTimeout(`/api/beers/${beerId}/comments`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({ body, parentId: null })
                 }, 10000);
 
-                if (!res.ok) {
-                    const msg = await res.text().catch(() => "");
-                    throw new Error(msg || `POST ${res.status}`);
-                }
-
-                txt.value = ""; if (name) name.value = "";
+                if (!res.ok) { const msg = await res.text().catch(() => ""); throw new Error(msg || `POST ${res.status}`); }
+                if (txt) txt.value = "";
                 await load();
             } catch (err) {
                 console.error(err);
-                const isAbort = err?.name === "AbortError" || err === "timeout";
-                alert(isAbort ? "เครือข่ายช้า/ขาดการเชื่อมต่อ" : "ส่งคอมเมนต์ไม่สำเร็จ");
+                alert("ส่งคอมเมนต์ไม่สำเร็จ");
             } finally {
                 btnSend.disabled = false;
                 btnSend.textContent = "ส่งความคิดเห็น";
             }
         }
 
-        btnSend?.addEventListener("click", send);
+        btnSend?.addEventListener("click", sendTopLevel);
         btnReload?.addEventListener("click", load);
 
         // auto-load
         load();
     })();
 
-    // ===== Favorite (ต้องล็อกอิน) =====
+    // ===== Favorite เดิม =====
     (function favoriteFeature() {
         const root = document.getElementById('beerData');
         if (!root) return;
@@ -320,13 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async function ensureAuthState() {
             if (isAuth) return true;
-            try {
-                const res = await fetchWithTimeout('/api/debug/whoami', {}, 8000);
-                if (!res.ok) return false;
-                const x = await res.json();
-                isAuth = !!x.isAuth;
-                return isAuth;
-            } catch { return false; }
+            try { const res = await fetchWithTimeout('/api/debug/whoami', {}, 8000); if (!res.ok) return false; const x = await res.json(); isAuth = !!x.isAuth; return isAuth; }
+            catch { return false; }
         }
 
         async function getStatus() {
@@ -344,12 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
         async function toggle() {
             const okAuth = await ensureAuthState();
             if (!okAuth) {
-                if (confirm('ต้องล็อกอินก่อนถึงจะเพิ่ม “ถูกใจ” ได้\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?')) {
-                    location.href = loginUrl;
-                }
+                if (confirm('ต้องล็อกอินก่อนถึงจะเพิ่ม “ถูกใจ” ได้\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?')) location.href = loginUrl;
                 return;
             }
-
             const on = btn.classList.contains('fav-on');
             btn.disabled = true;
             try {
@@ -357,30 +406,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: on ? 'DELETE' : 'POST',
                     headers: { 'Content-Type': 'application/json' }
                 });
-
                 if (res.status === 401) {
-                    if (confirm('เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?')) {
-                        location.href = loginUrl;
-                    }
+                    if (confirm('เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่\nไปหน้าเข้าสู่ระบบตอนนี้ไหม?')) location.href = loginUrl;
                     return;
                 }
-
                 if (!res.ok && res.status !== 204) {
                     const t = await res.text().catch(() => '');
                     alert('ดำเนินการไม่สำเร็จ: ' + (t || res.status));
                     return;
                 }
-
                 setUI(!on);
-            } catch (e) {
-                console.error(e);
-                alert('เครือข่ายขัดข้อง ลองใหม่อีกครั้ง');
-            } finally {
-                btn.disabled = false;
-            }
+            } catch (e) { console.error(e); alert('เครือข่ายขัดข้อง ลองใหม่อีกครั้ง'); }
+            finally { btn.disabled = false; }
         }
 
         btn.addEventListener('click', toggle);
         getStatus();
     })();
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.getElementById('beerData');
+        if (!root) return;
+        const id = parseInt(root.dataset.id || '0', 10);
+        if (!id) return;
+
+        // กันนับซ้ำใน session ของแท็บเดียวกัน
+        const key = `pv_once_${id}`;
+        if (sessionStorage.getItem(key)) return;
+        sessionStorage.setItem(key, '1');
+
+        // ถ้าคุณอยากนับผ่าน API เพิ่มเติม สามารถยิงไปยัง /api/beers/{id}/view ได้
+        // แต่ในวิธีหลัก เรานับแล้วใน OnGet() จึงไม่จำเป็นต้องยิง
+    });
+    // ยืนยันก่อนลบ (เฉพาะฟอร์มแอดมิน)
+    document.addEventListener('DOMContentLoaded', () => {
+        const delForm = document.getElementById('deleteBeerForm');
+        if (delForm) {
+            delForm.addEventListener('submit', (e) => {
+                if (!confirm('ยืนยันลบข้อมูลนี้ถาวร?\n(ไม่สามารถกู้คืนได้)')) {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+
 });

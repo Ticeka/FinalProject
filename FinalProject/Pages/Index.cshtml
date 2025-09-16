@@ -1,4 +1,5 @@
 ﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model FinalProject.Pages.IndexModel
 @{
     ViewData["Title"] = "Sip & Trip — แผนที่เครื่องดื่มท้องถิ่นไทย";
@@ -13,14 +14,14 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 
-<link rel="stylesheet" href="~/css/index.css" />
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 <header class="page-hero rounded-4 mb-4 p-4 p-md-5">
     <div class="container">
         <div class="d-flex flex-column flex-md-row align-items-md-end gap-3 justify-content-between">
             <div>
                 <h1 class="display-6 fw-bold mb-1">
-                    <img src="~/images/Logo.png" alt="Sip & Trip"
+                    <img src="~/images/Logo.png" asp-append-version="true" alt="Sip & Trip"
                          style="height:90px; width:auto; vertical-align:middle;" class="me-2" />
                     Sip &amp; Trip — แผนที่เครื่องดื่มท้องถิ่นไทย
                 </h1>
@@ -143,4 +144,4 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-<script src="~/js/index.js"></script>
+<script src="~/js/index.js" asp-append-version="true"></script>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1B0jU3fu8cJVGoTHzc0t0sweTljdJ9QoX61dbuodyyM=",
+  "Hash": "uGsQbdQ43c7TfBQ+VI73UBUomrwRnxNCFPXGoESBy1g=",
   "Source": "FinalProject",
   "BasePath": "_content/FinalProject",
   "Mode": "Default",
@@ -59,6 +59,27 @@
       "OriginalItemSpec": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FinalProject.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\aboutus.css",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "css/aboutus#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fj9cwox25f",
+      "Integrity": "S8v6lngilyd58KXec5IEUQccIx7iNGvPLCEOEIGGEyw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\aboutus.css"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-dashboard.css",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -115,8 +136,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "p088isjazf",
-      "Integrity": "ZzPXwG22LFOVNqXVLgg5oez2vMFUngGm9XOgXSiUxFk=",
+      "Fingerprint": "oeldtmpesn",
+      "Integrity": "oBLjCf8YY54fg4zYZfqBx17UBvLv1vJnI3mcVnB1hu0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\admin-users.css"
@@ -136,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ua3gb4oknl",
-      "Integrity": "tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY=",
+      "Fingerprint": "5c5oudyuof",
+      "Integrity": "BQO82PThOEJYavAzfcJ67HC2CiMR44B2UK10IIHbL24=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\detail.css"
@@ -157,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "lkhi2qnzpe",
-      "Integrity": "i7w8th6yK4a+Bh1ts7BhbiKrlJu38Dt/7WqXSPcBkb4=",
+      "Fingerprint": "qwmmzssf4z",
+      "Integrity": "hm9p6W4BEg3qMV7RpKT6u9ZV/GjgxlP/BnqoxHcUpM8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\flavor-match.css"
@@ -178,8 +199,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "w7fdc51hcs",
-      "Integrity": "TJ7/+dHGmORtJ8ySbWiLHoK5INBxZauzfsCvI3pPlhU=",
+      "Fingerprint": "a3yqud5kew",
+      "Integrity": "6k7re/52qsDzOke+j2ZEfIIPat+B/ljbzG1OOSMcYdg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\index.css"
@@ -199,8 +220,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ll5h75u6w1",
-      "Integrity": "Z87NUsjCOknjVMWzl6oKg4EkwVJ6MmP4zY9gBQlxiIw=",
+      "Fingerprint": "7xlgy63wev",
+      "Integrity": "BcPNqFbVy179ItHJX5y6ykGGA6XIcM1gC8fqIxOPTs0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\layout-theme.css"
@@ -220,8 +241,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "r51b4vof29",
-      "Integrity": "n3pNH6zVObNkHxwgG2b+b9nTmGewkOV9npNiLRoou7A=",
+      "Fingerprint": "hnxyuigksc",
+      "Integrity": "3UQjnUsCJTctI6hf/q2h7xn0v7qOBSTZRFfHlvLvEQ8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\list.css"
@@ -1949,6 +1970,27 @@
       "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
+      "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\aboutus.js",
+      "SourceId": "FinalProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\",
+      "BasePath": "_content/FinalProject",
+      "RelativePath": "js/aboutus#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hvh4yvi9i3",
+      "Integrity": "fdFRSqxFOpgcub3sgAnqVlEamoiZnb37oC2x7oxvmcA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\aboutus.js"
+    },
+    {
       "Identity": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-dashboard.js",
       "SourceId": "FinalProject",
       "SourceType": "Discovered",
@@ -2005,8 +2047,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ajgod9bws1",
-      "Integrity": "SvXjaa6/LhqmrY4DiZIMSLnSO5bGZuZZu19WDiyl4kE=",
+      "Fingerprint": "16zrmmrqab",
+      "Integrity": "yQhhEL8Gyckl46vYUqF4bELmMf/cJJcqgKaMjZWEKoE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\admin-users.js"
@@ -2026,8 +2068,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "17m0w0lqnm",
-      "Integrity": "XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE=",
+      "Fingerprint": "k2lje1knn2",
+      "Integrity": "bGPjHb3RhRYVD+fogKW8ZNXgTMTj9zYL7pl7T6HrxM8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\detail.js"
@@ -2047,8 +2089,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "zfabb7uaw0",
-      "Integrity": "n9DOV36kbAZgf+YmZ86EtGSPcoyDDHOCGhjhlBzYX5w=",
+      "Fingerprint": "lmtucouycr",
+      "Integrity": "fT358jwbQO5i4bQbYR+ZFgXQBsfN/Lv8Qmcs8tp+6Es=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\flavor-match.js"
@@ -2068,8 +2110,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "cx6pspl9i8",
-      "Integrity": "sODHYWBtaji99EGgxdCcOWXEKmlGP7QW8dKcD1Sjbmg=",
+      "Fingerprint": "bvk2b4zotj",
+      "Integrity": "2X779MlGMD7ZIQ231yb/n+/VT0TTy9hxxszyzU6aYng=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\index.js"
@@ -2089,8 +2131,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "pgdq8ne9sp",
-      "Integrity": "qao3rPyhsa1bTk90Mv14y/oFwtpKnEGG15n9KKV+7ng=",
+      "Fingerprint": "lgy0tn1p54",
+      "Integrity": "dff0tIYliQUSmqMauakg67NUT0uEDdXd3OUWpWO5bRQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\layout-nav.js"
@@ -2110,8 +2152,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6t5gyd6xsn",
-      "Integrity": "atelFl6PSFxF2XM2mO4tDdb0uxHBgi4JmiGH4NEwZbQ=",
+      "Fingerprint": "oyrnur8i0y",
+      "Integrity": "sOgNi3NVmVKkNPsKKMCM9qQsJKI2J4UcF0PT/CHfIfU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\list.js"
@@ -3484,6 +3526,88 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/aboutus.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\aboutus.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10719"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"S8v6lngilyd58KXec5IEUQccIx7iNGvPLCEOEIGGEyw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 01:14:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-S8v6lngilyd58KXec5IEUQccIx7iNGvPLCEOEIGGEyw="
+        }
+      ]
+    },
+    {
+      "Route": "css/aboutus.fj9cwox25f.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\aboutus.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10719"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"S8v6lngilyd58KXec5IEUQccIx7iNGvPLCEOEIGGEyw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 01:14:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fj9cwox25f"
+        },
+        {
+          "Name": "label",
+          "Value": "css/aboutus.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-S8v6lngilyd58KXec5IEUQccIx7iNGvPLCEOEIGGEyw="
+        }
+      ]
+    },
+    {
       "Route": "css/admin-dashboard.1qm5w4vvsd.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-dashboard.css",
       "Selectors": [],
@@ -3506,7 +3630,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 03:26:14 GMT"
+          "Value": "Thu, 11 Sep 2025 22:17:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3551,7 +3675,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 03:26:14 GMT"
+          "Value": "Thu, 11 Sep 2025 22:17:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3658,7 +3782,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5006"
+          "Value": "7889"
         },
         {
           "Name": "Content-Type",
@@ -3666,11 +3790,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZzPXwG22LFOVNqXVLgg5oez2vMFUngGm9XOgXSiUxFk=\""
+          "Value": "\"oBLjCf8YY54fg4zYZfqBx17UBvLv1vJnI3mcVnB1hu0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 04:24:36 GMT"
+          "Value": "Tue, 09 Sep 2025 23:09:48 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3680,12 +3804,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZzPXwG22LFOVNqXVLgg5oez2vMFUngGm9XOgXSiUxFk="
+          "Value": "sha256-oBLjCf8YY54fg4zYZfqBx17UBvLv1vJnI3mcVnB1hu0="
         }
       ]
     },
     {
-      "Route": "css/admin-users.p088isjazf.css",
+      "Route": "css/admin-users.oeldtmpesn.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\admin-users.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3695,7 +3819,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5006"
+          "Value": "7889"
         },
         {
           "Name": "Content-Type",
@@ -3703,11 +3827,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZzPXwG22LFOVNqXVLgg5oez2vMFUngGm9XOgXSiUxFk=\""
+          "Value": "\"oBLjCf8YY54fg4zYZfqBx17UBvLv1vJnI3mcVnB1hu0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 04:24:36 GMT"
+          "Value": "Tue, 09 Sep 2025 23:09:48 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3717,7 +3841,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "p088isjazf"
+          "Value": "oeldtmpesn"
         },
         {
           "Name": "label",
@@ -3725,7 +3849,52 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ZzPXwG22LFOVNqXVLgg5oez2vMFUngGm9XOgXSiUxFk="
+          "Value": "sha256-oBLjCf8YY54fg4zYZfqBx17UBvLv1vJnI3mcVnB1hu0="
+        }
+      ]
+    },
+    {
+      "Route": "css/detail.5c5oudyuof.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10804"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BQO82PThOEJYavAzfcJ67HC2CiMR44B2UK10IIHbL24=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 00:19:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5c5oudyuof"
+        },
+        {
+          "Name": "label",
+          "Value": "css/detail.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BQO82PThOEJYavAzfcJ67HC2CiMR44B2UK10IIHbL24="
         }
       ]
     },
@@ -3740,7 +3909,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5792"
+          "Value": "10804"
         },
         {
           "Name": "Content-Type",
@@ -3748,11 +3917,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY=\""
+          "Value": "\"BQO82PThOEJYavAzfcJ67HC2CiMR44B2UK10IIHbL24=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:07:16 GMT"
+          "Value": "Sat, 13 Sep 2025 00:19:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3762,52 +3931,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY="
-        }
-      ]
-    },
-    {
-      "Route": "css/detail.ua3gb4oknl.css",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\detail.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5792"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:07:16 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ua3gb4oknl"
-        },
-        {
-          "Name": "label",
-          "Value": "css/detail.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-tm9hk31Auzs86alj7tUgx0Aa1PLCanFE9Fh/kxG11PY="
+          "Value": "sha256-BQO82PThOEJYavAzfcJ67HC2CiMR44B2UK10IIHbL24="
         }
       ]
     },
@@ -3822,7 +3946,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3098"
+          "Value": "5123"
         },
         {
           "Name": "Content-Type",
@@ -3830,11 +3954,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i7w8th6yK4a+Bh1ts7BhbiKrlJu38Dt/7WqXSPcBkb4=\""
+          "Value": "\"hm9p6W4BEg3qMV7RpKT6u9ZV/GjgxlP/BnqoxHcUpM8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 09:41:17 GMT"
+          "Value": "Fri, 12 Sep 2025 23:23:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3844,12 +3968,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-i7w8th6yK4a+Bh1ts7BhbiKrlJu38Dt/7WqXSPcBkb4="
+          "Value": "sha256-hm9p6W4BEg3qMV7RpKT6u9ZV/GjgxlP/BnqoxHcUpM8="
         }
       ]
     },
     {
-      "Route": "css/flavor-match.lkhi2qnzpe.css",
+      "Route": "css/flavor-match.qwmmzssf4z.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\flavor-match.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3859,7 +3983,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3098"
+          "Value": "5123"
         },
         {
           "Name": "Content-Type",
@@ -3867,11 +3991,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i7w8th6yK4a+Bh1ts7BhbiKrlJu38Dt/7WqXSPcBkb4=\""
+          "Value": "\"hm9p6W4BEg3qMV7RpKT6u9ZV/GjgxlP/BnqoxHcUpM8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 19 Aug 2025 09:41:17 GMT"
+          "Value": "Fri, 12 Sep 2025 23:23:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3881,7 +4005,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lkhi2qnzpe"
+          "Value": "qwmmzssf4z"
         },
         {
           "Name": "label",
@@ -3889,7 +4013,52 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i7w8th6yK4a+Bh1ts7BhbiKrlJu38Dt/7WqXSPcBkb4="
+          "Value": "sha256-hm9p6W4BEg3qMV7RpKT6u9ZV/GjgxlP/BnqoxHcUpM8="
+        }
+      ]
+    },
+    {
+      "Route": "css/index.a3yqud5kew.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\index.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5135"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6k7re/52qsDzOke+j2ZEfIIPat+B/ljbzG1OOSMcYdg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 11 Sep 2025 23:33:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "a3yqud5kew"
+        },
+        {
+          "Name": "label",
+          "Value": "css/index.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6k7re/52qsDzOke+j2ZEfIIPat+B/ljbzG1OOSMcYdg="
         }
       ]
     },
@@ -3904,7 +4073,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4386"
+          "Value": "5135"
         },
         {
           "Name": "Content-Type",
@@ -3912,11 +4081,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TJ7/+dHGmORtJ8ySbWiLHoK5INBxZauzfsCvI3pPlhU=\""
+          "Value": "\"6k7re/52qsDzOke+j2ZEfIIPat+B/ljbzG1OOSMcYdg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 05 Sep 2025 00:50:46 GMT"
+          "Value": "Thu, 11 Sep 2025 23:33:17 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3926,13 +4095,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TJ7/+dHGmORtJ8ySbWiLHoK5INBxZauzfsCvI3pPlhU="
+          "Value": "sha256-6k7re/52qsDzOke+j2ZEfIIPat+B/ljbzG1OOSMcYdg="
         }
       ]
     },
     {
-      "Route": "css/index.w7fdc51hcs.css",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\index.css",
+      "Route": "css/layout-theme.7xlgy63wev.css",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\layout-theme.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3941,7 +4110,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4386"
+          "Value": "9700"
         },
         {
           "Name": "Content-Type",
@@ -3949,11 +4118,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TJ7/+dHGmORtJ8ySbWiLHoK5INBxZauzfsCvI3pPlhU=\""
+          "Value": "\"BcPNqFbVy179ItHJX5y6ykGGA6XIcM1gC8fqIxOPTs0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 05 Sep 2025 00:50:46 GMT"
+          "Value": "Sat, 13 Sep 2025 00:36:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3963,15 +4132,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "w7fdc51hcs"
+          "Value": "7xlgy63wev"
         },
         {
           "Name": "label",
-          "Value": "css/index.css"
+          "Value": "css/layout-theme.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-TJ7/+dHGmORtJ8ySbWiLHoK5INBxZauzfsCvI3pPlhU="
+          "Value": "sha256-BcPNqFbVy179ItHJX5y6ykGGA6XIcM1gC8fqIxOPTs0="
         }
       ]
     },
@@ -3986,7 +4155,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3701"
+          "Value": "9700"
         },
         {
           "Name": "Content-Type",
@@ -3994,11 +4163,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Z87NUsjCOknjVMWzl6oKg4EkwVJ6MmP4zY9gBQlxiIw=\""
+          "Value": "\"BcPNqFbVy179ItHJX5y6ykGGA6XIcM1gC8fqIxOPTs0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 04:14:21 GMT"
+          "Value": "Sat, 13 Sep 2025 00:36:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4008,52 +4177,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Z87NUsjCOknjVMWzl6oKg4EkwVJ6MmP4zY9gBQlxiIw="
-        }
-      ]
-    },
-    {
-      "Route": "css/layout-theme.ll5h75u6w1.css",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\layout-theme.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3701"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Z87NUsjCOknjVMWzl6oKg4EkwVJ6MmP4zY9gBQlxiIw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 04:14:21 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ll5h75u6w1"
-        },
-        {
-          "Name": "label",
-          "Value": "css/layout-theme.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Z87NUsjCOknjVMWzl6oKg4EkwVJ6MmP4zY9gBQlxiIw="
+          "Value": "sha256-BcPNqFbVy179ItHJX5y6ykGGA6XIcM1gC8fqIxOPTs0="
         }
       ]
     },
@@ -4068,7 +4192,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2331"
+          "Value": "5299"
         },
         {
           "Name": "Content-Type",
@@ -4076,11 +4200,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n3pNH6zVObNkHxwgG2b+b9nTmGewkOV9npNiLRoou7A=\""
+          "Value": "\"3UQjnUsCJTctI6hf/q2h7xn0v7qOBSTZRFfHlvLvEQ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 10:32:46 GMT"
+          "Value": "Sat, 13 Sep 2025 00:26:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4090,12 +4214,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-n3pNH6zVObNkHxwgG2b+b9nTmGewkOV9npNiLRoou7A="
+          "Value": "sha256-3UQjnUsCJTctI6hf/q2h7xn0v7qOBSTZRFfHlvLvEQ8="
         }
       ]
     },
     {
-      "Route": "css/list.r51b4vof29.css",
+      "Route": "css/list.hnxyuigksc.css",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\css\\list.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4105,7 +4229,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2331"
+          "Value": "5299"
         },
         {
           "Name": "Content-Type",
@@ -4113,11 +4237,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n3pNH6zVObNkHxwgG2b+b9nTmGewkOV9npNiLRoou7A=\""
+          "Value": "\"3UQjnUsCJTctI6hf/q2h7xn0v7qOBSTZRFfHlvLvEQ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 10:32:46 GMT"
+          "Value": "Sat, 13 Sep 2025 00:26:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4127,7 +4251,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r51b4vof29"
+          "Value": "hnxyuigksc"
         },
         {
           "Name": "label",
@@ -4135,7 +4259,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-n3pNH6zVObNkHxwgG2b+b9nTmGewkOV9npNiLRoou7A="
+          "Value": "sha256-3UQjnUsCJTctI6hf/q2h7xn0v7qOBSTZRFfHlvLvEQ8="
         }
       ]
     },
@@ -4490,7 +4614,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 05:56:11 GMT"
+          "Value": "Thu, 11 Sep 2025 22:21:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4535,7 +4659,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 05:56:11 GMT"
+          "Value": "Thu, 11 Sep 2025 22:21:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4580,7 +4704,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 05:56:11 GMT"
+          "Value": "Thu, 11 Sep 2025 22:21:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4617,7 +4741,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 05:56:11 GMT"
+          "Value": "Thu, 11 Sep 2025 22:21:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11028,6 +11152,88 @@
       ]
     },
     {
+      "Route": "js/aboutus.hvh4yvi9i3.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\aboutus.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3312"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fdFRSqxFOpgcub3sgAnqVlEamoiZnb37oC2x7oxvmcA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 01:52:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hvh4yvi9i3"
+        },
+        {
+          "Name": "label",
+          "Value": "js/aboutus.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fdFRSqxFOpgcub3sgAnqVlEamoiZnb37oC2x7oxvmcA="
+        }
+      ]
+    },
+    {
+      "Route": "js/aboutus.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\aboutus.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3312"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fdFRSqxFOpgcub3sgAnqVlEamoiZnb37oC2x7oxvmcA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 01:52:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fdFRSqxFOpgcub3sgAnqVlEamoiZnb37oC2x7oxvmcA="
+        }
+      ]
+    },
+    {
       "Route": "js/admin-dashboard.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-dashboard.js",
       "Selectors": [],
@@ -11050,7 +11256,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 03:33:30 GMT"
+          "Value": "Wed, 10 Sep 2025 08:11:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11087,7 +11293,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 03:33:30 GMT"
+          "Value": "Wed, 10 Sep 2025 08:11:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11192,7 +11398,7 @@
       ]
     },
     {
-      "Route": "js/admin-users.ajgod9bws1.js",
+      "Route": "js/admin-users.16zrmmrqab.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\admin-users.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -11202,7 +11408,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8902"
+          "Value": "13820"
         },
         {
           "Name": "Content-Type",
@@ -11210,11 +11416,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SvXjaa6/LhqmrY4DiZIMSLnSO5bGZuZZu19WDiyl4kE=\""
+          "Value": "\"yQhhEL8Gyckl46vYUqF4bELmMf/cJJcqgKaMjZWEKoE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 06:13:10 GMT"
+          "Value": "Tue, 09 Sep 2025 23:09:17 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11224,7 +11430,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "ajgod9bws1"
+          "Value": "16zrmmrqab"
         },
         {
           "Name": "label",
@@ -11232,7 +11438,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-SvXjaa6/LhqmrY4DiZIMSLnSO5bGZuZZu19WDiyl4kE="
+          "Value": "sha256-yQhhEL8Gyckl46vYUqF4bELmMf/cJJcqgKaMjZWEKoE="
         }
       ]
     },
@@ -11247,7 +11453,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8902"
+          "Value": "13820"
         },
         {
           "Name": "Content-Type",
@@ -11255,11 +11461,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"SvXjaa6/LhqmrY4DiZIMSLnSO5bGZuZZu19WDiyl4kE=\""
+          "Value": "\"yQhhEL8Gyckl46vYUqF4bELmMf/cJJcqgKaMjZWEKoE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 06:13:10 GMT"
+          "Value": "Tue, 09 Sep 2025 23:09:17 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11269,52 +11475,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-SvXjaa6/LhqmrY4DiZIMSLnSO5bGZuZZu19WDiyl4kE="
-        }
-      ]
-    },
-    {
-      "Route": "js/detail.17m0w0lqnm.js",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "18790"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:13:25 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "17m0w0lqnm"
-        },
-        {
-          "Name": "label",
-          "Value": "js/detail.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE="
+          "Value": "sha256-yQhhEL8Gyckl46vYUqF4bELmMf/cJJcqgKaMjZWEKoE="
         }
       ]
     },
@@ -11329,7 +11490,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "18790"
+          "Value": "25155"
         },
         {
           "Name": "Content-Type",
@@ -11337,11 +11498,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE=\""
+          "Value": "\"bGPjHb3RhRYVD+fogKW8ZNXgTMTj9zYL7pl7T6HrxM8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 19:13:25 GMT"
+          "Value": "Sat, 13 Sep 2025 00:08:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11351,7 +11512,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XWDCqFBTtClrFOqaD3QHNQQ53iVvZ6UNwbqB4vuDVSE="
+          "Value": "sha256-bGPjHb3RhRYVD+fogKW8ZNXgTMTj9zYL7pl7T6HrxM8="
+        }
+      ]
+    },
+    {
+      "Route": "js/detail.k2lje1knn2.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\detail.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25155"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bGPjHb3RhRYVD+fogKW8ZNXgTMTj9zYL7pl7T6HrxM8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 00:08:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "k2lje1knn2"
+        },
+        {
+          "Name": "label",
+          "Value": "js/detail.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bGPjHb3RhRYVD+fogKW8ZNXgTMTj9zYL7pl7T6HrxM8="
         }
       ]
     },
@@ -11366,7 +11572,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9831"
+          "Value": "11914"
         },
         {
           "Name": "Content-Type",
@@ -11374,11 +11580,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n9DOV36kbAZgf+YmZ86EtGSPcoyDDHOCGhjhlBzYX5w=\""
+          "Value": "\"fT358jwbQO5i4bQbYR+ZFgXQBsfN/Lv8Qmcs8tp+6Es=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 05 Sep 2025 00:13:27 GMT"
+          "Value": "Fri, 12 Sep 2025 23:24:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11388,12 +11594,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-n9DOV36kbAZgf+YmZ86EtGSPcoyDDHOCGhjhlBzYX5w="
+          "Value": "sha256-fT358jwbQO5i4bQbYR+ZFgXQBsfN/Lv8Qmcs8tp+6Es="
         }
       ]
     },
     {
-      "Route": "js/flavor-match.zfabb7uaw0.js",
+      "Route": "js/flavor-match.lmtucouycr.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\flavor-match.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -11403,7 +11609,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9831"
+          "Value": "11914"
         },
         {
           "Name": "Content-Type",
@@ -11411,11 +11617,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n9DOV36kbAZgf+YmZ86EtGSPcoyDDHOCGhjhlBzYX5w=\""
+          "Value": "\"fT358jwbQO5i4bQbYR+ZFgXQBsfN/Lv8Qmcs8tp+6Es=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 05 Sep 2025 00:13:27 GMT"
+          "Value": "Fri, 12 Sep 2025 23:24:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11425,7 +11631,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "zfabb7uaw0"
+          "Value": "lmtucouycr"
         },
         {
           "Name": "label",
@@ -11433,12 +11639,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-n9DOV36kbAZgf+YmZ86EtGSPcoyDDHOCGhjhlBzYX5w="
+          "Value": "sha256-fT358jwbQO5i4bQbYR+ZFgXQBsfN/Lv8Qmcs8tp+6Es="
         }
       ]
     },
     {
-      "Route": "js/index.cx6pspl9i8.js",
+      "Route": "js/index.bvk2b4zotj.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\index.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -11448,7 +11654,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11682"
+          "Value": "13530"
         },
         {
           "Name": "Content-Type",
@@ -11456,11 +11662,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"sODHYWBtaji99EGgxdCcOWXEKmlGP7QW8dKcD1Sjbmg=\""
+          "Value": "\"2X779MlGMD7ZIQ231yb/n+/VT0TTy9hxxszyzU6aYng=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 05 Sep 2025 21:10:46 GMT"
+          "Value": "Thu, 11 Sep 2025 23:33:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11470,7 +11676,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "cx6pspl9i8"
+          "Value": "bvk2b4zotj"
         },
         {
           "Name": "label",
@@ -11478,7 +11684,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-sODHYWBtaji99EGgxdCcOWXEKmlGP7QW8dKcD1Sjbmg="
+          "Value": "sha256-2X779MlGMD7ZIQ231yb/n+/VT0TTy9hxxszyzU6aYng="
         }
       ]
     },
@@ -11493,7 +11699,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11682"
+          "Value": "13530"
         },
         {
           "Name": "Content-Type",
@@ -11501,11 +11707,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"sODHYWBtaji99EGgxdCcOWXEKmlGP7QW8dKcD1Sjbmg=\""
+          "Value": "\"2X779MlGMD7ZIQ231yb/n+/VT0TTy9hxxszyzU6aYng=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 05 Sep 2025 21:10:46 GMT"
+          "Value": "Thu, 11 Sep 2025 23:33:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11515,7 +11721,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-sODHYWBtaji99EGgxdCcOWXEKmlGP7QW8dKcD1Sjbmg="
+          "Value": "sha256-2X779MlGMD7ZIQ231yb/n+/VT0TTy9hxxszyzU6aYng="
         }
       ]
     },
@@ -11530,7 +11736,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "521"
+          "Value": "1665"
         },
         {
           "Name": "Content-Type",
@@ -11538,11 +11744,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"qao3rPyhsa1bTk90Mv14y/oFwtpKnEGG15n9KKV+7ng=\""
+          "Value": "\"dff0tIYliQUSmqMauakg67NUT0uEDdXd3OUWpWO5bRQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 05:55:17 GMT"
+          "Value": "Sat, 13 Sep 2025 00:34:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11552,12 +11758,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-qao3rPyhsa1bTk90Mv14y/oFwtpKnEGG15n9KKV+7ng="
+          "Value": "sha256-dff0tIYliQUSmqMauakg67NUT0uEDdXd3OUWpWO5bRQ="
         }
       ]
     },
     {
-      "Route": "js/layout-nav.pgdq8ne9sp.js",
+      "Route": "js/layout-nav.lgy0tn1p54.js",
       "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\layout-nav.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -11567,7 +11773,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "521"
+          "Value": "1665"
         },
         {
           "Name": "Content-Type",
@@ -11575,11 +11781,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"qao3rPyhsa1bTk90Mv14y/oFwtpKnEGG15n9KKV+7ng=\""
+          "Value": "\"dff0tIYliQUSmqMauakg67NUT0uEDdXd3OUWpWO5bRQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 09 Sep 2025 05:55:17 GMT"
+          "Value": "Sat, 13 Sep 2025 00:34:15 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11589,7 +11795,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pgdq8ne9sp"
+          "Value": "lgy0tn1p54"
         },
         {
           "Name": "label",
@@ -11597,52 +11803,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-qao3rPyhsa1bTk90Mv14y/oFwtpKnEGG15n9KKV+7ng="
-        }
-      ]
-    },
-    {
-      "Route": "js/list.6t5gyd6xsn.js",
-      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\list.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7288"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"atelFl6PSFxF2XM2mO4tDdb0uxHBgi4JmiGH4NEwZbQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 10:34:15 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6t5gyd6xsn"
-        },
-        {
-          "Name": "label",
-          "Value": "js/list.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-atelFl6PSFxF2XM2mO4tDdb0uxHBgi4JmiGH4NEwZbQ="
+          "Value": "sha256-dff0tIYliQUSmqMauakg67NUT0uEDdXd3OUWpWO5bRQ="
         }
       ]
     },
@@ -11657,7 +11818,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7288"
+          "Value": "7011"
         },
         {
           "Name": "Content-Type",
@@ -11665,11 +11826,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"atelFl6PSFxF2XM2mO4tDdb0uxHBgi4JmiGH4NEwZbQ=\""
+          "Value": "\"sOgNi3NVmVKkNPsKKMCM9qQsJKI2J4UcF0PT/CHfIfU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Aug 2025 10:34:15 GMT"
+          "Value": "Sat, 13 Sep 2025 00:26:46 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11679,7 +11840,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-atelFl6PSFxF2XM2mO4tDdb0uxHBgi4JmiGH4NEwZbQ="
+          "Value": "sha256-sOgNi3NVmVKkNPsKKMCM9qQsJKI2J4UcF0PT/CHfIfU="
+        }
+      ]
+    },
+    {
+      "Route": "js/list.oyrnur8i0y.js",
+      "AssetFile": "C:\\Users\\WiNDOWS 11 PRO\\source\\repos\\FinalProject\\FinalProject\\wwwroot\\js\\list.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7011"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sOgNi3NVmVKkNPsKKMCM9qQsJKI2J4UcF0PT/CHfIfU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 13 Sep 2025 00:26:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "oyrnur8i0y"
+        },
+        {
+          "Name": "label",
+          "Value": "js/list.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-sOgNi3NVmVKkNPsKKMCM9qQsJKI2J4UcF0PT/CHfIfU="
         }
       ]
     },

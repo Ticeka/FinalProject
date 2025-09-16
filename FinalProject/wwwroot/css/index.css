@@ -221,3 +221,38 @@ body {
     background: #fff;
     box-shadow: 0 1px 4px rgba(0,0,0,.15);
 }
+/* ===== Popup image ===== */
+.popup-img {
+    margin: 6px 0 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e6ebf2;
+}
+
+    .popup-img img {
+        display: block;
+        width: 100%;
+        height: 160px; /* ปรับสูง-ต่ำได้ตามชอบ */
+        object-fit: cover;
+    }
+
+/* ===== Yellow stars ===== */
+.stars .star {
+    font-size: 16px;
+    line-height: 1;
+    display: inline-block;
+    margin-right: 2px;
+}
+
+    .stars .star.filled {
+        color: #fbbf24;
+    }
+    /* เหลืองชัด */
+    .stars .star.empty {
+        color: #e5e7eb;
+    }
+/* เทาอ่อน */
+.rating-num {
+    color: var(--muted);
+    font-size: 0.9em;
+}

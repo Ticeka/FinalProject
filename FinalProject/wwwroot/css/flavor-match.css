@@ -67,35 +67,105 @@
     gap: 8px
 }
 
+/* ==== base chip style (ของเดิม) ==== */
 .chip {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
+    gap: 10px;
+    padding: 8px 12px;
     border: 1px solid var(--line);
     background: #fff;
     border-radius: 999px;
     cursor: pointer;
-    user-select: none
+    user-select: none;
+    position: relative;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
-    .chip input {
-        appearance: none;
-        width: 14px;
-        height: 14px;
-        border: 1px solid var(--line);
-        border-radius: 3px
+    .chip:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(17, 24, 39, .08);
     }
 
-        .chip input:checked {
-            background: var(--brand);
-            border-color: var(--brand)
-        }
+    .chip:active {
+        transform: translateY(0);
+    }
+
+    .chip input {
+        /* ซ่อนกล่องเช็คเดิมให้เหลือแต่สถานะ (ยังเข้าถึงด้วยคีย์บอร์ดได้) */
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+    }
 
     .chip span {
-        font-size: .9rem
+        font-size: .95rem
     }
 
+/* ==== chip with image/icon ==== */
+.chip--withimg {
+    padding: 8px 14px 8px 10px;
+}
+
+.chip__img {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #f3f6fb;
+    border: 1px solid var(--line);
+    overflow: hidden;
+}
+
+    .chip__img img, .chip__img svg {
+        width: 20px;
+        height: 20px;
+        display: block;
+    }
+
+.chip__text {
+    line-height: 1;
+}
+
+/* state เมื่อถูกเลือก */
+.chip input:checked ~ .chip__img {
+    background: radial-gradient(160px 80px at 30% 20%, rgba(37,99,235,.15), transparent), #fff;
+    border-color: var(--brand);
+}
+
+.chip input:checked ~ .chip__text {
+    font-weight: 800;
+}
+
+.chip input:checked ~ .chip__badge {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ป้ายเล็ก ๆ เฉพาะหมวดอาหาร (optional) */
+.chip__badge {
+    font-size: .75rem;
+    color: var(--muted);
+    opacity: 0;
+    transform: translateY(2px);
+    transition: all var(--dur) var(--ease);
+}
+
+/* แต่งเฉพาะหมวดอาหารให้ดูเด่น */
+.chip--food {
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+}
+
+    .chip--food:hover {
+        border-color: #d8e2f1;
+        background: linear-gradient(180deg, #ffffff, #f6faff);
+    }
+
+/* ส่วนอื่น ๆ ของหน้า (คงโครงสร้างเดิม) */
 .mix-actions {
     grid-column: 1/-1;
     display: flex;
