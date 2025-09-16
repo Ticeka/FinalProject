@@ -98,7 +98,6 @@
         background: #f5f7fb;
     }
 
-    /* Truncate cell */
     .admin-dashboard .truncate {
         max-width: 520px;
         white-space: nowrap;
@@ -106,13 +105,78 @@
         text-overflow: ellipsis;
     }
 
+    /* Chips (เช่น Views/Favorites) */
+    .admin-dashboard .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        font-weight: 600;
+        font-size: .85rem;
+        padding: .22rem .6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(2,6,23,.08);
+        background: #f8fafc;
+        color: #0f172a;
+    }
+
+        .admin-dashboard .chip .dot {
+            display: inline-block;
+            width: .5rem;
+            height: .5rem;
+            border-radius: 50%;
+            background: var(--brand);
+        }
+
+    /* Pagination */
+    .admin-dashboard .pager {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        justify-content: flex-end;
+        padding: .75rem 1rem 1.25rem;
+        border-top: 1px solid var(--card-border);
+        background: #fff;
+    }
+
+        .admin-dashboard .pager .info {
+            margin-right: auto;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .admin-dashboard .pager a,
+        .admin-dashboard .pager button {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            border: 1px solid var(--card-border);
+            background: #fff;
+            color: var(--ink);
+            padding: .5rem .8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+            text-decoration: none;
+        }
+
+            .admin-dashboard .pager a:hover {
+                border-color: var(--ring);
+                box-shadow: var(--elev);
+                transform: translateY(-1px);
+            }
+
+        .admin-dashboard .pager .disabled {
+            pointer-events: none;
+            opacity: .5;
+        }
+
     /* Charts */
     .admin-dashboard canvas {
         max-height: 360px;
-        background: transparent; /* ให้ดูกลืนกับการ์ด */
+        background: transparent;
     }
 
-    /* Utilities (spacing/glow) */
+    /* Utilities */
     .admin-dashboard .badge-brand {
         background: rgba(37,99,235,.08);
         color: var(--brand);

@@ -1,30 +1,57 @@
-﻿@page "/flavor-match"
+﻿@page
 @model FinalProject.Pages.FlavorMatchModel
 @{
-    ViewData["Title"] = "Flavor Match — Sip & Trip";
+    ViewData["Title"] = "ตัวช่วยจับคู่รสชาติ • Flavor Match";
 }
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/flavor-match.css" asp-append-version="true" />
+<script defer src="~/js/flavor-match.js"></script>
 
-<div class="container py-4 mixtrip">
-    <header class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-3">
+<!-- ===== LAYOUT: Sidebar (filters) + Main (results) ===== -->
+<div class="fm-container">
+
+    <!-- HERO -->
+    <header class="fm-hero">
         <div>
-            <h1 class="h4 fw-bold mb-1">🧪 Flavor Match</h1>
-            <div class="text-muted">บอกรส/ส่วนผสมที่ชอบ แล้วให้เราจับคู่เครื่องดื่มที่ใช่</div>
+            <h1 class="fm-title">
+                <span class="fm-icon fm-icon-magic" aria-hidden="true" style="background:#1d4ed8;border-radius:8px;padding:8px"></span>
+                ตัวช่วยจับคู่รสชาติ (Flavor Match)
+            </h1>
+            <p class="fm-subtitle">เลือกฐานเครื่องดื่ม + รสชาติ + ประเภทอาหาร + บรรยากาศ แล้วให้ระบบแนะนำเมนูที่เข้ากัน</p>
         </div>
-        <div id="shareToast" class="badge bg-success-subtle text-success-emphasis d-none">คัดลอกลิงก์แล้ว!</div>
+        <img class="fm-hero-img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Busy_bar_shelf_%28Unsplash%29.jpg" alt="ชั้นวางขวดเครื่องดื่มที่บาร์ แสงอุ่น ๆ">
     </header>
 
-    <form id="matchForm" class="mix-grid">
-        <!-- LEFT: Filters -->
-        <div class="card shadow-soft">
-            <div class="card-body">
-                <!-- Base -->
-                <div class="mix-field">
-                    <label for="base" class="form-label">ฐานเครื่องดื่ม</label>
-                    <select id="base" class="form-select">
-                        <option value="">— เลือกฐานเครื่องดื่ม —</option>
+    <!-- GUIDE -->
+    <section class="fm-guide">
+        <span class="fm-icon fm-icon-info" aria-hidden="true"></span>
+        <div>
+            <div class="fm-guide__title">วิธีใช้</div>
+            <ol class="fm-guide__steps">
+                <li>เลือก <strong>ประเภทเครื่องดื่ม</strong></li>
+                <li>ติ๊ก <strong>รสชาติ / ประเภทอาหาร / บรรยากาศ</strong></li>
+                <li>กด <strong>แนะนำเลย</strong></li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ภาพประกอบ -->
+    <figure class="fm-illus">
+        <img alt="ไวน์แดงกำลังรินลงแก้วในแสงอาทิตย์ยามเย็น" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Sunset_and_wine_%28Unsplash%29.jpg">
+    </figure>
+
+    <div class="fm-grid">
+        <!-- ===== SIDEBAR: FILTERS ===== -->
+        <aside class="fm-sidebar">
+            <form id="matchForm" class="fm-card fm-filter">
+
+                <!-- ประเภทเครื่องดื่ม -->
+                <div class="fm-field">
+                    <label for="base" class="fm-label">
+                        <span class="fm-icon fm-icon-glass" aria-hidden="true"></span> ประเภทเครื่องดื่ม
+                    </label>
+                    <select id="base" class="fm-select" aria-label="ประเภทเครื่องดื่ม">
+                        <option value="">— เลือกฐาน —</option>
                         <option>เบียร์</option>
                         <option>ไวน์</option>
                         <option>เหล้า</option>
@@ -32,65 +59,79 @@
                     </select>
                 </div>
 
-                <!-- Flavors -->
-                <div class="mix-field mt-3">
-                    <div class="form-label">รสชาติ/โทนที่ชอบ (เลือกได้หลายข้อ)</div>
-                    <div id="chipset-flavor" class="chipset">
-                        @* จะถูกเติมชิปด้วย JS จาก /api/reco/flavor-options *@
-                    </div>
+                <!-- รสชาติ -->
+                <div class="fm-field">
+                    <label class="fm-label">
+                        <span class="fm-icon fm-icon-flavor" aria-hidden="true"></span> รสชาติ
+                    </label>
+                    <div id="chipset-flavor" class="fm-chipset" aria-label="เลือกรสชาติ"></div>
                 </div>
 
-                <!-- Foods -->
-                <div class="mix-field mt-3">
-                    <div class="form-label">อาหารที่อยากกินคู่ (เลือกได้หลายข้อ)</div>
-                    <div id="chipset-food" class="chipset">
-                        @* จะถูกเติมชิปด้วย JS *@
-                    </div>
+                <!-- ประเภทอาหาร -->
+                <div class="fm-field">
+                    <label class="fm-label">
+                        <span class="fm-icon fm-icon-food" aria-hidden="true"></span> ประเภทอาหาร
+                    </label>
+                    <div id="chipset-food" class="fm-chipset" aria-label="เลือกประเภทอาหาร"></div>
                 </div>
 
-                <!-- Moods -->
-                <div class="mix-field mt-3">
-                    <div class="form-label">Mood / บรรยากาศ (เลือกได้หลายข้อ)</div>
-                    <div id="chipset-mood" class="chipset">
-                        @* จะถูกเติมชิปด้วย JS *@
-                    </div>
+                <!-- บรรยากาศ -->
+                <div class="fm-field">
+                    <label class="fm-label">
+                        <span class="fm-icon fm-icon-mood" aria-hidden="true"></span> บรรยากาศ
+                    </label>
+                    <div id="chipset-mood" class="fm-chipset" aria-label="เลือกบรรยากาศ"></div>
                 </div>
 
-
-                <div class="mix-actions mt-3">
-                    <button id="btnSuggest" class="btn btn-brand" type="submit">✨ แนะนำเลย</button>
-                    <button id="btnReset" class="btn btn-soft" type="button">รีเซ็ต</button>
-                    <button id="btnShare" class="btn btn-outline-primary" type="button">🔗 แชร์ผล</button>
+                <!-- ปุ่มทำงาน -->
+                <div class="fm-actions">
+                    <button type="submit" class="fm-btn fm-btn-primary fm-btn-lg">
+                        <span class="fm-icon fm-icon-magic" aria-hidden="true" style="filter:invert(1)"></span>
+                        แนะนำเลย
+                    </button>
+                    <button type="button" id="btnReset" class="fm-btn fm-btn-ghost fm-btn-md">รีเซ็ต</button>
+                    <button type="button" id="btnShare" class="fm-btn fm-btn-ghost fm-btn-sm">
+                        <span class="fm-icon fm-icon-share" aria-hidden="true"></span> คัดลอกลิงก์
+                    </button>
+                    <span id="shareToast" class="fm-toast d-none">คัดลอกแล้ว!</span>
                 </div>
+            </form>
+
+            <!-- ประวัติ -->
+            <details class="fm-card fm-history" open>
+                <summary>
+                    <span class="fm-icon fm-icon-clock" aria-hidden="true"></span> ประวัติล่าสุด
+                </summary>
+                <div class="fm-history-tools">
+                    <button type="button" id="btnClearHist" class="fm-btn fm-btn-ghost fm-btn-sm">ล้างประวัติ</button>
+                </div>
+                <div id="histList" class="fm-hist-grid"></div>
+            </details>
+        </aside>
+
+        <!-- ===== MAIN: RESULTS ===== -->
+        <main class="fm-main">
+            <div class="fm-head">
+                <h2 id="recTitle" class="fm-section-title">เริ่มจับคู่เมนูของคุณ</h2>
+                <p id="recSub" class="fm-section-sub">เลือกตัวกรองทางซ้าย หรือกด “ตัวอย่างเร็ว” ด้านล่าง</p>
             </div>
-        </div>
 
-        <!-- RIGHT: Result -->
-        <div class="card shadow-soft">
-            <div class="card-body">
-                <div class="r-card">
-                    <div class="r-title mb-1">ผลลัพธ์</div>
-                    <div class="r-main" id="recTitle">—</div>
-                    <div class="r-sub" id="recSub">เลือกฐานและรสที่ชอบ แล้วกด “แนะนำเลย”</div>
+            <!-- EMPTY STATE (แสดงก่อนค้นหา) -->
+            <section id="emptyState" class="fm-empty">
+                <div class="fm-empty-art" aria-hidden="true"></div>
+                <h3 class="fm-empty-title">ยังไม่มีผลลัพธ์</h3>
+                <p class="fm-empty-sub">เลือก <strong>ประเภทเครื่องดื่ม</strong> แล้วติ๊ก <strong>รสชาติ / อาหาร / บรรยากาศ</strong> จากนั้นกด “แนะนำเลย”</p>
+
+                <div class="fm-quick">
+                    <button class="fm-quick-btn" data-base="ไวน์" data-flavors="หวาน" data-foods="ทะเล" data-moods="Chill">ไวน์ • หวาน • ทะเล • ชิล</button>
+                    <button class="fm-quick-btn" data-base="เบียร์" data-flavors="ขม" data-foods="เนื้อ" data-moods="Party">เบียร์ • ขม • เนื้อ • ปาร์ตี้</button>
+                    <button class="fm-quick-btn" data-base="เหล้า" data-flavors="อูมามิ" data-foods="หมู" data-moods="Celebration">เหล้า • อูมามิ • หมู • ฉลอง</button>
+                    <button class="fm-quick-btn" data-base="สาโท" data-flavors="เปรี้ยว" data-foods="ไก่" data-moods="Fresh">สาโท • เปรี้ยว • ไก่ • สดชื่น</button>
                 </div>
+            </section>
 
-                <div id="resultWrap" class="row row-cols-1 row-cols-md-3 g-3 mt-2 d-none"></div>
-            </div>
-        </div>
-
-        <!-- History -->
-        <div class="history card shadow-soft">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div class="fw-bold">ประวัติการแนะนำล่าสุด</div>
-                    <button id="btnClearHist" type="button" class="btn btn-sm btn-soft">ล้างประวัติ</button>
-                </div>
-                <div id="histList" class="hist-grid"></div>
-            </div>
-        </div>
-    </form>
+            <!-- GRID RESULTS -->
+            <div id="resultWrap" class="fm-results d-none" aria-live="polite"></div>
+        </main>
+    </div>
 </div>
-
-@section Scripts {
-    <script src="~/js/flavor-match.js" asp-append-version="true"></script>
-}

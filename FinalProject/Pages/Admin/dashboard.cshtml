@@ -2,8 +2,9 @@
 @model FinalProject.Pages.Admin.DashboardModel
 @using System.Text.Json
 @{
-    ViewData["Title"] = "Admin Dashboard";
+    ViewData["Title"] = "แดชบอร์ดผู้ดูแลระบบ";
     var vm = Model.VM;
+    int Pages(int total, int size) => Math.Max(1, (int)Math.Ceiling(total / (double)size));
 }
 
 @section Styles {
@@ -12,74 +13,81 @@
 
 <div class="container-fluid my-4 admin-dashboard">
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <h1 class="page-title">Admin Dashboard</h1>
+        <h1 class="page-title">แดชบอร์ดผู้ดูแลระบบ</h1>
         <div class="d-flex gap-2">
-            <span class="badge-brand">Live</span>
+            <span class="badge-brand">ออนไลน์</span>
         </div>
     </div>
 
-    <!-- KPI GRID -->
+    <!-- KPI -->
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
             <div class="kpi-card">
-                <div class="kpi-title">Beers</div>
+                <div class="kpi-title">จำนวนเบียร์</div>
                 <div class="kpi-value">@vm.TotalBeers</div>
-                <div class="kpi-sub">รายการทั้งหมด</div>
+                <div class="kpi-sub">ทั้งหมดในระบบ</div>
             </div>
         </div>
         <div class="col-6 col-md-3">
             <div class="kpi-card">
-                <div class="kpi-title">Users</div>
+                <div class="kpi-title">ผู้ใช้งาน</div>
                 <div class="kpi-value">@vm.TotalUsers</div>
-                <div class="kpi-sub">บัญชีผู้ใช้</div>
+                <div class="kpi-sub">บัญชีที่ลงทะเบียน</div>
             </div>
         </div>
         <div class="col-6 col-md-3">
             <div class="kpi-card">
-                <div class="kpi-title">Ratings</div>
+                <div class="kpi-title">การให้คะแนน</div>
                 <div class="kpi-value small">@vm.RatingsCount</div>
-                <div class="kpi-sub">Avg @vm.RatingsAvg.ToString("0.00") / 5</div>
+                <div class="kpi-sub">เฉลี่ย @vm.RatingsAvg.ToString("0.00") / 5</div>
             </div>
         </div>
         <div class="col-6 col-md-3">
             <div class="kpi-card">
-                <div class="kpi-title">Favorites</div>
+                <div class="kpi-title">ถูกใจ</div>
                 <div class="kpi-value">@vm.TotalFavorites</div>
-                <div class="kpi-sub">ยอดกดถูกใจ</div>
+                <div class="kpi-sub">ยอดกดถูกใจทั้งหมด</div>
             </div>
         </div>
 
         <div class="col-6 col-md-4">
             <div class="kpi-card">
-                <div class="kpi-title">Comments</div>
+                <div class="kpi-title">ความคิดเห็น</div>
                 <div class="kpi-value small">@vm.TotalComments</div>
-                <div class="kpi-sub"></div>
+                <div class="kpi-sub">ทั้งหมด</div>
             </div>
         </div>
         <div class="col-6 col-md-4">
             <div class="kpi-card">
-                <div class="kpi-title">User Reviews</div>
+                <div class="kpi-title">รีวิวผู้ใช้</div>
                 <div class="kpi-value small">@vm.TotalReviews</div>
-                <div class="kpi-sub"></div>
+                <div class="kpi-sub">ทั้งหมด</div>
             </div>
         </div>
-    
+        <div class="col-12 col-md-4">
+            <div class="kpi-card">
+                <div class="kpi-title">จำนวนการเข้าชมเบียร์</div>
+                <div class="kpi-value small">@vm.BeerViewcount</div>
+                <div class="kpi-sub">รวมทั้งหมด</div>
+            </div>
+        </div>
+    </div>
 
     <!-- CHARTS -->
     <div class="row g-3 mb-4">
         <div class="col-12 col-lg-7">
             <div class="card-lite">
-                <div class="card-header px-3 py-2 d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Ratings (Last 30 days)</h5>
+                <div class="card-header px-3 py-2">
+                    <h5 class="mb-0">สถิติการให้คะแนน (30 วันล่าสุด)</h5>
                 </div>
                 <div class="p-3">
                     @if (vm.RatingsOverTime?.Count > 0)
                     {
-                        <canvas id="ratingsLine" aria-label="Ratings over time" role="img"></canvas>
+                        <canvas id="ratingsLine"></canvas>
                     }
                     else
                     {
-                        <div class="text-muted">ไม่มีข้อมูลเพียงพอสำหรับกราฟ</div>
+                        <div class="text-muted">ยังไม่มีข้อมูลเพียงพอ</div>
                     }
                 </div>
             </div>
@@ -87,16 +95,16 @@
         <div class="col-12 col-lg-5">
             <div class="card-lite">
                 <div class="card-header px-3 py-2">
-                    <h5 class="mb-0">Beers by Province</h5>
+                    <h5 class="mb-0">จำนวนเบียร์ตามจังหวัด</h5>
                 </div>
                 <div class="p-3">
                     @if (vm.BeersByProvince?.Count > 0)
                     {
-                        <canvas id="provinceBar" aria-label="Beers by province" role="img"></canvas>
+                        <canvas id="provinceBar"></canvas>
                     }
                     else
                     {
-                        <div class="text-muted">ยังไม่มีการกระจายตามจังหวัด</div>
+                        <div class="text-muted">ยังไม่มีข้อมูลการกระจาย</div>
                     }
                 </div>
             </div>
@@ -104,27 +112,28 @@
     </div>
 
     <!-- TABLES -->
+    <div id="lists"></div>
     <div class="row g-3">
+
+        <!-- Top Rated -->
         <div class="col-12 col-xl-6">
             <div class="card-table">
-                <div class="card-header px-3 py-2">
-                    <h5 class="mb-0">Top Rated Beers</h5>
-                </div>
+                <div class="card-header px-3 py-2"><h5 class="mb-0">เบียร์ที่ได้คะแนนสูงสุด</h5></div>
                 <div class="table-responsive">
                     <table class="table table-modern mb-0">
                         <thead>
                             <tr>
-                                <th style="width:56px">#</th>
+                                <th>#</th>
                                 <th>ชื่อ</th>
                                 <th>จังหวัด</th>
-                                <th class="text-end">Avg</th>
-                                <th class="text-end">Votes</th>
+                                <th class="text-end">คะแนนเฉลี่ย</th>
+                                <th class="text-end">จำนวนโหวต</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (vm.TopRatedBeers?.Count > 0)
                             {
-                                var i = 1;
+                                var i = 1 + ((Model.TopRatedPage.Page - 1) * Model.TopRatedPage.PageSize);
                                 foreach (var b in vm.TopRatedBeers)
                                 {
                                     <tr>
@@ -139,33 +148,37 @@
                             }
                             else
                             {
-                                <tr><td colspan="5" class="text-muted">ยังไม่มีข้อมูล</td></tr>
+                                <tr><td colspan="5" class="text-muted">ไม่มีข้อมูล</td></tr>
                             }
                         </tbody>
                     </table>
                 </div>
+                <div class="pager">
+                    <div class="info">หน้า @Model.TopRatedPage.Page จาก @Pages(Model.TopRatedPage.Total, Model.TopRatedPage.PageSize)</div>
+                    <a class="@(Model.TopRatedPage.HasPrev ? "" : "disabled")" href="@(Model.TopRatedPage.PrevUrl ?? "#")">‹ ก่อนหน้า</a>
+                    <a class="@(Model.TopRatedPage.HasNext ? "" : "disabled")" href="@(Model.TopRatedPage.NextUrl ?? "#")">ถัดไป ›</a>
+                </div>
             </div>
         </div>
 
+        <!-- Most Favorited -->
         <div class="col-12 col-xl-6">
             <div class="card-table">
-                <div class="card-header px-3 py-2">
-                    <h5 class="mb-0">Most Favorited</h5>
-                </div>
+                <div class="card-header px-3 py-2"><h5 class="mb-0">เบียร์ที่ถูกใจกันมากที่สุด</h5></div>
                 <div class="table-responsive">
                     <table class="table table-modern mb-0">
                         <thead>
                             <tr>
-                                <th style="width:56px">#</th>
+                                <th>#</th>
                                 <th>ชื่อ</th>
                                 <th>จังหวัด</th>
-                                <th class="text-end">Favorites</th>
+                                <th class="text-end">ถูกใจ</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (vm.MostFavoritedBeers?.Count > 0)
                             {
-                                var i = 1;
+                                var i = 1 + ((Model.MostFavPage.Page - 1) * Model.MostFavPage.PageSize);
                                 foreach (var b in vm.MostFavoritedBeers)
                                 {
                                     <tr>
@@ -179,26 +192,81 @@
                             }
                             else
                             {
-                                <tr><td colspan="4" class="text-muted">ยังไม่มีข้อมูล</td></tr>
+                                <tr><td colspan="4" class="text-muted">ไม่มีข้อมูล</td></tr>
                             }
                         </tbody>
                     </table>
                 </div>
+                <div class="pager">
+                    <div class="info">หน้า @Model.MostFavPage.Page จาก @Pages(Model.MostFavPage.Total, Model.MostFavPage.PageSize)</div>
+                    <a class="@(Model.MostFavPage.HasPrev ? "" : "disabled")" href="@(Model.MostFavPage.PrevUrl ?? "#")">‹ ก่อนหน้า</a>
+                    <a class="@(Model.MostFavPage.HasNext ? "" : "disabled")" href="@(Model.MostFavPage.NextUrl ?? "#")">ถัดไป ›</a>
+                </div>
             </div>
         </div>
 
+        <!-- Most Viewed -->
         <div class="col-12">
             <div class="card-table">
-                <div class="card-header px-3 py-2 d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Recent Comments</h5>
+                <div class="card-header px-3 py-2 d-flex justify-content-between">
+                    <h5 class="mb-0">เบียร์ที่มีคนเข้าชมมากที่สุด</h5>
+                    <div class="text-muted">รวมทั้งหมด: <strong>@vm.BeerViewcount</strong> ครั้ง</div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-modern mb-0">
                         <thead>
                             <tr>
-                                <th style="width:120px">เวลา</th>
-                                <th>เบียร์</th>
-                                <th>โดย</th>
+                                <th>#</th>
+                                <th>ชื่อ</th>
+                                <th>จังหวัด</th>
+                                <th class="text-end">คะแนนเฉลี่ย</th>
+                                <th class="text-end">โหวต</th>
+                                <th class="text-end">เข้าชม</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (vm.MostViewedBeers?.Count > 0)
+                            {
+                                var i = 1 + ((Model.MostViewPage.Page - 1) * Model.MostViewPage.PageSize);
+                                foreach (var b in vm.MostViewedBeers)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td class="truncate">@b.Name</td>
+                                        <td>@b.Province</td>
+                                        <td class="text-end">@b.Avg.ToString("0.00")</td>
+                                        <td class="text-end">@b.Count</td>
+                                        <td class="text-end"><span class="chip"><span class="dot"></span>@b.ViewCount</span></td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="6" class="text-muted">ไม่มีข้อมูล</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pager">
+                    <div class="info">หน้า @Model.MostViewPage.Page จาก @Pages(Model.MostViewPage.Total, Model.MostViewPage.PageSize)</div>
+                    <a class="@(Model.MostViewPage.HasPrev ? "" : "disabled")" href="@(Model.MostViewPage.PrevUrl ?? "#")">‹ ก่อนหน้า</a>
+                    <a class="@(Model.MostViewPage.HasNext ? "" : "disabled")" href="@(Model.MostViewPage.NextUrl ?? "#")">ถัดไป ›</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Comments -->
+        <div class="col-12">
+            <div class="card-table">
+                <div class="card-header px-3 py-2"><h5 class="mb-0">ความคิดเห็นล่าสุด</h5></div>
+                <div class="table-responsive">
+                    <table class="table table-modern mb-0">
+                        <thead>
+                            <tr>
+                                <th>เวลา</th>
+                                <th>ชื่อเบียร์</th>
+                                <th>ผู้ใช้</th>
                                 <th>ข้อความ</th>
                             </tr>
                         </thead>
@@ -217,7 +285,7 @@
                             }
                             else
                             {
-                                <tr><td colspan="4" class="text-muted">ยังไม่มีคอมเมนต์</td></tr>
+                                <tr><td colspan="4" class="text-muted">ยังไม่มีความคิดเห็น</td></tr>
                             }
                         </tbody>
                     </table>
@@ -227,7 +295,7 @@
     </div>
 </div>
 
-<!-- ==== DATA FEEDS FOR admin-dashboard.js ==== -->
+<!-- DATA -->
 <script id="ratings-data" type="application/json">
     @Html.Raw(JsonSerializer.Serialize(vm.RatingsOverTime ?? new List<FinalProject.ViewModels.DailyRatingPoint>()))
 </script>

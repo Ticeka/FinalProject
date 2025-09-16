@@ -1,11 +1,11 @@
 ﻿@page
 @model FinalProject.Pages.Admin.Users.IndexModel
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "ผู้ใช้งาน";
 
     string[] logActions = new[]
     {
-        "", 
+        "",
         "rating.add",
         "comment.add",
         "favorite.add",
@@ -67,7 +67,7 @@
 
 <div class="container-fluid my-4 admin-dashboard">
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <h1 class="page-title">Users</h1>
+        <h1 class="page-title">ผู้ใช้งาน</h1>
 
         <div class="d-flex flex-wrap gap-2">
             @if (TempData["Msg"] is string msg)
@@ -81,21 +81,21 @@
         </div>
     </div>
 
-    <!-- Flash + Toast area (ย้ายขึ้นบนขวาให้เด่น) -->
+    <!-- พื้นที่แจ้งเตือน -->
     <div id="flash" data-msg="@TempData["Msg"]" data-err="@TempData["Err"]"></div>
     <div id="toastArea" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Filters -->
-    <form method="get" class="card card-lite p-3 mb-3" role="search" aria-label="Filter users">
+    <!-- ฟิลเตอร์ -->
+    <form method="get" class="card card-lite p-3 mb-3" role="search" aria-label="กรองผู้ใช้งาน">
         <div class="row g-2 align-items-end">
             <div class="col-sm-4">
-                <label class="form-label" for="q">Search</label>
-                <input id="q" name="q" value="@Model.q" class="form-control" placeholder="name, email, display name" />
+                <label class="form-label" for="q">ค้นหา</label>
+                <input id="q" name="q" value="@Model.q" class="form-control" placeholder="ชื่อ อีเมล หรือชื่อแสดง" />
             </div>
             <div class="col-sm-3">
-                <label class="form-label" for="role">Role</label>
+                <label class="form-label" for="role">บทบาท</label>
                 <select id="role" name="role" class="form-select">
-                    <option value="">(all)</option>
+                    <option value="">(ทั้งหมด)</option>
                     @foreach (var r in Model.VM.AllRoles)
                     {
                         <option value="@r" selected="@(Model.role==r ? "selected" : null)">@r</option>
@@ -103,47 +103,47 @@
                 </select>
             </div>
             <div class="col-sm-3">
-                <label class="form-label" for="status">Status</label>
+                <label class="form-label" for="status">สถานะ</label>
                 <select id="status" name="status" class="form-select">
-                    <option value="">(all)</option>
-                    <option value="active" selected="@(Model.status=="active" ? "selected": null)">Active</option>
-                    <option value="locked" selected="@(Model.status=="locked" ? "selected": null)">Locked</option>
-                    <option value="2fa" selected="@(Model.status=="2fa" ? "selected": null)">2FA Enabled</option>
-                    <option value="unconfirmed" selected="@(Model.status=="unconfirmed" ? "selected": null)">Unconfirmed Email</option>
+                    <option value="">(ทั้งหมด)</option>
+                    <option value="active" selected="@(Model.status=="active" ? "selected": null)">ใช้งาน</option>
+                    <option value="locked" selected="@(Model.status=="locked" ? "selected": null)">ถูกล็อก</option>
+                    <option value="2fa" selected="@(Model.status=="2fa" ? "selected": null)">เปิดใช้ 2FA</option>
+                    <option value="unconfirmed" selected="@(Model.status=="unconfirmed" ? "selected": null)">อีเมลยังไม่ยืนยัน</option>
                 </select>
             </div>
             <div class="col-sm-2">
-                <label class="form-label" for="sort">Sort</label>
+                <label class="form-label" for="sort">จัดเรียง</label>
                 <select id="sort" name="sort" class="form-select">
-                    <option value="name" selected="@(Model.sort is null || Model.sort=="name" ? "selected": null)">Name</option>
-                    <option value="email" selected="@(Model.sort=="email" ? "selected": null)">Email</option>
-                    <option value="lock" selected="@(Model.sort=="lock" ? "selected": null)">Lockout</option>
+                    <option value="name" selected="@(Model.sort is null || Model.sort=="name" ? "selected": null)">ชื่อ</option>
+                    <option value="email" selected="@(Model.sort=="email" ? "selected": null)">อีเมล</option>
+                    <option value="lock" selected="@(Model.sort=="lock" ? "selected": null)">สถานะล็อก</option>
                 </select>
             </div>
             <div class="col-sm-12 d-flex gap-2">
-                <button class="btn btn-primary" aria-label="Apply filters">Apply</button>
-                <a class="btn btn-outline-secondary" asp-page="./Index" aria-label="Reset filters">Reset</a>
+                <button class="btn btn-primary" aria-label="ใช้ตัวกรอง">ใช้ตัวกรอง</button>
+                <a class="btn btn-outline-secondary" asp-page="./Index" aria-label="ล้างตัวกรอง">ล้างตัวกรอง</a>
             </div>
         </div>
     </form>
 
-    <!-- Table -->
+    <!-- ตารางผู้ใช้งาน -->
     <div class="card card-table">
         <div class="table-responsive">
             <table class="table align-middle mb-0 table-hover table-modern">
                 <thead>
                     <tr>
-                        <th scope="col">Name / Email</th>
-                        <th scope="col">Roles</th>
-                        <th scope="col">Stats</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" class="text-end">Actions</th>
+                        <th scope="col">ชื่อ / อีเมล</th>
+                        <th scope="col">บทบาท</th>
+                        <th scope="col">สถิติ</th>
+                        <th scope="col">สถานะ</th>
+                        <th scope="col" class="text-end">การดำเนินการ</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model.VM.Items.Count == 0)
                     {
-                        <tr><td colspan="5" class="text-center text-muted py-4">No users found.</td></tr>
+                        <tr><td colspan="5" class="text-center text-muted py-4">ไม่พบผู้ใช้งาน</td></tr>
                     }
                     else
                     {
@@ -159,7 +159,7 @@
                                 <td id="rolesCell-@u.Id">
                                     @if (u.Roles.Count == 0)
                                     {
-                                        <span class="badge-ghost">no role</span>
+                                        <span class="badge-ghost">ไม่มีบทบาท</span>
                                     }
                                     else
                                     {
@@ -171,21 +171,21 @@
                                 </td>
 
                                 <td class="text-muted small">
-                                    <span class="me-2">Reviews: <strong>@u.Reviews</strong></span>
-                                    <span class="me-2">Comments: <strong>@u.Comments</strong></span>
-                                    <span class="me-2">Favs: <strong>@u.Favorites</strong></span>
-                                    <span>Badges: <strong>@u.Badges</strong></span>
+                                    <span class="me-2">รีวิว: <strong>@u.Reviews</strong></span>
+                                    <span class="me-2">ความคิดเห็น: <strong>@u.Comments</strong></span>
+                                    <span class="me-2">ถูกใจ: <strong>@u.Favorites</strong></span>
+                                    <span>เหรียญ: <strong>@u.Badges</strong></span>
                                 </td>
 
                                 <td>
                                     <div class="d-flex flex-wrap gap-1">
                                         @if (isLocked)
                                         {
-                                            <span class="chip chip-red" data-status="state">Locked</span>
+                                            <span class="chip chip-red" data-status="state">ถูกล็อก</span>
                                         }
                                         else
                                         {
-                                            <span class="chip chip-green" data-status="state">Active</span>
+                                            <span class="chip chip-green" data-status="state">ใช้งาน</span>
                                         }
                                         @if (u.TwoFactorEnabled)
                                         {
@@ -193,26 +193,26 @@
                                         }
                                         @if (!u.EmailConfirmed)
                                         {
-                                            <span class="chip chip-amber">Unconfirmed</span>
+                                            <span class="chip chip-amber">ยังไม่ยืนยันอีเมล</span>
                                         }
                                     </div>
                                     @if (isLocked)
                                     {
-                                        <div class="text-muted small mt-1" data-status="lockend">Until @u.LockoutEnd?.LocalDateTime.ToString("yyyy-MM-dd HH:mm")</div>
+                                        <div class="text-muted small mt-1" data-status="lockend">จนถึง @u.LockoutEnd?.LocalDateTime.ToString("yyyy-MM-dd HH:mm")</div>
                                     }
                                 </td>
 
                                 <td class="text-end">
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="User actions for @u.UserName">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="การดำเนินการสำหรับ @u.UserName">
                                         @if (isLocked)
                                         {
                                             <form method="post" asp-page-handler="Unlock" class="d-inline ajax-form" data-handler="Unlock">
                                                 <input type="hidden" name="id" value="@u.Id" />
                                                 <button class="btn btn-outline-success"
-                                                        data-confirm="Unlock this user?"
+                                                        data-confirm="ปลดล็อกผู้ใช้งานนี้หรือไม่?"
                                                         data-busy="กำลังปลดล็อก..."
                                                         data-pending="กำลังส่งคำสั่งปลดล็อก">
-                                                    Unlock
+                                                    ปลดล็อก
                                                 </button>
                                             </form>
                                         }
@@ -222,15 +222,13 @@
                                                 <input type="hidden" name="id" value="@u.Id" />
                                                 <input type="hidden" name="days" value="7" />
                                                 <button class="btn btn-outline-danger"
-                                                        data-confirm="Lock 7 days?"
+                                                        data-confirm="ต้องการล็อกผู้ใช้งาน 7 วันหรือไม่?"
                                                         data-busy="กำลังล็อก..."
                                                         data-pending="กำลังส่งคำสั่งล็อก">
-                                                    Lock
+                                                    ล็อก
                                                 </button>
                                             </form>
                                         }
-
-                                       
 
                                         <button class="btn btn-outline-primary"
                                                 data-bs-toggle="modal"
@@ -238,7 +236,7 @@
                                                 data-userid="@u.Id"
                                                 data-username="@(!string.IsNullOrWhiteSpace(u.DisplayName) ? u.DisplayName : u.UserName)"
                                                 data-roles="@string.Join(",", u.Roles)">
-                                            Roles
+                                            บทบาท
                                         </button>
 
                                         <button class="btn btn-outline-dark"
@@ -246,7 +244,7 @@
                                                 data-bs-target="#logsModal"
                                                 data-userid="@u.Id"
                                                 data-username="@(!string.IsNullOrWhiteSpace(u.DisplayName) ? u.DisplayName : u.UserName)">
-                                            Logs
+                                            บันทึกกิจกรรม
                                         </button>
                                     </div>
                                 </td>
@@ -257,19 +255,19 @@
             </table>
         </div>
 
-        <!-- Pagination -->
+        <!-- เพจจิเนชัน -->
         <div class="d-flex justify-content-between align-items-center p-3">
             <div class="text-muted small">
-                Page <strong>@Model.VM.Page</strong> / @Model.VM.TotalPages • @Model.VM.TotalItems users
+                หน้า <strong>@Model.VM.Page</strong> / @Model.VM.TotalPages • ผู้ใช้ทั้งหมด @Model.VM.TotalItems คน
             </div>
-            <div class="btn-group" role="group" aria-label="Pagination">
+            <div class="btn-group" role="group" aria-label="เพจจิเนชัน">
                 <a class="btn btn-outline-secondary btn-sm @(Model.VM.Page<=1?"disabled":null)"
                    asp-page="./Index"
                    asp-route-q="@Model.q"
                    asp-route-role="@Model.role"
                    asp-route-status="@Model.status"
                    asp-route-sort="@Model.sort"
-                   asp-route-page="@(Model.VM.Page-1)">Prev</a>
+                   asp-route-page="@(Model.VM.Page-1)">ก่อนหน้า</a>
 
                 <a class="btn btn-outline-secondary btn-sm @(Model.VM.Page>=Model.VM.TotalPages?"disabled":null)"
                    asp-page="./Index"
@@ -277,20 +275,20 @@
                    asp-route-role="@Model.role"
                    asp-route-status="@Model.status"
                    asp-route-sort="@Model.sort"
-                   asp-route-page="@(Model.VM.Page+1)">Next</a>
+                   asp-route-page="@(Model.VM.Page+1)">ถัดไป</a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Roles Modal -->
+<!-- โมดัล: แก้ไขบทบาท -->
 <div class="modal fade" id="rolesModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <!-- ใส่ ajax-form เพื่อยิง JSON + Toast -->
+        <!-- ajax-form เพื่อยิง JSON + Toast -->
         <form method="post" asp-page-handler="UpdateRoles" class="modal-content ajax-form" data-handler="UpdateRoles">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Roles: <span id="rolesModalUser"></span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">แก้ไขบทบาท: <span id="rolesModalUser"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" name="id" id="rolesModalUserId" />
@@ -305,77 +303,77 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-busy="กำลังบันทึก..." data-pending="กำลังอัปเดตบทบาท">Save</button>
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" data-busy="กำลังบันทึก..." data-pending="กำลังอัปเดตบทบาท">บันทึก</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">ยกเลิก</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Logs Modal (with filters) -->
+<!-- โมดัล: บันทึกกิจกรรม -->
 <div class="modal fade" id="logsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    Activity Logs: <span id="logsModalUser"></span>
+                    บันทึกกิจกรรม: <span id="logsModalUser"></span>
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
             </div>
 
             <div class="modal-body">
                 <input type="hidden" id="logsModalUserId" value="" />
 
-                <!-- Filters -->
+                <!-- ฟิลเตอร์ในโมดัล -->
                 <form class="row g-2 align-items-end mb-3" onsubmit="return false;">
                     <div class="col-sm-4">
-                        <label class="form-label" for="logsFilterAction">Action</label>
+                        <label class="form-label" for="logsFilterAction">การกระทำ</label>
                         <select id="logsFilterAction" class="form-select">
                             @foreach (var a in logActions)
                             {
-                                <option value="@a">@((string.IsNullOrEmpty(a) ? "(all actions)" : a))</option>
+                                <option value="@a">@((string.IsNullOrEmpty(a) ? "(ทุกการกระทำ)" : a))</option>
                             }
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <label class="form-label" for="logsFilterFrom">From</label>
+                        <label class="form-label" for="logsFilterFrom">ตั้งแต่วันที่</label>
                         <input id="logsFilterFrom" type="date" class="form-control" />
                     </div>
                     <div class="col-sm-3">
-                        <label class="form-label" for="logsFilterTo">To</label>
+                        <label class="form-label" for="logsFilterTo">ถึงวันที่</label>
                         <input id="logsFilterTo" type="date" class="form-control" />
                     </div>
                     <div class="col-sm-2">
-                        <label class="form-label" for="logsFilterQ">Search</label>
-                        <input id="logsFilterQ" type="text" class="form-control" placeholder="keyword" />
+                        <label class="form-label" for="logsFilterQ">ค้นหา</label>
+                        <input id="logsFilterQ" type="text" class="form-control" placeholder="คีย์เวิร์ด" />
                     </div>
                 </form>
 
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="text-muted small" id="logsSummary"></div>
                     <div class="btn-group btn-group-sm">
-                        <button class="btn btn-outline-secondary" id="logsApplyBtn">Apply</button>
-                        <button class="btn btn-outline-secondary" id="logsRefreshBtn">Refresh</button>
-                        <button class="btn btn-outline-secondary" id="logsClearBtn">Clear</button>
+                        <button class="btn btn-outline-secondary" id="logsApplyBtn">ใช้ตัวกรอง</button>
+                        <button class="btn btn-outline-secondary" id="logsRefreshBtn">รีเฟรช</button>
+                        <button class="btn btn-outline-secondary" id="logsClearBtn">ล้าง</button>
                     </div>
                 </div>
 
                 <div id="logsSpinner" class="text-center py-3 d-none">
-                    <div class="spinner-border" role="status" aria-label="Loading"></div>
+                    <div class="spinner-border" role="status" aria-label="กำลังโหลด"></div>
                 </div>
 
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead>
                             <tr>
-                                <th style="width: 170px;">When (UTC)</th>
-                                <th>Action</th>
-                                <th>Message</th>
-                                <th style="width: 130px;">Subject</th>
+                                <th style="width: 170px;">เวลา (UTC)</th>
+                                <th>การกระทำ</th>
+                                <th>ข้อความ</th>
+                                <th style="width: 130px;">หัวข้อ</th>
                             </tr>
                         </thead>
                         <tbody id="logsTableBody">
-                            <!-- rows via JS -->
+                            <!-- แถวข้อมูลสร้างด้วย JS -->
                         </tbody>
                     </table>
                 </div>
@@ -383,8 +381,8 @@
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <div class="text-muted small" id="logsPageInfo"></div>
                     <div class="btn-group btn-group-sm">
-                        <button class="btn btn-outline-secondary" id="logsPrevBtn">Prev</button>
-                        <button class="btn btn-outline-secondary" id="logsNextBtn">Next</button>
+                        <button class="btn btn-outline-secondary" id="logsPrevBtn">ก่อนหน้า</button>
+                        <button class="btn btn-outline-secondary" id="logsNextBtn">ถัดไป</button>
                     </div>
                 </div>
             </div>

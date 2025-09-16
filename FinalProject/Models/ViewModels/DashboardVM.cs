@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FinalProject.ViewModels
 {
-    // ====== View Models ======
+    // ====== View Models (Root) ======
     public class DashboardVM
     {
         // ===== KPI cards (รวม + ช่วงเวลา) =====
@@ -16,6 +16,9 @@ namespace FinalProject.ViewModels
         public int TotalUserBadges { get; set; }         // sum(UserStats.Badges)
         public int RatingsCount { get; set; }            // count(QuickRating)
         public double RatingsAvg { get; set; }           // avg(QuickRating.Score)
+
+        // รวมจำนวนการถูกดูทั้งหมดของเบียร์ (Sum(LocalBeer.ViewCount))
+        public int BeerViewcount { get; set; }
 
         // Activity KPIs (เช่นช่วง 1/7/30 วันล่าสุด)
         public int ActiveUsers1d { get; set; }           // distinct(ActivityLog.UserId) last 1d
@@ -36,10 +39,11 @@ namespace FinalProject.ViewModels
         // ===== Tables =====
         public List<BeerMini> TopRatedBeers { get; set; } = new();
         public List<BeerMini> MostFavoritedBeers { get; set; } = new();
-        public List<RecentCommentVM> RecentComments { get; set; } = new();
+        public List<BeerMini> MostViewedBeers { get; set; } = new();   // มี ViewCount ต่อแถว
 
         public List<BeerWithCounts> TopCommentedBeers { get; set; } = new();
         public List<UserMini> TopActiveUsers { get; set; } = new();    // จาก UserStats/Activity
+        public List<RecentCommentVM> RecentComments { get; set; } = new();
         public List<RecentFavoriteVM> RecentFavorites { get; set; } = new();
         public List<ActivityItemVM> RecentActivities { get; set; } = new();
 
@@ -62,48 +66,30 @@ namespace FinalProject.ViewModels
         public List<TagCount> TopFoodPairings { get; set; } = new();
         public List<TagCount> TopMoodPairings { get; set; } = new();
 
-        // Value-for-money scatter (ใช้ทำ scatter plot ราคา vs เรตติ้งเฉลี่ย)
+        // Value-for-money scatter (ราคา vs เรตติ้งเฉลี่ย)
         public List<ValuePoint> RatingVsPrice { get; set; } = new();
 
         // Data quality summary (สรุป missings)
         public DataQualitySummary DataQuality { get; set; } = new();
+
+        // ===== Pagination Info (สำหรับปุ่มก่อนหน้า/ถัดไป) =====
+        public PageInfo TopRatedPage { get; set; } = PageInfo.Empty;
+        public PageInfo MostFavPage { get; set; } = PageInfo.Empty;
+        public PageInfo MostViewPage { get; set; } = PageInfo.Empty;
     }
 
-    // ====== Existing ======
+    // ====== Small VMs / Records ======
     public class BeerMini
     {
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Province { get; set; }
-        public double Avg { get; set; }
-        public int Count { get; set; }
-        public int Favorites { get; set; }
+        public double Avg { get; set; }      // average rating
+        public int Count { get; set; }       // rating count
+        public int Favorites { get; set; }   // favorite count (ถ้ามี)
+        public int ViewCount { get; set; }   // จำนวนวิวของเบียร์แต่ละรายการ
     }
 
-    public class RecentCommentVM
-    {
-        public int Id { get; set; }
-        public int BeerId { get; set; }
-        public string? BeerName { get; set; }
-        public string Body { get; set; } = string.Empty;
-        public string UserName { get; set; } = "";
-        public DateTime CreatedAt { get; set; }
-    }
-
-    public class DailyRatingPoint
-    {
-        public DateTime Day { get; set; }
-        public int Count { get; set; }
-        public double Avg { get; set; }
-    }
-
-    public class ProvinceCount
-    {
-        public string? Province { get; set; }
-        public int Count { get; set; }
-    }
-
-    // ====== New small VMs ======
     public class BeerWithCounts : BeerMini
     {
         public int Comments { get; set; }
@@ -120,9 +106,19 @@ namespace FinalProject.ViewModels
         public int Badges { get; set; }
     }
 
+    public class RecentCommentVM
+    {
+        public int Id { get; set; }
+        public int BeerId { get; set; }
+        public string? BeerName { get; set; }
+        public string Body { get; set; } = string.Empty;
+        public string UserName { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
+    }
+
     public class RecentFavoriteVM
     {
-        public int Id { get; set; }              
+        public int Id { get; set; }
         public int BeerId { get; set; }
         public string? BeerName { get; set; }
         public string UserName { get; set; } = "";
@@ -138,9 +134,22 @@ namespace FinalProject.ViewModels
         public DateTime CreatedAt { get; set; }
     }
 
+    public class DailyRatingPoint
+    {
+        public DateTime Day { get; set; }
+        public int Count { get; set; }
+        public double Avg { get; set; }
+    }
+
     public class DailyCountPoint
     {
         public DateTime Day { get; set; }
+        public int Count { get; set; }
+    }
+
+    public class ProvinceCount
+    {
+        public string? Province { get; set; }
         public int Count { get; set; }
     }
 
@@ -159,7 +168,7 @@ namespace FinalProject.ViewModels
 
     public class BucketCount
     {
-        public string Bucket { get; set; } = ""; 
+        public string Bucket { get; set; } = "";
         public int Count { get; set; }
     }
 
@@ -167,7 +176,7 @@ namespace FinalProject.ViewModels
     {
         public string Tag { get; set; } = "";
         public int Count { get; set; }
-        public double? AvgIntensity { get; set; } 
+        public double? AvgIntensity { get; set; }
     }
 
     public class ValuePoint
@@ -185,5 +194,32 @@ namespace FinalProject.ViewModels
         public int MissingPrice { get; set; }
         public int MissingGeo { get; set; }
         public int MissingDescription { get; set; }
+    }
+
+    // ===== PageInfo สำหรับควบคุมปุ่มก่อนหน้า/ถัดไป =====
+    public readonly record struct PageInfo(
+        int Page,
+        int PageSize,
+        int Total,
+        bool HasPrev,
+        bool HasNext,
+        string? PrevUrl,
+        string? NextUrl
+    )
+    {
+        public static PageInfo Empty => new(1, 8, 0, false, false, null, null);
+
+        public static PageInfo Create(int page, int size, int total, string? prevUrl, string? nextUrl)
+        {
+            var maxPage = Math.Max(1, (int)Math.Ceiling(total / (double)size));
+            page = Math.Clamp(page, 1, maxPage);
+            return new PageInfo(
+                page, size, total,
+                HasPrev: page > 1,
+                HasNext: page < maxPage,
+                PrevUrl: page > 1 ? prevUrl : null,
+                NextUrl: page < maxPage ? nextUrl : null
+            );
+        }
     }
 }

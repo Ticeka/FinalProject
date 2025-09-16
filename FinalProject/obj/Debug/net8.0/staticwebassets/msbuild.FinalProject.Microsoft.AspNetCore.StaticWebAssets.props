@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>1qm5w4vvsd</Fingerprint>
-      <Integrity>SWKvv/BNk8FYOEqJy4nWo0NV7ryPhi2uf7ui/+Q5aPw=</Integrity>
+      <Fingerprint>tr504kn7kh</Fingerprint>
+      <Integrity>x15uRNgQGFGsqRy4zUdDyHSOA0qfvqf7jJinMd5EtiU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin-dashboard.css'))</OriginalItemSpec>
@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qwmmzssf4z</Fingerprint>
-      <Integrity>hm9p6W4BEg3qMV7RpKT6u9ZV/GjgxlP/BnqoxHcUpM8=</Integrity>
+      <Fingerprint>171x8exjmc</Fingerprint>
+      <Integrity>TVQ/z/xXCOx/Z7fF7y0cpKai4OQfgd3no/nGsej/Ys8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\flavor-match.css'))</OriginalItemSpec>
@@ -1686,8 +1686,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mahaypdo92</Fingerprint>
-      <Integrity>8lN8R+/t8Oad0Mom1yD5cFnKYYLEKkMsJLyQ4vxT19A=</Integrity>
+      <Fingerprint>8k2ghlg6rb</Fingerprint>
+      <Integrity>+BVsJcm4UzpPqDAxYFEa1RFVHaUAnd4Ngz3IgsKdtys=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\admin-dashboard.js'))</OriginalItemSpec>
@@ -1758,8 +1758,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>lmtucouycr</Fingerprint>
-      <Integrity>fT358jwbQO5i4bQbYR+ZFgXQBsfN/Lv8Qmcs8tp+6Es=</Integrity>
+      <Fingerprint>97zogmfdz8</Fingerprint>
+      <Integrity>y98L8yPJ6aPnOSWSwrXUyCcQ4sxMFNeiZ8UUY9a7+9M=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\flavor-match.js'))</OriginalItemSpec>

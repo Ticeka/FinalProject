@@ -19,7 +19,7 @@ namespace FinalProject.Pages
 
         public void OnGet()
         {
-            // defaults — ใช้เผื่อกรณีต้อง render ฝั่ง server (JS จะ override ด้วย API อีกชั้น)
+            // defaults — server-render fallback (JS จะ override ด้วย API อีกชั้น)
             var defaultFlavors = new[] { "หวาน", "เปรี้ยว", "ขม", "เค็ม", "อูมามิ" };
             var defaultFoods = new[] { "ทะเล", "เนื้อ", "ไก่", "หมู" };
             var defaultMoods = new[] { "Party", "Chill", "Celebration", "Fresh", "Sport" };

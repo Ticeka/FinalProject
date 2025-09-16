@@ -15,40 +15,76 @@
     const API_OPTS = "/api/reco/flavor-options";
     const HISTORY_KEY = "flavor_match_hist";
 
-    // ----- fixed option sets (ตามที่ผู้ใช้กำหนด/สำรอง) -----
+    // ===== Fixed options =====
     const FIXED_FLAVORS = ["หวาน", "เปรี้ยว", "ขม", "เค็ม", "อูมามิ"];
     const FIXED_FOODS = ["ทะเล", "เนื้อ", "ไก่", "หมู"];
     const FIXED_MOODS = ["Party", "Chill", "Celebration", "Fresh", "Sport"];
 
-    // ====== SVG ไอคอนสำหรับหมวด 'อาหาร' ======
-    // (ขนาดจะถูกบีบด้วย CSS .chip__img svg { width:20px;height:20px })
-    const FOOD_ICON_SVGS = {
-        "ทะเล": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c2.5 0 3.5-2 6-2s3.5 2 6 2 3.5-2 6-2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 16c1.8 0 2.7-1.5 5-1.5S12.2 16 14 16s2.7-1.5 5-1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="10.5" r="0.8" fill="currentColor"/></svg>`,
-        "ไก่": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6c-1 0-2 .5-2 1.8 0 1.2 1 2.2 2.4 2.2H17a4.5 4.5 0 0 1 0 9H9.5A4.5 4.5 0 0 1 5 14V8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="18.2" cy="5.2" r="1.2" fill="currentColor"/></svg>`,
-        "เนื้อ": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6h10c3 0 5 2.5 5 5.5S20 17 17 17H7c-3 0-5-2.5-5-5.5S4 6 7 6Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9.5c0-.8.7-1.5 1.5-1.5S12 8.7 12 9.5 11.3 11 10.5 11 9 10.3 9 9.5Z" fill="currentColor"/></svg>`,
-        "หมู": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12c0-3 2.5-5.5 6-5.5h4c3.5 0 6 2.5 6 5.5v2a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-2Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="12.5" r="0.8" fill="currentColor"/><circle cx="15.5" cy="12.5" r="0.8" fill="currentColor"/></svg>`
+    // ===== Labels (ไทย) =====
+    const FOOD_LABEL_TH = {
+        "ทะเล": "อาหารทะเล",
+        "เนื้อ": "อาหารประเภทเนื้อ",
+        "ไก่": "อาหารประเภทไก่",
+        "หมู": "อาหารประเภทหมู",
+    };
+    const MOOD_LABEL_TH = {
+        "Party": "ปาร์ตี้",
+        "Chill": "ชิล",
+        "Celebration": "ฉลอง",
+        "Fresh": "สดชื่น",
+        "Sport": "กีฬา",
     };
 
-    // ---------- helpers ----------
+    // ===== Icons =====
+    const FLAVOR_EMOJI = { "หวาน": "🍯", "เปรี้ยว": "🍋", "ขม": "🍫", "เค็ม": "🧂", "อูมามิ": "🍄" };
+    const MOOD_EMOJI = { "Party": "🎉", "Chill": "🧘", "Celebration": "🥂", "Fresh": "🍃", "Sport": "⚽" };
+
+    // ==== Food icons สดใส ====
+    const FOOD_ICON_THEME = {
+        "ทะเล": { emoji: "🐟", bg: "#e0f2fe", border: "#93c5fd" },
+        "เนื้อ": { emoji: "🥩", bg: "#fee2e2", border: "#fca5a5" },
+        "ไก่": { emoji: "🍗", bg: "#fff7ed", border: "#fdba74" },
+        "หมู": { emoji: "🐷", bg: "#fce7f3", border: "#f9a8d4" }
+    };
     function iconForFood(value) {
-        // คืน SVG ของหมวดอาหาร ถ้าไม่มีตรงชื่อจะวาดเป็น emoji fallback
-        const svg = FOOD_ICON_SVGS[value];
-        if (svg) return svg;
-        return `<span style="font-size:16px">${value === "ทะเล" ? "🦐" : value === "ไก่" ? "🍗" : value === "เนื้อ" ? "🥩" : value === "หมู" ? "🐖" : "🍽"}</span>`;
+        const cfg = FOOD_ICON_THEME[value];
+        if (!cfg) return "";
+        return `
+      <span class="fm-chip__img" aria-hidden="true"
+            style="background:${cfg.bg}; border-color:${cfg.border};">
+        ${cfg.emoji}
+      </span>`;
     }
 
-    function chipHtml(name, value, checked = false) {
-        const safe = String(value);
-        const isFood = name === "food";
-        // ใส่รูปเฉพาะหมวดอาหาร
-        const img = isFood ? `<span class="chip__img" aria-hidden="true">${iconForFood(safe)}</span>` : "";
-        const cls = isFood ? "chip chip--withimg chip--food" : "chip";
+    // ===== Helpers =====
+    function displayLabel(name, value) {
+        if (name === "food") return FOOD_LABEL_TH[value] || value;
+        if (name === "mood") return MOOD_LABEL_TH[value] || value;
+        return value;
+    }
+    function iconFor(name, value) {
+        if (name === "food") return iconForFood(value);
+        if (name === "flavor") {
+            const e = FLAVOR_EMOJI[value];
+            return e ? `<span class="fm-chip__img" aria-hidden="true">${e}</span>` : "";
+        }
+        if (name === "mood") {
+            const e = MOOD_EMOJI[value];
+            return e ? `<span class="fm-chip__img" aria-hidden="true">${e}</span>` : "";
+        }
+        return "";
+    }
 
+    // ===== Chip HTML =====
+    function chipHtml(name, value, checked = false) {
+        const label = displayLabel(name, value);
+        const icon = iconFor(name, value);
         return `
-<label class="${cls}" title="${safe}">
-  <input type="checkbox" name="${name}" value="${safe}" ${checked ? "checked" : ""} />
-  ${img}
-  <span class="chip__text">${safe}</span>
+<label class="fm-chip${checked ? " is-checked" : ""}" title="${label}">
+  <input type="checkbox" name="${name}" value="${value}" ${checked ? "checked" : ""} />
+  ${icon}
+  <span class="fm-chip__text">${label}</span>
+  <span class="fm-chip__tick">✓</span>
 </label>`;
     }
 
@@ -56,12 +92,33 @@
         const host = document.querySelector(`#chipset-${name}`);
         if (!host) return;
         host.innerHTML = (items || [])
-            .map(v => chipHtml(name, v, preset.includes(v)))
+            .map((v) => chipHtml(name, v, preset.includes(v)))
             .join("");
+
+        host.addEventListener("change", (e) => {
+            if (e.target && e.target.matches('input[type="checkbox"]')) {
+                const label = e.target.closest("label.fm-chip");
+                if (label) {
+                    label.classList.toggle("is-checked", e.target.checked);
+                }
+            }
+        });
+        host.querySelectorAll('input[type="checkbox"]').forEach((i) => {
+            i.closest("label.fm-chip")?.classList.toggle("is-checked", i.checked);
+        });
     }
 
-    function readChecked(name) { return $all(`input[name="${name}"]:checked`).map(i => i.value); }
+    // ===== Deep link =====
+    const sp = new URLSearchParams(location.search);
+    const dl = {
+        base: sp.get("base") || "",
+        flavors: (sp.get("flavors") || "").split(",").map((s) => s.trim()).filter(Boolean),
+        foods: (sp.get("foods") || "").split(",").map((s) => s.trim()).filter(Boolean),
+        moods: (sp.get("moods") || "").split(",").map((s) => s.trim()).filter(Boolean),
+    };
+    if (dl.base) $("#base").value = dl.base;
 
+    // ===== History =====
     function saveHistory(entry) {
         const arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
         arr.unshift({ ...entry, t: Date.now() });
@@ -71,63 +128,73 @@
     function renderHistory() {
         const arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
         if (!histList) return;
-        histList.innerHTML = arr.map(h => {
+        histList.innerHTML = arr.map((h) => {
             const extra = [
-                (h.foods?.length ? `🍽 ${h.foods.join(", ")}` : null),
-                (h.moods?.length ? `🎭 ${h.moods.join(", ")}` : null)
+                h.foods?.length ? `ประเภทอาหาร: ${h.foods.map((v) => FOOD_LABEL_TH[v] || v).join(", ")}` : null,
+                h.moods?.length ? `บรรยากาศ: ${h.moods.map((v) => MOOD_LABEL_TH[v] || v).join(", ")}` : null,
             ].filter(Boolean).join(" • ");
             const dt = new Date(h.t || Date.now());
             return `
-<div class="hist-item">
-  <div class="hist-head">
-    <div class="hist-title">${h.base} • ${(h.flavors || []).join(", ") || "Signature"}</div>
-    <time class="hist-time">${dt.toLocaleString()}</time>
+<div class="fm-hist-item">
+  <div class="fm-hist-head">
+    <div class="fm-hist-title">${h.base || "—"} • ${(h.flavors || []).join(", ") || "Signature"}</div>
+    <time class="fm-hist-time">${dt.toLocaleString()}</time>
   </div>
-  <div class="hist-sub">${extra || ""}</div>
+  <div class="fm-hist-sub">${extra || ""}</div>
 </div>`;
         }).join("");
     }
 
-    // ---------- deep link ----------
-    const sp = new URLSearchParams(location.search);
-    const dl = {
-        base: sp.get("base") || "",
-        flavors: (sp.get("flavors") || "").split(",").map(s => s.trim()).filter(Boolean),
-        foods: (sp.get("foods") || "").split(",").map(s => s.trim()).filter(Boolean),
-        moods: (sp.get("moods") || "").split(",").map(s => s.trim()).filter(Boolean),
-    };
-    if (dl.base) baseEl.value = dl.base;
-
+    // ===== Share URL =====
     function buildShareUrl({ base, flavors, foods, moods }) {
         const u = new URL(location.href);
-        const sp = u.searchParams;
-        sp.set("base", base || "");
-        sp.set("flavors", (flavors || []).join(","));
-        sp.set("foods", (foods || []).join(","));
-        sp.set("moods", (moods || []).join(","));
+        const p = u.searchParams;
+        p.set("base", base || "");
+        p.set("flavors", (flavors || []).join(","));
+        p.set("foods", (foods || []).join(","));
+        p.set("moods", (moods || []).join(","));
         return u.toString();
     }
 
+    // ===== API =====
     async function fetchMatch(base, flavors, foods, moods) {
-        const payload = { base, flavors, foods, moods, take: 6 };
-        const res = await fetch(API_MATCH, {
+        const res = await fetch("/api/reco/flavor-match", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-            credentials: "same-origin"
+            body: JSON.stringify({ base, flavors, foods, moods, take: 6 }),
+            credentials: "same-origin",
         });
         if (!res.ok) throw new Error(await res.text());
         return res.json();
     }
     async function fetchOptions(base) {
-        const url = new URL(API_OPTS, location.origin);
+        const url = new URL("/api/reco/flavor-options", location.origin);
         if (base) url.searchParams.set("base", base);
         const res = await fetch(url, { credentials: "same-origin" });
         if (!res.ok) throw new Error(await res.text());
-        return res.json(); // { flavors:[], foods:[], moods:[] }
+        return res.json();
     }
 
-    // ---------- load options ----------
+    // ===== Skeleton (ใช้กับ .fm-results) =====
+    function showSkeletons(n = 6) {
+        resultWrap.classList.remove("d-none");
+        resultWrap.innerHTML = Array.from({ length: n }).map(() => `
+<div class="fm-result">
+  <div class="skel">
+    <div class="ph"></div>
+    <div class="bx">
+      <div class="ln"></div>
+      <div class="ln sm"></div>
+    </div>
+  </div>
+</div>`).join("");
+    }
+    function clearResults() {
+        resultWrap.innerHTML = "";
+        resultWrap.classList.add("d-none");
+    }
+
+    // ===== Load options =====
     async function loadOptionsAndRender() {
         try {
             const base = baseEl.value || "";
@@ -135,47 +202,46 @@
             renderChipset("flavor", flavors.length ? flavors : FIXED_FLAVORS, dl.flavors);
             renderChipset("food", foods.length ? foods : FIXED_FOODS, dl.foods);
             renderChipset("mood", moods.length ? moods : FIXED_MOODS, dl.moods);
-        } catch (e) {
-            console.error("load options failed", e);
-            // fallback: ใช้ชุดตายตัว
+        } catch {
             renderChipset("flavor", FIXED_FLAVORS, dl.flavors);
             renderChipset("food", FIXED_FOODS, dl.foods);
             renderChipset("mood", FIXED_MOODS, dl.moods);
         } finally {
-            // ใช้ deep-link รอบแรกครั้งเดียวพอ
             dl.flavors = []; dl.foods = []; dl.moods = [];
         }
     }
     baseEl.addEventListener("change", loadOptionsAndRender);
 
-    // ---------- submit ----------
+    // ===== Submit =====
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
         const base = baseEl.value;
-        const flavors = readChecked("flavor");
-        const foods = readChecked("food");
-        const moods = readChecked("mood");
+        const flavors = $all('input[name="flavor"]:checked').map((i) => i.value);
+        const foods = $all('input[name="food"]:checked').map((i) => i.value);
+        const moods = $all('input[name="mood"]:checked').map((i) => i.value);
 
-        recTitle.textContent = "กำลังประมวลผล…";
-        recSub.textContent = "จะใช้คะแนนช่วยหาเฉพาะเมื่อยังไม่เจอคำตอบตรง ๆ";
-        resultWrap.classList.add("d-none");
+        recTitle.textContent = "กำลังค้นหาคำแนะนำ…";
+        recSub.textContent = "ถ้าไม่เจอตรง ระบบจะประเมินความใกล้เคียงให้";
+        showSkeletons(6);
 
         try {
             const out = await fetchMatch(base, flavors, foods, moods);
-            recTitle.textContent = `${out.base} • ${out.flavors.join(", ") || "Signature"}`;
-            const extra = [
-                foods.length ? `🍽 ${foods.join(", ")}` : null,
-                moods.length ? `🎭 ${moods.join(", ")}` : null
-            ].filter(Boolean).join(" • ");
-            recSub.textContent = `พบคำแนะนำ ${out.items.length} รายการ${extra ? " • " + extra : ""}`;
+            recTitle.textContent = `${out.base || "ผลลัพธ์"} • ${out.flavors?.join(", ") || "Signature"}`;
 
-            resultWrap.innerHTML = out.items.map(x => {
-                const img = x.imageUrl || "https://via.placeholder.com/640x480?text=Sip+%26+Trip";
-                const price = (typeof x.price === "number" && x.price > 0) ? ` • ฿${x.price.toLocaleString()}` : "";
+            const foodsTH = foods.map((v) => FOOD_LABEL_TH[v] || v).join(", ");
+            const moodsTH = moods.map((v) => MOOD_LABEL_TH[v] || v).join(", ");
+            const meta = [
+                foods.length ? `ประเภทอาหาร: ${foodsTH}` : null,
+                moods.length ? `บรรยากาศ: ${moodsTH}` : null,
+            ].filter(Boolean).join(" • ");
+
+            resultWrap.innerHTML = out.items.map((x) => {
+                const img = x.imageUrl || "https://via.placeholder.com/640x480?text=Flavor+Match";
+                const price = typeof x.price === "number" && x.price > 0 ? ` • ฿${x.price.toLocaleString()}` : "";
                 const rating = x.rating ? `⭐ ${x.rating.toFixed(1)} (${x.ratingCount || 0})` : "";
-                const meta = [x.type, x.province].filter(Boolean).join(" • ");
+                const sub = [x.type, x.province].filter(Boolean).join(" • ");
                 return `
-<div class="col">
+<div class="fm-result">
   <div class="reco-card">
     <img class="reco-img" src="${img}" alt="${x.name}">
     <div class="reco-body">
@@ -183,55 +249,56 @@
         <div class="reco-name">${x.name}</div>
         <span class="reco-badge">Score ${x.score?.toFixed?.(2) ?? "—"}</span>
       </div>
-      <div class="reco-meta">${meta}${price}</div>
+      <div class="reco-meta">${[sub, price].join("")}</div>
       ${rating ? `<div class="reco-meta mt-1">${rating}</div>` : ``}
       <div class="reco-why">${x.why || ""}</div>
-      ${x.id ? `<a class="btn btn-sm btn-soft mt-2" href="/Detail?id=${x.id}">ดูข้อมูล</a>` : ``}
+      ${x.id ? `<a class="fm-btn fm-btn-ghost fm-btn-sm mt-2" href="/Detail?id=${x.id}">ดูข้อมูล</a>` : ``}
     </div>
   </div>
 </div>`;
             }).join("");
 
-            resultWrap.classList.remove("d-none");
-
+            recSub.textContent = `พบ ${out.items.length} รายการ${meta ? " • " + meta : ""}`;
+            resultWrap.scrollIntoView({ behavior: "smooth", block: "start" });
             saveHistory({ base, flavors, foods, moods });
             renderHistory();
         } catch (err) {
             alert(err?.message || "เกิดข้อผิดพลาด");
-            console.error(err);
+            clearResults();
+            recTitle.textContent = "เกิดข้อผิดพลาด";
+            recSub.textContent = "ลองปรับตัวเลือกใหม่ หรือรีเฟรชหน้า";
         }
     });
 
-    // ---------- reset ----------
+    // ===== Misc controls =====
     $("#btnReset")?.addEventListener("click", () => {
-        $all('input[type="checkbox"]').forEach(i => i.checked = false);
-        resultWrap.innerHTML = "";
-        resultWrap.classList.add("d-none");
+        $all('input[type="checkbox"]').forEach((i) => (i.checked = false));
+        clearResults();
         recTitle.textContent = "ยังไม่มีคำแนะนำ";
-        recSub.textContent = "เลือกตัวกรองด้านซ้ายแล้วกด “แนะนำเลย”";
+        recSub.textContent = "ตั้งค่าทางซ้าย แล้วกด “แนะนำเลย”";
     });
 
-    // ---------- clear history ----------
     $("#btnClearHist")?.addEventListener("click", () => {
         localStorage.removeItem(HISTORY_KEY);
         renderHistory();
     });
 
-    // ---------- share ----------
     btnShare?.addEventListener("click", async () => {
         const base = baseEl.value;
-        const flavors = readChecked("flavor");
-        const foods = readChecked("food");
-        const moods = readChecked("mood");
+        const flavors = $all('input[name="flavor"]:checked').map((i) => i.value);
+        const foods = $all('input[name="food"]:checked').map((i) => i.value);
+        const moods = $all('input[name="mood"]:checked').map((i) => i.value);
         const url = buildShareUrl({ base, flavors, foods, moods });
         try {
             await navigator.clipboard.writeText(url);
             shareToast?.classList.remove("d-none");
-            setTimeout(() => shareToast?.classList.add("d-none"), 1500);
-        } catch { alert("คัดลอกลิงก์ไม่สำเร็จ"); }
+            setTimeout(() => shareToast?.classList.add("d-none"), 1200);
+        } catch {
+            alert("คัดลอกลิงก์ไม่สำเร็จ");
+        }
     });
 
-    // ---------- init ----------
+    // ===== Init =====
     renderHistory();
-    loadOptionsAndRender(); // โหลด options ครั้งแรกตาม base (ถ้ามีใน query)
+    loadOptionsAndRender();
 })();

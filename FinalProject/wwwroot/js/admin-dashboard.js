@@ -75,10 +75,7 @@
             options: {
                 responsive: true,
                 interaction: { mode: "index", intersect: false },
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { enabled: true }
-                },
+                plugins: { legend: { display: true }, tooltip: { enabled: true } },
                 scales: {
                     y: { beginAtZero: true, ticks: { precision: 0 } },
                     y1: { position: "right", min: 0, max: 5, grid: { drawOnChartArea: false } }
@@ -97,10 +94,7 @@
             options: {
                 indexAxis: provinceLabels.length > 8 ? "y" : "x",
                 responsive: true,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { enabled: true }
-                },
+                plugins: { legend: { display: false }, tooltip: { enabled: true } },
                 scales: {
                     x: { ticks: { autoSkip: true, maxRotation: 0 } },
                     y: { beginAtZero: true, ticks: { precision: 0 } }
@@ -109,5 +103,9 @@
         });
     }
 
-    // ถ้าไม่มีข้อมูล ไม่ต้องสร้างกราฟ (หลีกเลี่ยง error)
+    // -------- Nice UX: ถ้ามี #lists ให้เลื่อนนุ่ม ๆ ไปยัง block รายการ --------
+    if (location.hash === "#lists") {
+        const el = document.getElementById("lists");
+        if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    }
 })();
