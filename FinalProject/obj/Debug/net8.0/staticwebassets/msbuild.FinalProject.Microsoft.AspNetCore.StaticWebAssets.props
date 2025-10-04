@@ -1758,8 +1758,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>97zogmfdz8</Fingerprint>
-      <Integrity>y98L8yPJ6aPnOSWSwrXUyCcQ4sxMFNeiZ8UUY9a7+9M=</Integrity>
+      <Fingerprint>xv2hdnx15j</Fingerprint>
+      <Integrity>I56BlaqkplSAjhQNQTwo8AC1ZCjgWyIHE6j/4B/hnGI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\flavor-match.js'))</OriginalItemSpec>
